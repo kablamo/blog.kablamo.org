@@ -3,7 +3,7 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2012-08-26 16:40:29 +0100</pubDate>
+    <pubDate>2012-08-26 20:32:11 +0100</pubDate>
     <item>
       <title>Slides from my Selenium talk at YAPCEU 2012</title>
       <link>http://blog.kablamo.org/slides-from-my-selenium-talk-at-yapceu-2012/</link>
@@ -22,9 +22,9 @@
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.4409115078914525" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.17460887672845837" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.8797321766535952" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.6036613516781347" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.4856382431413955" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.7533267068917953" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -63,13 +63,13 @@
 
 &lt;div class="row"&gt;
   &lt;div class="span8"&gt;
-    &lt;p&gt;I gave my first &lt;a href="http://act.yapc.eu/ye2012/schedule?day=2012-08-20"&gt;YAPC&lt;/a&gt;
-presentation this year after doing a trial run at London.pm.  I received some
-good questions and comments and a few new ideas.  It was a good experience and
-I plan to create a new talk next year or sooner.&lt;/p&gt;
+    &lt;p&gt;I gave my first &lt;a href="http://act.yapc.eu/ye2012/schedule?day=2012-08-20"&gt;YAPC::EU&lt;/a&gt;
+presentation this year in Frankfurt after doing a trial run at London.pm.  I
+received some good questions and comments and a few new ideas.  It was a good
+experience and I want to do this again.&lt;/p&gt;
 
-&lt;p&gt;My talk introduces Selenium and common problems people have when first trying
-to write Selenium tests in Perl.  I also show how I solved many of those
+&lt;p&gt;My talk introduced Selenium and common problems people have when first trying
+to write Selenium tests in Perl.  I also explained how I solved many of those
 problems by creating
 &lt;a href="https://metacpan.org/module/Test::WWW::Selenium::More"&gt;Test::WWW::Selenium::More&lt;/a&gt;.&lt;/p&gt;
 
@@ -164,9 +164,9 @@ download them for some reason, they are hosted on
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.38923038083240835" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.17314841141794401" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.7037747483105743" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.7404216581323063" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.026978779813144005" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.6488923937734564" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -330,9 +330,9 @@ done_testing;
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.961517306810408" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.3789053767811362" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.2952879417199731" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.2517374942214393" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.10960557512068736" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.20883822339447045" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -483,9 +483,9 @@ sub download {
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.6122440754281152" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.5350075158425311" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.4561542867624653" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.03726186468435844" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.5402094969290787" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.4860355453825097" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
