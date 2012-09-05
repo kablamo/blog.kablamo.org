@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Test::WWW::Selenium::More</title>
+    <title>Devel::Dwarn helps me type less</title>
     <meta name="author" content="Eric Johnson">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_">
 
@@ -12,9 +12,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.8274750096464888" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/stylesheets/blog.css?0.28588437845046166" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.8225210631922247" type="text/css" rel="stylesheet" media="all">
+    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.16194483396067227" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/stylesheets/blog.css?0.47653039571434086" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.8740588518692117" type="text/css" rel="stylesheet" media="all">
 
  
 
@@ -48,58 +48,55 @@
     <div class="container">
       <div class="content">
         <div class="page-header">
-  <h1>Test::WWW::Selenium::More </h1>
+  <h1>Devel::Dwarn helps me type less </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>I recently released
-<a href="https://metacpan.org/module/Test::WWW::Selenium::More">Test::WWW::Selenium::More</a>
-to CPAN.  It is a small collection of utilities to help you write Selenium
-tests.  Here are some reasons to use it:</p>
+    <p>2 bajillion times a day I want to print a hashref and see whats inside.
+But every time I want to do that I have to type:</p>
+
+<pre><code>use Data::Dumper::Concise;
+print Dumper $hashref;
+</code></pre>
+
+<p>First of all, thats too much typing.  And second of all I keep forgetting to
+delete my print statements when I check in.</p>
+
+<p>Happily I recently discovered
+<a href="https://metacpan.org/module/Devel::Dwarn">Devel::Dwarn</a> on CPAN.  It is
+(basically) an alias to
+<a href="https://metacpan.org/module/Data::Dumper::Concise">Data::Dumper::Concise</a>.</p>
+
+<p>The name is shorter which means its slightly less typing so I am already
+winning.  But thats not the best part.  Lets see how to use it.</p>
+
+<p>On the command line I do this:</p>
+
+<pre><code>perl -MDevel::Dwarn codeIWantToDebug.pl
+</code></pre>
+
+<p>And then in my code I do this:</p>
+
+<pre><code>print ::Dwarn $hashref;
+</code></pre>
+
+<p>There are 2 levels of good here:</p>
 
 <ol>
-<li><p>It has a
-<a href="https://metacpan.org/module/Test::WWW::Selenium::More::Manual">manual</a> which
-provides a concise but fairly comprehensive howto guide to Selenium testing in
-Perl.</p></li>
-<li><p>It uses Moose so you can more easily use roles.  For example you might want
-a role for methods that deal with authentication and a role for methods that
-deal with payments.</p></li>
-<li><p>Smarter testing with methods like wait_for_jquery() and jquery_click().  You
-should never sleep() in your Selenium tests because that leads to slow tests
-with random failures which leads to frustration, low morale, hair pulling, and
-heavy drinking.</p></li>
-<li><p>Method chaining.  Here is what this looks like:</p>
-
-<pre><code>use Test::Most;
-use Test::WWW::Selenium::More;
-
-Test::WWW::Selenium::More-&gt;new()
-
--&gt;note(&#39;Search google&#39;)
--&gt;open_ok(&quot;http://www.google.com&quot;)
--&gt;title_like(qr/Google Search/)
--&gt;type_ok(&#39;cat pictures&#39;)
--&gt;follow_link_ok(&#39;Search&#39;)
-
--&gt;note(&#39;Check the number of results&#39;)
--&gt;is_text_present_ok(&#39;2 bajillion results&#39;);
-
-done_testing;
-</code></pre></li>
+<li>Less typing.</li>
+<li>When I run my code without &#39;perl -M&#39; I get compile time errors in all
+ the places I forgot to remove <code>print ::Dwarn $hashref</code>.</li>
 </ol>
-
-<p>Bugs or patches?  <a href="https://github.com/kablamo/Test-WWW-Selenium-More">https://github.com/kablamo/Test-WWW-Selenium-More</a></p>
 
     <div class="pagination pagination-centered">
       <ul>
         <ul>
-            <li class="prev"><a href="/new-on-cpan-moosex-cachingproxy" title="New on CPAN - MooseX::CachingProxy">&larr; Previous</a></li>
+            <li class="prev"><a href="/slides-from-my-selenium-talk-at-yapceu-2012" title="Slides from my Selenium talk at YAPCEU 2012">&larr; Previous</a></li>
 
             <li><a href="/">All posts</a></li>
 
-            <li class="next"><a href="/slides-from-my-selenium-talk-at-yapceu-2012" title="Slides from my Selenium talk at YAPCEU 2012">Next &rarr;</a></li>
+            <li class="next disabled"><a>Next &rarr;</a>
         </ul>
       </ul>
     </div>
@@ -120,7 +117,7 @@ done_testing;
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-05-17</span></div>
+    <div class="date"><span>2012-09-05</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">

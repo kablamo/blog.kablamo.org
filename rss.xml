@@ -3,7 +3,48 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2012-08-26 22:49:25 +0100</pubDate>
+    <pubDate>2012-09-05 20:31:16 +0100</pubDate>
+    <item>
+      <title>Devel::Dwarn helps me type less</title>
+      <link>http://blog.kablamo.org/devel-dwarn-helps-me-type-less</link>
+      <pubDate>2012-09-05</pubDate>
+      <description>&lt;p&gt;2 bajillion times a day I want to print a hashref and see whats inside.
+But every time I want to do that I have to type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use Data::Dumper::Concise;
+print Dumper $hashref;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;First of all, thats too much typing.  And second of all I keep forgetting to
+delete my print statements when I check in.&lt;/p&gt;
+
+&lt;p&gt;Happily I recently discovered
+&lt;a href="https://metacpan.org/module/Devel::Dwarn"&gt;Devel::Dwarn&lt;/a&gt; on CPAN.  It is
+(basically) an alias to
+&lt;a href="https://metacpan.org/module/Data::Dumper::Concise"&gt;Data::Dumper::Concise&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The name is shorter which means its slightly less typing so I am already
+winning.  But thats not the best part.  Lets see how to use it.&lt;/p&gt;
+
+&lt;p&gt;On the command line I do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;perl -MDevel::Dwarn codeIWantToDebug.pl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And then in my code I do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;print ::Dwarn $hashref;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are 2 levels of good here:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Less typing.&lt;/li&gt;
+&lt;li&gt;When I run my code without &amp;#39;perl -M&amp;#39; I get compile time errors in all
+ the places I forgot to remove &lt;code&gt;print ::Dwarn $hashref&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     <item>
       <title>Slides from my Selenium talk at YAPCEU 2012</title>
       <link>http://blog.kablamo.org/slides-from-my-selenium-talk-at-yapceu-2012</link>
