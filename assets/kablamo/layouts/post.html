@@ -12,19 +12,19 @@ layout : default
       <ul>
         <ul>
           {{# page?previous }}
-            <li class="prev"><a href="{{ url }}" title="{{ title }}">&larr; Previous</a></li>
+            <li class="prev"><a href="{{ url }}" title="{{ title }}">LAST</a></li>
           {{/ page?previous }}
           {{^ page?previous }}
-            <li class="prev disabled"><a>&larr; Previous</a></li>
+            <li class="prev disabled"><a>LAST</a></li>
           {{/ page?previous }}
 
-            <li><a href="/">All posts</a></li>
+            <li><a href="/">INDEX</a></li>
 
           {{# page?next }}
-            <li class="next"><a href="{{ url }}" title="{{ title }}">Next &rarr;</a></li>
+          <li class="next"><a href="{{ url }}" title="{{ title }}">NEXT</a></li>
           {{/ page?next }}
           {{^ page?next }}
-            <li class="next disabled"><a>Next &rarr;</a>
+            <li class="next disabled"><a>NEXT</a>
           {{/ page?next }}
         </ul>
       </ul>

@@ -1,20 +1,10 @@
-@font-face {
-    font-family: 'Komikax';
-    src: url('/assets/kablamo/media/KOMIKAX_-webfont.eot');
-    src: url('/assets/kablamo/media/KOMIKAX_-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/kablamo/media/KOMIKAX_-webfont.woff') format('woff'),
-         url('/assets/kablamo/media/KOMIKAX_-webfont.ttf') format('truetype'),
-         url('/assets/kablamo/media/KOMIKAX_-webfont.svg#KomikaAxisRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-
 /* Override some defaults */
 html, body {
- background-color: #eef0f0;
+ background-color: #00b4ff;
+ background-color: #0E2430;
+ font-size: 14px;
 }
+p { font-size:15px }
 .navbar {
   margin-bottom: 0;
 }
@@ -33,21 +23,25 @@ html, body {
   background-color: #fff;
   padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+  border: solid 0px #818181;
   -webkit-border-radius: 0 0 6px 6px;
      -moz-border-radius: 0 0 6px 6px;
           border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-          box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -webkit-box-shadow: 0;
+     -moz-box-shadow: 0;
+          box-shadow: 0;
 }
 
 /* Page header tweaks */
 .page-header {
- background-color: #fff;
+ background-color: #E30842 ;
+ color: #fff;
  padding: 20px 20px 10px;
  margin: -20px -20px 20px;
- border-top: 1px solid #eee;
- border-bottom: 0px solid #eee;
+ padding-top: 2em;
+ padding-bottom: 2em;
+ border: 0;
+ border-bottom: solid 0px #ddd;
 }
 
 /* posts index */
@@ -98,18 +92,6 @@ html, body {
   color:#FFF;
 }
 
-/* kablamo */
-
-a, a:visited {
- color: #333333;
- color: #f15348; 
- font-weight: normal;
- text-decoration: underline;
-}
-a:hover {
- color: red;
-}
-
 .navbar, .navbar-inner, .navbar-inner .container, .navbar-inner .container a {
  vertical-align: middle;
 }
@@ -123,26 +105,21 @@ a:hover {
  padding: 10px 10px 11px;
  line-height: 19px;
  color: #666;
+ color: orange;
+ color: #999;
  text-decoration: none;
  text-shadow: none;
 }
-.navbar .nav>li>a:hover {
- color: #333;
-}
+.navbar .nav>li>a:hover { color: #fff }
 .navbar .nav .active>a,.navbar .nav .active>a:hover {
- background-color: #ccd0d0;
- background-color: #556060;
- color: #333;
+ background-color: transparent;
  color: #fff;
  text-decoration: none;
- -webkit-border-radius: 0 0 20px 20px;
-    -moz-border-radius: 0 0 20px 20px;
-         border-radius: 0 0 20px 20px;
 }
 .logo {
- color: #adff2f !important;
- color: #f06e54 !important;
- font-family: 'Komikax', Helvetica, Arial, sans-serif;
+ color: #E30842 !important;
+ color: #fff !important;
+ font-family: sans;
  float: left;
  line-height: 1.5em;
  line-height: 1em;
@@ -167,7 +144,10 @@ div.navbar .blog {
 }
 
 .navbar-inner {
- background-color: #eef0f0;
+ background-color: #fff;
+ background-color: #0E2430;
+ padding-top: 2.5em;
+ padding-bottom: 2em;
  background-image:none;
  -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -177,7 +157,18 @@ div.navbar .blog {
          box-shadow: none;
 }
 
-.pagination { margin-top: 50px; margin-bottom: 100px }
+.pagination { 
+ margin-top: 10px;
+ margin-bottom: 10px;
+ padding-top: 10px; 
+ padding-bottom: 10px; 
+}
+.pagination a {background: #fff; border: 0; background: orange; color: #fff}
+.pagination li a:hover {color: fff; background: orangered }
+.pagination li a {border: solid 1px darkorange}
+.pagination li:first-child a {border-right: solid 0px darkorange}
+.pagination li:last-child a {border-left: solid 0px darkorange}
+.pagination .disabled a {color: orange; background: darkorange}
 
 img.src { margin-top: 20px; margin-bottom: 0px; padding: 0; display: block; }
 a.src { display: block; margin-top: 0px; margin-bottom: 20px; padding-top: 0px; font-size: 9px }
@@ -199,9 +190,10 @@ a.src { display: block; margin-top: 0px; margin-bottom: 20px; padding-top: 0px; 
  float: right;
 }
 .posts li a {
- font-size: 13px;
+ font-size: 20px;
  vertical-align: middle;
  margin-right: 30px;
+ font-family: mono;
 }
 
 .mathHeader {

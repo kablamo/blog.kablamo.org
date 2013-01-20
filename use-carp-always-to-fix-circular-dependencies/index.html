@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>New on CPAN - MooseX::CachingProxy</title>
+    <title>Use Carp::Always to fix circular dependencies</title>
     <meta name="author" content="Eric Johnson">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_">
 
@@ -12,9 +12,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.8904544030433859" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/stylesheets/blog.css?0.5088941248794419" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.5211716739920589" type="text/css" rel="stylesheet" media="all">
+    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.8222374391408972" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/stylesheets/blog.css?0.9063469668528497" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.7105829577980598" type="text/css" rel="stylesheet" media="all">
 
  
 
@@ -48,45 +48,81 @@
     <div class="container">
       <div class="content">
         <div class="page-header">
-  <h1>New on CPAN - MooseX::CachingProxy </h1>
+  <h1>Use Carp::Always to fix circular dependencies </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>Last week I released <a href="https://metacpan.org/module/MooseX::CachingProxy">MooseX::CachingProxy</a> to CPAN.</p>
+    <p>Circular dependencies happen when your library requires a library which
+requires your library.  Here&#39;s an example.  Lets say you have 2 packages:  </p>
 
-<p>Its a small module that intercepts requests from your LWP based application.
-Those requests are relayed on to the intended server unless they already exist
-in the cache.</p>
+<p><strong>AlienPlanet.pm</strong></p>
 
-<p>To toggle on and off the caching proxy, MooseX::CachingProxy provides the
-attribute &#39;caching_proxy&#39;.  Here is a quick demo:</p>
-
-<pre><code>package MyApp;
+<pre><code>package AlienPlanet;
 use Moose;
-use WWW::Mechanize; # or any LWP based library
-with &#39;MooseX::CachingProxy&#39;;
-
-sub url { &#39;http://example.com&#39; } # required by MooseX::CachingProxy
-
-sub download { 
-    my $self = shift;
-    $self-&gt;start_caching_proxy;
-    return WWW::Mechanize-&gt;new()-&gt;get($self-&gt;url . &#39;/foo&#39;); 
-}
+use Dinosaurs;          # &lt;--- Circular dependency
+sub has_dinosaurs {1}
+1;
 </code></pre>
 
-<p>Under the covers, its a tiny Plack application that mashes up
-<a href="https://metacpan.org/module/Plack::Middleware::Cache">Plack::Middleware::Cache</a> and <a href="https://metacpan.org/module/Plack::App::Proxy">Plack::App::Proxy</a>.</p>
+<p><strong>Dinosaurs.pm</strong></p>
+
+<pre><code>package Dinosaurs;
+use Moose;
+use AlienPlanet;        # &lt;--- Circular dependency
+sub has_rabies {1}
+1;
+</code></pre>
+
+<p>If you try to compile this, you get the following warning:</p>
+
+<pre><code>⚡ perl -c lib/AlienPlanet.pm 
+Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 5.
+lib/AlienPlanet.pm syntax OK
+</code></pre>
+
+<p>In this case its obvious where the problem is.  </p>
+
+<p>But if the package you included, included 25 other libraries, which included
+other libraries, which included your original library -- then its harder to
+figure out where the circle is.</p>
+
+<p>Happily I discovered a good solution. First, modify <strong>AlienPlanet.pm</strong> to look
+like this:</p>
+
+<pre><code>package AlienPlanet;
+sub has_dinosaurs {1}
+use Dinosaurs;
+1;
+</code></pre>
+
+<p>Next, try compiling your code again but this time with
+<a href="http://perladvent.org/2011/2011-12-04.html">Carp::Always</a>:</p>
+
+<pre><code>⚡ perl -MCarp::Always -c lib/AlienPlanet.pm                                                                                                            
+Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 4.
+        require AlienPlanet.pm called at lib/Dinosaurs.pm line 4
+        Dinosaurs::BEGIN() called at lib/AlienPlanet.pm line 4
+        eval {...} called at lib/AlienPlanet.pm line 4
+        require Dinosaurs.pm called at lib/AlienPlanet.pm line 5
+        AlienPlanet::BEGIN() called at lib/AlienPlanet.pm line 4
+        eval {...} called at lib/AlienPlanet.pm line 4
+lib/AlienPlanet.pm syntax OK
+</code></pre>
+
+<p>Now you&#39;ve got a stack trace and its easy to see where your problem is.  All
+thats left is figuring out how to solve it. (Fast solution: use
+<a href="https://metacpan.org/module/Class::Load">Class::Load</a> in the Dinosaurs
+package.)</p>
 
     <div class="pagination pagination-centered">
       <ul>
         <ul>
-            <li class="prev"><a href="/new-on-cpan-log-json" title="New on CPAN - Log::JSON">LAST</a></li>
+            <li class="prev"><a href="/devel-dwarn-helps-me-type-less" title="Devel::Dwarn helps me type less">LAST</a></li>
 
             <li><a href="/">INDEX</a></li>
 
-          <li class="next"><a href="/test-www-selenium-more" title="Test::WWW::Selenium::More">NEXT</a></li>
+            <li class="next disabled"><a>NEXT</a>
         </ul>
       </ul>
     </div>
@@ -107,7 +143,7 @@ sub download {
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-05-10</span></div>
+    <div class="date"><span>2013-01-19</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">

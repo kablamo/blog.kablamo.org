@@ -3,7 +3,74 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2012-09-05 20:31:16 +0100</pubDate>
+    <pubDate>2013-01-20 21:06:15 +0000</pubDate>
+    <item>
+      <title>Use Carp::Always to fix circular dependencies</title>
+      <link>http://blog.kablamo.org/use-carp-always-to-fix-circular-dependencies</link>
+      <pubDate>2013-01-19</pubDate>
+      <description>&lt;p&gt;Circular dependencies happen when your library requires a library which
+requires your library.  Here&amp;#39;s an example.  Lets say you have 2 packages:  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;AlienPlanet.pm&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package AlienPlanet;
+use Moose;
+use Dinosaurs;          # &amp;lt;--- Circular dependency
+sub has_dinosaurs {1}
+1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Dinosaurs.pm&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package Dinosaurs;
+use Moose;
+use AlienPlanet;        # &amp;lt;--- Circular dependency
+sub has_rabies {1}
+1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you try to compile this, you get the following warning:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; perl -c lib/AlienPlanet.pm 
+Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 5.
+lib/AlienPlanet.pm syntax OK
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case its obvious where the problem is.  &lt;/p&gt;
+
+&lt;p&gt;But if the package you included, included 25 other libraries, which included
+other libraries, which included your original library -- then its harder to
+figure out where the circle is.&lt;/p&gt;
+
+&lt;p&gt;Happily I discovered a good solution. First, modify &lt;strong&gt;AlienPlanet.pm&lt;/strong&gt; to look
+like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package AlienPlanet;
+sub has_dinosaurs {1}
+use Dinosaurs;
+1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, try compiling your code again but this time with
+&lt;a href="http://perladvent.org/2011/2011-12-04.html"&gt;Carp::Always&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; perl -MCarp::Always -c lib/AlienPlanet.pm                                                                                                            
+Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 4.
+        require AlienPlanet.pm called at lib/Dinosaurs.pm line 4
+        Dinosaurs::BEGIN() called at lib/AlienPlanet.pm line 4
+        eval {...} called at lib/AlienPlanet.pm line 4
+        require Dinosaurs.pm called at lib/AlienPlanet.pm line 5
+        AlienPlanet::BEGIN() called at lib/AlienPlanet.pm line 4
+        eval {...} called at lib/AlienPlanet.pm line 4
+lib/AlienPlanet.pm syntax OK
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you&amp;#39;ve got a stack trace and its easy to see where your problem is.  All
+thats left is figuring out how to solve it. (Fast solution: use
+&lt;a href="https://metacpan.org/module/Class::Load"&gt;Class::Load&lt;/a&gt; in the Dinosaurs
+package.)&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Devel::Dwarn helps me type less</title>
       <link>http://blog.kablamo.org/devel-dwarn-helps-me-type-less</link>
