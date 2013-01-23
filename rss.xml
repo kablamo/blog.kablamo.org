@@ -3,7 +3,48 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2013-01-20 21:16:45 +0000</pubDate>
+    <pubDate>2013-01-23 21:33:58 +0000</pubDate>
+    <item>
+      <title>git-spark plots your commit history</title>
+      <link>http://blog.kablamo.org/git-spark-plots-your-commit-history</link>
+      <pubDate>2013-01-23</pubDate>
+      <description>&lt;p&gt;I recently rediscovered &lt;a href="https://github.com/holman/spark"&gt;spark&lt;/a&gt;, Zach Holman&amp;#39;s
+cool little sparklines graphing tool for the command line.  I used a little
+Perl to mash it up with &amp;#39;git log&amp;#39; and came up with
+&lt;a href="https://gist.github.com/4598480"&gt;git-spark&lt;/a&gt; which works like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; git spark --hours 8
+Commits by Godzilla over the last 8 hours
+&#x2583;&#x2583;&#x2581;&#x2586;&#x2585;&#x2581;&#x2581;&#x2583;&#x2588;
+&#x26A1; git spark -d 14 HulkHogan
+Commits by HulkHogan over the last 14 days
+&#x2587;&#x2585;&#x2584;&#x2581;&#x2581;&#x2584;&#x2585;&#x2582;&#x2588;&#x2582;&#x2581;&#x2581;&#x2581;&#x2585;
+&#x26A1; git spark -w 52 Tarzan
+Commits by Tarzan over the last 52 weeks
+&#x2583;&#x2581;&#x2582;&#x2583;&#x2583;&#x2583;&#x2582;&#x2581;&#x2588;&#x2586;&#x2581;&#x2584;&#x2584;&#x2583;&#x2582;&#x2582;&#x2581;&#x2581;&#x2582;&#x2583;&#x2583;&#x2584;&#x2583;&#x2583;&#x2582;&#x2583;&#x2581;&#x2581;&#x2581;&#x2581;&#x2581;&#x2582;&#x2582;&#x2583;&#x2586;&#x2585;&#x2582;&#x2581;&#x2584;&#x2583;&#x2582;&#x2584;&#x2584;&#x2584;&#x2581;&#x2582;&#x2581;&#x2581;&#x2582;&#x2582;&#x2582;&#x2583;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And heres the usage/help:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; git spark -h
+usage: git spark [-dhmowy] [long options...] [AUTHOR]
+        -o --hours      commits from the last x hours
+        -d --days       commits from the last x days
+        -w --weeks      commits from the last x weeks
+        -m --months     commits from the last x months
+        -y --years      commits from the last x years
+        -h --help       show this message
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It was fun to build, but afterward I realized its totally useless.  Clearly
+&amp;#39;commits&amp;#39; are a problematic metric.  But its much worse than that.  The peaks
+on the graph are relative to the lows on the same graph.  So a peak on one
+graph has no relation to a peak on another.  That means I can&amp;#39;t compare one
+sparkline with another.&lt;/p&gt;
+
+&lt;p&gt;Back to the drawing board.  I&amp;#39;ll have to come up with something else.  &lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Use Carp::Always to fix circular dependencies</title>
       <link>http://blog.kablamo.org/use-carp-always-to-fix-circular-dependencies</link>

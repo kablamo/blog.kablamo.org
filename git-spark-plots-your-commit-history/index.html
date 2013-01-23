@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Slides from my Selenium talk at YAPCEU 2012</title>
+    <title>git-spark plots your commit history</title>
     <meta name="author" content="Eric Johnson">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_">
 
@@ -12,9 +12,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.6761375262143992" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/stylesheets/blog.css?0.9425396789442836" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.3445332591894218" type="text/css" rel="stylesheet" media="all">
+    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.31492819650043125" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/stylesheets/blog.css?0.12261041004039397" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.3821023464918034" type="text/css" rel="stylesheet" media="all">
 
  
 
@@ -48,34 +48,55 @@
     <div class="container">
       <div class="content">
         <div class="page-header">
-  <h1>Slides from my Selenium talk at YAPCEU 2012 </h1>
+  <h1>git-spark plots your commit history </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>I gave my first <a href="http://act.yapc.eu/ye2012/schedule?day=2012-08-20">YAPC::EU</a>
-presentation this year in Frankfurt after doing a trial run at London.pm.  I
-received some good questions and comments and a few new ideas.  It was a good
-experience and I want to do this again.</p>
+    <p>I recently rediscovered <a href="https://github.com/holman/spark">spark</a>, Zach Holman&#39;s
+cool little sparklines graphing tool for the command line.  I used a little
+Perl to mash it up with &#39;git log&#39; and came up with
+<a href="https://gist.github.com/4598480">git-spark</a> which works like this:</p>
 
-<p>My talk introduced Selenium and common problems people have when first trying
-to write Selenium tests in Perl.  I also explained how I solved many of those
-problems by creating
-<a href="https://metacpan.org/module/Test::WWW::Selenium::More">Test::WWW::Selenium::More</a>.</p>
+<pre><code>⚡ git spark --hours 8
+Commits by Godzilla over the last 8 hours
+▃▃▁▆▅▁▁▃█
+⚡ git spark -d 14 HulkHogan
+Commits by HulkHogan over the last 14 days
+▇▅▄▁▁▄▅▂█▂▁▁▁▅
+⚡ git spark -w 52 Tarzan
+Commits by Tarzan over the last 52 weeks
+▃▁▂▃▃▃▂▁█▆▁▄▄▃▂▂▁▁▂▃▃▄▃▃▂▃▁▁▁▁▁▂▂▃▆▅▂▁▄▃▂▄▄▄▁▂▁▁▂▂▂▃
+</code></pre>
 
-<p>The slides are available
-<a href="http://kablamo.org/selenium-2012-yapceu-slides/">online</a>. Or if you need to
-download them for some reason, they are hosted on
-<a href="https://github.com/kablamo/selenium-2012-yapceu-slides">github</a>.</p>
+<p>And heres the usage/help:</p>
+
+<pre><code>⚡ git spark -h
+usage: git spark [-dhmowy] [long options...] [AUTHOR]
+        -o --hours      commits from the last x hours
+        -d --days       commits from the last x days
+        -w --weeks      commits from the last x weeks
+        -m --months     commits from the last x months
+        -y --years      commits from the last x years
+        -h --help       show this message
+</code></pre>
+
+<p>It was fun to build, but afterward I realized its totally useless.  Clearly
+&#39;commits&#39; are a problematic metric.  But its much worse than that.  The peaks
+on the graph are relative to the lows on the same graph.  So a peak on one
+graph has no relation to a peak on another.  That means I can&#39;t compare one
+sparkline with another.</p>
+
+<p>Back to the drawing board.  I&#39;ll have to come up with something else.  </p>
 
     <div class="pagination pagination-centered">
       <ul>
         <ul>
-            <li class="prev"><a href="/test-www-selenium-more" title="Test::WWW::Selenium::More">LAST</a></li>
+            <li class="prev"><a href="/use-carp-always-to-fix-circular-dependencies" title="Use Carp::Always to fix circular dependencies">LAST</a></li>
 
             <li><a href="/">INDEX</a></li>
 
-          <li class="next"><a href="/devel-dwarn-helps-me-type-less" title="Devel::Dwarn helps me type less">NEXT</a></li>
+            <li class="next disabled"><a>NEXT</a>
         </ul>
       </ul>
     </div>
@@ -96,7 +117,7 @@ download them for some reason, they are hosted on
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-08-26</span></div>
+    <div class="date"><span>2013-01-23</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
