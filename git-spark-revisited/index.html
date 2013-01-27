@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Use Carp::Always to fix circular dependencies</title>
+    <title>git-spark revisited</title>
     <meta name="author" content="Eric Johnson">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_">
 
@@ -12,9 +12,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.08508914107305743" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/stylesheets/blog.css?0.7088779905041699" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.47258479539084375" type="text/css" rel="stylesheet" media="all">
+    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.11583517641497021" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/stylesheets/blog.css?0.7627611848586021" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.2819754713642716" type="text/css" rel="stylesheet" media="all">
 
  
 
@@ -48,81 +48,72 @@
     <div class="container">
       <div class="content">
         <div class="page-header">
-  <h1>Use Carp::Always to fix circular dependencies </h1>
+  <h1>git-spark revisited </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>Circular dependencies happen when your library requires a library which
-requires your library.  Here&#39;s an example.  Lets say you have 2 packages:  </p>
+    <p>A <a href="http://blog.kablamo.org/git-spark-plots-your-commit-history/">few days ago</a>
+I wrote about my <a href="https://gist.github.com/4598480">git-spark</a> Perl script.  It
+counts how many commits a user has in a git project and makes a little graph
+and displays it on the command line.</p>
 
-<p><strong>AlienPlanet.pm</strong></p>
+<p>However I also said it wasn&#39;t very useful becuase you can&#39;t compare one graph
+with another because the scale changes when different graphs have different min
+and max values.  For example these two data series produce identical graphs
+despite have very different data.</p>
 
-<pre><code>package AlienPlanet;
-use Moose;
-use Dinosaurs;          # &lt;--- Circular dependency
-sub has_dinosaurs {1}
-1;
+<pre><code>⚡ spark 1 2 3 4 5
+▁▂▄▆█
+⚡ spark 10 20 30 40 50
+▁▂▄▆█
 </code></pre>
 
-<p><strong>Dinosaurs.pm</strong></p>
+<p>So I put on my thinking cap and came up with the following solution: </p>
 
-<pre><code>package Dinosaurs;
-use Moose;
-use AlienPlanet;        # &lt;--- Circular dependency
-sub has_rabies {1}
-1;
+<pre><code>⚡ spark 50 1 1 2 3 4 5
+█▁▁▁▁▁▁
+⚡ spark 50 1 10 20 30 40 50
+█▁▂▃▅▆█
 </code></pre>
 
-<p>If you try to compile this, you get the following warning:</p>
+<p>I just need to prepend a max and a min to the data to get consistent scaling
+and now I can compare graphs.</p>
 
-<pre><code>⚡ perl -c lib/AlienPlanet.pm 
-Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 5.
-lib/AlienPlanet.pm syntax OK
+<p>For git-spark, I now assume the min is zero and you can pass in the max using
+the --scale option.  (Note that I chopped off the max/min characters from
+the spark output as they are distracting.)</p>
+
+<p>I also decided to print out the number of commits which helps with the
+scaling issue.  And while I was in there I got it to calculate the total,
+average, and maximum number of commits for that duration.</p>
+
+<p>Here is an example.  It doesn&#39;t really need the --scale option because the data
+is so close anyway, but it shows how to use it:</p>
+
+<pre><code>⚡ git spark --days 14 --scale 23 Stegosaurus
+Commits by Stegosaurus over the last 14 days
+total: 95   avg: 7   max: 23
+10 15 6 23 5 0 0 1 15 0 17 3 0 0
+▄▅▂█▂▁▁▁▅▁▆▁▁▁
+⚡ git spark --days 14 --scale 23 Triceratops
+Commits by Triceratops over the last 14 days
+total: 90   avg: 7   max: 22
+1 12 3 11 3 0 0 6 16 3 13 22 0 0
+▁▄▁▄▁▁▁▂▅▁▄▇▁▁
 </code></pre>
 
-<p>In this case its obvious where the problem is.  </p>
-
-<p>But if the package you included, included 25 other libraries, which included
-other libraries, which included your original library -- then its harder to
-figure out where the circle is.</p>
-
-<p>Happily I discovered a good solution. First, modify <strong>AlienPlanet.pm</strong> to look
-like this:</p>
-
-<pre><code>package AlienPlanet;
-sub has_dinosaurs {1}   &lt;-- swap
-use Dinosaurs;          &lt;-- swap
-1;
-</code></pre>
-
-<p>Next, try compiling your code again but this time with
-<a href="http://perladvent.org/2011/2011-12-04.html">Carp::Always</a>:</p>
-
-<pre><code>⚡ perl -MCarp::Always -c lib/AlienPlanet.pm                                                                                                            
-Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 4.
-        require AlienPlanet.pm called at lib/Dinosaurs.pm line 4
-        Dinosaurs::BEGIN() called at lib/AlienPlanet.pm line 4
-        eval {...} called at lib/AlienPlanet.pm line 4
-        require Dinosaurs.pm called at lib/AlienPlanet.pm line 5
-        AlienPlanet::BEGIN() called at lib/AlienPlanet.pm line 4
-        eval {...} called at lib/AlienPlanet.pm line 4
-lib/AlienPlanet.pm syntax OK
-</code></pre>
-
-<p>Now you&#39;ve got a stack trace and its easy to see where your problem is.  All
-thats left is figuring out how to solve it. (Fast solution: use
-<a href="https://metacpan.org/module/Class::Load">Class::Load</a> in the Dinosaurs
-package.)</p>
+<p>Of course you still need to consider the quality of commits and not just how
+many there are.  </p>
 
     <div class="pagination pagination-centered">
       <ul>
         <ul>
-            <li class="prev"><a href="/devel-dwarn-helps-me-type-less" title="Devel::Dwarn helps me type less">LAST</a></li>
+            <li class="prev"><a href="/git-spark-plots-your-commit-history" title="git-spark plots your commit history">LAST</a></li>
 
             <li><a href="/">INDEX</a></li>
 
-          <li class="next"><a href="/git-spark-plots-your-commit-history" title="git-spark plots your commit history">NEXT</a></li>
+            <li class="next disabled"><a>NEXT</a>
         </ul>
       </ul>
     </div>
@@ -143,7 +134,7 @@ package.)</p>
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2013-01-19</span></div>
+    <div class="date"><span>2013-01-27</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">

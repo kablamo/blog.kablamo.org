@@ -3,12 +3,247 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2013-01-23 22:12:47 +0000</pubDate>
+    <pubDate>2013-01-27 21:57:56 +0000</pubDate>
+    <item>
+      <title>git-spark revisited</title>
+      <link>http://blog.kablamo.org/git-spark-revisited</link>
+      <pubDate>2013-01-27</pubDate>
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;git-spark revisited&lt;/title&gt;
+    &lt;meta name="author" content="Eric Johnson"&gt;
+    &lt;link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_"&gt;
+
+    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+
+    &lt;!-- Le styles --&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.23885336463353535" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.839663476434845" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.8427576360141147" type="text/css" rel="stylesheet" media="all"&gt;
+
+ 
+
+    &lt;!-- Le fav and touch icons --&gt;
+  &lt;!-- Update these with your own images
+    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
+    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
+  --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div class="navbar"&gt;
+      &lt;div class="navbar-inner"&gt;
+        &lt;div class="container"&gt;
+          &lt;a class="brand logo" href="/"&gt;KABLAMO&lt;/a&gt;
+          &lt;ul class="nav"&gt;
+              
+                &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="http://feeds.feedburner.com/Kablamo_" rel="alternate" type="application/rss+xml"&gt;RSS&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+  &lt;h1&gt;git-spark revisited &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="span8"&gt;
+    &lt;p&gt;A &lt;a href="http://blog.kablamo.org/git-spark-plots-your-commit-history/"&gt;few days ago&lt;/a&gt;
+I wrote about my &lt;a href="https://gist.github.com/4598480"&gt;git-spark&lt;/a&gt; Perl script.  It
+counts how many commits a user has in a git project and makes a little graph
+and displays it on the command line.&lt;/p&gt;
+
+&lt;p&gt;However I also said it wasn&amp;#39;t very useful becuase you can&amp;#39;t compare one graph
+with another because the scale changes when different graphs have different min
+and max values.  For example these two data series produce identical graphs
+despite have very different data.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; spark 1 2 3 4 5
+&#x2581;&#x2582;&#x2584;&#x2586;&#x2588;
+&#x26A1; spark 10 20 30 40 50
+&#x2581;&#x2582;&#x2584;&#x2586;&#x2588;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So I put on my thinking cap and came up with the following solution: &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; spark 50 1 1 2 3 4 5
+&#x2588;&#x2581;&#x2581;&#x2581;&#x2581;&#x2581;&#x2581;
+&#x26A1; spark 50 1 10 20 30 40 50
+&#x2588;&#x2581;&#x2582;&#x2583;&#x2585;&#x2586;&#x2588;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I just need to prepend a max and a min to the data to get consistent scaling
+and now I can compare graphs.&lt;/p&gt;
+
+&lt;p&gt;For git-spark, I now assume the min is zero and you can pass in the max using
+the --scale option.  (Note that I chopped off the max/min characters from
+the spark output as they are distracting.)&lt;/p&gt;
+
+&lt;p&gt;I also decided to print out the number of commits which helps with the
+scaling issue.  And while I was in there I got it to calculate the total,
+average, and maximum number of commits for that duration.&lt;/p&gt;
+
+&lt;p&gt;Here is an example.  It doesn&amp;#39;t really need the --scale option because the data
+is so close anyway, but it shows how to use it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; git spark --days 14 --scale 23 Stegosaurus
+Commits by Stegosaurus over the last 14 days
+total: 95   avg: 7   max: 23
+10 15 6 23 5 0 0 1 15 0 17 3 0 0
+&#x2584;&#x2585;&#x2582;&#x2588;&#x2582;&#x2581;&#x2581;&#x2581;&#x2585;&#x2581;&#x2586;&#x2581;&#x2581;&#x2581;
+&#x26A1; git spark --days 14 --scale 23 Triceratops
+Commits by Triceratops over the last 14 days
+total: 90   avg: 7   max: 22
+1 12 3 11 3 0 0 6 16 3 13 22 0 0
+&#x2581;&#x2584;&#x2581;&#x2584;&#x2581;&#x2581;&#x2581;&#x2582;&#x2585;&#x2581;&#x2584;&#x2587;&#x2581;&#x2581;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course you still need to consider the quality of commits and not just how
+many there are.  &lt;/p&gt;
+
+    &lt;div class="pagination pagination-centered"&gt;
+      &lt;ul&gt;
+        &lt;ul&gt;
+            &lt;li class="prev"&gt;&lt;a href="/git-spark-plots-your-commit-history" title="git-spark plots your commit history"&gt;LAST&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li&gt;&lt;a href="/"&gt;INDEX&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li class="next disabled"&gt;&lt;a&gt;NEXT&lt;/a&gt;
+        &lt;/ul&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'networthify'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    &lt;/script&gt;
+    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="span4"&gt;
+    &lt;h4&gt;Published&lt;/h4&gt;
+    &lt;div class="date"&gt;&lt;span&gt;2013-01-27&lt;/span&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Categories&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+      &lt;/div&gt;
+      &lt;footer&gt;&lt;/footer&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Google Prettify --&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i &lt; pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+&lt;/script&gt;
+&lt;!-- end Google Prettify --&gt;
+    &lt;script type="text/javascript"&gt;
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30610896-1']);
+      _gaq.push(['_setDomainName', 'networthify.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</description>
+    </item>
     <item>
       <title>git-spark plots your commit history</title>
       <link>http://blog.kablamo.org/git-spark-plots-your-commit-history</link>
       <pubDate>2013-01-23</pubDate>
-      <description>&lt;p&gt;I recently rediscovered &lt;a href="https://github.com/holman/spark"&gt;spark&lt;/a&gt;, Zach Holman&amp;#39;s
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;git-spark plots your commit history&lt;/title&gt;
+    &lt;meta name="author" content="Eric Johnson"&gt;
+    &lt;link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_"&gt;
+
+    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+
+    &lt;!-- Le styles --&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.2851062042809114" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.5709527413449224" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.4556700356212142" type="text/css" rel="stylesheet" media="all"&gt;
+
+ 
+
+    &lt;!-- Le fav and touch icons --&gt;
+  &lt;!-- Update these with your own images
+    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
+    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
+  --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div class="navbar"&gt;
+      &lt;div class="navbar-inner"&gt;
+        &lt;div class="container"&gt;
+          &lt;a class="brand logo" href="/"&gt;KABLAMO&lt;/a&gt;
+          &lt;ul class="nav"&gt;
+              
+                &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="http://feeds.feedburner.com/Kablamo_" rel="alternate" type="application/rss+xml"&gt;RSS&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+  &lt;h1&gt;git-spark plots your commit history &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="span8"&gt;
+    &lt;p&gt;I recently rediscovered &lt;a href="https://github.com/holman/spark"&gt;spark&lt;/a&gt;, Zach Holman&amp;#39;s
 cool little sparklines graphing tool for the command line.  I used a little
 Perl to mash it up with &amp;#39;git log&amp;#39; and came up with
 &lt;a href="https://gist.github.com/4598480"&gt;git-spark&lt;/a&gt; which works like this:&lt;/p&gt;
@@ -43,13 +278,135 @@ graph has no relation to a peak on another.  That means I can&amp;#39;t compare 
 sparkline with another.&lt;/p&gt;
 
 &lt;p&gt;Back to the drawing board.  I&amp;#39;ll have to come up with something else.  &lt;/p&gt;
+
+    &lt;div class="pagination pagination-centered"&gt;
+      &lt;ul&gt;
+        &lt;ul&gt;
+            &lt;li class="prev"&gt;&lt;a href="/use-carp-always-to-fix-circular-dependencies" title="Use Carp::Always to fix circular dependencies"&gt;LAST&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li&gt;&lt;a href="/"&gt;INDEX&lt;/a&gt;&lt;/li&gt;
+
+          &lt;li class="next"&gt;&lt;a href="/git-spark-revisited" title="git-spark revisited"&gt;NEXT&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'networthify'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    &lt;/script&gt;
+    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="span4"&gt;
+    &lt;h4&gt;Published&lt;/h4&gt;
+    &lt;div class="date"&gt;&lt;span&gt;2013-01-23&lt;/span&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Categories&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+      &lt;/div&gt;
+      &lt;footer&gt;&lt;/footer&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Google Prettify --&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i &lt; pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+&lt;/script&gt;
+&lt;!-- end Google Prettify --&gt;
+    &lt;script type="text/javascript"&gt;
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30610896-1']);
+      _gaq.push(['_setDomainName', 'networthify.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </description>
     </item>
     <item>
       <title>Use Carp::Always to fix circular dependencies</title>
       <link>http://blog.kablamo.org/use-carp-always-to-fix-circular-dependencies</link>
       <pubDate>2013-01-19</pubDate>
-      <description>&lt;p&gt;Circular dependencies happen when your library requires a library which
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Use Carp::Always to fix circular dependencies&lt;/title&gt;
+    &lt;meta name="author" content="Eric Johnson"&gt;
+    &lt;link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_"&gt;
+
+    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+
+    &lt;!-- Le styles --&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.421486734395327" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.48033261224897605" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.4784998314505159" type="text/css" rel="stylesheet" media="all"&gt;
+
+ 
+
+    &lt;!-- Le fav and touch icons --&gt;
+  &lt;!-- Update these with your own images
+    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
+    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
+  --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div class="navbar"&gt;
+      &lt;div class="navbar-inner"&gt;
+        &lt;div class="container"&gt;
+          &lt;a class="brand logo" href="/"&gt;KABLAMO&lt;/a&gt;
+          &lt;ul class="nav"&gt;
+              
+                &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="http://feeds.feedburner.com/Kablamo_" rel="alternate" type="application/rss+xml"&gt;RSS&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+  &lt;h1&gt;Use Carp::Always to fix circular dependencies &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="span8"&gt;
+    &lt;p&gt;Circular dependencies happen when your library requires a library which
 requires your library.  Here&amp;#39;s an example.  Lets say you have 2 packages:  &lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;AlienPlanet.pm&lt;/strong&gt;&lt;/p&gt;
@@ -110,13 +467,135 @@ lib/AlienPlanet.pm syntax OK
 thats left is figuring out how to solve it. (Fast solution: use
 &lt;a href="https://metacpan.org/module/Class::Load"&gt;Class::Load&lt;/a&gt; in the Dinosaurs
 package.)&lt;/p&gt;
+
+    &lt;div class="pagination pagination-centered"&gt;
+      &lt;ul&gt;
+        &lt;ul&gt;
+            &lt;li class="prev"&gt;&lt;a href="/devel-dwarn-helps-me-type-less" title="Devel::Dwarn helps me type less"&gt;LAST&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li&gt;&lt;a href="/"&gt;INDEX&lt;/a&gt;&lt;/li&gt;
+
+          &lt;li class="next"&gt;&lt;a href="/git-spark-plots-your-commit-history" title="git-spark plots your commit history"&gt;NEXT&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'networthify'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    &lt;/script&gt;
+    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="span4"&gt;
+    &lt;h4&gt;Published&lt;/h4&gt;
+    &lt;div class="date"&gt;&lt;span&gt;2013-01-19&lt;/span&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Categories&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+      &lt;/div&gt;
+      &lt;footer&gt;&lt;/footer&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Google Prettify --&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i &lt; pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+&lt;/script&gt;
+&lt;!-- end Google Prettify --&gt;
+    &lt;script type="text/javascript"&gt;
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30610896-1']);
+      _gaq.push(['_setDomainName', 'networthify.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </description>
     </item>
     <item>
       <title>Devel::Dwarn helps me type less</title>
       <link>http://blog.kablamo.org/devel-dwarn-helps-me-type-less</link>
       <pubDate>2012-09-05</pubDate>
-      <description>&lt;p&gt;2 bajillion times a day I want to print a hashref and see whats inside.
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Devel::Dwarn helps me type less&lt;/title&gt;
+    &lt;meta name="author" content="Eric Johnson"&gt;
+    &lt;link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_"&gt;
+
+    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+
+    &lt;!-- Le styles --&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.4752269080194025" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.0705689616769366" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.18480562464520334" type="text/css" rel="stylesheet" media="all"&gt;
+
+ 
+
+    &lt;!-- Le fav and touch icons --&gt;
+  &lt;!-- Update these with your own images
+    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
+    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
+  --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div class="navbar"&gt;
+      &lt;div class="navbar-inner"&gt;
+        &lt;div class="container"&gt;
+          &lt;a class="brand logo" href="/"&gt;KABLAMO&lt;/a&gt;
+          &lt;ul class="nav"&gt;
+              
+                &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="http://feeds.feedburner.com/Kablamo_" rel="alternate" type="application/rss+xml"&gt;RSS&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+  &lt;h1&gt;Devel::Dwarn helps me type less &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="span8"&gt;
+    &lt;p&gt;2 bajillion times a day I want to print a hashref and see whats inside.
 But every time I want to do that I have to type:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;use Data::Dumper::Concise;
@@ -151,13 +630,135 @@ winning.  But thats not the best part.  Lets see how to use it.&lt;/p&gt;
 &lt;li&gt;When I run my code without &amp;#39;perl -M&amp;#39; I get compile time errors in all
  the places I forgot to remove &lt;code&gt;print ::Dwarn $hashref&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
+
+    &lt;div class="pagination pagination-centered"&gt;
+      &lt;ul&gt;
+        &lt;ul&gt;
+            &lt;li class="prev"&gt;&lt;a href="/slides-from-my-selenium-talk-at-yapceu-2012" title="Slides from my Selenium talk at YAPCEU 2012"&gt;LAST&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li&gt;&lt;a href="/"&gt;INDEX&lt;/a&gt;&lt;/li&gt;
+
+          &lt;li class="next"&gt;&lt;a href="/use-carp-always-to-fix-circular-dependencies" title="Use Carp::Always to fix circular dependencies"&gt;NEXT&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'networthify'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    &lt;/script&gt;
+    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="span4"&gt;
+    &lt;h4&gt;Published&lt;/h4&gt;
+    &lt;div class="date"&gt;&lt;span&gt;2012-09-05&lt;/span&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Categories&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+      &lt;/div&gt;
+      &lt;footer&gt;&lt;/footer&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Google Prettify --&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i &lt; pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+&lt;/script&gt;
+&lt;!-- end Google Prettify --&gt;
+    &lt;script type="text/javascript"&gt;
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30610896-1']);
+      _gaq.push(['_setDomainName', 'networthify.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </description>
     </item>
     <item>
       <title>Slides from my Selenium talk at YAPCEU 2012</title>
       <link>http://blog.kablamo.org/slides-from-my-selenium-talk-at-yapceu-2012</link>
       <pubDate>2012-08-26</pubDate>
-      <description>&lt;p&gt;I gave my first &lt;a href="http://act.yapc.eu/ye2012/schedule?day=2012-08-20"&gt;YAPC::EU&lt;/a&gt;
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Slides from my Selenium talk at YAPCEU 2012&lt;/title&gt;
+    &lt;meta name="author" content="Eric Johnson"&gt;
+    &lt;link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_"&gt;
+
+    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+
+    &lt;!-- Le styles --&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.8712833555299345" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.2691394211541346" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.2924523185501673" type="text/css" rel="stylesheet" media="all"&gt;
+
+ 
+
+    &lt;!-- Le fav and touch icons --&gt;
+  &lt;!-- Update these with your own images
+    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
+    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
+  --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div class="navbar"&gt;
+      &lt;div class="navbar-inner"&gt;
+        &lt;div class="container"&gt;
+          &lt;a class="brand logo" href="/"&gt;KABLAMO&lt;/a&gt;
+          &lt;ul class="nav"&gt;
+              
+                &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="http://feeds.feedburner.com/Kablamo_" rel="alternate" type="application/rss+xml"&gt;RSS&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+  &lt;h1&gt;Slides from my Selenium talk at YAPCEU 2012 &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="span8"&gt;
+    &lt;p&gt;I gave my first &lt;a href="http://act.yapc.eu/ye2012/schedule?day=2012-08-20"&gt;YAPC::EU&lt;/a&gt;
 presentation this year in Frankfurt after doing a trial run at London.pm.  I
 received some good questions and comments and a few new ideas.  It was a good
 experience and I want to do this again.&lt;/p&gt;
@@ -171,13 +772,135 @@ problems by creating
 &lt;a href="http://kablamo.org/selenium-2012-yapceu-slides/"&gt;online&lt;/a&gt;. Or if you need to
 download them for some reason, they are hosted on
 &lt;a href="https://github.com/kablamo/selenium-2012-yapceu-slides"&gt;github&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;div class="pagination pagination-centered"&gt;
+      &lt;ul&gt;
+        &lt;ul&gt;
+            &lt;li class="prev"&gt;&lt;a href="/test-www-selenium-more" title="Test::WWW::Selenium::More"&gt;LAST&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li&gt;&lt;a href="/"&gt;INDEX&lt;/a&gt;&lt;/li&gt;
+
+          &lt;li class="next"&gt;&lt;a href="/devel-dwarn-helps-me-type-less" title="Devel::Dwarn helps me type less"&gt;NEXT&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'networthify'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    &lt;/script&gt;
+    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="span4"&gt;
+    &lt;h4&gt;Published&lt;/h4&gt;
+    &lt;div class="date"&gt;&lt;span&gt;2012-08-26&lt;/span&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Categories&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+      &lt;/div&gt;
+      &lt;footer&gt;&lt;/footer&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Google Prettify --&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i &lt; pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+&lt;/script&gt;
+&lt;!-- end Google Prettify --&gt;
+    &lt;script type="text/javascript"&gt;
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30610896-1']);
+      _gaq.push(['_setDomainName', 'networthify.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </description>
     </item>
     <item>
       <title>Test::WWW::Selenium::More</title>
       <link>http://blog.kablamo.org/test-www-selenium-more</link>
       <pubDate>2012-05-17</pubDate>
-      <description>&lt;p&gt;I recently released
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Test::WWW::Selenium::More&lt;/title&gt;
+    &lt;meta name="author" content="Eric Johnson"&gt;
+    &lt;link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_"&gt;
+
+    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+
+    &lt;!-- Le styles --&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.6242731661883392" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.804913901338684" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.9502698645836383" type="text/css" rel="stylesheet" media="all"&gt;
+
+ 
+
+    &lt;!-- Le fav and touch icons --&gt;
+  &lt;!-- Update these with your own images
+    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
+    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
+  --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div class="navbar"&gt;
+      &lt;div class="navbar-inner"&gt;
+        &lt;div class="container"&gt;
+          &lt;a class="brand logo" href="/"&gt;KABLAMO&lt;/a&gt;
+          &lt;ul class="nav"&gt;
+              
+                &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="http://feeds.feedburner.com/Kablamo_" rel="alternate" type="application/rss+xml"&gt;RSS&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+  &lt;h1&gt;Test::WWW::Selenium::More &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="span8"&gt;
+    &lt;p&gt;I recently released
 &lt;a href="https://metacpan.org/module/Test::WWW::Selenium::More"&gt;Test::WWW::Selenium::More&lt;/a&gt;
 to CPAN.  It is a small collection of utilities to help you write Selenium
 tests.  Here are some reasons to use it:&lt;/p&gt;
@@ -215,13 +938,135 @@ done_testing;
 &lt;/ol&gt;
 
 &lt;p&gt;Bugs or patches?  &lt;a href="https://github.com/kablamo/Test-WWW-Selenium-More"&gt;https://github.com/kablamo/Test-WWW-Selenium-More&lt;/a&gt;&lt;/p&gt;
+
+    &lt;div class="pagination pagination-centered"&gt;
+      &lt;ul&gt;
+        &lt;ul&gt;
+            &lt;li class="prev"&gt;&lt;a href="/new-on-cpan-moosex-cachingproxy" title="New on CPAN - MooseX::CachingProxy"&gt;LAST&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li&gt;&lt;a href="/"&gt;INDEX&lt;/a&gt;&lt;/li&gt;
+
+          &lt;li class="next"&gt;&lt;a href="/slides-from-my-selenium-talk-at-yapceu-2012" title="Slides from my Selenium talk at YAPCEU 2012"&gt;NEXT&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'networthify'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    &lt;/script&gt;
+    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="span4"&gt;
+    &lt;h4&gt;Published&lt;/h4&gt;
+    &lt;div class="date"&gt;&lt;span&gt;2012-05-17&lt;/span&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Categories&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+      &lt;/div&gt;
+      &lt;footer&gt;&lt;/footer&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Google Prettify --&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i &lt; pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+&lt;/script&gt;
+&lt;!-- end Google Prettify --&gt;
+    &lt;script type="text/javascript"&gt;
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30610896-1']);
+      _gaq.push(['_setDomainName', 'networthify.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </description>
     </item>
     <item>
       <title>New on CPAN - MooseX::CachingProxy</title>
       <link>http://blog.kablamo.org/new-on-cpan-moosex-cachingproxy</link>
       <pubDate>2012-05-10</pubDate>
-      <description>&lt;p&gt;Last week I released &lt;a href="https://metacpan.org/module/MooseX::CachingProxy"&gt;MooseX::CachingProxy&lt;/a&gt; to CPAN.&lt;/p&gt;
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;New on CPAN - MooseX::CachingProxy&lt;/title&gt;
+    &lt;meta name="author" content="Eric Johnson"&gt;
+    &lt;link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_"&gt;
+
+    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+
+    &lt;!-- Le styles --&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.27672468535703976" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.12215139838211775" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.41244848815841995" type="text/css" rel="stylesheet" media="all"&gt;
+
+ 
+
+    &lt;!-- Le fav and touch icons --&gt;
+  &lt;!-- Update these with your own images
+    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
+    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
+  --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div class="navbar"&gt;
+      &lt;div class="navbar-inner"&gt;
+        &lt;div class="container"&gt;
+          &lt;a class="brand logo" href="/"&gt;KABLAMO&lt;/a&gt;
+          &lt;ul class="nav"&gt;
+              
+                &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="http://feeds.feedburner.com/Kablamo_" rel="alternate" type="application/rss+xml"&gt;RSS&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+  &lt;h1&gt;New on CPAN - MooseX::CachingProxy &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="span8"&gt;
+    &lt;p&gt;Last week I released &lt;a href="https://metacpan.org/module/MooseX::CachingProxy"&gt;MooseX::CachingProxy&lt;/a&gt; to CPAN.&lt;/p&gt;
 
 &lt;p&gt;Its a small module that intercepts requests from your LWP based application.
 Those requests are relayed on to the intended server unless they already exist
@@ -246,13 +1091,135 @@ sub download {
 
 &lt;p&gt;Under the covers, its a tiny Plack application that mashes up
 &lt;a href="https://metacpan.org/module/Plack::Middleware::Cache"&gt;Plack::Middleware::Cache&lt;/a&gt; and &lt;a href="https://metacpan.org/module/Plack::App::Proxy"&gt;Plack::App::Proxy&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;div class="pagination pagination-centered"&gt;
+      &lt;ul&gt;
+        &lt;ul&gt;
+            &lt;li class="prev"&gt;&lt;a href="/new-on-cpan-log-json" title="New on CPAN - Log::JSON"&gt;LAST&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li&gt;&lt;a href="/"&gt;INDEX&lt;/a&gt;&lt;/li&gt;
+
+          &lt;li class="next"&gt;&lt;a href="/test-www-selenium-more" title="Test::WWW::Selenium::More"&gt;NEXT&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'networthify'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    &lt;/script&gt;
+    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="span4"&gt;
+    &lt;h4&gt;Published&lt;/h4&gt;
+    &lt;div class="date"&gt;&lt;span&gt;2012-05-10&lt;/span&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Categories&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+      &lt;/div&gt;
+      &lt;footer&gt;&lt;/footer&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Google Prettify --&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i &lt; pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+&lt;/script&gt;
+&lt;!-- end Google Prettify --&gt;
+    &lt;script type="text/javascript"&gt;
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30610896-1']);
+      _gaq.push(['_setDomainName', 'networthify.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </description>
     </item>
     <item>
       <title>New on CPAN - Log::JSON</title>
       <link>http://blog.kablamo.org/new-on-cpan-log-json</link>
       <pubDate>2012-04-29</pubDate>
-      <description>&lt;p&gt;I released Log::JSON v0.001 to CPAN today.  Its a very simple JSON logger.&lt;/p&gt;
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;New on CPAN - Log::JSON&lt;/title&gt;
+    &lt;meta name="author" content="Eric Johnson"&gt;
+    &lt;link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_"&gt;
+
+    &lt;!-- Le HTML5 shim, for IE6-8 support of HTML elements --&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="http://html5shim.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+
+    &lt;!-- Le styles --&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.2593629299623289" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.5878518791663659" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.5589050523184073" type="text/css" rel="stylesheet" media="all"&gt;
+
+ 
+
+    &lt;!-- Le fav and touch icons --&gt;
+  &lt;!-- Update these with your own images
+    &lt;link rel="shortcut icon" href="images/favicon.ico"&gt;
+    &lt;link rel="apple-touch-icon" href="images/apple-touch-icon.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"&gt;
+    &lt;link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"&gt;
+  --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;div class="navbar"&gt;
+      &lt;div class="navbar-inner"&gt;
+        &lt;div class="container"&gt;
+          &lt;a class="brand logo" href="/"&gt;KABLAMO&lt;/a&gt;
+          &lt;ul class="nav"&gt;
+              
+                &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/categories"&gt;Categories&lt;/a&gt;&lt;/li&gt;
+              
+                &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="http://feeds.feedburner.com/Kablamo_" rel="alternate" type="application/rss+xml"&gt;RSS&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="container"&gt;
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+  &lt;h1&gt;New on CPAN - Log::JSON &lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+  &lt;div class="span8"&gt;
+    &lt;p&gt;I released Log::JSON v0.001 to CPAN today.  Its a very simple JSON logger.&lt;/p&gt;
 
 &lt;p&gt;The advantage of a JSON logger is that a human can open a mysterious new log
 file and quickly decipher the content because each piece of information is
@@ -283,6 +1250,73 @@ that I write this, I think some kind of compression feature may be nice for
 Log::JSON and pretty great for Log::Dispatch too.&lt;/p&gt;
 
 &lt;p&gt;Log::JSON on github: &lt;a href="https://github.com/kablamo/Log-JSON"&gt;https://github.com/kablamo/Log-JSON&lt;/a&gt;&lt;/p&gt;
+
+    &lt;div class="pagination pagination-centered"&gt;
+      &lt;ul&gt;
+        &lt;ul&gt;
+            &lt;li class="prev disabled"&gt;&lt;a&gt;LAST&lt;/a&gt;&lt;/li&gt;
+
+            &lt;li&gt;&lt;a href="/"&gt;INDEX&lt;/a&gt;&lt;/li&gt;
+
+          &lt;li class="next"&gt;&lt;a href="/new-on-cpan-moosex-cachingproxy" title="New on CPAN - MooseX::CachingProxy"&gt;NEXT&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div id="disqus_thread"&gt;&lt;/div&gt;
+    &lt;script type="text/javascript"&gt;
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'networthify'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    &lt;/script&gt;
+    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="span4"&gt;
+    &lt;h4&gt;Published&lt;/h4&gt;
+    &lt;div class="date"&gt;&lt;span&gt;2012-04-29&lt;/span&gt;&lt;/div&gt;
+    &lt;br&gt;
+    &lt;h4&gt;Categories&lt;/h4&gt;
+    &lt;ul class="tag_box"&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+      &lt;/div&gt;
+      &lt;footer&gt;&lt;/footer&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Google Prettify --&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i &lt; pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+&lt;/script&gt;
+&lt;!-- end Google Prettify --&gt;
+    &lt;script type="text/javascript"&gt;
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30610896-1']);
+      _gaq.push(['_setDomainName', 'networthify.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </description>
     </item>
   </channel>
