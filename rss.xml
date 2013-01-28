@@ -3,7 +3,7 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2013-01-27 21:57:56 +0000</pubDate>
+    <pubDate>2013-01-28 08:55:36 +0000</pubDate>
     <item>
       <title>git-spark revisited</title>
       <link>http://blog.kablamo.org/git-spark-revisited</link>
@@ -22,9 +22,9 @@
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.23885336463353535" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.839663476434845" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.8427576360141147" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.6914420792985513" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.49867651130960267" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.10598248461720161" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -202,9 +202,9 @@ many there are.  &lt;/p&gt;
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.2851062042809114" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.5709527413449224" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.4556700356212142" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.3422205760584982" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.48678908164089973" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.6039720110370488" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -278,6 +278,8 @@ graph has no relation to a peak on another.  That means I can&amp;#39;t compare 
 sparkline with another.&lt;/p&gt;
 
 &lt;p&gt;Back to the drawing board.  I&amp;#39;ll have to come up with something else.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UPDATE:&lt;/strong&gt; I solved this problem in &lt;a href="http://blog.kablamo.org/git-spark-plots-your-commit-history/"&gt;git spark revisted&lt;/a&gt;.&lt;/p&gt;
 
     &lt;div class="pagination pagination-centered"&gt;
       &lt;ul&gt;
@@ -365,9 +367,9 @@ sparkline with another.&lt;/p&gt;
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.421486734395327" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.48033261224897605" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.4784998314505159" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.49904539335672427" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.3931860272378793" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.7260383766511763" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -554,9 +556,9 @@ package.)&lt;/p&gt;
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.4752269080194025" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.0705689616769366" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.18480562464520334" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.3541655144377681" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.06277274346979522" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.7789306724291275" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -717,9 +719,9 @@ winning.  But thats not the best part.  Lets see how to use it.&lt;/p&gt;
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.8712833555299345" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.2691394211541346" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.2924523185501673" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.6219346062480983" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.35170781759908765" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.8517199801644557" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -859,9 +861,9 @@ download them for some reason, they are hosted on
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.6242731661883392" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.804913901338684" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.9502698645836383" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.34410326983546724" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.299873055865177" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.13009828291046333" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -1025,9 +1027,9 @@ done_testing;
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.27672468535703976" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.12215139838211775" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.41244848815841995" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.47193095351233316" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.05639522603200042" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.5283588279829493" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
@@ -1178,9 +1180,9 @@ sub download {
     &lt;![endif]--&gt;
 
     &lt;!-- Le styles --&gt;
-    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.2593629299623289" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/stylesheets/blog.css?0.5878518791663659" type="text/css" rel="stylesheet" media="all"&gt;
-&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.5589050523184073" type="text/css" rel="stylesheet" media="all"&gt;
+    &lt;link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.8101963578723421" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/stylesheets/blog.css?0.7203900700378236" type="text/css" rel="stylesheet" media="all"&gt;
+&lt;link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.1565779977737196" type="text/css" rel="stylesheet" media="all"&gt;
 
  
 
