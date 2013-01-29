@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>git-spark revisited</title>
+    <title>Whats in your $PERL5LIB?</title>
     <meta name="author" content="Eric Johnson">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_">
 
@@ -12,9 +12,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.4606765939588283" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/stylesheets/blog.css?0.20755291808218135" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.15895564152530617" type="text/css" rel="stylesheet" media="all">
+    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.0025622286559725538" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/stylesheets/blog.css?0.43315638941264645" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.6135404966676352" type="text/css" rel="stylesheet" media="all">
 
  
 
@@ -48,72 +48,49 @@
     <div class="container">
       <div class="content">
         <div class="page-header">
-  <h1>git-spark revisited </h1>
+  <h1>Whats in your $PERL5LIB? </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>A <a href="http://blog.kablamo.org/git-spark-plots-your-commit-history/">few days ago</a>
-I wrote about my <a href="https://gist.github.com/4598480">git-spark</a> Perl script.  It
-counts how many commits a user has in a git project and makes a little graph
-and displays it on the command line.</p>
+    <p>Ever wonder whats in your $PERL5LIB?  Here is one way to find out:</p>
 
-<p>However I also said it wasn&#39;t very useful becuase you can&#39;t compare one graph
-with another because the scale changes when different graphs have different min
-and max values.  For example these two data series produce identical graphs
-despite have very different data.</p>
-
-<pre><code>⚡ spark 1 2 3 4 5
-▁▂▄▆█
-⚡ spark 10 20 30 40 50
-▁▂▄▆█
+<pre><code>⚡ echo $PERL5LIB
+.:./lib:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5:/home/eri
+c/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux:/home/eric/perl
+5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux-gnu-thread-multi-64in
+t:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/site_perl:/home/eric/
+perl5/perlbrew/perls/perl-5.16.2/lib/5.16.2
 </code></pre>
 
-<p>So I put on my thinking cap and came up with the following solution: </p>
+<p>My human eyeballs are not equipped to parse that.  Unhelpful.  So I put this in
+my .bashrc:</p>
 
-<pre><code>⚡ spark 50 1 1 2 3 4 5
-█▁▁▁▁▁▁
-⚡ spark 50 1 10 20 30 40 50
-█▁▂▃▅▆█
+<pre><code>alias perl5lib=&#39;perl -E &quot;say join \&quot;\n\&quot;, split \&quot;:\&quot;, \$ENV{PERL5LIB}&quot;&#39;
 </code></pre>
 
-<p>I just need to prepend a max and a min to the data to get consistent scaling
-and now I can compare graphs.</p>
+<p>Here it is in action:</p>
 
-<p>For git-spark, I now assume the min is zero and you can pass in the max using
-the --scale option.  (Note that I chopped off the max/min characters from
-the spark output as they are distracting.)</p>
-
-<p>I also decided to print out the number of commits which helps with the
-scaling issue.  And while I was in there I got it to calculate the total,
-average, and maximum number of commits for that duration.</p>
-
-<p>Here is an example.  It doesn&#39;t really need the --scale option because the data
-is so close anyway, but it shows how to use it:</p>
-
-<pre><code>⚡ git spark --days 14 --scale 23 Stegosaurus
-Commits by Stegosaurus over the last 14 days
-total: 95   avg: 7   max: 23
-10 15 6 23 5 0 0 1 15 0 17 3 0 0
-▄▅▂█▂▁▁▁▅▁▆▁▁▁
-⚡ git spark --days 14 --scale 23 Triceratops
-Commits by Triceratops over the last 14 days
-total: 90   avg: 7   max: 22
-1 12 3 11 3 0 0 6 16 3 13 22 0 0
-▁▄▁▄▁▁▁▂▅▁▄▇▁▁
+<pre><code>⚡ perl5lib
+.
+./lib
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux-gnu-thread-multi-64int
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/site_perl
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/5.16.2
 </code></pre>
 
-<p>Of course you still need to consider the quality of commits and not just how
-many there are.  </p>
+<p>Better.</p>
 
     <div class="pagination pagination-centered">
       <ul>
         <ul>
-            <li class="prev"><a href="/git-spark-plots-your-commit-history" title="git-spark plots your commit history">LAST</a></li>
+            <li class="prev"><a href="/git-spark-revisited" title="git-spark revisited">LAST</a></li>
 
             <li><a href="/">INDEX</a></li>
 
-          <li class="next"><a href="/whats-in-your-perl5lib" title="Whats in your $PERL5LIB?">NEXT</a></li>
+            <li class="next disabled"><a>NEXT</a>
         </ul>
       </ul>
     </div>
@@ -134,7 +111,7 @@ many there are.  </p>
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2013-01-27</span></div>
+    <div class="date"><span>2013-01-29</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
