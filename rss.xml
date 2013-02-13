@@ -3,7 +3,26 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2013-02-09 07:28:47 +0800</pubDate>
+    <pubDate>2013-02-13 10:56:30 +0800</pubDate>
+    <item>
+      <title>CPAN release of App::Git::Ribbon, App::Git::Spark</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/cpan-release-of-app-git-ribbon-app-git-spark</link>
+      <pubDate>2013-02-12</pubDate>
+      <description>&lt;p&gt;I packaged up these scripts and released them on CPAN to make them a little
+easier to install and manage.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;App::Git::Ribbon&lt;/strong&gt; &lt;br&gt;
+on &lt;a href="https://metacpan.org/module/App::Git::Ribbon"&gt;CPAN&lt;/a&gt;&lt;br&gt;
+on &lt;a href="https://github.com/kablamo/git-ribbon"&gt;GitHub&lt;/a&gt;&lt;br&gt;
+previous &lt;a href="/git-ribbon"&gt;blog post&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;App::Git::Spark&lt;/strong&gt; &lt;br&gt;
+on &lt;a href="https://metacpan.org/module/App::Git::Spark"&gt;CPAN&lt;/a&gt;&lt;br&gt;
+on &lt;a href="https://github.com/kablamo/git-spark"&gt;GitHub&lt;/a&gt;&lt;br&gt;
+previous &lt;a href="/git-spark-revisited"&gt;blog post&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>git-ribbon</title>
       <author>Eric Johnson (@kablamo)</author>

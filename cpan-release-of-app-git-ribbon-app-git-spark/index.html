@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Use Carp::Always to fix circular dependencies</title>
+    <title>CPAN release of App::Git::Ribbon, App::Git::Spark</title>
     <meta name="author" content="Eric Johnson (@kablamo)">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_">
 
@@ -12,9 +12,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.5099699667674394" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/stylesheets/blog.css?0.793046816225897" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.8616003146602619" type="text/css" rel="stylesheet" media="all">
+    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.017477929092181155" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/stylesheets/blog.css?0.7819866933967644" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.9238624350771727" type="text/css" rel="stylesheet" media="all">
 
  
 
@@ -48,81 +48,32 @@
     <div class="container">
       <div class="content">
         <div class="page-header">
-  <h1>Use Carp::Always to fix circular dependencies </h1>
+  <h1>CPAN release of App::Git::Ribbon, App::Git::Spark </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>Circular dependencies happen when your library requires a library which
-requires your library.  Here&#39;s an example.  Lets say you have 2 packages:  </p>
+    <p>I packaged up these scripts and released them on CPAN to make them a little
+easier to install and manage.  </p>
 
-<p><strong>AlienPlanet.pm</strong></p>
+<p><strong>App::Git::Ribbon</strong> <br>
+on <a href="https://metacpan.org/module/App::Git::Ribbon">CPAN</a><br>
+on <a href="https://github.com/kablamo/git-ribbon">GitHub</a><br>
+previous <a href="/git-ribbon">blog post</a></p>
 
-<pre><code>package AlienPlanet;
-use Moose;
-use Dinosaurs;          # &lt;--- Circular dependency
-sub has_dinosaurs {1}
-1;
-</code></pre>
-
-<p><strong>Dinosaurs.pm</strong></p>
-
-<pre><code>package Dinosaurs;
-use Moose;
-use AlienPlanet;        # &lt;--- Circular dependency
-sub has_rabies {1}
-1;
-</code></pre>
-
-<p>If you try to compile this, you get the following warning:</p>
-
-<pre><code>⚡ perl -c lib/AlienPlanet.pm 
-Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 5.
-lib/AlienPlanet.pm syntax OK
-</code></pre>
-
-<p>In this case its obvious where the problem is.  </p>
-
-<p>But if the package you included, included 25 other libraries, which included
-other libraries, which included your original library -- then its harder to
-figure out where the circle is.</p>
-
-<p>Happily I discovered a good solution. First, modify <strong>AlienPlanet.pm</strong> to look
-like this:</p>
-
-<pre><code>package AlienPlanet;
-sub has_dinosaurs {1}   &lt;-- swap
-use Dinosaurs;          &lt;-- swap
-1;
-</code></pre>
-
-<p>Next, try compiling your code again but this time with
-<a href="http://perladvent.org/2011/2011-12-04.html">Carp::Always</a>:</p>
-
-<pre><code>⚡ perl -MCarp::Always -c lib/AlienPlanet.pm                                                                                                            
-Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 4.
-        require AlienPlanet.pm called at lib/Dinosaurs.pm line 4
-        Dinosaurs::BEGIN() called at lib/AlienPlanet.pm line 4
-        eval {...} called at lib/AlienPlanet.pm line 4
-        require Dinosaurs.pm called at lib/AlienPlanet.pm line 5
-        AlienPlanet::BEGIN() called at lib/AlienPlanet.pm line 4
-        eval {...} called at lib/AlienPlanet.pm line 4
-lib/AlienPlanet.pm syntax OK
-</code></pre>
-
-<p>Now you&#39;ve got a stack trace and its easy to see where your problem is.  All
-thats left is figuring out how to solve it. (Fast solution: use
-<a href="https://metacpan.org/module/Class::Load">Class::Load</a> in the Dinosaurs
-package.)</p>
+<p><strong>App::Git::Spark</strong> <br>
+on <a href="https://metacpan.org/module/App::Git::Spark">CPAN</a><br>
+on <a href="https://github.com/kablamo/git-spark">GitHub</a><br>
+previous <a href="/git-spark-revisited">blog post</a></p>
 
     <div class="pagination pagination-centered">
       <ul>
         <ul>
-            <li class="prev"><a href="/devel-dwarn-helps-me-type-less" title="Devel::Dwarn helps me type less">LAST</a></li>
+            <li class="prev"><a href="/git-ribbon" title="git-ribbon">LAST</a></li>
 
             <li><a href="/">INDEX</a></li>
 
-          <li class="next"><a href="/git-spark-plots-your-commit-history" title="git-spark plots your commit history">NEXT</a></li>
+            <li class="next disabled"><a>NEXT</a>
         </ul>
       </ul>
     </div>
@@ -143,7 +94,7 @@ package.)</p>
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2013-01-19</span></div>
+    <div class="date"><span>2013-02-12</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
