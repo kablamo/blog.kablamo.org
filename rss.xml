@@ -3,22 +3,23 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2013-02-22 20:59:51 +0000</pubDate>
+    <pubDate>2013-02-22 21:02:43 +0000</pubDate>
     <item>
       <title>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome</title>
       <author>Eric Johnson (@kablamo)</author>
       <link>http://blog.kablamo.org/dist-zilla-pluginbundle-dagolden-is-pretty-awesome</link>
       <pubDate>2013-02-20</pubDate>
       <description>&lt;p&gt;I&amp;#39;ve been using &lt;a href="https://metacpan.org/module/Dist::Zilla"&gt;Dist::Zilla&lt;/a&gt; for a
-couple years.  It&amp;#39;s a powerful way to automate CPAN releases.  But learning 
-how to use it was not as easy as I hoped.&lt;/p&gt;
+couple years.  It&amp;#39;s a powerful way to automate CPAN releases.  &lt;/p&gt;
 
-&lt;h2 id="toc_0"&gt;Writing your own dist.ini or PluginBundle is hard&lt;/h2&gt;
+&lt;p&gt;But learning how to use it was not as easy as I hoped.&lt;/p&gt;
 
 &lt;p&gt;I remember when &lt;code&gt;Dist::Zilla&lt;/code&gt; first debuted.  It was very exciting.  But I think
 I may have drank too much of the cool aid becuase my expectations were very
 high when I finally sat down to learn it.  I expected my experience to be
 composed entirely of rainbows and puppy dog tails.&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;Writing your own dist.ini or PluginBundle is hard&lt;/h2&gt;
 
 &lt;p&gt;Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
 are a huge number of plugins and it&amp;#39;s difficult for a newcomer to know which
