@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>git-spark plots your commit history</title>
+    <title>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome</title>
     <meta name="author" content="Eric Johnson (@kablamo)">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_">
 
@@ -12,9 +12,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.5393491868127128" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/stylesheets/blog.css?0.9824812482916504" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.8155565161725165" type="text/css" rel="stylesheet" media="all">
+    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.20435236155768566" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/stylesheets/blog.css?0.31599862944700874" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.9028266193548834" type="text/css" rel="stylesheet" media="all">
 
  
 
@@ -48,57 +48,74 @@
     <div class="container">
       <div class="content">
         <div class="page-header">
-  <h1>git-spark plots your commit history </h1>
+  <h1>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>I recently rediscovered <a href="https://github.com/holman/spark">spark</a>, Zach Holman&#39;s
-cool little sparklines graphing tool for the command line.  I used a little
-Perl to mash it up with &#39;git log&#39; and came up with
-<a href="https://gist.github.com/4598480">git-spark</a> which works like this:</p>
+    <p>I&#39;ve been using <a href="https://metacpan.org/module/Dist::Zilla">Dist::Zilla</a> for a
+couple years.  It&#39;s a powerful way to automate CPAN releases.  But learning 
+how to use it was not as easy as I hoped.</p>
 
-<pre><code>⚡ git spark --hours 8
-Commits by Godzilla over the last 8 hours
-▃▃▁▆▅▁▁▃█
-⚡ git spark -d 14 HulkHogan
-Commits by HulkHogan over the last 14 days
-▇▅▄▁▁▄▅▂█▂▁▁▁▅
-⚡ git spark -w 52 Tarzan
-Commits by Tarzan over the last 52 weeks
-▃▁▂▃▃▃▂▁█▆▁▄▄▃▂▂▁▁▂▃▃▄▃▃▂▃▁▁▁▁▁▂▂▃▆▅▂▁▄▃▂▄▄▄▁▂▁▁▂▂▂▃
+<h2 id="toc_0">Writing your own dist.ini or PluginBundle is hard</h2>
+
+<p>I remember when <code>Dist::Zilla</code> first debuted.  It was very exciting.  But I think
+I may have drank too much of the cool aid becuase my expectations were very
+high when I finally sat down to learn it.  I expected my experience to be
+composed entirely of rainbows and puppy dog tails.</p>
+
+<p>Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
+are a huge number of plugins and it&#39;s difficult for a newcomer to know which
+are old, which are new, and how they work together.  If you look, for example,
+at <code>Dist::Zilla::PluginBundle::DAGOLDEN</code> it uses 23 different plugins and the
+<em>synopsis</em> is 132 lines long.</p>
+
+<p>In retrospect, it was not reasonable to expect I could build something
+comparable after a few minutes of perusing the docs.  It&#39;s more complex than
+that.  So if you are looking to quickly add <code>Dist::Zilla</code> to your toolchain, you
+need to use a PluginBundle and not write your own.</p>
+
+<h2 id="toc_1">How to quickly add Dist::Zilla to your toolchain</h2>
+
+<p>One way is to just use <code>Dist::Zilla::PluginBundle::Basic</code>.  But this was not like
+the promised land I had been dreaming of.  I wanted more.  So I kept looking.</p>
+
+<p>Happily, there is a PluginBundle which I think works well as a reusable
+component suitable for public consumption thats also very configurable.  I
+doubt it&#39;s well known because the name sounds very personal.  That module is,
+of course,
+<a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN">Dist::Zilla::PluginBundle::DAGOLDEN</a>.</p>
+
+<p>I think the workflow it uses will work for many people.  Even if it
+doesn&#39;t, reading the code is a great way to learn how to write your own
+PluginBundle.  And because it&#39;s so comprehensive it&#39;s like having a up-to-date
+map of the state of the art in <code>Dist::Zilla</code> plugins and how they work
+together.  </p>
+
+<p>Here&#39;s what my dist.ini looks like:</p>
+
+<pre><code>name    = App-Git-Ribbon
+author  = Eric Johnson &lt;cpan at iijo dot nospamthanks dot org&gt;
+license = Perl_5
+copyright_holder = Eric Johnson
+main_module = lib/App/Git/Ribbon.pm
+
+[@DAGOLDEN]
+no_spellcheck = 1
+AutoMetaResources.bugtracker.rt = 0
+AutoMetaResources.repository.github = user:kablamo
+AutoMetaResources.bugtracker.github = user:kablamo
+weaver_config = @FLORA
 </code></pre>
-
-<p>And heres the usage/help:</p>
-
-<pre><code>⚡ git spark -h
-usage: git spark [-dhmowy] [long options...] [AUTHOR]
-        -o --hours      commits from the last x hours
-        -d --days       commits from the last x days
-        -w --weeks      commits from the last x weeks
-        -m --months     commits from the last x months
-        -y --years      commits from the last x years
-        -h --help       show this message
-</code></pre>
-
-<p>It was fun to build, but afterward I realized its totally useless.  Clearly
-&#39;commits&#39; are a problematic metric.  But its much worse than that.  The peaks
-on the graph are relative to the lows on the same graph.  So a peak on one
-graph has no relation to a peak on another.  That means I can&#39;t compare one
-sparkline with another.</p>
-
-<p>Back to the drawing board.  I&#39;ll have to come up with something else.  </p>
-
-<p><strong>UPDATE:</strong> I solved this problem in <a href="http://blog.kablamo.org/git-spark-revisited/">git-spark revisted</a>.</p>
 
     <div class="pagination pagination-centered">
       <ul>
         <ul>
-            <li class="prev"><a href="/use-carp-always-to-fix-circular-dependencies" title="Use Carp::Always to fix circular dependencies">LAST</a></li>
+            <li class="prev"><a href="/cpan-release-of-app-git-ribbon-app-git-spark" title="CPAN release of App::Git::Ribbon, App::Git::Spark">LAST</a></li>
 
             <li><a href="/">INDEX</a></li>
 
-          <li class="next"><a href="/git-spark-revisited" title="git-spark revisited">NEXT</a></li>
+            <li class="next disabled"><a>NEXT</a>
         </ul>
       </ul>
     </div>
@@ -119,7 +136,7 @@ sparkline with another.</p>
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2013-01-23</span></div>
+    <div class="date"><span>2013-02-20</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">

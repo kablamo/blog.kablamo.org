@@ -3,7 +3,68 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2013-02-13 10:56:30 +0800</pubDate>
+    <pubDate>2013-02-22 20:59:51 +0000</pubDate>
+    <item>
+      <title>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/dist-zilla-pluginbundle-dagolden-is-pretty-awesome</link>
+      <pubDate>2013-02-20</pubDate>
+      <description>&lt;p&gt;I&amp;#39;ve been using &lt;a href="https://metacpan.org/module/Dist::Zilla"&gt;Dist::Zilla&lt;/a&gt; for a
+couple years.  It&amp;#39;s a powerful way to automate CPAN releases.  But learning 
+how to use it was not as easy as I hoped.&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;Writing your own dist.ini or PluginBundle is hard&lt;/h2&gt;
+
+&lt;p&gt;I remember when &lt;code&gt;Dist::Zilla&lt;/code&gt; first debuted.  It was very exciting.  But I think
+I may have drank too much of the cool aid becuase my expectations were very
+high when I finally sat down to learn it.  I expected my experience to be
+composed entirely of rainbows and puppy dog tails.&lt;/p&gt;
+
+&lt;p&gt;Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
+are a huge number of plugins and it&amp;#39;s difficult for a newcomer to know which
+are old, which are new, and how they work together.  If you look, for example,
+at &lt;code&gt;Dist::Zilla::PluginBundle::DAGOLDEN&lt;/code&gt; it uses 23 different plugins and the
+&lt;em&gt;synopsis&lt;/em&gt; is 132 lines long.&lt;/p&gt;
+
+&lt;p&gt;In retrospect, it was not reasonable to expect I could build something
+comparable after a few minutes of perusing the docs.  It&amp;#39;s more complex than
+that.  So if you are looking to quickly add &lt;code&gt;Dist::Zilla&lt;/code&gt; to your toolchain, you
+need to use a PluginBundle and not write your own.&lt;/p&gt;
+
+&lt;h2 id="toc_1"&gt;How to quickly add Dist::Zilla to your toolchain&lt;/h2&gt;
+
+&lt;p&gt;One way is to just use &lt;code&gt;Dist::Zilla::PluginBundle::Basic&lt;/code&gt;.  But this was not like
+the promised land I had been dreaming of.  I wanted more.  So I kept looking.&lt;/p&gt;
+
+&lt;p&gt;Happily, there is a PluginBundle which I think works well as a reusable
+component suitable for public consumption thats also very configurable.  I
+doubt it&amp;#39;s well known because the name sounds very personal.  That module is,
+of course,
+&lt;a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN"&gt;Dist::Zilla::PluginBundle::DAGOLDEN&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I think the workflow it uses will work for many people.  Even if it
+doesn&amp;#39;t, reading the code is a great way to learn how to write your own
+PluginBundle.  And because it&amp;#39;s so comprehensive it&amp;#39;s like having a up-to-date
+map of the state of the art in &lt;code&gt;Dist::Zilla&lt;/code&gt; plugins and how they work
+together.  &lt;/p&gt;
+
+&lt;p&gt;Here&amp;#39;s what my dist.ini looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;name    = App-Git-Ribbon
+author  = Eric Johnson &amp;lt;cpan at iijo dot nospamthanks dot org&amp;gt;
+license = Perl_5
+copyright_holder = Eric Johnson
+main_module = lib/App/Git/Ribbon.pm
+
+[@DAGOLDEN]
+no_spellcheck = 1
+AutoMetaResources.bugtracker.rt = 0
+AutoMetaResources.repository.github = user:kablamo
+AutoMetaResources.bugtracker.github = user:kablamo
+weaver_config = @FLORA
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     <item>
       <title>CPAN release of App::Git::Ribbon, App::Git::Spark</title>
       <author>Eric Johnson (@kablamo)</author>
