@@ -3,7 +3,73 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2013-02-22 21:02:43 +0000</pubDate>
+    <pubDate>2013-03-06 21:42:57 +0000</pubDate>
+    <item>
+      <title>Chinese zombie flashcards on GitHub (Catalyst &amp; Perl)</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/chinese-zombie-flashcards-on-github-catalyst-perl</link>
+      <pubDate>2013-02-28</pubDate>
+      <description>&lt;p&gt;There seem to be quite a few Perl people learning Chinese so maybe this will be
+relevant here.  &lt;/p&gt;
+
+&lt;p&gt;I created &lt;a href="http://iijo.org"&gt;IIJO&lt;/a&gt; which is a Perl powered website that does 3
+sided flashcards (Chinese, English, and Pinyin).&lt;/p&gt;
+
+&lt;p&gt;The main advantage IIJO has over Anki and other flashcard sites is that you can 
+pick your flashcards from a dictionary so you don&amp;#39;t have to type all that stuff
+in yourself.   It allows you to share word lists with others and the built in
+dictionary means that you don&amp;#39;t need to worry about the accuracy and
+completeness of other people who share wordlists.  &lt;/p&gt;
+
+&lt;p&gt;The site does &lt;a href="http://en.wikipedia.org/wiki/Spaced_repetition"&gt;spaced
+repetition&lt;/a&gt; like Anki.  But it
+has a different simpler user interface because Anki&amp;#39;s 4
+buttons after each flashcard &lt;em&gt;stresses me out.&lt;/em&gt; &lt;/p&gt;
+
+&lt;p&gt;If you want, you can just play with the &lt;a href="http://iijo.org/dictionary"&gt;Chinese/English
+dictionary&lt;/a&gt;.  The goal here is to be able to look
+up a word then add it easily to one of your existing word lists.&lt;/p&gt;
+
+&lt;p&gt;If you think there is something missing, check out the project on
+&lt;a href="http://github.org/kablamo/iijo.org"&gt;GitHub&lt;/a&gt; and send me a pull request.  I&amp;#39;m
+using Perl, Catalyst, and SQLite. &lt;/p&gt;
+
+&lt;p&gt;Here are some of the things on my todo list:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;More analytics/stats/data for measuring progress using D3&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Speech/pronunciation samples&lt;/li&gt;
+&lt;li&gt;Export to Anki&lt;/li&gt;
+&lt;li&gt;Some way to learn phrases instead of just characters&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id="toc_0"&gt;Vampires and zombies&lt;/h1&gt;
+
+&lt;p&gt;Btw, here&amp;#39;s an interesting thing I learned about the Chinese language: the word
+for &lt;code&gt;vampire&lt;/code&gt; is the same word thats used for &lt;code&gt;zombie&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;p style="font-size: 4em; font-weight: bold;"&gt;&#x50F5;&#x5C38;&lt;/p&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;This is becuase the Chinese merged the two concepts into a single vampire
+zombie monster.  So Chinese zombies are stiff and walk around with their hands
+straight out.  But they also bite their victim&amp;#39;s necks and suck their blood
+passing on the zombie infection.  &lt;/p&gt;
+
+&lt;p&gt;They are also fast and angry and they often do kung fu.  You can&amp;#39;t
+kill them of course, however you can put them to sleep if you write a spell on a
+yellow piece of paper and put it on their forehead.  But if it falls off, they
+wake up and get angry again.  Strangest of all is that they do little
+hops like bunnies instead of walking.&lt;/p&gt;
+
+&lt;p&gt;I highly recommend Liao Yiwo&amp;#39;s book, &lt;a href="http://www.amazon.com/The-Corpse-Walker-Stories-Bottom/dp/0307388379/ref=sr_1_1?ie=UTF8&amp;amp;qid=1362603639&amp;amp;sr=8-1&amp;amp;keywords=corpse+walker"&gt;&lt;em&gt;Corpse
+Walker,&lt;/em&gt;&lt;/a&gt;
+which tells the fascinating history and origin of Chinese zombies.  You can read more
+about jiangshi on &lt;a href="http://en.wikipedia.org/wiki/Jiangshi"&gt;Wikipedia&lt;/a&gt;.  And of
+course there are YouTube videos:&lt;/p&gt;
+
+&lt;iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/56Zvquhww80" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
     <item>
       <title>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome</title>
       <author>Eric Johnson (@kablamo)</author>
