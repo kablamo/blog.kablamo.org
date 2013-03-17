@@ -172,7 +172,7 @@ div.navbar .blog {
  padding-top: 10px; 
  padding-bottom: 10px; 
 }
-.pagination a {background: #fff; border: 0; background: orange; color: #fff}
+.pagination a {background: #fff; border: 0; background: orange; color: #fff; font-size: 12px}
 .pagination li a:hover {color: fff; background: orangered }
 .pagination li a {border: solid 1px darkorange}
 .pagination li:first-child a {border-right: solid 0px darkorange}
@@ -222,3 +222,10 @@ code, pre {
          border-radius:3px;
 }
 pre {padding-left: 28px}
+.rss {
+ padding-top: 2em;
+ padding-bottom: .5em;
+ background: #f6f6f6;
+ color: #666;
+ font-size: 12px;
+}

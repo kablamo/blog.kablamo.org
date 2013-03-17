@@ -3,7 +3,42 @@
   <channel>
     <title>Kablamo</title>
     <link>http://blog.kablamo.org</link>
-    <pubDate>2013-03-06 21:42:57 +0000</pubDate>
+    <pubDate>2013-03-17 12:32:18 +0000</pubDate>
+    <item>
+      <title>git-vspark plots your commits vertically with Term::Vspark</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/git-vspark-plots-your-commits-vertically-with-term-vspark</link>
+      <pubDate>2013-03-17</pubDate>
+      <description>&lt;p&gt;I added a &lt;strong&gt;git-vspark&lt;/strong&gt; script to my App::Git::Spark CPAN module.  It does the
+same thing as &lt;a href="https://github.com/kablamo/git-spark"&gt;git-spark&lt;/a&gt; but instead of
+normal horizontal sparklines, it uses &amp;quot;vertical&amp;quot; sparklines.  Here&amp;#39;s what that
+looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git vspark --months 8 batman
+Commits by batman over the last 8 months
+total: 233   avg: 29   max: 69
+ 12 &#x2588;&#x2588;&#x258B;
+ 18 &#x2588;&#x2588;&#x2588;&#x2588;
+ 69 &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x258F;
+ 59 &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2589;
+ 16 &#x2588;&#x2588;&#x2588;&#x258C;
+ 28 &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x258F;
+ 12 &#x2588;&#x2588;&#x258B;
+ 19 &#x2588;&#x2588;&#x2588;&#x2588;&#x258E;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This effect is achieved using
+&lt;a href="https://metacpan.org/module/Term::Vspark"&gt;Term::Vspark&lt;/a&gt;.  Its companion module
+&lt;a href="https://metacpan.org/module/Term::Spark"&gt;Term::Spark&lt;/a&gt; is a small pure Perl
+replacement for Zach Holman&amp;#39;s original &lt;a href="https://github.com/holman/spark"&gt;spark&lt;/a&gt;
+implementation and it now powers my git-spark script.  &lt;/p&gt;
+
+&lt;p&gt;These libraries were fun little projects developed over the past few weeks
+mainly by &lt;a href="https://github.com/LuRsT"&gt;Gil Gon&#xE7;alves&lt;/a&gt; with a few pull requests
+from myself.  Having them available on CPAN means you can easily use sparklines
+in your own Perl code.  &lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Chinese zombie flashcards on GitHub (Catalyst &amp; Perl)</title>
       <author>Eric Johnson (@kablamo)</author>

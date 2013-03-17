@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>New on CPAN - MooseX::CachingProxy</title>
+    <title>git-vspark plots your commits vertically with Term::Vspark</title>
     <meta name="author" content="Eric Johnson (@kablamo)">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_">
 
@@ -12,9 +12,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.7308316054105478" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/stylesheets/blog.css?0.7522941058141633" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.4249758268093846" type="text/css" rel="stylesheet" media="all">
+    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.8866285717158382" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/stylesheets/blog.css?0.415953962195193" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.8476336568471847" type="text/css" rel="stylesheet" media="all">
 
  
 
@@ -48,36 +48,39 @@
     <div class="container">
       <div class="content">
         <div class="page-header">
-  <h1>New on CPAN - MooseX::CachingProxy </h1>
+  <h1>git-vspark plots your commits vertically with Term::Vspark </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>Last week I released <a href="https://metacpan.org/module/MooseX::CachingProxy">MooseX::CachingProxy</a> to CPAN.</p>
+    <p>I added a <strong>git-vspark</strong> script to my App::Git::Spark CPAN module.  It does the
+same thing as <a href="https://github.com/kablamo/git-spark">git-spark</a> but instead of
+normal horizontal sparklines, it uses &quot;vertical&quot; sparklines.  Here&#39;s what that
+looks like:</p>
 
-<p>Its a small module that intercepts requests from your LWP based application.
-Those requests are relayed on to the intended server unless they already exist
-in the cache.</p>
-
-<p>To toggle on and off the caching proxy, MooseX::CachingProxy provides the
-attribute &#39;caching_proxy&#39;.  Here is a quick demo:</p>
-
-<pre><code>package MyApp;
-use Moose;
-use WWW::Mechanize; # or any LWP based library
-with &#39;MooseX::CachingProxy&#39;;
-
-sub url { &#39;http://example.com&#39; } # required by MooseX::CachingProxy
-
-sub download { 
-    my $self = shift;
-    $self-&gt;start_caching_proxy;
-    return WWW::Mechanize-&gt;new()-&gt;get($self-&gt;url . &#39;/foo&#39;); 
-}
+<pre><code>$ git vspark --months 8 batman
+Commits by batman over the last 8 months
+total: 233   avg: 29   max: 69
+ 12 ██▋
+ 18 ████
+ 69 ███████████████▏
+ 59 ████████████▉
+ 16 ███▌
+ 28 ██████▏
+ 12 ██▋
+ 19 ████▎
 </code></pre>
 
-<p>Under the covers, its a tiny Plack application that mashes up
-<a href="https://metacpan.org/module/Plack::Middleware::Cache">Plack::Middleware::Cache</a> and <a href="https://metacpan.org/module/Plack::App::Proxy">Plack::App::Proxy</a>.</p>
+<p>This effect is achieved using
+<a href="https://metacpan.org/module/Term::Vspark">Term::Vspark</a>.  Its companion module
+<a href="https://metacpan.org/module/Term::Spark">Term::Spark</a> is a small pure Perl
+replacement for Zach Holman&#39;s original <a href="https://github.com/holman/spark">spark</a>
+implementation and it now powers my git-spark script.  </p>
+
+<p>These libraries were fun little projects developed over the past few weeks
+mainly by <a href="https://github.com/LuRsT">Gil Gonçalves</a> with a few pull requests
+from myself.  Having them available on CPAN means you can easily use sparklines
+in your own Perl code.  </p>
 
     <br><br>
     <br><br>
@@ -89,11 +92,11 @@ sub download {
       <div class="pagination pagination-centered">
         <ul>
           <ul>
-              <li class="prev"><a href="/new-on-cpan-log-json" title="New on CPAN - Log::JSON">Last article</a></li>
+              <li class="prev"><a href="/chinese-zombie-flashcards-on-github-catalyst-perl" title="Chinese zombie flashcards on GitHub (Catalyst &amp; Perl)">Last article</a></li>
 
               <li><a href="/">All articles</a></li>
 
-            <li class="next"><a href="/test-www-selenium-more" title="Test::WWW::Selenium::More">Next article</a></li>
+              <li class="next disabled"><a>Next article</a>
           </ul>
         </ul>
       </div>
@@ -116,7 +119,7 @@ sub download {
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-05-10</span></div>
+    <div class="date"><span>2013-03-17</span></div>
     <br>
     <h4>Categories</h4>
     <ul class="tag_box">
