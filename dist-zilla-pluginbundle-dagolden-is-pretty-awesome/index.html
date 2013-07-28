@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome</title>
+    <meta name="author" content="Eric Johnson (@kablamo)">
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://feeds.feedburner.com/Kablamo_">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/kablamo/stylesheets/bootstrap.min.css?0.032892588535881395" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/stylesheets/blog.css?0.7177712580428105" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/kablamo/widgets/google_prettify/stylesheets/kablamo.css?0.05259343410034212" type="text/css" rel="stylesheet" media="all">
+
+ 
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  <!-- Update these with your own images
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand logo" href="/">KABLAMO</a>
+          <ul class="nav">
+              
+                <li><a href="/">Home</a></li>
+              
+                <li><a href="/categories">Categories</a></li>
+              
+                <li><a href="/about">About</a></li>
+            <li><a href="http://feeds.feedburner.com/Kablamo_" rel="alternate" type="application/rss+xml">RSS</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        <div class="page-header">
+  <h1>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>I&#39;ve been using <a href="https://metacpan.org/module/Dist::Zilla">Dist::Zilla</a> for a
+couple years.  It&#39;s a powerful way to automate CPAN releases.  </p>
+
+<p>But learning how to use it was not as easy as I hoped.</p>
+
+<p>I remember when <code>Dist::Zilla</code> first debuted.  It was very exciting.  But I think
+I may have drank too much of the cool aid becuase my expectations were very
+high when I finally sat down to learn it.  I expected my experience to be
+composed entirely of rainbows and puppy dog tails.</p>
+
+<h2 id="toc_0">Writing your own dist.ini or PluginBundle is hard</h2>
+
+<p>Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
+are a huge number of plugins and it&#39;s difficult for a newcomer to know which
+are old, which are new, and how they work together.  If you look, for example,
+at <code>Dist::Zilla::PluginBundle::DAGOLDEN</code> it uses 23 different plugins and the
+<em>synopsis</em> is 132 lines long.</p>
+
+<p>In retrospect, it was not reasonable to expect I could build something
+comparable after a few minutes of perusing the docs.  It&#39;s more complex than
+that.  So if you are looking to quickly add <code>Dist::Zilla</code> to your toolchain, you
+need to use a PluginBundle and not write your own.</p>
+
+<h2 id="toc_1">How to quickly add Dist::Zilla to your toolchain</h2>
+
+<p>One way is to just use <code>Dist::Zilla::PluginBundle::Basic</code>.  But this was not like
+the promised land I had been dreaming of.  I wanted more.  So I kept looking.</p>
+
+<p>Happily, there is a PluginBundle which I think works well as a reusable
+component suitable for public consumption thats also very configurable.  I
+doubt it&#39;s well known because the name sounds very personal.  That module is,
+of course,
+<a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN">Dist::Zilla::PluginBundle::DAGOLDEN</a>.</p>
+
+<p>I think the workflow it uses will work for many people.  Even if it
+doesn&#39;t, reading the code is a great way to learn how to write your own
+PluginBundle.  And because it&#39;s so comprehensive it&#39;s like having a up-to-date
+map of the state of the art in <code>Dist::Zilla</code> plugins and how they work
+together.  </p>
+
+<p>Here&#39;s what my dist.ini looks like:</p>
+
+<pre><code>name    = App-Git-Ribbon
+author  = Eric Johnson &lt;cpan at iijo dot nospamthanks dot org&gt;
+license = Perl_5
+copyright_holder = Eric Johnson
+main_module = lib/App/Git/Ribbon.pm
+
+[@DAGOLDEN]
+no_spellcheck = 1
+AutoMetaResources.bugtracker.rt = 0
+AutoMetaResources.repository.github = user:kablamo
+AutoMetaResources.bugtracker.github = user:kablamo
+weaver_config = @FLORA
+</code></pre>
+
+    <br><br>
+    <br><br>
+    <div class="rss">
+      <center>
+        If you found this useful you should subscribe to my 
+        <a href="http://feeds.feedburner.com/Kablamo_" rel="alternate" type="application/rss+xml">RSS feed</a>.
+      </center>
+      <div class="pagination pagination-centered">
+        <ul>
+          <ul>
+              <li class="prev"><a href="/cpan-release-of-app-git-ribbon-app-git-spark" title="CPAN release of App::Git::Ribbon, App::Git::Spark">Last article</a></li>
+
+              <li><a href="/">All articles</a></li>
+
+            <li class="next"><a href="/chinese-zombie-flashcards-on-github-catalyst-perl" title="Chinese zombie flashcards on GitHub (Catalyst &amp; Perl)">Next article</a></li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+    <br><br>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'kablamo'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2013-02-20</span></div>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    </ul>
+  </div>
+</div>
+
+      </div>
+      <footer></footer>
+    </div>
+
+    <!-- Google Prettify -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+</script>
+<!-- end Google Prettify -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30610896-1']);
+      _gaq.push(['_setDomainName', 'networthify.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+      _gaq.push(['_trackPageLoadTime']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

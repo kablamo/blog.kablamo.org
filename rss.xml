@@ -1,0 +1,696 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>Kablamo</title>
+    <link>http://blog.kablamo.org</link>
+    <pubDate>2013-03-17 12:32:18 +0000</pubDate>
+    <item>
+      <title>git-vspark plots your commits vertically with Term::Vspark</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/git-vspark-plots-your-commits-vertically-with-term-vspark</link>
+      <pubDate>2013-03-17</pubDate>
+      <description>&lt;p&gt;I added a &lt;strong&gt;git-vspark&lt;/strong&gt; script to my App::Git::Spark CPAN module.  It does the
+same thing as &lt;a href="https://github.com/kablamo/git-spark"&gt;git-spark&lt;/a&gt; but instead of
+normal horizontal sparklines, it uses &amp;quot;vertical&amp;quot; sparklines.  Here&amp;#39;s what that
+looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git vspark --months 8 batman
+Commits by batman over the last 8 months
+total: 233   avg: 29   max: 69
+ 12 &#x2588;&#x2588;&#x258B;
+ 18 &#x2588;&#x2588;&#x2588;&#x2588;
+ 69 &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x258F;
+ 59 &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2589;
+ 16 &#x2588;&#x2588;&#x2588;&#x258C;
+ 28 &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x258F;
+ 12 &#x2588;&#x2588;&#x258B;
+ 19 &#x2588;&#x2588;&#x2588;&#x2588;&#x258E;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This effect is achieved using
+&lt;a href="https://metacpan.org/module/Term::Vspark"&gt;Term::Vspark&lt;/a&gt;.  Its companion module
+&lt;a href="https://metacpan.org/module/Term::Spark"&gt;Term::Spark&lt;/a&gt; is a small pure Perl
+replacement for Zach Holman&amp;#39;s original &lt;a href="https://github.com/holman/spark"&gt;spark&lt;/a&gt;
+implementation and it now powers my git-spark script.  &lt;/p&gt;
+
+&lt;p&gt;These libraries were fun little projects developed over the past few weeks
+mainly by &lt;a href="https://github.com/LuRsT"&gt;Gil Gon&#xE7;alves&lt;/a&gt; with a few pull requests
+from myself.  Having them available on CPAN means you can easily use sparklines
+in your own Perl code.  &lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Chinese zombie flashcards on GitHub (Catalyst &amp; Perl)</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/chinese-zombie-flashcards-on-github-catalyst-perl</link>
+      <pubDate>2013-02-28</pubDate>
+      <description>&lt;p&gt;There seem to be quite a few Perl people learning Chinese so maybe this will be
+relevant here.  &lt;/p&gt;
+
+&lt;p&gt;I created &lt;a href="http://iijo.org"&gt;IIJO&lt;/a&gt; which is a Perl powered website that does 3
+sided flashcards (Chinese, English, and Pinyin).&lt;/p&gt;
+
+&lt;p&gt;The main advantage IIJO has over Anki and other flashcard sites is that you can 
+pick your flashcards from a dictionary so you don&amp;#39;t have to type all that stuff
+in yourself.   It allows you to share word lists with others and the built in
+dictionary means that you don&amp;#39;t need to worry about the accuracy and
+completeness of other people who share wordlists.  &lt;/p&gt;
+
+&lt;p&gt;The site does &lt;a href="http://en.wikipedia.org/wiki/Spaced_repetition"&gt;spaced
+repetition&lt;/a&gt; like Anki.  But it
+has a different simpler user interface because Anki&amp;#39;s 4
+buttons after each flashcard &lt;em&gt;stresses me out.&lt;/em&gt; &lt;/p&gt;
+
+&lt;p&gt;If you want, you can just play with the &lt;a href="http://iijo.org/dictionary"&gt;Chinese/English
+dictionary&lt;/a&gt;.  The goal here is to be able to look
+up a word then add it easily to one of your existing word lists.&lt;/p&gt;
+
+&lt;p&gt;If you think there is something missing, check out the project on
+&lt;a href="http://github.org/kablamo/iijo.org"&gt;GitHub&lt;/a&gt; and send me a pull request.  I&amp;#39;m
+using Perl, Catalyst, and SQLite. &lt;/p&gt;
+
+&lt;p&gt;Here are some of the things on my todo list:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;More analytics/stats/data for measuring progress using D3&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Speech/pronunciation samples&lt;/li&gt;
+&lt;li&gt;Export to Anki&lt;/li&gt;
+&lt;li&gt;Some way to learn phrases instead of just characters&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id="toc_0"&gt;Vampires and zombies&lt;/h1&gt;
+
+&lt;p&gt;Btw, here&amp;#39;s an interesting thing I learned about the Chinese language: the word
+for &lt;code&gt;vampire&lt;/code&gt; is the same word thats used for &lt;code&gt;zombie&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;p style="font-size: 4em; font-weight: bold;"&gt;&#x50F5;&#x5C38;&lt;/p&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;This is becuase the Chinese merged the two concepts into a single vampire
+zombie monster.  So Chinese zombies are stiff and walk around with their hands
+straight out.  But they also bite their victim&amp;#39;s necks and suck their blood
+passing on the zombie infection.  &lt;/p&gt;
+
+&lt;p&gt;They are also fast and angry and they often do kung fu.  You can&amp;#39;t
+kill them of course, however you can put them to sleep if you write a spell on a
+yellow piece of paper and put it on their forehead.  But if it falls off, they
+wake up and get angry again.  Strangest of all is that they do little
+hops like bunnies instead of walking.&lt;/p&gt;
+
+&lt;p&gt;I highly recommend Liao Yiwo&amp;#39;s book, &lt;a href="http://www.amazon.com/The-Corpse-Walker-Stories-Bottom/dp/0307388379/ref=sr_1_1?ie=UTF8&amp;amp;qid=1362603639&amp;amp;sr=8-1&amp;amp;keywords=corpse+walker"&gt;&lt;em&gt;Corpse
+Walker,&lt;/em&gt;&lt;/a&gt;
+which tells the fascinating history and origin of Chinese zombies.  You can read more
+about jiangshi on &lt;a href="http://en.wikipedia.org/wiki/Jiangshi"&gt;Wikipedia&lt;/a&gt;.  And of
+course there are YouTube videos:&lt;/p&gt;
+
+&lt;iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/56Zvquhww80" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    <item>
+      <title>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/dist-zilla-pluginbundle-dagolden-is-pretty-awesome</link>
+      <pubDate>2013-02-20</pubDate>
+      <description>&lt;p&gt;I&amp;#39;ve been using &lt;a href="https://metacpan.org/module/Dist::Zilla"&gt;Dist::Zilla&lt;/a&gt; for a
+couple years.  It&amp;#39;s a powerful way to automate CPAN releases.  &lt;/p&gt;
+
+&lt;p&gt;But learning how to use it was not as easy as I hoped.&lt;/p&gt;
+
+&lt;p&gt;I remember when &lt;code&gt;Dist::Zilla&lt;/code&gt; first debuted.  It was very exciting.  But I think
+I may have drank too much of the cool aid becuase my expectations were very
+high when I finally sat down to learn it.  I expected my experience to be
+composed entirely of rainbows and puppy dog tails.&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;Writing your own dist.ini or PluginBundle is hard&lt;/h2&gt;
+
+&lt;p&gt;Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
+are a huge number of plugins and it&amp;#39;s difficult for a newcomer to know which
+are old, which are new, and how they work together.  If you look, for example,
+at &lt;code&gt;Dist::Zilla::PluginBundle::DAGOLDEN&lt;/code&gt; it uses 23 different plugins and the
+&lt;em&gt;synopsis&lt;/em&gt; is 132 lines long.&lt;/p&gt;
+
+&lt;p&gt;In retrospect, it was not reasonable to expect I could build something
+comparable after a few minutes of perusing the docs.  It&amp;#39;s more complex than
+that.  So if you are looking to quickly add &lt;code&gt;Dist::Zilla&lt;/code&gt; to your toolchain, you
+need to use a PluginBundle and not write your own.&lt;/p&gt;
+
+&lt;h2 id="toc_1"&gt;How to quickly add Dist::Zilla to your toolchain&lt;/h2&gt;
+
+&lt;p&gt;One way is to just use &lt;code&gt;Dist::Zilla::PluginBundle::Basic&lt;/code&gt;.  But this was not like
+the promised land I had been dreaming of.  I wanted more.  So I kept looking.&lt;/p&gt;
+
+&lt;p&gt;Happily, there is a PluginBundle which I think works well as a reusable
+component suitable for public consumption thats also very configurable.  I
+doubt it&amp;#39;s well known because the name sounds very personal.  That module is,
+of course,
+&lt;a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN"&gt;Dist::Zilla::PluginBundle::DAGOLDEN&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I think the workflow it uses will work for many people.  Even if it
+doesn&amp;#39;t, reading the code is a great way to learn how to write your own
+PluginBundle.  And because it&amp;#39;s so comprehensive it&amp;#39;s like having a up-to-date
+map of the state of the art in &lt;code&gt;Dist::Zilla&lt;/code&gt; plugins and how they work
+together.  &lt;/p&gt;
+
+&lt;p&gt;Here&amp;#39;s what my dist.ini looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;name    = App-Git-Ribbon
+author  = Eric Johnson &amp;lt;cpan at iijo dot nospamthanks dot org&amp;gt;
+license = Perl_5
+copyright_holder = Eric Johnson
+main_module = lib/App/Git/Ribbon.pm
+
+[@DAGOLDEN]
+no_spellcheck = 1
+AutoMetaResources.bugtracker.rt = 0
+AutoMetaResources.repository.github = user:kablamo
+AutoMetaResources.bugtracker.github = user:kablamo
+weaver_config = @FLORA
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    <item>
+      <title>CPAN release of App::Git::Ribbon, App::Git::Spark</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/cpan-release-of-app-git-ribbon-app-git-spark</link>
+      <pubDate>2013-02-12</pubDate>
+      <description>&lt;p&gt;I packaged up these scripts and released them on CPAN to make them a little
+easier to install and manage.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;App::Git::Ribbon&lt;/strong&gt; &lt;br&gt;
+on &lt;a href="https://metacpan.org/module/App::Git::Ribbon"&gt;CPAN&lt;/a&gt;&lt;br&gt;
+on &lt;a href="https://github.com/kablamo/git-ribbon"&gt;GitHub&lt;/a&gt;&lt;br&gt;
+previous &lt;a href="/git-ribbon"&gt;blog post&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;App::Git::Spark&lt;/strong&gt; &lt;br&gt;
+on &lt;a href="https://metacpan.org/module/App::Git::Spark"&gt;CPAN&lt;/a&gt;&lt;br&gt;
+on &lt;a href="https://github.com/kablamo/git-spark"&gt;GitHub&lt;/a&gt;&lt;br&gt;
+previous &lt;a href="/git-spark-revisited"&gt;blog post&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>git-ribbon</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/git-ribbon</link>
+      <pubDate>2013-02-02</pubDate>
+      <description>&lt;p&gt;I wrote a little Perl script called
+&lt;a href="https://github.com/kablamo/git-ribbon"&gt;git-ribbon&lt;/a&gt; to help me review the
+latest changes in a git repository.  &lt;/p&gt;
+
+&lt;p&gt;The way I used to review changes was by reading through the &lt;code&gt;git log&lt;/code&gt;.  I try
+to do this every morning at work to keep up with whats going on.  But I was
+having a few problems:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Its hard to know exactly which changes are new.&lt;/li&gt;
+&lt;li&gt;I want to review commits in the order they happened (instead of most recent first).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git log&lt;/code&gt; diff output can be hard to read and may not have enough context
+-- sometimes I want a side by side diff like I get from &lt;code&gt;vimdiff&lt;/code&gt; or &lt;code&gt;git
+difftool&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Basically I wanted a quick and easy way to review the latest changes in a way
+that feels a little more like an RSS feed.  So I wrote this script.&lt;/p&gt;
+
+&lt;h2 id="toc_0"&gt;How to use git-ribbon&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;First&lt;/strong&gt; mark your current place in the commit history.  This command will
+place a tag named _ribbon at origin/master.  Basically its a bookmark at your
+current location.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; git ribbon --save
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Next&lt;/strong&gt;, pull the latest changes made by your fellow conspirators from the
+remote repository.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; git pull
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Then&lt;/strong&gt; use &lt;code&gt;git ribbon&lt;/code&gt; to review only the changes that have occurred since _ribbon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; git ribbon
+Eric Johnson 6 weeks ago ecf43db
+Css tweaks.
+root/html/calculator/realCost.tt
+
+press &amp;#39;s&amp;#39; to skip 
+
+Eric Johnson 4 weeks ago 9595fa0
+fix css margin class.
+root/css/networth.css
+root/css/style.less
+root/css/style.less.old
+root/html/calculator/realCost.tt
+root/html/fi.tt
+
+press &amp;#39;s&amp;#39; to skip 
+
+Eric Johnson 2 weeks ago 5ef0fb2
+Added daysPerYear.
+lib/Networth/Controller/Calculator.pm
+lib/Networth/Out/RealCost.pm
+root/html/calculator/realCost.tt
+
+press &amp;#39;s&amp;#39; to skip 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The script will pause and wait for input when it prints &lt;code&gt;press &amp;#39;s&amp;#39; to skip&lt;/code&gt;.
+If you type anything other than &lt;code&gt;s&lt;/code&gt;, it will show you the side by side diff
+using &lt;code&gt;git difftool&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://farm9.staticflickr.com/8107/8457314152_7f8b3c955c_b.jpg" title="click to view large version"&gt;&lt;img src="http://farm9.staticflickr.com/8107/8457314152_7f8b3c955c.jpg" width="500" height="201" alt="vimdiff"&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;After you have reviewed all the changes, be sure to mark your place again so
+its ready to go next time you want to do a pull:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git ribbon --save
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="toc_1"&gt;Bonus tips&lt;/h2&gt;
+
+&lt;p&gt;In your .gitconfig try this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[diff]
+    tool = vimdiff
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The default colors for vimdiff look like they were created by strange clowns so
+try this instead:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; mkdir -p ~/.vim/colors/
+&#x26A1; wget https://github.com/kablamo/dotfiles/blob/master/links/.vim/colors/iijo.vim -O ~/.vim/colors/iijo.vim
+&#x26A1; echo &amp;quot;colorscheme iijo&amp;quot; &amp;gt;&amp;gt; ~/.vimrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then learn to use vimdiff:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To switch windows type &lt;code&gt;ctl-w l&lt;/code&gt; and &lt;code&gt;ctl-w h&lt;/code&gt;. 
+For more help type &lt;code&gt;:help window-move-cursor&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;To open and close folds type &lt;code&gt;zo&lt;/code&gt; and &lt;code&gt;zc&lt;/code&gt;. 
+For more help type &lt;code&gt;:help fold-commands&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;To close vimdiff with less typing try &lt;code&gt;ZZ&lt;/code&gt;.&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="toc_2"&gt;Alternatives to vimdiff&lt;/h2&gt;
+
+&lt;p&gt;If you don&amp;#39;t want to invest the time just yet to learn vim, use an alternative like meld, opendiff,
+p4merge, xxdiff, etc.  Side by side diffs are worth it!&lt;/p&gt;
+
+&lt;h2 id="toc_3"&gt;See also&lt;/h2&gt;
+
+&lt;p&gt;This script was inspired by a great &lt;a href="http://gitready.com/advanced/2011/10/21/ribbon-and-catchup-reading-new-commits.html"&gt;blog
+post&lt;/a&gt;
+on gitready.com which has a number of awesome git tricks for both beginners and
+advanced users.&lt;/p&gt;
+
+&lt;p&gt;I also ended up writing a &lt;a href="https://github.com/kablamo/vim-ribbon"&gt;vim plugin&lt;/a&gt;
+that is probably better user experience if you very comfortable in vim.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Whats in your $PERL5LIB?</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/whats-in-your-perl5lib</link>
+      <pubDate>2013-01-29</pubDate>
+      <description>&lt;p&gt;Ever wonder whats in your $PERL5LIB?  Here is one way to find out:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; echo $PERL5LIB
+.:./lib:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5:/home/eri
+c/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux:/home/eric/perl
+5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux-gnu-thread-multi-64in
+t:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/site_perl:/home/eric/
+perl5/perlbrew/perls/perl-5.16.2/lib/5.16.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;My human eyeballs are not equipped to parse that.  Unhelpful.  So I put this in
+my .bashrc:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;alias perl5lib=&amp;#39;perl -E &amp;quot;say join \&amp;quot;\n\&amp;quot;, split \&amp;quot;:\&amp;quot;, \$ENV{PERL5LIB}&amp;quot;&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here it is in action:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; perl5lib
+.
+./lib
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux-gnu-thread-multi-64int
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/site_perl
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/5.16.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Better.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>git-spark revisited</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/git-spark-revisited</link>
+      <pubDate>2013-01-27</pubDate>
+      <description>&lt;p&gt;A &lt;a href="http://blog.kablamo.org/git-spark-plots-your-commit-history/"&gt;few days ago&lt;/a&gt;
+I wrote about my &lt;a href="https://gist.github.com/4598480"&gt;git-spark&lt;/a&gt; Perl script.  It
+counts how many commits a user has in a git project and makes a little graph
+and displays it on the command line.&lt;/p&gt;
+
+&lt;p&gt;However I also said it wasn&amp;#39;t very useful becuase you can&amp;#39;t compare one graph
+with another because the scale changes when different graphs have different min
+and max values.  For example these two data series produce identical graphs
+despite have very different data.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; spark 1 2 3 4 5
+&#x2581;&#x2582;&#x2584;&#x2586;&#x2588;
+&#x26A1; spark 10 20 30 40 50
+&#x2581;&#x2582;&#x2584;&#x2586;&#x2588;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So I put on my thinking cap and came up with the following solution: &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; spark 50 1 1 2 3 4 5
+&#x2588;&#x2581;&#x2581;&#x2581;&#x2581;&#x2581;&#x2581;
+&#x26A1; spark 50 1 10 20 30 40 50
+&#x2588;&#x2581;&#x2582;&#x2583;&#x2585;&#x2586;&#x2588;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I just need to prepend a max and a min to the data to get consistent scaling
+and now I can compare graphs.&lt;/p&gt;
+
+&lt;p&gt;For git-spark, I now assume the min is zero and you can pass in the max using
+the --scale option.  (Note that I chopped off the max/min characters from
+the spark output as they are distracting.)&lt;/p&gt;
+
+&lt;p&gt;I also decided to print out the number of commits which helps with the
+scaling issue.  And while I was in there I got it to calculate the total,
+average, and maximum number of commits for that duration.&lt;/p&gt;
+
+&lt;p&gt;Here is an example.  It doesn&amp;#39;t really need the --scale option because the data
+is so close anyway, but it shows how to use it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; git spark --days 14 --scale 23 Stegosaurus
+Commits by Stegosaurus over the last 14 days
+total: 95   avg: 7   max: 23
+10 15 6 23 5 0 0 1 15 0 17 3 0 0
+&#x2584;&#x2585;&#x2582;&#x2588;&#x2582;&#x2581;&#x2581;&#x2581;&#x2585;&#x2581;&#x2586;&#x2581;&#x2581;&#x2581;
+&#x26A1; git spark --days 14 --scale 23 Triceratops
+Commits by Triceratops over the last 14 days
+total: 90   avg: 7   max: 22
+1 12 3 11 3 0 0 6 16 3 13 22 0 0
+&#x2581;&#x2584;&#x2581;&#x2584;&#x2581;&#x2581;&#x2581;&#x2582;&#x2585;&#x2581;&#x2584;&#x2587;&#x2581;&#x2581;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course you still need to consider the quality of commits and not just how
+many there are.  &lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>git-spark plots your commit history</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/git-spark-plots-your-commit-history</link>
+      <pubDate>2013-01-23</pubDate>
+      <description>&lt;p&gt;I recently rediscovered &lt;a href="https://github.com/holman/spark"&gt;spark&lt;/a&gt;, Zach Holman&amp;#39;s
+cool little sparklines graphing tool for the command line.  I used a little
+Perl to mash it up with &amp;#39;git log&amp;#39; and came up with
+&lt;a href="https://gist.github.com/4598480"&gt;git-spark&lt;/a&gt; which works like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; git spark --hours 8
+Commits by Godzilla over the last 8 hours
+&#x2583;&#x2583;&#x2581;&#x2586;&#x2585;&#x2581;&#x2581;&#x2583;&#x2588;
+&#x26A1; git spark -d 14 HulkHogan
+Commits by HulkHogan over the last 14 days
+&#x2587;&#x2585;&#x2584;&#x2581;&#x2581;&#x2584;&#x2585;&#x2582;&#x2588;&#x2582;&#x2581;&#x2581;&#x2581;&#x2585;
+&#x26A1; git spark -w 52 Tarzan
+Commits by Tarzan over the last 52 weeks
+&#x2583;&#x2581;&#x2582;&#x2583;&#x2583;&#x2583;&#x2582;&#x2581;&#x2588;&#x2586;&#x2581;&#x2584;&#x2584;&#x2583;&#x2582;&#x2582;&#x2581;&#x2581;&#x2582;&#x2583;&#x2583;&#x2584;&#x2583;&#x2583;&#x2582;&#x2583;&#x2581;&#x2581;&#x2581;&#x2581;&#x2581;&#x2582;&#x2582;&#x2583;&#x2586;&#x2585;&#x2582;&#x2581;&#x2584;&#x2583;&#x2582;&#x2584;&#x2584;&#x2584;&#x2581;&#x2582;&#x2581;&#x2581;&#x2582;&#x2582;&#x2582;&#x2583;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And heres the usage/help:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; git spark -h
+usage: git spark [-dhmowy] [long options...] [AUTHOR]
+        -o --hours      commits from the last x hours
+        -d --days       commits from the last x days
+        -w --weeks      commits from the last x weeks
+        -m --months     commits from the last x months
+        -y --years      commits from the last x years
+        -h --help       show this message
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It was fun to build, but afterward I realized its totally useless.  Clearly
+&amp;#39;commits&amp;#39; are a problematic metric.  But its much worse than that.  The peaks
+on the graph are relative to the lows on the same graph.  So a peak on one
+graph has no relation to a peak on another.  That means I can&amp;#39;t compare one
+sparkline with another.&lt;/p&gt;
+
+&lt;p&gt;Back to the drawing board.  I&amp;#39;ll have to come up with something else.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UPDATE:&lt;/strong&gt; I solved this problem in &lt;a href="http://blog.kablamo.org/git-spark-revisited/"&gt;git-spark revisted&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Use Carp::Always to fix circular dependencies</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/use-carp-always-to-fix-circular-dependencies</link>
+      <pubDate>2013-01-19</pubDate>
+      <description>&lt;p&gt;Circular dependencies happen when your library requires a library which
+requires your library.  Here&amp;#39;s an example.  Lets say you have 2 packages:  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;AlienPlanet.pm&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package AlienPlanet;
+use Moose;
+use Dinosaurs;          # &amp;lt;--- Circular dependency
+sub has_dinosaurs {1}
+1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Dinosaurs.pm&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package Dinosaurs;
+use Moose;
+use AlienPlanet;        # &amp;lt;--- Circular dependency
+sub has_rabies {1}
+1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you try to compile this, you get the following warning:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; perl -c lib/AlienPlanet.pm 
+Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 5.
+lib/AlienPlanet.pm syntax OK
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case its obvious where the problem is.  &lt;/p&gt;
+
+&lt;p&gt;But if the package you included, included 25 other libraries, which included
+other libraries, which included your original library -- then its harder to
+figure out where the circle is.&lt;/p&gt;
+
+&lt;p&gt;Happily I discovered a good solution. First, modify &lt;strong&gt;AlienPlanet.pm&lt;/strong&gt; to look
+like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package AlienPlanet;
+sub has_dinosaurs {1}   &amp;lt;-- swap
+use Dinosaurs;          &amp;lt;-- swap
+1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, try compiling your code again but this time with
+&lt;a href="http://perladvent.org/2011/2011-12-04.html"&gt;Carp::Always&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#x26A1; perl -MCarp::Always -c lib/AlienPlanet.pm                                                                                                            
+Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 4.
+        require AlienPlanet.pm called at lib/Dinosaurs.pm line 4
+        Dinosaurs::BEGIN() called at lib/AlienPlanet.pm line 4
+        eval {...} called at lib/AlienPlanet.pm line 4
+        require Dinosaurs.pm called at lib/AlienPlanet.pm line 5
+        AlienPlanet::BEGIN() called at lib/AlienPlanet.pm line 4
+        eval {...} called at lib/AlienPlanet.pm line 4
+lib/AlienPlanet.pm syntax OK
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you&amp;#39;ve got a stack trace and its easy to see where your problem is.  All
+thats left is figuring out how to solve it. (Fast solution: use
+&lt;a href="https://metacpan.org/module/Class::Load"&gt;Class::Load&lt;/a&gt; in the Dinosaurs
+package.)&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Devel::Dwarn helps me type less</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/devel-dwarn-helps-me-type-less</link>
+      <pubDate>2012-09-05</pubDate>
+      <description>&lt;p&gt;2 bajillion times a day I want to print a hashref and see whats inside.
+But every time I want to do that I have to type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use Data::Dumper::Concise;
+print Dumper $hashref;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;First of all, thats too much typing.  And second of all I keep forgetting to
+delete my print statements when I check in.&lt;/p&gt;
+
+&lt;p&gt;Happily I recently discovered
+&lt;a href="https://metacpan.org/module/Devel::Dwarn"&gt;Devel::Dwarn&lt;/a&gt; on CPAN.  It is
+(basically) an alias to
+&lt;a href="https://metacpan.org/module/Data::Dumper::Concise"&gt;Data::Dumper::Concise&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The name is shorter which means its slightly less typing so I am already
+winning.  But thats not the best part.  Lets see how to use it.&lt;/p&gt;
+
+&lt;p&gt;On the command line I do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;perl -MDevel::Dwarn codeIWantToDebug.pl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And then in my code I do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;print ::Dwarn $hashref;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are 2 levels of good here:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Less typing.&lt;/li&gt;
+&lt;li&gt;When I run my code without &amp;#39;perl -M&amp;#39; I get compile time errors in all
+ the places I forgot to remove &lt;code&gt;print ::Dwarn $hashref&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    <item>
+      <title>Slides from my Selenium talk at YAPCEU 2012</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/slides-from-my-selenium-talk-at-yapceu-2012</link>
+      <pubDate>2012-08-26</pubDate>
+      <description>&lt;p&gt;I gave my first &lt;a href="http://act.yapc.eu/ye2012/schedule?day=2012-08-20"&gt;YAPC::EU&lt;/a&gt;
+presentation this year in Frankfurt after doing a trial run at London.pm.  I
+received some good questions and comments and a few new ideas.  It was a good
+experience and I want to do this again.&lt;/p&gt;
+
+&lt;p&gt;My talk introduced Selenium and common problems people have when first trying
+to write Selenium tests in Perl.  I also explained how I solved many of those
+problems by creating
+&lt;a href="https://metacpan.org/module/Test::WWW::Selenium::More"&gt;Test::WWW::Selenium::More&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The slides are available
+&lt;a href="http://kablamo.org/selenium-2012-yapceu-slides/"&gt;online&lt;/a&gt;. Or if you need to
+download them for some reason, they are hosted on
+&lt;a href="https://github.com/kablamo/selenium-2012-yapceu-slides"&gt;github&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Test::WWW::Selenium::More</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/test-www-selenium-more</link>
+      <pubDate>2012-05-17</pubDate>
+      <description>&lt;p&gt;I recently released
+&lt;a href="https://metacpan.org/module/Test::WWW::Selenium::More"&gt;Test::WWW::Selenium::More&lt;/a&gt;
+to CPAN.  It is a small collection of utilities to help you write Selenium
+tests.  Here are some reasons to use it:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;It has a
+&lt;a href="https://metacpan.org/module/Test::WWW::Selenium::More::Manual"&gt;manual&lt;/a&gt; which
+provides a concise but fairly comprehensive howto guide to Selenium testing in
+Perl.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;It uses Moose so you can more easily use roles.  For example you might want
+a role for methods that deal with authentication and a role for methods that
+deal with payments.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Smarter testing with methods like wait_for_jquery() and jquery_click().  You
+should never sleep() in your Selenium tests because that leads to slow tests
+with random failures which leads to frustration, low morale, hair pulling, and
+heavy drinking.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Method chaining.  Here is what this looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use Test::Most;
+use Test::WWW::Selenium::More;
+
+Test::WWW::Selenium::More-&amp;gt;new()
+
+-&amp;gt;note(&amp;#39;Search google&amp;#39;)
+-&amp;gt;open_ok(&amp;quot;http://www.google.com&amp;quot;)
+-&amp;gt;title_like(qr/Google Search/)
+-&amp;gt;type_ok(&amp;#39;cat pictures&amp;#39;)
+-&amp;gt;follow_link_ok(&amp;#39;Search&amp;#39;)
+
+-&amp;gt;note(&amp;#39;Check the number of results&amp;#39;)
+-&amp;gt;is_text_present_ok(&amp;#39;2 bajillion results&amp;#39;);
+
+done_testing;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Bugs or patches?  &lt;a href="https://github.com/kablamo/Test-WWW-Selenium-More"&gt;https://github.com/kablamo/Test-WWW-Selenium-More&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>New on CPAN - MooseX::CachingProxy</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/new-on-cpan-moosex-cachingproxy</link>
+      <pubDate>2012-05-10</pubDate>
+      <description>&lt;p&gt;Last week I released &lt;a href="https://metacpan.org/module/MooseX::CachingProxy"&gt;MooseX::CachingProxy&lt;/a&gt; to CPAN.&lt;/p&gt;
+
+&lt;p&gt;Its a small module that intercepts requests from your LWP based application.
+Those requests are relayed on to the intended server unless they already exist
+in the cache.&lt;/p&gt;
+
+&lt;p&gt;To toggle on and off the caching proxy, MooseX::CachingProxy provides the
+attribute &amp;#39;caching_proxy&amp;#39;.  Here is a quick demo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package MyApp;
+use Moose;
+use WWW::Mechanize; # or any LWP based library
+with &amp;#39;MooseX::CachingProxy&amp;#39;;
+
+sub url { &amp;#39;http://example.com&amp;#39; } # required by MooseX::CachingProxy
+
+sub download { 
+    my $self = shift;
+    $self-&amp;gt;start_caching_proxy;
+    return WWW::Mechanize-&amp;gt;new()-&amp;gt;get($self-&amp;gt;url . &amp;#39;/foo&amp;#39;); 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Under the covers, its a tiny Plack application that mashes up
+&lt;a href="https://metacpan.org/module/Plack::Middleware::Cache"&gt;Plack::Middleware::Cache&lt;/a&gt; and &lt;a href="https://metacpan.org/module/Plack::App::Proxy"&gt;Plack::App::Proxy&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>New on CPAN - Log::JSON</title>
+      <author>Eric Johnson (@kablamo)</author>
+      <link>http://blog.kablamo.org/new-on-cpan-log-json</link>
+      <pubDate>2012-04-29</pubDate>
+      <description>&lt;p&gt;I released Log::JSON v0.001 to CPAN today.  Its a very simple JSON logger.&lt;/p&gt;
+
+&lt;p&gt;The advantage of a JSON logger is that a human can open a mysterious new log
+file and quickly decipher the content because each piece of information is
+labeled.  Using JSON also means that parsing the log file and reviving the data
+structures is trivial.&lt;/p&gt;
+
+&lt;p&gt;Here is some example usage for you:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use Log::JSON;
+my $logger = Log::JSON-&amp;gt;new(
+    file            =&amp;gt; &amp;#39;/path/errorlog.json&amp;#39;, # required
+    date            =&amp;gt; 1, # optional
+    remove_newlines =&amp;gt; 1, # optional
+);
+$logger-&amp;gt;log(a =&amp;gt; 1, b =&amp;gt; 2);
+# &amp;#39;/path/errorlog.json&amp;#39; now contains:
+# {&amp;quot;__date&amp;quot;:&amp;quot;2010-03-28T23:15:52Z&amp;quot;,&amp;quot;a&amp;quot;:1,&amp;quot;b&amp;quot;:1}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I wish I had written it as a Log::Dispatch plugin, and perhaps I&amp;#39;ll get around
+to that sometime.&lt;/p&gt;
+
+&lt;p&gt;One problem with using JSON is that there is a lot repetition and if your log
+file is a bajillion lines long, then that&amp;#39;s going to be a big file.  Happily,
+file compression solves this problem very well.  And Vim and less handle
+compressed files on the fly so viewing the file is not inconvenient.  And now
+that I write this, I think some kind of compression feature may be nice for
+Log::JSON and pretty great for Log::Dispatch too.&lt;/p&gt;
+
+&lt;p&gt;Log::JSON on github: &lt;a href="https://github.com/kablamo/Log-JSON"&gt;https://github.com/kablamo/Log-JSON&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+  </channel>
+</rss>
