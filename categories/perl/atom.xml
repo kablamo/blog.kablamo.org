@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: perl | KABLAMO]]></title>
+  <link href="http://blog.kablamo.org/categories/perl/atom.xml" rel="self"/>
+  <link href="http://blog.kablamo.org/"/>
+  <updated>2013-07-28T19:25:38+01:00</updated>
+  <id>http://blog.kablamo.org/</id>
+  <author>
+    <name><![CDATA[Eric Johnson]]></name>
+    <email><![CDATA[kablamo@kablamo.org]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[git-vspark plots your commits vertically with Term::Vspark]]></title>
+    <link href="http://blog.kablamo.org/2013/03/17/git-vspark/"/>
+    <updated>2013-03-17T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2013/03/17/git-vspark</id>
+    <content type="html"><![CDATA[<p>I added a <strong>git-vspark</strong> script to my App::Git::Spark CPAN module.  It does the
+same thing as <a href="https://github.com/kablamo/git-spark">git-spark</a> but instead of
+normal horizontal sparklines, it uses &ldquo;vertical&rdquo; sparklines.  Here&rsquo;s what that
+looks like:</p>
+
+<pre><code>$ git vspark --months 8 batman
+Commits by batman over the last 8 months
+total: 233   avg: 29   max: 69
+ 12 ██▋
+ 18 ████
+ 69 ███████████████▏
+ 59 ████████████▉
+ 16 ███▌
+ 28 ██████▏
+ 12 ██▋
+ 19 ████▎
+</code></pre>
+
+<p>This effect is achieved using
+<a href="https://metacpan.org/module/Term::Vspark">Term::Vspark</a>.  Its companion module
+<a href="https://metacpan.org/module/Term::Spark">Term::Spark</a> is a small pure Perl
+replacement for Zach Holman&rsquo;s original <a href="https://github.com/holman/spark">spark</a>
+implementation and it now powers my git-spark script.</p>
+
+<p>These libraries were fun little projects developed over the past few weeks
+mainly by <a href="https://github.com/LuRsT">Gil Gonçalves</a> with a few pull requests
+from myself.  Having them available on CPAN means you can easily use sparklines
+in your own Perl code.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chinese zombie flashcards on GitHub (Catalyst & Perl)]]></title>
+    <link href="http://blog.kablamo.org/2013/02/28/chinese-flashcards/"/>
+    <updated>2013-02-28T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2013/02/28/chinese-flashcards</id>
+    <content type="html"><![CDATA[<p>There seem to be quite a few Perl people learning Chinese so maybe this will be
+relevant here.</p>
+
+<p>I created <a href="http://iijo.org">IIJO</a> which is a Perl powered website that does 3
+sided flashcards (Chinese, English, and Pinyin).</p>
+
+<p>The main advantage IIJO has over Anki and other flashcard sites is that you can
+pick your flashcards from a dictionary so you don&rsquo;t have to type all that stuff
+in yourself.   It allows you to share word lists with others and the built in
+dictionary means that you don&rsquo;t need to worry about the accuracy and
+completeness of other people who share wordlists.</p>
+
+<p>The site does <a href="http://en.wikipedia.org/wiki/Spaced_repetition">spaced repetition</a>
+like Anki.  But it has a different simpler user interface because Anki&rsquo;s 4
+buttons after each flashcard <em>stresses me out.</em></p>
+
+<p>If you want, you can just play with the <a href="http://iijo.org/dictionary">Chinese/English dictionary</a>.<br/>
+The goal here is to be able to look up a word then add it easily to one of your
+existing word lists.</p>
+
+<p>If you think there is something missing, check out the project on
+<a href="http://github.org/kablamo/iijo.org">GitHub</a> and send me a pull request.  I&rsquo;m
+using Perl, Catalyst, and SQLite.</p>
+
+<p>Here are some of the things on my todo list:</p>
+
+<ul>
+<li>More analytics/stats/data for measuring progress using D3</li>
+<li>Speech/pronunciation samples</li>
+<li>Export to Anki</li>
+<li>Some way to learn phrases instead of just characters</li>
+</ul>
+
+
+<h1>Vampires and zombies</h1>
+
+<p>Btw, here&rsquo;s an interesting thing I learned about the Chinese language: the word
+for <code>vampire</code> is the same word thats used for <code>zombie</code>.</p>
+
+<center><p style="margin-bottom: .5em; font-size: 4em; font-weight: bold;">僵尸</p></center>
+
+
+<p>This is because the Chinese merged the two concepts into a single vampire
+zombie monster.  So Chinese zombies are stiff and walk around with their hands
+straight out.  But they also bite their victim&rsquo;s necks and suck their blood
+passing on the zombie infection.</p>
+
+<p>They are also fast and angry and they often do kung fu.  You can&rsquo;t
+kill them of course, however you can put them to sleep if you write a spell on a
+yellow piece of paper and put it on their forehead.  But if it falls off, they
+wake up and get angry again.  Strangest of all is that they do little
+hops like bunnies instead of walking.</p>
+
+<p>I highly recommend Liao Yiwo&rsquo;s book, <a href="http://www.amazon.com/The-Corpse-Walker-Stories-Bottom/dp/0307388379/ref=sr_1_1?ie=UTF8&amp;qid=1362603639&amp;sr=8-1&amp;keywords=corpse+walker"><em>Corpse Walker,</em></a>
+which tells the fascinating history and origin of Chinese zombies.  You can read more
+about jiangshi on <a href="http://en.wikipedia.org/wiki/Jiangshi">Wikipedia</a>.  And of
+course there are YouTube videos:</p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/56Zvquhww80" frameborder="0" allowfullscreen></iframe>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome]]></title>
+    <link href="http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/"/>
+    <updated>2013-02-20T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been using <a href="https://metacpan.org/module/Dist::Zilla">Dist::Zilla</a> for a
+couple years.  It&rsquo;s a powerful way to automate CPAN releases.</p>
+
+<p>But learning how to use it was not as easy as I hoped.</p>
+
+<p>I remember when <code>Dist::Zilla</code> first debuted.  It was very exciting.  But I think
+I may have drank too much of the cool aid becuase my expectations were very
+high when I finally sat down to learn it.  I expected my experience to be
+composed entirely of rainbows and puppy dog tails.</p>
+
+<h2>Writing your own dist.ini or PluginBundle is hard</h2>
+
+<p>Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
+are a huge number of plugins and it&rsquo;s difficult for a newcomer to know which
+are old, which are new, and how they work together.  If you look, for example,
+at <code>Dist::Zilla::PluginBundle::DAGOLDEN</code> it uses 23 different plugins and the
+<em>synopsis</em> is 132 lines long.</p>
+
+<p>In retrospect, it was not reasonable to expect I could build something
+comparable after a few minutes of perusing the docs.  It&rsquo;s more complex than
+that.  So if you are looking to quickly add <code>Dist::Zilla</code> to your toolchain, you
+need to use a PluginBundle and not write your own.</p>
+
+<h2>How to quickly add Dist::Zilla to your toolchain</h2>
+
+<p>One way is to just use <code>Dist::Zilla::PluginBundle::Basic</code>.  But this was not like
+the promised land I had been dreaming of.  I wanted more.  So I kept looking.</p>
+
+<p>Happily, there is a PluginBundle which I think works well as a reusable
+component suitable for public consumption thats also very configurable.  I
+doubt it&rsquo;s well known because the name sounds very personal.  That module is,
+of course,
+<a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN">Dist::Zilla::PluginBundle::DAGOLDEN</a>.</p>
+
+<p>I think the workflow it uses will work for many people.  Even if it
+doesn&rsquo;t, reading the code is a great way to learn how to write your own
+PluginBundle.  And because it&rsquo;s so comprehensive it&rsquo;s like having a up-to-date
+map of the state of the art in <code>Dist::Zilla</code> plugins and how they work
+together.</p>
+
+<p>Here&rsquo;s what my dist.ini looks like:</p>
+
+<pre><code>name    = App-Git-Ribbon
+author  = Eric Johnson &lt;cpan at iijo dot nospamthanks dot org&gt;
+license = Perl_5
+copyright_holder = Eric Johnson
+main_module = lib/App/Git/Ribbon.pm
+
+[@DAGOLDEN]
+no_spellcheck = 1
+AutoMetaResources.bugtracker.rt = 0
+AutoMetaResources.repository.github = user:kablamo
+AutoMetaResources.bugtracker.github = user:kablamo
+weaver_config = @FLORA
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CPAN release of App::Git::Ribbon, App::Git::Spark]]></title>
+    <link href="http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/"/>
+    <updated>2013-02-12T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark</id>
+    <content type="html"><![CDATA[<p>I packaged up these scripts and released them on CPAN to make them a little
+easier to install and manage.</p>
+
+<p><strong>App::Git::Ribbon</strong> <br>
+on <a href="https://metacpan.org/module/App::Git::Ribbon">CPAN</a><br>
+on <a href="https://github.com/kablamo/git-ribbon">GitHub</a><br>
+previous <a href="/git-ribbon">blog post</a></p>
+
+<p><strong>App::Git::Spark</strong> <br>
+on <a href="https://metacpan.org/module/App::Git::Spark">CPAN</a><br>
+on <a href="https://github.com/kablamo/git-spark">GitHub</a><br>
+previous <a href="/git-spark-revisited">blog post</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git-ribbon]]></title>
+    <link href="http://blog.kablamo.org/2013/02/02/git-ribbon/"/>
+    <updated>2013-02-02T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2013/02/02/git-ribbon</id>
+    <content type="html"><![CDATA[<p>I wrote a little Perl script called
+<a href="https://github.com/kablamo/git-ribbon">git-ribbon</a> to help me review the
+latest changes in a git repository.</p>
+
+<p>The way I used to review changes was by reading through the <code>git log</code>.  I try
+to do this every morning at work to keep up with whats going on.  But I was
+having a few problems:</p>
+
+<ol>
+<li>Its hard to know exactly which changes are new.</li>
+<li>I want to review commits in the order they happened (instead of most recent first).</li>
+<li><code>git log</code> diff output can be hard to read and may not have enough context
+&mdash; sometimes I want a side by side diff like I get from <code>vimdiff</code> or <code>git
+difftool</code>.</li>
+</ol>
+
+
+<p>Basically I wanted a quick and easy way to review the latest changes in a way
+that feels a little more like an RSS feed.  So I wrote this script.</p>
+
+<h2>How to use git-ribbon</h2>
+
+<p><strong>First</strong> mark your current place in the commit history.  This command will
+place a tag named _ribbon at origin/master.  Basically its a bookmark at your
+current location.</p>
+
+<pre><code>⚡ git ribbon --save
+</code></pre>
+
+<p><strong>Next</strong>, pull the latest changes made by your fellow conspirators from the
+remote repository.</p>
+
+<pre><code>⚡ git pull
+</code></pre>
+
+<p><strong>Then</strong> use <code>git ribbon</code> to review only the changes that have occurred since _ribbon:</p>
+
+<pre><code>⚡ git ribbon
+Eric Johnson 6 weeks ago ecf43db
+Css tweaks.
+root/html/calculator/realCost.tt
+
+press 's' to skip 
+
+Eric Johnson 4 weeks ago 9595fa0
+fix css margin class.
+root/css/networth.css
+root/css/style.less
+root/css/style.less.old
+root/html/calculator/realCost.tt
+root/html/fi.tt
+
+press 's' to skip 
+
+Eric Johnson 2 weeks ago 5ef0fb2
+Added daysPerYear.
+lib/Networth/Controller/Calculator.pm
+lib/Networth/Out/RealCost.pm
+root/html/calculator/realCost.tt
+
+press 's' to skip 
+</code></pre>
+
+<p>The script will pause and wait for input when it prints <code>press 's' to skip</code>.
+If you type anything other than <code>s</code>, it will show you the side by side diff
+using <code>git difftool</code>.</p>
+
+<p><a href="http://farm9.staticflickr.com/8107/8457314152_7f8b3c955c_b.jpg" title="click to view large version"><img src="http://farm9.staticflickr.com/8107/8457314152_7f8b3c955c.jpg" width="500" height="201" alt="vimdiff"></a></p>
+
+<p>After you have reviewed all the changes, be sure to mark your place again so
+its ready to go next time you want to do a pull:</p>
+
+<pre><code>git ribbon --save
+</code></pre>
+
+<h2>Bonus tips</h2>
+
+<p>In your .gitconfig try this:</p>
+
+<pre><code>[diff]
+    tool = vimdiff
+</code></pre>
+
+<p>The default colors for vimdiff look like they were created by strange clowns so
+try this instead:</p>
+
+<pre><code>⚡ mkdir -p ~/.vim/colors/
+⚡ wget https://github.com/kablamo/dotfiles/blob/master/links/.vim/colors/iijo.vim -O ~/.vim/colors/iijo.vim
+⚡ echo "colorscheme iijo" &gt;&gt; ~/.vimrc
+</code></pre>
+
+<p>Then learn to use vimdiff:</p>
+
+<ul>
+<li>To switch windows type <code>ctl-w l</code> and <code>ctl-w h</code>.
+For more help type <code>:help window-move-cursor</code>.</li>
+<li>To open and close folds type <code>zo</code> and <code>zc</code>.
+For more help type <code>:help fold-commands</code>.</li>
+<li>To close vimdiff with less typing try <code>ZZ</code>.</li>
+</ul>
+
+
+<h2>Alternatives to vimdiff</h2>
+
+<p>If you don&rsquo;t want to invest the time just yet to learn vim, use an alternative like meld, opendiff,
+p4merge, xxdiff, etc.  Side by side diffs are worth it!</p>
+
+<h2>See also</h2>
+
+<p>This script was inspired by a great <a href="http://gitready.com/advanced/2011/10/21/ribbon-and-catchup-reading-new-commits.html">blog
+post</a>
+on gitready.com which has a number of awesome git tricks for both beginners and
+advanced users.</p>
+
+<p>I also ended up writing a <a href="https://github.com/kablamo/vim-ribbon">vim plugin</a>
+that is probably better user experience if you very comfortable in vim.</p>
+]]></content>
+  </entry>
+  
+</feed>
