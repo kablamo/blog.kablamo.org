@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2013-07-28T19:25:38+01:00</updated>
+  <updated>2013-11-12T21:38:20+00:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[My contribution to the Linux ate my RAM problem]]></title>
+    <link href="http://blog.kablamo.org/2013/11/12/linux_ate_my_ram/"/>
+    <updated>2013-11-12T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2013/11/12/linux_ate_my_ram</id>
+    <content type="html"><![CDATA[<p>I can never remember how to know how much free memory I have.</p>
+
+<p>The Linux kernel claims most of the operating system&rsquo;s memory.  That doesn&rsquo;t
+mean the operating system is out of memory.  It means the kernel has claimed it
+and is managing it.  The problem is that the Linux kernel defines &lsquo;free&rsquo; memory
+differently than any reasonable user.  There are excellent shiny reasons for
+that, but as a user I don&rsquo;t really care.</p>
+
+<pre><code>~ ⚡ free -m 
+            total       used       free     shared    buffers     cached
+Mem:          3822       2066       1755          0        147       1125
+-/+ buffers/cache:        793       3029
+Swap:         3394          0       3394
+</code></pre>
+
+<p>Experienced users and sysadmins will know from this means my system currently
+has 3822 MB of total memory and 3029 MB of free memory.  Errr.  What?  See
+<a href="http://www.linuxatemyram.com">linuxatemyram.com</a> for a more detailed
+explanation.</p>
+
+<p>I think the world deserves something easier to deal with.  So I wrote &lsquo;mem&rsquo;.
+Use it like this:</p>
+
+<pre><code>~ ⚡ mem
+  3026 MB used (21%)
+  3823 MB total
+</code></pre>
+
+<p>Its a bash function.  Add the following to your .bashrc:</p>
+
+<pre><code>mem() {
+    memfree=$( grep '^MemFree:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    buffers=$( grep '^Buffers:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    cached=$(  grep '^Cached:'  /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    free=$( echo $memfree+$buffers+$cached | bc -l )
+
+    total=$( grep '^MemTotal:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    used=$( echo $total-$free | bc -l )
+    pct=$( echo 100*$used/$total | bc -l )
+
+    printf "%5.f MB used (%.0f%%)\n%5.f MB total\n" $used $pct $total
+}
+</code></pre>
+
+<p>See
+<a href="https://github.com/kablamo/dotfiles/blob/master/links/.bash/aliases.sh">github</a>
+for the latest version.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[git-vspark plots your commits vertically with Term::Vspark]]></title>

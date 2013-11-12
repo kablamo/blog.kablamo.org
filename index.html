@@ -9,9 +9,7 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I added a git-vspark script to my App::Git::Spark CPAN module. It does the
-same thing as git-spark but instead of
-normal horizontal sparklines, it &hellip;">
+  <meta name="description" content="I can never remember how to know how much free memory I have. The Linux kernel claims most of the operating system&rsquo;s memory. That doesn&rsquo;t &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -58,6 +56,89 @@ normal horizontal sparklines, it &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/11/12/linux_ate_my_ram/">My Contribution to the Linux Ate My RAM Problem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-11-12T00:00:00+00:00" pubdate data-updated="true">Nov 12<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I can never remember how to know how much free memory I have.</p>
+
+<p>The Linux kernel claims most of the operating system&rsquo;s memory.  That doesn&rsquo;t
+mean the operating system is out of memory.  It means the kernel has claimed it
+and is managing it.  The problem is that the Linux kernel defines &lsquo;free&rsquo; memory
+differently than any reasonable user.  There are excellent shiny reasons for
+that, but as a user I don&rsquo;t really care.</p>
+
+<pre><code>~ ⚡ free -m 
+            total       used       free     shared    buffers     cached
+Mem:          3822       2066       1755          0        147       1125
+-/+ buffers/cache:        793       3029
+Swap:         3394          0       3394
+</code></pre>
+
+<p>Experienced users and sysadmins will know from this means my system currently
+has 3822 MB of total memory and 3029 MB of free memory.  Errr.  What?  See
+<a href="http://www.linuxatemyram.com">linuxatemyram.com</a> for a more detailed
+explanation.</p>
+
+<p>I think the world deserves something easier to deal with.  So I wrote &lsquo;mem&rsquo;.
+Use it like this:</p>
+
+<pre><code>~ ⚡ mem
+  3026 MB used (21%)
+  3823 MB total
+</code></pre>
+
+<p>Its a bash function.  Add the following to your .bashrc:</p>
+
+<pre><code>mem() {
+    memfree=$( grep '^MemFree:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    buffers=$( grep '^Buffers:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    cached=$(  grep '^Cached:'  /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    free=$( echo $memfree+$buffers+$cached | bc -l )
+
+    total=$( grep '^MemTotal:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    used=$( echo $total-$free | bc -l )
+    pct=$( echo 100*$used/$total | bc -l )
+
+    printf "%5.f MB used (%.0f%%)\n%5.f MB total\n" $used $pct $total
+}
+</code></pre>
+
+<p>See
+<a href="https://github.com/kablamo/dotfiles/blob/master/links/.bash/aliases.sh">github</a>
+for the latest version.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -835,78 +916,6 @@ package.)</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/09/05/data-dumper-concise/">Devel::Dwarn Helps Me Type Less</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-09-05T00:00:00+01:00" pubdate data-updated="true">Sep 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>2 bajillion times a day I want to print a hashref and see whats inside.
-But every time I want to do that I have to type:</p>
-
-<pre><code>use Data::Dumper::Concise;
-print Dumper $hashref;
-</code></pre>
-
-<p>First of all, thats too much typing.  And second of all I keep forgetting to
-delete my print statements when I check in.</p>
-
-<p>Happily I recently discovered
-<a href="https://metacpan.org/module/Devel::Dwarn">Devel::Dwarn</a> on CPAN.  It is
-(basically) an alias to
-<a href="https://metacpan.org/module/Data::Dumper::Concise">Data::Dumper::Concise</a>.</p>
-
-<p>The name is shorter which means its slightly less typing so I am already
-winning.  But thats not the best part.  Lets see how to use it.</p>
-
-<p>On the command line I do this:</p>
-
-<pre><code>perl -MDevel::Dwarn codeIWantToDebug.pl
-</code></pre>
-
-<p>And then in my code I do this:</p>
-
-<pre><code>print ::Dwarn $hashref;
-</code></pre>
-
-<p>There are 2 levels of good here:</p>
-
-<ol>
-<li> Less typing.</li>
-<li> When I run my code without &lsquo;perl -M&rsquo; I get compile time errors in all
- the places I forgot to remove <code>print ::Dwarn $hashref</code>.</li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -943,6 +952,10 @@ winning.  But thats not the best part.  Lets see how to use it.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/11/12/linux_ate_my_ram/">My Contribution to the Linux Ate My RAM Problem</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/03/17/git-vspark/">Git-vspark Plots Your Commits Vertically With Term::Vspark</a>
       </li>
     
@@ -956,10 +969,6 @@ winning.  But thats not the best part.  Lets see how to use it.</p>
     
       <li class="post">
         <a href="/2013/02/12/cpan-release-git-ribbon-git-spark/">CPAN Release of App::Git::Ribbon, App::Git::Spark</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/02/02/git-ribbon/">Git-ribbon</a>
       </li>
     
   </ul>

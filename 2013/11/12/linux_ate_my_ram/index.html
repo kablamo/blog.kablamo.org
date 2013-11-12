@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>git-vspark plots your commits vertically with Term::Vspark - KABLAMO</title>
+  <title>My contribution to the Linux ate my RAM problem - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I added a git-vspark script to my App::Git::Spark CPAN module. It does the
-same thing as git-spark but instead of
-normal horizontal sparklines, it &hellip;">
+  <meta name="description" content="I can never remember how to know how much free memory I have. The Linux kernel claims most of the operating system&rsquo;s memory. That doesn&rsquo;t &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ normal horizontal sparklines, it &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2013/03/17/git-vspark">
+  <link rel="canonical" href="http://blog.kablamo.org/2013/11/12/linux_ate_my_ram">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -61,7 +59,7 @@ normal horizontal sparklines, it &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Git-vspark Plots Your Commits Vertically With Term::Vspark</h1>
+      <h1 class="entry-title">My Contribution to the Linux Ate My RAM Problem</h1>
     
     
       <p class="meta">
@@ -78,41 +76,60 @@ normal horizontal sparklines, it &hellip;">
 
 
 
-<time datetime="2013-03-17T00:00:00+00:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
+<time datetime="2013-11-12T00:00:00+00:00" pubdate data-updated="true">Nov 12<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I added a <strong>git-vspark</strong> script to my App::Git::Spark CPAN module.  It does the
-same thing as <a href="https://github.com/kablamo/git-spark">git-spark</a> but instead of
-normal horizontal sparklines, it uses &ldquo;vertical&rdquo; sparklines.  Here&rsquo;s what that
-looks like:</p>
+<div class="entry-content"><p>I can never remember how to know how much free memory I have.</p>
 
-<pre><code>$ git vspark --months 8 batman
-Commits by batman over the last 8 months
-total: 233   avg: 29   max: 69
- 12 ██▋
- 18 ████
- 69 ███████████████▏
- 59 ████████████▉
- 16 ███▌
- 28 ██████▏
- 12 ██▋
- 19 ████▎
+<p>The Linux kernel claims most of the operating system&rsquo;s memory.  That doesn&rsquo;t
+mean the operating system is out of memory.  It means the kernel has claimed it
+and is managing it.  The problem is that the Linux kernel defines &lsquo;free&rsquo; memory
+differently than any reasonable user.  There are excellent shiny reasons for
+that, but as a user I don&rsquo;t really care.</p>
+
+<pre><code>~ ⚡ free -m 
+            total       used       free     shared    buffers     cached
+Mem:          3822       2066       1755          0        147       1125
+-/+ buffers/cache:        793       3029
+Swap:         3394          0       3394
 </code></pre>
 
-<p>This effect is achieved using
-<a href="https://metacpan.org/module/Term::Vspark">Term::Vspark</a>.  Its companion module
-<a href="https://metacpan.org/module/Term::Spark">Term::Spark</a> is a small pure Perl
-replacement for Zach Holman&rsquo;s original <a href="https://github.com/holman/spark">spark</a>
-implementation and it now powers my git-spark script.</p>
+<p>Experienced users and sysadmins will know from this means my system currently
+has 3822 MB of total memory and 3029 MB of free memory.  Errr.  What?  See
+<a href="http://www.linuxatemyram.com">linuxatemyram.com</a> for a more detailed
+explanation.</p>
 
-<p>These libraries were fun little projects developed over the past few weeks
-mainly by <a href="https://github.com/LuRsT">Gil Gonçalves</a> with a few pull requests
-from myself.  Having them available on CPAN means you can easily use sparklines
-in your own Perl code.</p>
+<p>I think the world deserves something easier to deal with.  So I wrote &lsquo;mem&rsquo;.
+Use it like this:</p>
+
+<pre><code>~ ⚡ mem
+  3026 MB used (21%)
+  3823 MB total
+</code></pre>
+
+<p>Its a bash function.  Add the following to your .bashrc:</p>
+
+<pre><code>mem() {
+    memfree=$( grep '^MemFree:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    buffers=$( grep '^Buffers:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    cached=$(  grep '^Cached:'  /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    free=$( echo $memfree+$buffers+$cached | bc -l )
+
+    total=$( grep '^MemTotal:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
+    used=$( echo $total-$free | bc -l )
+    pct=$( echo 100*$used/$total | bc -l )
+
+    printf "%5.f MB used (%.0f%%)\n%5.f MB total\n" $used $pct $total
+}
+</code></pre>
+
+<p>See
+<a href="https://github.com/kablamo/dotfiles/blob/master/links/.bash/aliases.sh">github</a>
+for the latest version.</p>
 </div>
 
 
@@ -123,7 +140,7 @@ in your own Perl code.</p>
 
 <span class="categories">
   
-    <a class='category' href='/categories/perl/'>perl</a>
+    <a class='category' href='/categories/bash/'>bash</a>
   
 </span>
 
@@ -131,7 +148,7 @@ in your own Perl code.</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/03/17/git-vspark/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/03/17/git-vspark/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/11/12/linux_ate_my_ram/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/11/12/linux_ate_my_ram/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -145,10 +162,8 @@ in your own Perl code.</p>
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/02/28/chinese-flashcards/" title="Previous Post: Chinese zombie flashcards on GitHub (Catalyst & Perl)">&laquo; Chinese zombie flashcards on GitHub (Catalyst & Perl)</a>
+        <a class="basic-alignment left" href="/2013/03/17/git-vspark/" title="Previous Post: git-vspark plots your commits vertically with Term::Vspark">&laquo; git-vspark plots your commits vertically with Term::Vspark</a>
       
-      
-        <a class="basic-alignment right" href="/2013/11/12/linux_ate_my_ram/" title="Next Post: My contribution to the Linux ate my RAM problem">My contribution to the Linux ate my RAM problem &raquo;</a>
       
     </p>
   </footer>
@@ -226,8 +241,8 @@ in your own Perl code.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2013/03/17/git-vspark/';
-        var disqus_url = 'http://blog.kablamo.org/2013/03/17/git-vspark/';
+        var disqus_identifier = 'http://blog.kablamo.org/2013/11/12/linux_ate_my_ram/';
+        var disqus_url = 'http://blog.kablamo.org/2013/11/12/linux_ate_my_ram/';
         var disqus_script = 'embed.js';
       
     (function () {
