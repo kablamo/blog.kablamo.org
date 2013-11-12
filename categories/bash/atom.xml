@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bash | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/bash/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2013-11-12T21:38:20+00:00</updated>
+  <updated>2013-11-12T21:58:15+00:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -42,11 +42,12 @@ explanation.</p>
 Use it like this:</p>
 
 <pre><code>~ ⚡ mem
-  3026 MB used (21%)
+   927 MB used (24%)
   3823 MB total
 </code></pre>
 
-<p>Its a bash function.  Add the following to your .bashrc:</p>
+<p>Its a bash function.  I put the following in my
+<a href="https://github.com/kablamo/dotfiles/blob/master/links/.bash/aliases.sh">.bashrc</a>:</p>
 
 <pre><code>mem() {
     memfree=$( grep '^MemFree:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
@@ -62,9 +63,7 @@ Use it like this:</p>
 }
 </code></pre>
 
-<p>See
-<a href="https://github.com/kablamo/dotfiles/blob/master/links/.bash/aliases.sh">github</a>
-for the latest version.</p>
+<p>See also &lsquo;htop&rsquo; (sudo apt-get install htop).</p>
 ]]></content>
   </entry>
   
