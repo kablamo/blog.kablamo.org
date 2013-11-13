@@ -9,8 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="2 bajillion times a day I want to print a hashref and see whats inside.
-But every time I want to do that I have to type: use Data::Dumper::Concise; &hellip;">
+  <meta name="description" content="Circular dependencies happen when your library requires a library which
+requires your library. Here&rsquo;s an example. Lets say you have 2 packages &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,6 +57,103 @@ But every time I want to do that I have to type: use Data::Dumper::Concise; &hel
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/01/19/how-to-resolve-circular-dependencies/">Use Carp::Always to Fix Circular Dependencies</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-01-19T00:00:00+00:00" pubdate data-updated="true">Jan 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Circular dependencies happen when your library requires a library which
+requires your library.  Here&rsquo;s an example.  Lets say you have 2 packages:</p>
+
+<p><strong>AlienPlanet.pm</strong></p>
+
+<pre><code>package AlienPlanet;
+use Moose;
+use Dinosaurs;          # &lt;--- Circular dependency
+sub has_dinosaurs {1}
+1;
+</code></pre>
+
+<p><strong>Dinosaurs.pm</strong></p>
+
+<pre><code>package Dinosaurs;
+use Moose;
+use AlienPlanet;        # &lt;--- Circular dependency
+sub has_rabies {1}
+1;
+</code></pre>
+
+<p>If you try to compile this, you get the following warning:</p>
+
+<pre><code>⚡ perl -c lib/AlienPlanet.pm 
+Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 5.
+lib/AlienPlanet.pm syntax OK
+</code></pre>
+
+<p>In this case its obvious where the problem is.</p>
+
+<p>But if the package you included, included 25 other libraries, which included
+other libraries, which included your original library &mdash; then its harder to
+figure out where the circle is.</p>
+
+<p>Happily I discovered a good solution. First, modify <strong>AlienPlanet.pm</strong> to look
+like this:</p>
+
+<pre><code>package AlienPlanet;
+sub has_dinosaurs {1}   &lt;-- swap
+use Dinosaurs;          &lt;-- swap
+1;
+</code></pre>
+
+<p>Next, try compiling your code again but this time with
+<a href="http://perladvent.org/2011/2011-12-04.html">Carp::Always</a>:</p>
+
+<pre><code>⚡ perl -MCarp::Always -c lib/AlienPlanet.pm                                                                                                            
+Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 4.
+        require AlienPlanet.pm called at lib/Dinosaurs.pm line 4
+        Dinosaurs::BEGIN() called at lib/AlienPlanet.pm line 4
+        eval {...} called at lib/AlienPlanet.pm line 4
+        require Dinosaurs.pm called at lib/AlienPlanet.pm line 5
+        AlienPlanet::BEGIN() called at lib/AlienPlanet.pm line 4
+        eval {...} called at lib/AlienPlanet.pm line 4
+lib/AlienPlanet.pm syntax OK
+</code></pre>
+
+<p>Now you&rsquo;ve got a stack trace and its easy to see where your problem is.  All
+thats left is figuring out how to solve it. (Fast solution: use
+<a href="https://metacpan.org/module/Class::Load">Class::Load</a> in the Dinosaurs
+package.)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -419,6 +516,10 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/11/13/docker/">Down a Rabbit Hole - Docker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/11/12/linux_ate_my_ram/">My Contribution to the Linux Ate My RAM Problem</a>
       </li>
     
@@ -432,10 +533,6 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
     
       <li class="post">
         <a href="/2013/02/20/how-to-learn-dist-zilla/">Dist::Zilla::PluginBundle::DAGOLDEN Is Pretty Awesome</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/02/12/cpan-release-git-ribbon-git-spark/">CPAN Release of App::Git::Ribbon, App::Git::Spark</a>
       </li>
     
   </ul>
