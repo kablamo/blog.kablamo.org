@@ -1,24 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: perl | KABLAMO]]></title>
-  <link href="http://blog.kablamo.org/categories/perl/atom.xml" rel="self"/>
-  <link href="http://blog.kablamo.org/"/>
-  <updated>2013-11-14T20:02:27+00:00</updated>
-  <id>http://blog.kablamo.org/</id>
-  <author>
-    <name><![CDATA[Eric Johnson]]></name>
-    <email><![CDATA[kablamo@kablamo.org]]></email>
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Down a rabbit hole - Go-lang and its decentralized CPAN - KABLAMO</title>
+  <meta name="author" content="Eric Johnson">
 
   
-  <entry>
-    <title type="html"><![CDATA[Down a rabbit hole - Go-lang and its decentralized CPAN]]></title>
-    <link href="http://blog.kablamo.org/2013/11/13/go/"/>
-    <updated>2013-11-13T00:00:00+00:00</updated>
-    <id>http://blog.kablamo.org/2013/11/13/go</id>
-    <content type="html"><![CDATA[<p>I have been in a rabbit hole for the last week.  I started by looking at
+  <meta name="description" content="I have been in a rabbit hole for the last week. I started by looking at
+Docker. It turns out Docker is
+written in Go and so somehow I ended up &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.kablamo.org/2013/11/13/go">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body  class="collapse-sidebar sidebar-footer">
+  <header role="banner"><hgroup>
+  <h1><a href="/">KABLAMO</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe to all posts via RSS">RSS</a></li>
+  
+</ul>
+  
+<ul class="main-navigation">
+  <li><a href="/blog/archives">everything</a></li>
+  <li><a href="/categories/perl">perl</a></li>
+  <li><a href="/categories/business">business</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Down a Rabbit Hole - Go-lang and Its Decentralized CPAN</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-11-13T00:00:00+00:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I have been in a rabbit hole for the last week.  I started by looking at
 <a href="http://blog.kablamo.org/2013/11/13/docker/">Docker</a>.  It turns out Docker is
 written in Go and so somehow I ended up learning <a href="http://golang.org/">Go</a>.
 Well &ldquo;learning&rdquo; is an overstatement.  I&rsquo;ve read about it for a few days and
@@ -184,196 +251,164 @@ running.</p>
 
 
 <p>(the golang mascot)</p>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+    
+      
+
+<span class="categories">
   
-  <entry>
-    <title type="html"><![CDATA[git-vspark plots your commits vertically with Term::Vspark]]></title>
-    <link href="http://blog.kablamo.org/2013/03/17/git-vspark/"/>
-    <updated>2013-03-17T00:00:00+00:00</updated>
-    <id>http://blog.kablamo.org/2013/03/17/git-vspark</id>
-    <content type="html"><![CDATA[<p>I added a <strong>git-vspark</strong> script to my App::Git::Spark CPAN module.  It does the
-same thing as <a href="https://github.com/kablamo/git-spark">git-spark</a> but instead of
-normal horizontal sparklines, it uses &ldquo;vertical&rdquo; sparklines.  Here&rsquo;s what that
-looks like:</p>
-
-<pre><code>$ git vspark --months 8 batman
-Commits by batman over the last 8 months
-total: 233   avg: 29   max: 69
- 12 ██▋
- 18 ████
- 69 ███████████████▏
- 59 ████████████▉
- 16 ███▌
- 28 ██████▏
- 12 ██▋
- 19 ████▎
-</code></pre>
-
-<p>This effect is achieved using
-<a href="https://metacpan.org/module/Term::Vspark">Term::Vspark</a>.  Its companion module
-<a href="https://metacpan.org/module/Term::Spark">Term::Spark</a> is a small pure Perl
-replacement for Zach Holman&rsquo;s original <a href="https://github.com/holman/spark">spark</a>
-implementation and it now powers my git-spark script.</p>
-
-<p>These libraries were fun little projects developed over the past few weeks
-mainly by <a href="https://github.com/LuRsT">Gil Gonçalves</a> with a few pull requests
-from myself.  Having them available on CPAN means you can easily use sparklines
-in your own Perl code.</p>
-]]></content>
-  </entry>
+    <a class='category' href='/categories/go/'>go,</a>, <a class='category' href='/categories/perl/'>perl</a>
   
-  <entry>
-    <title type="html"><![CDATA[Chinese zombie flashcards on GitHub (Catalyst & Perl)]]></title>
-    <link href="http://blog.kablamo.org/2013/02/28/chinese-flashcards/"/>
-    <updated>2013-02-28T00:00:00+00:00</updated>
-    <id>http://blog.kablamo.org/2013/02/28/chinese-flashcards</id>
-    <content type="html"><![CDATA[<p>There seem to be quite a few Perl people learning Chinese so maybe this will be
-relevant here.</p>
-
-<p>I created <a href="http://iijo.org">IIJO</a> which is a Perl powered website that does 3
-sided flashcards (Chinese, English, and Pinyin).</p>
-
-<p>The main advantage IIJO has over Anki and other flashcard sites is that you can
-pick your flashcards from a dictionary so you don&rsquo;t have to type all that stuff
-in yourself.   It allows you to share word lists with others and the built in
-dictionary means that you don&rsquo;t need to worry about the accuracy and
-completeness of other people who share wordlists.</p>
-
-<p>The site does <a href="http://en.wikipedia.org/wiki/Spaced_repetition">spaced repetition</a>
-like Anki.  But it has a different simpler user interface because Anki&rsquo;s 4
-buttons after each flashcard <em>stresses me out.</em></p>
-
-<p>If you want, you can just play with the <a href="http://iijo.org/dictionary">Chinese/English dictionary</a>.<br/>
-The goal here is to be able to look up a word then add it easily to one of your
-existing word lists.</p>
-
-<p>If you think there is something missing, check out the project on
-<a href="http://github.org/kablamo/iijo.org">GitHub</a> and send me a pull request.  I&rsquo;m
-using Perl, Catalyst, and SQLite.</p>
-
-<p>Here are some of the things on my todo list:</p>
-
-<ul>
-<li>More analytics/stats/data for measuring progress using D3</li>
-<li>Speech/pronunciation samples</li>
-<li>Export to Anki</li>
-<li>Some way to learn phrases instead of just characters</li>
-</ul>
+</span>
 
 
-<h1>Vampires and zombies</h1>
-
-<p>Btw, here&rsquo;s an interesting thing I learned about the Chinese language: the word
-for <code>vampire</code> is the same word thats used for <code>zombie</code>.</p>
-
-<center><p style="margin-bottom: .5em; font-size: 4em; font-weight: bold;">僵尸</p></center>
-
-
-<p>This is because the Chinese merged the two concepts into a single vampire
-zombie monster.  So Chinese zombies are stiff and walk around with their hands
-straight out.  But they also bite their victim&rsquo;s necks and suck their blood
-passing on the zombie infection.</p>
-
-<p>They are also fast and angry and they often do kung fu.  You can&rsquo;t
-kill them of course, however you can put them to sleep if you write a spell on a
-yellow piece of paper and put it on their forehead.  But if it falls off, they
-wake up and get angry again.  Strangest of all is that they do little
-hops like bunnies instead of walking.</p>
-
-<p>I highly recommend Liao Yiwo&rsquo;s book, <a href="http://www.amazon.com/The-Corpse-Walker-Stories-Bottom/dp/0307388379/ref=sr_1_1?ie=UTF8&amp;qid=1362603639&amp;sr=8-1&amp;keywords=corpse+walker"><em>Corpse Walker,</em></a>
-which tells the fascinating history and origin of Chinese zombies.  You can read more
-about jiangshi on <a href="http://en.wikipedia.org/wiki/Jiangshi">Wikipedia</a>.  And of
-course there are YouTube videos:</p>
-
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/56Zvquhww80" frameborder="0" allowfullscreen></iframe>
-
-
-
-]]></content>
-  </entry>
+    
+      <div class="sharing">
   
-  <entry>
-    <title type="html"><![CDATA[Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome]]></title>
-    <link href="http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/"/>
-    <updated>2013-02-20T00:00:00+00:00</updated>
-    <id>http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been using <a href="https://metacpan.org/module/Dist::Zilla">Dist::Zilla</a> for a
-couple years.  It&rsquo;s a powerful way to automate CPAN releases.</p>
-
-<p>But learning how to use it was not as easy as I hoped.</p>
-
-<p>I remember when <code>Dist::Zilla</code> first debuted.  It was very exciting.  But I think
-I may have drank too much of the cool aid becuase my expectations were very
-high when I finally sat down to learn it.  I expected my experience to be
-composed entirely of rainbows and puppy dog tails.</p>
-
-<h2>Writing your own dist.ini or PluginBundle is hard</h2>
-
-<p>Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
-are a huge number of plugins and it&rsquo;s difficult for a newcomer to know which
-are old, which are new, and how they work together.  If you look, for example,
-at <code>Dist::Zilla::PluginBundle::DAGOLDEN</code> it uses 23 different plugins and the
-<em>synopsis</em> is 132 lines long.</p>
-
-<p>In retrospect, it was not reasonable to expect I could build something
-comparable after a few minutes of perusing the docs.  It&rsquo;s more complex than
-that.  So if you are looking to quickly add <code>Dist::Zilla</code> to your toolchain, you
-need to use a PluginBundle and not write your own.</p>
-
-<h2>How to quickly add Dist::Zilla to your toolchain</h2>
-
-<p>One way is to just use <code>Dist::Zilla::PluginBundle::Basic</code>.  But this was not like
-the promised land I had been dreaming of.  I wanted more.  So I kept looking.</p>
-
-<p>Happily, there is a PluginBundle which I think works well as a reusable
-component suitable for public consumption thats also very configurable.  I
-doubt it&rsquo;s well known because the name sounds very personal.  That module is,
-of course,
-<a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN">Dist::Zilla::PluginBundle::DAGOLDEN</a>.</p>
-
-<p>I think the workflow it uses will work for many people.  Even if it
-doesn&rsquo;t, reading the code is a great way to learn how to write your own
-PluginBundle.  And because it&rsquo;s so comprehensive it&rsquo;s like having a up-to-date
-map of the state of the art in <code>Dist::Zilla</code> plugins and how they work
-together.</p>
-
-<p>Here&rsquo;s what my dist.ini looks like:</p>
-
-<pre><code>name    = App-Git-Ribbon
-author  = Eric Johnson &lt;cpan at iijo dot nospamthanks dot org&gt;
-license = Perl_5
-copyright_holder = Eric Johnson
-main_module = lib/App/Git/Ribbon.pm
-
-[@DAGOLDEN]
-no_spellcheck = 1
-AutoMetaResources.bugtracker.rt = 0
-AutoMetaResources.repository.github = user:kablamo
-AutoMetaResources.bugtracker.github = user:kablamo
-weaver_config = @FLORA
-</code></pre>
-]]></content>
-  </entry>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/11/13/go/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/11/13/go/" >Tweet</a>
   
-  <entry>
-    <title type="html"><![CDATA[CPAN release of App::Git::Ribbon, App::Git::Spark]]></title>
-    <link href="http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/"/>
-    <updated>2013-02-12T00:00:00+00:00</updated>
-    <id>http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark</id>
-    <content type="html"><![CDATA[<p>I packaged up these scripts and released them on CPAN to make them a little
-easier to install and manage.</p>
-
-<p><strong>App::Git::Ribbon</strong> <br>
-on <a href="https://metacpan.org/module/App::Git::Ribbon">CPAN</a><br>
-on <a href="https://github.com/kablamo/git-ribbon">GitHub</a><br>
-previous <a href="/git-ribbon">blog post</a></p>
-
-<p><strong>App::Git::Spark</strong> <br>
-on <a href="https://metacpan.org/module/App::Git::Spark">CPAN</a><br>
-on <a href="https://github.com/kablamo/git-spark">GitHub</a><br>
-previous <a href="/git-spark-revisited">blog post</a></p>
-]]></content>
-  </entry>
   
-</feed>
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/11/13/docker/" title="Previous Post: Down a rabbit hole - Docker">&laquo; Down a rabbit hole - Docker</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About</h1>
+  <p>
+    Hi I'm Eric Johnson.  I solve problems for businesses.
+  </p>
+  <p>
+    By day I'm a mild mannered web developer.  But at night I'm a mild
+    mannered web developer working on my side project. I'm building a better
+    Mint.com for early retirement savants and savings extremists at
+    <a style="text-decoration: underline" href="http://networthify.com/calculator/fi">Networthify.com</a>
+  </p>
+  <p>
+  You can also find me in the following places: <br>
+    on <a href="https://github.com/kablamo">github</a><br>
+    on <a href="http://www.linkedin.com/profile/view?id=8671375">linked in</a><br>
+    on <a href="http://pinboard.in/u:kablamo">pinboard</a><br>
+    on <a href="http://twitter.com/kablamo_">twitter</a><br>
+    on <a href="http://stackoverflow.com/users/58089/eric-johnson">stackoverflow</a><br>
+  </p>
+    <img src="http://www.gravatar.com/avatar/a1baab856c33f7b8cd94e62cf5f227a2?s=200" width="200" height="200">
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/11/13/go/">Down a Rabbit Hole - Go-lang and Its Decentralized CPAN</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/11/13/docker/">Down a Rabbit Hole - Docker</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/11/12/linux_ate_my_ram/">My Contribution to the Linux Ate My RAM Problem</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/03/17/git-vspark/">Git-vspark Plots Your Commits Vertically With Term::Vspark</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/02/28/chinese-flashcards/">Chinese Zombie Flashcards on GitHub (Catalyst & Perl)</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2013/11/13/go/';
+        var disqus_url = 'http://blog.kablamo.org/2013/11/13/go/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
