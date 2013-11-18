@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2013-11-18T07:22:28+00:00</updated>
+  <updated>2013-11-18T07:43:44+00:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -22,36 +22,36 @@
 <a href="http://edx.com">edX.com</a>) and I had a great experience and highly recommend
 it.</p>
 
-<p>The class is a quick tour of all the tools a Rubyist would use to create and
-deploy a website.  It assumes you already know how to program at a high level.
-As an experienced Perl web developer, it looked like the perfect introductory
-class.  I have no plans to stop doing Perl (which I love).  I just wanted to
-broaden my horizons, have some fun, and increase my <a href="http://www.codusoperandi.com/posts/increasing-your-luck-surface-area">luck surface
+<p>The class is a tour of all the tools a Rubyist would use to create and
+deploy a website.  It assumes you already know how to program at a fairly high
+level.  I have no plans to stop writing Perl code (which I love).  I just wanted
+to broaden my horizons, have some fun, and increase my <a href="http://www.codusoperandi.com/posts/increasing-your-luck-surface-area">luck surface
 area</a>.</p>
 
-<p>I strongly believe online education is the future, but I was initially
-sceptical that a traditional old world university was innovative enough to do a
-good job.  Hands up, who uses what they learned from university classes in
-their current job?  No one right?</p>
+<p>Hands up, who uses what they learned from university classes in their current
+job?  No one right?  Clearly online education is the future but I was initially
+sceptical that a traditional old world university like Berkeley was innovative
+enough to do a good job.</p>
 
 <p>But this class was refreshingly practical.  Instead of teaching algorithms,
-theory, and dead languages, I got an introduction to best practices and a
-blizzard of tools being used in workplaces today.  I learned to use Ruby,
+theory, or dead languages, I got an introduction to best practices and a
+tsunami of tools being used in workplaces right now.  I learned to use Ruby,
 Rails, Rake, Heroku, ActiveRecord, HAML, SASS, RSpec, Cucumber, and Capybara.
 They also explained agile iterative development processes, DRY, REST and a
 bajillion other things.</p>
 
 <p>Another thing they got right is we were able to submit our homework over and
 over again until we got all the answers right.  And the ability to play
-lectures at double speed is such a time saver!  I wish I had this super power
-on YouTube.  Also I was happy to see the course supplied students with an
-Ubuntu powered VM preconfigured with all the necessary software.</p>
+lectures at double speed is every bit as fantastic as I expected it to be.  I
+wish I had this super power on YouTube.  I was also happy to see the course
+supplied students with an Ubuntu powered VM preconfigured with all the
+necessary software.</p>
 
 <p>I only had a few minor complaints.  My biggest is that the course didn&rsquo;t spend
-any time on sysadmin things like rbenv and bundler.  I purposely avoided using
+any time on sysadmin topics like rbenv and bundler.  I purposely avoided using
 the VM so that I would learn that stuff.  Learning how to use your tools and
-configure your environment is crucial to being a good programmer.  This can
-perhaps be forgiven though since it was only a 5 week class and we raced
+configure your environment is a crucial part of being a good programmer.  This
+can perhaps be forgiven though since it was only a 5 week class and we raced
 through every topic.</p>
 
 <p>Altogether it was a fun experience at a great price (free) and I recommend it.
