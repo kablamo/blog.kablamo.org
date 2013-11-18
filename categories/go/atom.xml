@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: go, | KABLAMO]]></title>
+  <title><![CDATA[Category: go | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/go/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2013-11-14T20:02:27+00:00</updated>
+  <updated>2013-11-18T07:22:28+00:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -18,11 +18,11 @@
     <link href="http://blog.kablamo.org/2013/11/13/go/"/>
     <updated>2013-11-13T00:00:00+00:00</updated>
     <id>http://blog.kablamo.org/2013/11/13/go</id>
-    <content type="html"><![CDATA[<p>I have been in a rabbit hole for the last week.  I started by looking at
-<a href="http://blog.kablamo.org/2013/11/13/docker/">Docker</a>.  It turns out Docker is
-written in Go and so somehow I ended up learning <a href="http://golang.org/">Go</a>.
-Well &ldquo;learning&rdquo; is an overstatement.  I&rsquo;ve read about it for a few days and
-wrote a tiny bit of code.</p>
+    <content type="html"><![CDATA[<p>I have been in a rabbit hole for the last week.  I started by looking at Docker
+(<a href="http://blog.kablamo.org/2013/11/13/docker/">See my previous post</a>).  It turns
+out Docker is written in Go and so somehow I ended up learning
+<a href="http://golang.org/">Go</a>.  Well &ldquo;learning&rdquo; is an overstatement.  I&rsquo;ve read
+about it for a few days and wrote a tiny bit of code.</p>
 
 <p>But anyway, the coolest thing about Go so far is its decentralized libraries.
 <em>Centralized</em> collections of libraries have been all the rage the last few years

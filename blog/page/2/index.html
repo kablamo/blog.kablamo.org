@@ -9,9 +9,10 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I recently rediscovered spark, Zach Holman&rsquo;s
-cool little sparklines graphing tool for the command line. I used a little
-Perl to mash it up with &hellip;">
+  <meta name="description" content="A few days ago
+I wrote about my git-spark Perl script. It
+counts how many commits a user has in a git project and makes a little graph
+and displays &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -58,6 +59,94 @@ Perl to mash it up with &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/01/27/git-spark-revisited/">Git-spark Revisited</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-01-27T00:00:00+00:00" pubdate data-updated="true">Jan 27<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A <a href="http://blog.kablamo.org/git-spark-plots-your-commit-history/">few days ago</a>
+I wrote about my <a href="https://gist.github.com/4598480">git-spark</a> Perl script.  It
+counts how many commits a user has in a git project and makes a little graph
+and displays it on the command line.</p>
+
+<p>However I also said it wasn&rsquo;t very useful becuase you can&rsquo;t compare one graph
+with another because the scale changes when different graphs have different min
+and max values.  For example these two data series produce identical graphs
+despite have very different data.</p>
+
+<pre><code>⚡ spark 1 2 3 4 5
+▁▂▄▆█
+⚡ spark 10 20 30 40 50
+▁▂▄▆█
+</code></pre>
+
+<p>So I put on my thinking cap and came up with the following solution:</p>
+
+<pre><code>⚡ spark 50 1 1 2 3 4 5
+█▁▁▁▁▁▁
+⚡ spark 50 1 10 20 30 40 50
+█▁▂▃▅▆█
+</code></pre>
+
+<p>I just need to prepend a max and a min to the data to get consistent scaling
+and now I can compare graphs.</p>
+
+<p>For git-spark, I now assume the min is zero and you can pass in the max using
+the &mdash;scale option.  (Note that I chopped off the max/min characters from
+the spark output as they are distracting.)</p>
+
+<p>I also decided to print out the number of commits which helps with the
+scaling issue.  And while I was in there I got it to calculate the total,
+average, and maximum number of commits for that duration.</p>
+
+<p>Here is an example.  It doesn&rsquo;t really need the &mdash;scale option because the data
+is so close anyway, but it shows how to use it:</p>
+
+<pre><code>⚡ git spark --days 14 --scale 23 Stegosaurus
+Commits by Stegosaurus over the last 14 days
+total: 95   avg: 7   max: 23
+10 15 6 23 5 0 0 1 15 0 17 3 0 0
+▄▅▂█▂▁▁▁▅▁▆▁▁▁
+⚡ git spark --days 14 --scale 23 Triceratops
+Commits by Triceratops over the last 14 days
+total: 90   avg: 7   max: 22
+1 12 3 11 3 0 0 6 16 3 13 22 0 0
+▁▄▁▄▁▁▁▂▅▁▄▇▁▁
+</code></pre>
+
+<p>Of course you still need to consider the quality of commits and not just how
+many there are.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -590,6 +679,10 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/11/19/learning-ruby/">Learning Ruby With Online University Classes</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/11/13/go/">Down a Rabbit Hole - Go-lang and Its Decentralized CPAN</a>
       </li>
     
@@ -603,10 +696,6 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
     
       <li class="post">
         <a href="/2013/03/17/git-vspark/">Git-vspark Plots Your Commits Vertically With Term::Vspark</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/02/28/chinese-flashcards/">Chinese Zombie Flashcards on GitHub (Catalyst & Perl)</a>
       </li>
     
   </ul>
