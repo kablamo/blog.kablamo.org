@@ -9,10 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="A few days ago
-I wrote about my git-spark Perl script. It
-counts how many commits a user has in a git project and makes a little graph
-and displays &hellip;">
+  <meta name="description" content="Ever wonder whats in your $PERL5LIB? Here is one way to find out: ⚡ echo $PERL5LIB
+.:./lib:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5:/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -59,6 +57,71 @@ and displays &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/01/29/whats-in-your-perl5lib/">Whats in Your $PERL5LIB?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-01-29T00:00:00+00:00" pubdate data-updated="true">Jan 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ever wonder whats in your $PERL5LIB?  Here is one way to find out:</p>
+
+<pre><code>⚡ echo $PERL5LIB
+.:./lib:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5:/home/eri
+c/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux:/home/eric/perl
+5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux-gnu-thread-multi-64in
+t:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/site_perl:/home/eric/
+perl5/perlbrew/perls/perl-5.16.2/lib/5.16.2
+</code></pre>
+
+<p>My human eyeballs are not equipped to parse that.  Unhelpful.  So I put this in
+my .bashrc:</p>
+
+<pre><code>alias perl5lib='perl -E "say join \"\n\", split \":\", \$ENV{PERL5LIB}"'
+</code></pre>
+
+<p>Here it is in action:</p>
+
+<pre><code>⚡ perl5lib
+.
+./lib
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux-gnu-thread-multi-64int
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/site_perl
+/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/5.16.2
+</code></pre>
+
+<p>Better.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -679,6 +742,10 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/11/22/rex/">Devops With Rex</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/11/19/learning-ruby/">Learning Ruby With Online University Classes</a>
       </li>
     
@@ -692,10 +759,6 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
     
       <li class="post">
         <a href="/2013/11/12/linux_ate_my_ram/">My Contribution to the Linux Ate My RAM Problem</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/17/git-vspark/">Git-vspark Plots Your Commits Vertically With Term::Vspark</a>
       </li>
     
   </ul>

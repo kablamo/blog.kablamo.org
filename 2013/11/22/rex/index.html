@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>git-spark revisited - KABLAMO</title>
+  <title>Devops with Rex - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="A few days ago
-I wrote about my git-spark Perl script. It
-counts how many commits a user has in a git project and makes a little graph
-and displays &hellip;">
+  <meta name="description" content="I have recently been playing with Rex and wanted to
+write down some of my initial thoughts. Rex is a devops tool that helps you manage your servers. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@ and displays &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2013/01/27/git-spark-revisited">
+  <link rel="canonical" href="http://blog.kablamo.org/2013/11/22/rex">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -62,7 +60,7 @@ and displays &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Git-spark Revisited</h1>
+      <h1 class="entry-title">Devops With Rex</h1>
     
     
       <p class="meta">
@@ -79,65 +77,88 @@ and displays &hellip;">
 
 
 
-<time datetime="2013-01-27T00:00:00+00:00" pubdate data-updated="true">Jan 27<span>th</span>, 2013</time>
+<time datetime="2013-11-22T00:00:00+00:00" pubdate data-updated="true">Nov 22<span>nd</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>A <a href="http://blog.kablamo.org/git-spark-plots-your-commit-history/">few days ago</a>
-I wrote about my <a href="https://gist.github.com/4598480">git-spark</a> Perl script.  It
-counts how many commits a user has in a git project and makes a little graph
-and displays it on the command line.</p>
+<div class="entry-content"><p>I have recently been playing with <a href="http://www.rexify.org/">Rex</a> and wanted to
+write down some of my initial thoughts.</p>
 
-<p>However I also said it wasn&rsquo;t very useful becuase you can&rsquo;t compare one graph
-with another because the scale changes when different graphs have different min
-and max values.  For example these two data series produce identical graphs
-despite have very different data.</p>
+<p>Rex is a devops tool that helps you manage your servers.  Its similar to
+Puppet Lab&rsquo;s <a href="http://puppetlabs.com/mcollective">mcollective</a> tool or
+<a href="http://www.ansibleworks.com/docs/">ansible</a>.  You can easily run commands on
+your entire fleet of boxen or just on certain subgroups.  And you can run
+them in parallel which saves you giant baskets of time.</p>
 
-<pre><code>⚡ spark 1 2 3 4 5
-▁▂▄▆█
-⚡ spark 10 20 30 40 50
-▁▂▄▆█
+<p>The big advantage for People Who Prefer Perl (PWPP) is that Rex is written and
+configured with Perl. So for the most part you don&rsquo;t need to spend a lot of time
+learning yet another DSL.</p>
+
+<p>Another happy positive is that you don&rsquo;t need to install any software on your
+servers. Installation is simple:</p>
+
+<pre><code>$ apt-get install libssh2-1-dev
+$ cpanm Rex
 </code></pre>
 
-<p>So I put on my thinking cap and came up with the following solution:</p>
+<p>Configuration is also simple &mdash; at least if you know Perl.  The
+Rex configuration file is named &lsquo;Rexfile&rsquo; and its syntax is Perl with some
+extra Rexy sugar methods thrown in. And I feel the sugar and general API for
+Rex is fairly well done.  Here is an example Rexfile:</p>
 
-<pre><code>⚡ spark 50 1 1 2 3 4 5
-█▁▁▁▁▁▁
-⚡ spark 50 1 10 20 30 40 50
-█▁▂▃▅▆█
+<pre><code># Configure the default user and your ssh keys.  The default user can be
+# overridden on the command line with the -u option.
+user "joe";
+private_key "/home/joe/.ssh/id_rsa";
+public_key "/home/joe/.ssh/id_rsa.pub";
+key_auth;
+
+# Cofigure server groups
+group prod =&gt; "webserver", "mailserver", "dbserver";
+group dev  =&gt; "pancake[1-3]", "narwhale[1-3]", "honeybadger[1-3]";
+
+# Run commands in parallel on up to 100 servers at one time.  This can be
+# overridden on the command line with the -t option.
+parallelism 100;
+
+# Create tasks.  This task runs against all servers by default.  This can
+# be overridden on the command line with the -G or -H options.
+task 'uptime', group =&gt; 'all', sub {
+    my $output = run "uptime";
+    say $output;
+};
 </code></pre>
 
-<p>I just need to prepend a max and a min to the data to get consistent scaling
-and now I can compare graphs.</p>
+<p>You can see that Perl&rsquo;s &lsquo;say&rsquo; command is available by default.  &lsquo;run&rsquo; is a Rex
+sugar method which accepts a shell command and returns the output &mdash; similar
+to Capture::Tiny.</p>
 
-<p>For git-spark, I now assume the min is zero and you can pass in the max using
-the &mdash;scale option.  (Note that I chopped off the max/min characters from
-the spark output as they are distracting.)</p>
+<p>Here is a command line example which runs the &lsquo;uptime&rsquo; task as the &lsquo;root&rsquo; user
+on each server in the &lsquo;dev&rsquo; group:</p>
 
-<p>I also decided to print out the number of commits which helps with the
-scaling issue.  And while I was in there I got it to calculate the total,
-average, and maximum number of commits for that duration.</p>
-
-<p>Here is an example.  It doesn&rsquo;t really need the &mdash;scale option because the data
-is so close anyway, but it shows how to use it:</p>
-
-<pre><code>⚡ git spark --days 14 --scale 23 Stegosaurus
-Commits by Stegosaurus over the last 14 days
-total: 95   avg: 7   max: 23
-10 15 6 23 5 0 0 1 15 0 17 3 0 0
-▄▅▂█▂▁▁▁▅▁▆▁▁▁
-⚡ git spark --days 14 --scale 23 Triceratops
-Commits by Triceratops over the last 14 days
-total: 90   avg: 7   max: 22
-1 12 3 11 3 0 0 6 16 3 13 22 0 0
-▁▄▁▄▁▁▁▂▅▁▄▇▁▁
+<pre><code>$ rex -G dev -u root uptime
+    pancake1:  16:42:05 up 221 days,  9:49,  1 user,  load average: 0.00, 0.00, 0.00
+   narwhale2:  16:42:05 up 8 days,  3:28,  4 users,  load average: 0.00, 0.00, 0.00
+   narwhale3:  16:42:05 up 17 days,  3:57,  2 users,  load average: 0.01, 0.01, 0.00
+honeybadger1:  16:42:05 up 80 days,  3:29,  1 user,  load average: 0.09, 0.06, 0.01
+    pancake3:  16:42:05 up 137 days,  7:49,  1 user,  load average: 0.00, 0.00, 0.00
+   narwhale1:  16:42:05 up 65 days,  5:30,  2 users,  load average: 0.46, 0.41, 0.37
+honeybadger3:  16:42:04 up 15 days,  4:49,  1 user,  load average: 2.00, 2.00, 2.00
+    pancake2:  16:42:04 up 1 day,  2:23,  3 users,  load average: 1.38, 1.35, 1.30
+honeybadger2:  16:42:05 up 39 days,  1:24,  1 user,  load average: 0.08, 0.06, 0.01
 </code></pre>
 
-<p>Of course you still need to consider the quality of commits and not just how
-many there are.</p>
+<p>Rex is fantastic for ad-hoc commands.  But it also has a great set of libraries
+for doing much more like installing debian packages, user management,
+virtualization, and managing EC2 boxes.  I have to say I&rsquo;m deeply attracted to
+its simplicity &mdash; especially after dealing with Puppet&rsquo;s complicated and weird
+DSL.</p>
+
+<p>If anyone uses Rex to manage more than 50 servers, I would love to get in touch
+with you and ask a few questions.</p>
 </div>
 
 
@@ -148,7 +169,7 @@ many there are.</p>
 
 <span class="categories">
   
-    <a class='category' href='/categories/perl/'>perl</a>
+    <a class='category' href='/categories/devops/'>devops</a>, <a class='category' href='/categories/perl/'>perl</a>
   
 </span>
 
@@ -156,7 +177,7 @@ many there are.</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/01/27/git-spark-revisited/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/01/27/git-spark-revisited/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/11/22/rex/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/11/22/rex/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -170,10 +191,8 @@ many there are.</p>
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/01/23/git-spark-plots-your-commits/" title="Previous Post: git-spark plots your commit history">&laquo; git-spark plots your commit history</a>
+        <a class="basic-alignment left" href="/2013/11/19/learning-ruby/" title="Previous Post: Learning Ruby with online university classes">&laquo; Learning Ruby with online university classes</a>
       
-      
-        <a class="basic-alignment right" href="/2013/01/29/whats-in-your-perl5lib/" title="Next Post: Whats in your $PERL5LIB?">Whats in your $PERL5LIB? &raquo;</a>
       
     </p>
   </footer>
@@ -251,8 +270,8 @@ many there are.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2013/01/27/git-spark-revisited/';
-        var disqus_url = 'http://blog.kablamo.org/2013/01/27/git-spark-revisited/';
+        var disqus_identifier = 'http://blog.kablamo.org/2013/11/22/rex/';
+        var disqus_url = 'http://blog.kablamo.org/2013/11/22/rex/';
         var disqus_script = 'embed.js';
       
     (function () {
