@@ -9,8 +9,9 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="Ever wonder whats in your $PERL5LIB? Here is one way to find out: ⚡ echo $PERL5LIB
-.:./lib:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5:/ &hellip;">
+  <meta name="description" content="I wrote a little Perl script called
+git-ribbon to help me review the
+latest changes in a git repository. The way I used to review changes was by &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,6 +58,158 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/02/02/git-ribbon/">Git-ribbon</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-02-02T00:00:00+00:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I wrote a little Perl script called
+<a href="https://github.com/kablamo/git-ribbon">git-ribbon</a> to help me review the
+latest changes in a git repository.</p>
+
+<p>The way I used to review changes was by reading through the <code>git log</code>.  I try
+to do this every morning at work to keep up with whats going on.  But I was
+having a few problems:</p>
+
+<ol>
+<li>Its hard to know exactly which changes are new.</li>
+<li>I want to review commits in the order they happened (instead of most recent first).</li>
+<li><code>git log</code> diff output can be hard to read and may not have enough context
+&mdash; sometimes I want a side by side diff like I get from <code>vimdiff</code> or <code>git
+difftool</code>.</li>
+</ol>
+
+
+<p>Basically I wanted a quick and easy way to review the latest changes in a way
+that feels a little more like an RSS feed.  So I wrote this script.</p>
+
+<h2>How to use git-ribbon</h2>
+
+<p><strong>First</strong> mark your current place in the commit history.  This command will
+place a tag named _ribbon at origin/master.  Basically its a bookmark at your
+current location.</p>
+
+<pre><code>⚡ git ribbon --save
+</code></pre>
+
+<p><strong>Next</strong>, pull the latest changes made by your fellow conspirators from the
+remote repository.</p>
+
+<pre><code>⚡ git pull
+</code></pre>
+
+<p><strong>Then</strong> use <code>git ribbon</code> to review only the changes that have occurred since _ribbon:</p>
+
+<pre><code>⚡ git ribbon
+Eric Johnson 6 weeks ago ecf43db
+Css tweaks.
+root/html/calculator/realCost.tt
+
+press 's' to skip 
+
+Eric Johnson 4 weeks ago 9595fa0
+fix css margin class.
+root/css/networth.css
+root/css/style.less
+root/css/style.less.old
+root/html/calculator/realCost.tt
+root/html/fi.tt
+
+press 's' to skip 
+
+Eric Johnson 2 weeks ago 5ef0fb2
+Added daysPerYear.
+lib/Networth/Controller/Calculator.pm
+lib/Networth/Out/RealCost.pm
+root/html/calculator/realCost.tt
+
+press 's' to skip 
+</code></pre>
+
+<p>The script will pause and wait for input when it prints <code>press 's' to skip</code>.
+If you type anything other than <code>s</code>, it will show you the side by side diff
+using <code>git difftool</code>.</p>
+
+<p><a href="http://farm9.staticflickr.com/8107/8457314152_7f8b3c955c_b.jpg" title="click to view large version"><img src="http://farm9.staticflickr.com/8107/8457314152_7f8b3c955c.jpg" width="500" height="201" alt="vimdiff"></a></p>
+
+<p>After you have reviewed all the changes, be sure to mark your place again so
+its ready to go next time you want to do a pull:</p>
+
+<pre><code>git ribbon --save
+</code></pre>
+
+<h2>Bonus tips</h2>
+
+<p>In your .gitconfig try this:</p>
+
+<pre><code>[diff]
+    tool = vimdiff
+</code></pre>
+
+<p>The default colors for vimdiff look like they were created by strange clowns so
+try this instead:</p>
+
+<pre><code>⚡ mkdir -p ~/.vim/colors/
+⚡ wget https://github.com/kablamo/dotfiles/blob/master/links/.vim/colors/iijo.vim -O ~/.vim/colors/iijo.vim
+⚡ echo "colorscheme iijo" &gt;&gt; ~/.vimrc
+</code></pre>
+
+<p>Then learn to use vimdiff:</p>
+
+<ul>
+<li>To switch windows type <code>ctl-w l</code> and <code>ctl-w h</code>.
+For more help type <code>:help window-move-cursor</code>.</li>
+<li>To open and close folds type <code>zo</code> and <code>zc</code>.
+For more help type <code>:help fold-commands</code>.</li>
+<li>To close vimdiff with less typing try <code>ZZ</code>.</li>
+</ul>
+
+
+<h2>Alternatives to vimdiff</h2>
+
+<p>If you don&rsquo;t want to invest the time just yet to learn vim, use an alternative like meld, opendiff,
+p4merge, xxdiff, etc.  Side by side diffs are worth it!</p>
+
+<h2>See also</h2>
+
+<p>This script was inspired by a great <a href="http://gitready.com/advanced/2011/10/21/ribbon-and-catchup-reading-new-commits.html">blog
+post</a>
+on gitready.com which has a number of awesome git tricks for both beginners and
+advanced users.</p>
+
+<p>I also ended up writing a <a href="https://github.com/kablamo/vim-ribbon">vim plugin</a>
+that is probably better user experience if you very comfortable in vim.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -742,6 +895,10 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/11/24/monit/">Monit - How to Know When Your Web Site Is Down</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/11/22/rex/">Devops With Rex</a>
       </li>
     
@@ -755,10 +912,6 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
     
       <li class="post">
         <a href="/2013/11/13/docker/">Down a Rabbit Hole - Docker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/11/12/linux_ate_my_ram/">My Contribution to the Linux Ate My RAM Problem</a>
       </li>
     
   </ul>
