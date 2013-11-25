@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>git-spark plots your commit history - KABLAMO</title>
+  <title>Anyenv + Plenv + Carton - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I recently rediscovered spark, Zach Holman&rsquo;s
-cool little sparklines graphing tool for the command line. I used a little
-Perl to mash it up with &hellip;">
+  <meta name="description" content="Recently I started breaking out of my Perl-only isolation bubble and dabbling
+with other languages. I was surprised how easy and comfortable other &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ Perl to mash it up with &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits">
+  <link rel="canonical" href="http://blog.kablamo.org/2013/11/24/plenv">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -61,7 +60,7 @@ Perl to mash it up with &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Git-spark Plots Your Commit History</h1>
+      <h1 class="entry-title">Anyenv + Plenv + Carton</h1>
     
     
       <p class="meta">
@@ -78,50 +77,115 @@ Perl to mash it up with &hellip;">
 
 
 
-<time datetime="2013-01-23T00:00:00+00:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+<time datetime="2013-11-24T00:00:00+00:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I recently rediscovered <a href="https://github.com/holman/spark">spark</a>, Zach Holman&rsquo;s
-cool little sparklines graphing tool for the command line.  I used a little
-Perl to mash it up with &lsquo;git log&rsquo; and came up with
-<a href="https://gist.github.com/4598480">git-spark</a> which works like this:</p>
+<div class="entry-content"><p>Recently I started breaking out of my Perl-only isolation bubble and dabbling
+with other languages. I was surprised how easy and comfortable other languages
+are. I think its because these days good ideas spread from one language to the
+next incredibly fast. Even in a new language when I reach for a tool I can
+usually find some Perl technology analog.</p>
 
-<pre><code>⚡ git spark --hours 8
-Commits by Godzilla over the last 8 hours
-▃▃▁▆▅▁▁▃█
-⚡ git spark -d 14 HulkHogan
-Commits by HulkHogan over the last 14 days
-▇▅▄▁▁▄▅▂█▂▁▁▁▅
-⚡ git spark -w 52 Tarzan
-Commits by Tarzan over the last 52 weeks
-▃▁▂▃▃▃▂▁█▆▁▄▄▃▂▂▁▁▂▃▃▄▃▃▂▃▁▁▁▁▁▂▂▃▆▅▂▁▄▃▂▄▄▄▁▂▁▁▂▂▂▃
+<p>For example, I&rsquo;ve been a perlbrew person for a long time and it has served me
+well.  Ruby has its own version of perlbrew called rbenv which is pretty great.
+But actually it seems every language has a clone of rbenv.</p>
+
+<ul>
+<li>Python has pyenv.</li>
+<li>PHP has phpenv.</li>
+<li>Node has ndenv.</li>
+<li>Java has jenv.</li>
+<li>Perl has plenv.</li>
+</ul>
+
+
+<p>So I thought, what the heck &mdash; lets try that out.  The nice thing
+is all the envs have pretty much the same command line options and the same
+approach to managing dependencies.  I thought it might be calming and soothing
+for my brain to have one way of doing things.</p>
+
+<p>I found <a href="https://github.com/riywo/anyenv">Anyenv</a> just a second ago as I was
+writing this.  It claims it will manage all my envs. Looks like brilliant
+stuff. Fortune favors the bold. (I eat danger for breakfast.)  I&rsquo;ll try it.</p>
+
+<pre><code>git clone https://github.com/riywo/anyenv ~/.anyenv
+echo 'export PATH="$HOME/.anyenv/bin:$PATH"' &gt;&gt; ~/.my_profile
+echo 'eval "$(anyenv init -)"'               &gt;&gt; ~/.my_profile
+exec bash -l
+anyenv install rbenv    # ruby
+anyenv install plenv    # perl
+anyenv install pyenv    # python
+anyenv install phpenv   # php
+anyenv install ndenv    # nodejs
+anyenv install denv     # dunno
+anyenv install jenv     # java
+exec bash -l            # &lt;-- useful trick btw
+anyenv versions
 </code></pre>
 
-<p>And heres the usage/help:</p>
+<p>Ok now I have all the envs.  But I want to actually do some work with plenv.
+Lets see if I can do that.</p>
 
-<pre><code>⚡ git spark -h
-usage: git spark [-dhmowy] [long options...] [AUTHOR]
-        -o --hours      commits from the last x hours
-        -d --days       commits from the last x days
-        -w --weeks      commits from the last x weeks
-        -m --months     commits from the last x months
-        -y --years      commits from the last x years
-        -h --help       show this message
+<pre><code>plenv install --list  # list all the potential perl versions you can use
+plenv install 5.19.6  # install perl v5.19.6
+plenv rehash          # reload the shell environment with the new perl
+plenv global 5.19.6   # use v5.19.6 everywhere by default
+plenv local  5.19.6   # use v5.19.6 in this directory for this project
+plenv install-cpanm   # install cpanm for this version of perl
+plenv rehash          #
+plenv which cpanm     # see where cpanm is installed. should be ~/.anyenv
 </code></pre>
 
-<p>It was fun to build, but afterward I realized its totally useless.  Clearly
-&lsquo;commits&rsquo; are a problematic metric.  But its much worse than that.  The peaks
-on the graph are relative to the lows on the same graph.  So a peak on one
-graph has no relation to a peak on another.  That means I can&rsquo;t compare one
-sparkline with another.</p>
+<p>Now I will install the dependencies for my project.  I will manage them with
+<a href="https://metacpan.org/pod/Carton">Carton</a>.</p>
 
-<p>Back to the drawing board.  I&rsquo;ll have to come up with something else.</p>
+<pre><code>cpanm Carton          # install carton for this version of perl
+plenv list-modules
+</code></pre>
 
-<p><strong>UPDATE:</strong> I solved this problem in <a href="http://blog.kablamo.org/git-spark-revisited/">git-spark revisted</a>.</p>
+<p>At this point I need to create a <code>cpanfile</code>.  There are all kinds of cool
+things you can do in this file, but with your permision I will begin with baby
+steps.  Here is mine cpanfile for now:</p>
+
+<pre><code>requires "Catalyst";
+requires "Plack";
+requires "DBD::SQLite";
+</code></pre>
+
+<p>And then I run carton to install these modules locally into local/lib/perl5.</p>
+
+<pre><code>carton               # install all the dependencies from the cpanfile
+ls local/lib/perl5/  # see all the new modules installed here
+plenv list-modules   # see mountains of installed stuff
+cd /tmp
+plenv list-modules   # see nothing installed except Carton
+</code></pre>
+
+<p>Notice that a carton.snapshot file was created.  If I look inside, I can see a
+list of all my project dependencies, and all their dependencies, etc all the
+way down to the first turtle &mdash; AND there are version numbers for everything.</p>
+
+<pre><code># carton snapshot format: version 1.0
+DISTRIBUTIONS
+Apache-LogFormat-Compiler-0.13
+  pathname: K/KA/KAZEBURO/Apache-LogFormat-Compiler-0.13.tar.gz
+    provides:
+      Apache::LogFormat::Compiler 0.13
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Module::Build 0.38
+...blah biddee blah etc...
+</code></pre>
+
+<p>I can add <code>cpanfile</code> and <code>cpanfile.snapshot</code> to my git repo.  Now when I deploy
+or share the code, the user at the destination can run Carton and they will end
+up with the exact dependencies with the exact same version numbers I had. This
+way I can be sure my code will run as successfully for them as it did for me.</p>
 </div>
 
 
@@ -132,7 +196,7 @@ sparkline with another.</p>
 
 <span class="categories">
   
-    <a class='category' href='/categories/perl/'>perl</a>
+    <a class='category' href='/categories/devops/'>devops</a>, <a class='category' href='/categories/perl/'>perl</a>
   
 </span>
 
@@ -140,7 +204,7 @@ sparkline with another.</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/11/24/plenv/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/11/24/plenv/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -154,10 +218,8 @@ sparkline with another.</p>
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/01/19/how-to-resolve-circular-dependencies/" title="Previous Post: Use Carp::Always to fix circular dependencies">&laquo; Use Carp::Always to fix circular dependencies</a>
+        <a class="basic-alignment left" href="/2013/11/24/monit/" title="Previous Post: Monit - How to know when your web site is down">&laquo; Monit - How to know when your web site is down</a>
       
-      
-        <a class="basic-alignment right" href="/2013/01/27/git-spark-revisited/" title="Next Post: git-spark revisited">git-spark revisited &raquo;</a>
       
     </p>
   </footer>
@@ -235,8 +297,8 @@ sparkline with another.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits/';
-        var disqus_url = 'http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits/';
+        var disqus_identifier = 'http://blog.kablamo.org/2013/11/24/plenv/';
+        var disqus_url = 'http://blog.kablamo.org/2013/11/24/plenv/';
         var disqus_script = 'embed.js';
       
     (function () {
