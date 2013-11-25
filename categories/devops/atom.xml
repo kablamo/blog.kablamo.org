@@ -4,7 +4,7 @@
   <title><![CDATA[Category: devops | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/devops/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2013-11-25T21:23:53+00:00</updated>
+  <updated>2013-11-25T21:25:17+00:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -22,7 +22,7 @@
 with other languages. I was surprised how easy and comfortable other languages
 are. I think its because these days good ideas spread from one language to the
 next incredibly fast. Even in a new language when I reach for a tool I can
-usually find some Perl technology analog.</p>
+usually find some Perl technology analogue.</p>
 
 <p>For example, I&rsquo;ve been a perlbrew person for a long time and it has served me
 well.  Ruby has its own version of perlbrew called rbenv which is pretty great.
