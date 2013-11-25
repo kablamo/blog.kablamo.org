@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2013-11-25T21:25:17+00:00</updated>
+  <updated>2013-11-25T21:25:48+00:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Anyenv + Plenv + Carton]]></title>
-    <link href="http://blog.kablamo.org/2013/11/24/plenv/"/>
-    <updated>2013-11-24T00:00:00+00:00</updated>
-    <id>http://blog.kablamo.org/2013/11/24/plenv</id>
+    <link href="http://blog.kablamo.org/2013/11/25/plenv/"/>
+    <updated>2013-11-25T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2013/11/25/plenv</id>
     <content type="html"><![CDATA[<p>Recently I started breaking out of my Perl-only isolation bubble and dabbling
 with other languages. I was surprised how easy and comfortable other languages
 are. I think its because these days good ideas spread from one language to the
