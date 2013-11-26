@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2013-11-25T21:25:48+00:00</updated>
+  <updated>2013-11-26T19:47:05+00:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Configure tmux to give you status updates about anything]]></title>
+    <link href="http://blog.kablamo.org/2013/11/26/tmux-status-updates/"/>
+    <updated>2013-11-26T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2013/11/26/tmux-status-updates</id>
+    <content type="html"><![CDATA[<p>I use and love OSX growl and Ubuntu notify style desktop notifications.  They
+are gorgeous.  But they are also distracting and after a few vibrant and
+whimsical but fleeting seconds they are gone forever and you have no way to get
+them back.</p>
+
+<p>A more useful (and less glorious) way to receive notifications is in your
+<a href="http://tmux.sourceforge.net/">tmux</a> status bar.  tmux is the brilliant
+successor to the venerable screen which hasn&rsquo;t been actively developed for
+quite a while.</p>
+
+<p>Here is how I configure notifications in my .tmux.conf file:</p>
+
+<pre><code>set -g status-interval 15    
+set -g status-right !exec my_shell_script
+</code></pre>
+
+<p>This tells tmux to run <code>my_shell_script</code> every 15 seconds.  It displays the
+first line of output from the shell script.  Now I can get unobtrusive status
+updates which don&rsquo;t go away. And if I ate a good breakfast, feel rested, and
+have the wind at my back I can write some code to log my notifications to a
+file so that I don&rsquo;t miss any.</p>
+
+<p>Here are some ideas that might be useful which I might someday do maybe perhaps
+possibly:</p>
+
+<ul>
+<li>Status updates when someone says your name on irc</li>
+<li>Status updates when jenkins tests fail</li>
+<li>Status updates when people push code live</li>
+<li>Status updates when people merge branches</li>
+</ul>
+
+
+<p>Any other ideas?</p>
+
+<p>Also don&rsquo;t miss the tmux <a href="https://github.com/Lokaltog/powerline">powerline</a>
+status bar.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Anyenv + Plenv + Carton]]></title>
@@ -1446,39 +1491,6 @@ heavy drinking.</p></li>
 
 
 <p>Bugs or patches?  <a href="https://github.com/kablamo/Test-WWW-Selenium-More">https://github.com/kablamo/Test-WWW-Selenium-More</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[New on CPAN - MooseX::CachingProxy]]></title>
-    <link href="http://blog.kablamo.org/2012/05/10/new-on-cpan-moosex-cachingproxy/"/>
-    <updated>2012-05-10T00:00:00+01:00</updated>
-    <id>http://blog.kablamo.org/2012/05/10/new-on-cpan-moosex-cachingproxy</id>
-    <content type="html"><![CDATA[<p>Last week I released <a href="https://metacpan.org/module/MooseX::CachingProxy">MooseX::CachingProxy</a> to CPAN.</p>
-
-<p>Its a small module that intercepts requests from your LWP based application.
-Those requests are relayed on to the intended server unless they already exist
-in the cache.</p>
-
-<p>To toggle on and off the caching proxy, MooseX::CachingProxy provides the
-attribute &lsquo;caching_proxy&rsquo;.  Here is a quick demo:</p>
-
-<pre><code>package MyApp;
-use Moose;
-use WWW::Mechanize; # or any LWP based library
-with 'MooseX::CachingProxy';
-
-sub url { 'http://example.com' } # required by MooseX::CachingProxy
-
-sub download { 
-    my $self = shift;
-    $self-&gt;start_caching_proxy;
-    return WWW::Mechanize-&gt;new()-&gt;get($self-&gt;url . '/foo'); 
-}
-</code></pre>
-
-<p>Under the covers, its a tiny Plack application that mashes up
-<a href="https://metacpan.org/module/Plack::Middleware::Cache">Plack::Middleware::Cache</a> and <a href="https://metacpan.org/module/Plack::App::Proxy">Plack::App::Proxy</a>.</p>
 ]]></content>
   </entry>
   

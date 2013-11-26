@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tools | KABLAMO]]></title>
+  <link href="http://blog.kablamo.org/categories/tools/atom.xml" rel="self"/>
+  <link href="http://blog.kablamo.org/"/>
+  <updated>2013-11-26T19:47:05+00:00</updated>
+  <id>http://blog.kablamo.org/</id>
+  <author>
+    <name><![CDATA[Eric Johnson]]></name>
+    <email><![CDATA[kablamo@kablamo.org]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Configure tmux to give you status updates about anything]]></title>
+    <link href="http://blog.kablamo.org/2013/11/26/tmux-status-updates/"/>
+    <updated>2013-11-26T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2013/11/26/tmux-status-updates</id>
+    <content type="html"><![CDATA[<p>I use and love OSX growl and Ubuntu notify style desktop notifications.  They
+are gorgeous.  But they are also distracting and after a few vibrant and
+whimsical but fleeting seconds they are gone forever and you have no way to get
+them back.</p>
+
+<p>A more useful (and less glorious) way to receive notifications is in your
+<a href="http://tmux.sourceforge.net/">tmux</a> status bar.  tmux is the brilliant
+successor to the venerable screen which hasn&rsquo;t been actively developed for
+quite a while.</p>
+
+<p>Here is how I configure notifications in my .tmux.conf file:</p>
+
+<pre><code>set -g status-interval 15    
+set -g status-right !exec my_shell_script
+</code></pre>
+
+<p>This tells tmux to run <code>my_shell_script</code> every 15 seconds.  It displays the
+first line of output from the shell script.  Now I can get unobtrusive status
+updates which don&rsquo;t go away. And if I ate a good breakfast, feel rested, and
+have the wind at my back I can write some code to log my notifications to a
+file so that I don&rsquo;t miss any.</p>
+
+<p>Here are some ideas that might be useful which I might someday do maybe perhaps
+possibly:</p>
+
+<ul>
+<li>Status updates when someone says your name on irc</li>
+<li>Status updates when jenkins tests fail</li>
+<li>Status updates when people push code live</li>
+<li>Status updates when people merge branches</li>
+</ul>
+
+
+<p>Any other ideas?</p>
+
+<p>Also don&rsquo;t miss the tmux <a href="https://github.com/Lokaltog/powerline">powerline</a>
+status bar.</p>
+]]></content>
+  </entry>
+  
+</feed>
