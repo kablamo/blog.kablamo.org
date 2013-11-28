@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2013-11-26T19:47:05+00:00</updated>
+  <updated>2013-11-28T20:24:09+00:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tmux reloaded]]></title>
+    <link href="http://blog.kablamo.org/2013/11/27/tmux-reloaded/"/>
+    <updated>2013-11-27T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2013/11/27/tmux-reloaded</id>
+    <content type="html"><![CDATA[<p>To reload your tmux configuration without restarting the server, add this to
+your <code>~/.tmux.conf</code> file:</p>
+
+<pre><code># reload the config file without restarting the tmux server
+bind R source-file ~/.tmux.conf \; display-message "Config reloaded"
+</code></pre>
+
+<p>Notice thats a capital <code>R</code> not a lowercase <code>r</code>.  I keep forgetting that.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Configure tmux to give you status updates about anything]]></title>
@@ -1444,53 +1460,6 @@ problems by creating
 <a href="http://kablamo.org/selenium-2012-yapceu-slides/">online</a>. Or if you need to
 download them for some reason, they are hosted on
 <a href="https://github.com/kablamo/selenium-2012-yapceu-slides">github</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Test::WWW::Selenium::More]]></title>
-    <link href="http://blog.kablamo.org/2012/05/17/test-www-selenium-more/"/>
-    <updated>2012-05-17T00:00:00+01:00</updated>
-    <id>http://blog.kablamo.org/2012/05/17/test-www-selenium-more</id>
-    <content type="html"><![CDATA[<p>I recently released
-<a href="https://metacpan.org/module/Test::WWW::Selenium::More">Test::WWW::Selenium::More</a>
-to CPAN.  It is a small collection of utilities to help you write Selenium
-tests.  Here are some reasons to use it:</p>
-
-<ol>
-<li><p>It has a
-<a href="https://metacpan.org/module/Test::WWW::Selenium::More::Manual">manual</a> which
-provides a concise but fairly comprehensive howto guide to Selenium testing in
-Perl.</p></li>
-<li><p>It uses Moose so you can more easily use roles.  For example you might want
-a role for methods that deal with authentication and a role for methods that
-deal with payments.</p></li>
-<li><p>Smarter testing with methods like wait_for_jquery() and jquery_click().  You
-should never sleep() in your Selenium tests because that leads to slow tests
-with random failures which leads to frustration, low morale, hair pulling, and
-heavy drinking.</p></li>
-<li><p>Method chaining.  Here is what this looks like:</p>
-
-<pre><code> use Test::Most;
- use Test::WWW::Selenium::More;
-
- Test::WWW::Selenium::More-&gt;new()
-
- -&gt;note('Search google')
- -&gt;open_ok("http://www.google.com")
- -&gt;title_like(qr/Google Search/)
- -&gt;type_ok('cat pictures')
- -&gt;follow_link_ok('Search')
-
- -&gt;note('Check the number of results')
- -&gt;is_text_present_ok('2 bajillion results');
-
- done_testing;
-</code></pre></li>
-</ol>
-
-
-<p>Bugs or patches?  <a href="https://github.com/kablamo/Test-WWW-Selenium-More">https://github.com/kablamo/Test-WWW-Selenium-More</a></p>
 ]]></content>
   </entry>
   

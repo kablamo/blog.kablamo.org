@@ -9,8 +9,10 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="Last week I released MooseX::CachingProxy to CPAN. Its a small module that intercepts requests from your LWP based application.
-Those requests are &hellip;">
+  <meta name="description" content="I recently released
+Test::WWW::Selenium::More
+to CPAN. It is a small collection of utilities to help you write Selenium
+tests. Here are some reasons &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,6 +59,81 @@ Those requests are &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/05/17/test-www-selenium-more/">Test::WWW::Selenium::More</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-05-17T00:00:00+01:00" pubdate data-updated="true">May 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently released
+<a href="https://metacpan.org/module/Test::WWW::Selenium::More">Test::WWW::Selenium::More</a>
+to CPAN.  It is a small collection of utilities to help you write Selenium
+tests.  Here are some reasons to use it:</p>
+
+<ol>
+<li><p>It has a
+<a href="https://metacpan.org/module/Test::WWW::Selenium::More::Manual">manual</a> which
+provides a concise but fairly comprehensive howto guide to Selenium testing in
+Perl.</p></li>
+<li><p>It uses Moose so you can more easily use roles.  For example you might want
+a role for methods that deal with authentication and a role for methods that
+deal with payments.</p></li>
+<li><p>Smarter testing with methods like wait_for_jquery() and jquery_click().  You
+should never sleep() in your Selenium tests because that leads to slow tests
+with random failures which leads to frustration, low morale, hair pulling, and
+heavy drinking.</p></li>
+<li><p>Method chaining.  Here is what this looks like:</p>
+
+<pre><code> use Test::Most;
+ use Test::WWW::Selenium::More;
+
+ Test::WWW::Selenium::More-&gt;new()
+
+ -&gt;note('Search google')
+ -&gt;open_ok("http://www.google.com")
+ -&gt;title_like(qr/Google Search/)
+ -&gt;type_ok('cat pictures')
+ -&gt;follow_link_ok('Search')
+
+ -&gt;note('Check the number of results')
+ -&gt;is_text_present_ok('2 bajillion results');
+
+ done_testing;
+</code></pre></li>
+</ol>
+
+
+<p>Bugs or patches?  <a href="https://github.com/kablamo/Test-WWW-Selenium-More">https://github.com/kablamo/Test-WWW-Selenium-More</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -222,6 +299,10 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/11/27/tmux-reloaded/">Tmux Reloaded</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/11/26/tmux-status-updates/">Configure Tmux to Give You Status Updates About Anything</a>
       </li>
     
@@ -235,10 +316,6 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
     
       <li class="post">
         <a href="/2013/11/22/rex/">Devops With Rex</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/11/19/learning-ruby/">Learning Ruby With Online University Classes</a>
       </li>
     
   </ul>

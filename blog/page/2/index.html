@@ -9,8 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I&rsquo;ve been using Dist::Zilla for a
-couple years. It&rsquo;s a powerful way to automate CPAN releases. But learning how to use it was not as easy &hellip;">
+  <meta name="description" content="There seem to be quite a few Perl people learning Chinese so maybe this will be
+relevant here. I created IIJO which is a Perl powered website that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,6 +57,104 @@ couple years. It&rsquo;s a powerful way to automate CPAN releases. But learning 
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/02/28/chinese-flashcards/">Chinese Zombie Flashcards on GitHub (Catalyst & Perl)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-02-28T00:00:00+00:00" pubdate data-updated="true">Feb 28<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There seem to be quite a few Perl people learning Chinese so maybe this will be
+relevant here.</p>
+
+<p>I created <a href="http://iijo.org">IIJO</a> which is a Perl powered website that does 3
+sided flashcards (Chinese, English, and Pinyin).</p>
+
+<p>The main advantage IIJO has over Anki and other flashcard sites is that you can
+pick your flashcards from a dictionary so you don&rsquo;t have to type all that stuff
+in yourself.   It allows you to share word lists with others and the built in
+dictionary means that you don&rsquo;t need to worry about the accuracy and
+completeness of other people who share wordlists.</p>
+
+<p>The site does <a href="http://en.wikipedia.org/wiki/Spaced_repetition">spaced repetition</a>
+like Anki.  But it has a different simpler user interface because Anki&rsquo;s 4
+buttons after each flashcard <em>stresses me out.</em></p>
+
+<p>If you want, you can just play with the <a href="http://iijo.org/dictionary">Chinese/English dictionary</a>.<br/>
+The goal here is to be able to look up a word then add it easily to one of your
+existing word lists.</p>
+
+<p>If you think there is something missing, check out the project on
+<a href="http://github.org/kablamo/iijo.org">GitHub</a> and send me a pull request.  I&rsquo;m
+using Perl, Catalyst, and SQLite.</p>
+
+<p>Here are some of the things on my todo list:</p>
+
+<ul>
+<li>More analytics/stats/data for measuring progress using D3</li>
+<li>Speech/pronunciation samples</li>
+<li>Export to Anki</li>
+<li>Some way to learn phrases instead of just characters</li>
+</ul>
+
+
+<h1>Vampires and zombies</h1>
+
+<p>Btw, here&rsquo;s an interesting thing I learned about the Chinese language: the word
+for <code>vampire</code> is the same word thats used for <code>zombie</code>.</p>
+
+<center><p style="margin-bottom: .5em; font-size: 4em; font-weight: bold;">僵尸</p></center>
+
+
+<p>This is because the Chinese merged the two concepts into a single vampire
+zombie monster.  So Chinese zombies are stiff and walk around with their hands
+straight out.  But they also bite their victim&rsquo;s necks and suck their blood
+passing on the zombie infection.</p>
+
+<p>They are also fast and angry and they often do kung fu.  You can&rsquo;t
+kill them of course, however you can put them to sleep if you write a spell on a
+yellow piece of paper and put it on their forehead.  But if it falls off, they
+wake up and get angry again.  Strangest of all is that they do little
+hops like bunnies instead of walking.</p>
+
+<p>I highly recommend Liao Yiwo&rsquo;s book, <a href="http://www.amazon.com/The-Corpse-Walker-Stories-Bottom/dp/0307388379/ref=sr_1_1?ie=UTF8&amp;qid=1362603639&amp;sr=8-1&amp;keywords=corpse+walker"><em>Corpse Walker,</em></a>
+which tells the fascinating history and origin of Chinese zombies.  You can read more
+about jiangshi on <a href="http://en.wikipedia.org/wiki/Jiangshi">Wikipedia</a>.  And of
+course there are YouTube videos:</p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/56Zvquhww80" frameborder="0" allowfullscreen></iframe>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -794,81 +892,6 @@ download them for some reason, they are hosted on
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/05/17/test-www-selenium-more/">Test::WWW::Selenium::More</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-05-17T00:00:00+01:00" pubdate data-updated="true">May 17<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I recently released
-<a href="https://metacpan.org/module/Test::WWW::Selenium::More">Test::WWW::Selenium::More</a>
-to CPAN.  It is a small collection of utilities to help you write Selenium
-tests.  Here are some reasons to use it:</p>
-
-<ol>
-<li><p>It has a
-<a href="https://metacpan.org/module/Test::WWW::Selenium::More::Manual">manual</a> which
-provides a concise but fairly comprehensive howto guide to Selenium testing in
-Perl.</p></li>
-<li><p>It uses Moose so you can more easily use roles.  For example you might want
-a role for methods that deal with authentication and a role for methods that
-deal with payments.</p></li>
-<li><p>Smarter testing with methods like wait_for_jquery() and jquery_click().  You
-should never sleep() in your Selenium tests because that leads to slow tests
-with random failures which leads to frustration, low morale, hair pulling, and
-heavy drinking.</p></li>
-<li><p>Method chaining.  Here is what this looks like:</p>
-
-<pre><code> use Test::Most;
- use Test::WWW::Selenium::More;
-
- Test::WWW::Selenium::More-&gt;new()
-
- -&gt;note('Search google')
- -&gt;open_ok("http://www.google.com")
- -&gt;title_like(qr/Google Search/)
- -&gt;type_ok('cat pictures')
- -&gt;follow_link_ok('Search')
-
- -&gt;note('Check the number of results')
- -&gt;is_text_present_ok('2 bajillion results');
-
- done_testing;
-</code></pre></li>
-</ol>
-
-
-<p>Bugs or patches?  <a href="https://github.com/kablamo/Test-WWW-Selenium-More">https://github.com/kablamo/Test-WWW-Selenium-More</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -907,6 +930,10 @@ heavy drinking.</p></li>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/11/27/tmux-reloaded/">Tmux Reloaded</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/11/26/tmux-status-updates/">Configure Tmux to Give You Status Updates About Anything</a>
       </li>
     
@@ -920,10 +947,6 @@ heavy drinking.</p></li>
     
       <li class="post">
         <a href="/2013/11/22/rex/">Devops With Rex</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/11/19/learning-ruby/">Learning Ruby With Online University Classes</a>
       </li>
     
   </ul>
