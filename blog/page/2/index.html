@@ -9,8 +9,9 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="There seem to be quite a few Perl people learning Chinese so maybe this will be
-relevant here. I created IIJO which is a Perl powered website that &hellip;">
+  <meta name="description" content="I added a git-vspark script to my App::Git::Spark CPAN module. It does the
+same thing as git-spark but instead of
+normal horizontal sparklines, it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,6 +58,70 @@ relevant here. I created IIJO which is a Perl powered website that &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/03/17/git-vspark/">Git-vspark Plots Your Commits Vertically With Term::Vspark</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-03-17T00:00:00+00:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I added a <strong>git-vspark</strong> script to my App::Git::Spark CPAN module.  It does the
+same thing as <a href="https://github.com/kablamo/git-spark">git-spark</a> but instead of
+normal horizontal sparklines, it uses &ldquo;vertical&rdquo; sparklines.  Here&rsquo;s what that
+looks like:</p>
+
+<pre><code>$ git vspark --months 8 batman
+Commits by batman over the last 8 months
+total: 233   avg: 29   max: 69
+ 12 ██▋
+ 18 ████
+ 69 ███████████████▏
+ 59 ████████████▉
+ 16 ███▌
+ 28 ██████▏
+ 12 ██▋
+ 19 ████▎
+</code></pre>
+
+<p>This effect is achieved using
+<a href="https://metacpan.org/module/Term::Vspark">Term::Vspark</a>.  Its companion module
+<a href="https://metacpan.org/module/Term::Spark">Term::Spark</a> is a small pure Perl
+replacement for Zach Holman&rsquo;s original <a href="https://github.com/holman/spark">spark</a>
+implementation and it now powers my git-spark script.</p>
+
+<p>These libraries were fun little projects developed over the past few weeks
+mainly by <a href="https://github.com/LuRsT">Gil Gonçalves</a> with a few pull requests
+from myself.  Having them available on CPAN means you can easily use sparklines
+in your own Perl code.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -842,56 +907,6 @@ winning.  But thats not the best part.  Lets see how to use it.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/08/26/slides-from-my-selenium-talk-at-yapc-eu-2012/">Slides From My Selenium Talk at YAPCEU 2012</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-08-26T00:00:00+01:00" pubdate data-updated="true">Aug 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I gave my first <a href="http://act.yapc.eu/ye2012/schedule?day=2012-08-20">YAPC::EU</a>
-presentation this year in Frankfurt after doing a trial run at London.pm.  I
-received some good questions and comments and a few new ideas.  It was a good
-experience and I want to do this again.</p>
-
-<p>My talk introduced Selenium and common problems people have when first trying
-to write Selenium tests in Perl.  I also explained how I solved many of those
-problems by creating
-<a href="https://metacpan.org/module/Test::WWW::Selenium::More">Test::WWW::Selenium::More</a>.</p>
-
-<p>The slides are available
-<a href="http://kablamo.org/selenium-2012-yapceu-slides/">online</a>. Or if you need to
-download them for some reason, they are hosted on
-<a href="https://github.com/kablamo/selenium-2012-yapceu-slides">github</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -930,6 +945,10 @@ download them for some reason, they are hosted on
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/12/08/git-restore/">How to Find and Restore Deleted Files With Git</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/11/27/tmux-reloaded/">Tmux Reloaded</a>
       </li>
     
@@ -943,10 +962,6 @@ download them for some reason, they are hosted on
     
       <li class="post">
         <a href="/2013/11/24/monit/">Monit - How to Know When Your Web Site Is Down</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/11/22/rex/">Devops With Rex</a>
       </li>
     
   </ul>
