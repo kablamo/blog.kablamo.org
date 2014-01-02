@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2013-12-18T22:19:58+00:00</updated>
+  <updated>2014-01-02T21:33:57+00:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[No dessert forever]]></title>
+    <link href="http://blog.kablamo.org/2014/01/01/no-dessert-forever/"/>
+    <updated>2014-01-01T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2014/01/01/no-dessert-forever</id>
+    <content type="html"><![CDATA[<p>For years I have been hearing people say sugar is the new bad thing.  So I
+finally got around to reading up on this claim.  Here is what I learned.</p>
+
+<h1>Nutrition</h1>
+
+<p>Food is composed of <strong>carbohydrates, fats, proteins, water, vitamins,</strong> and
+<strong>minerals</strong>.  Of course, I sometimes swallow stuff that is not on that list
+but the list is comprehensive in the sense that it covers everything my body
+needs.  Notice that sugar is not in the list.  My body breaks down carbs and
+fats into glucose (sugar) which can be used by my body as energy.</p>
+
+<p>This means sugar has <em>zero</em> nutritional value.  There is no reason to ever
+eat any.  Humans do not require sugar.</p>
+
+<p>I have always been smug about the fact that I don&rsquo;t throw away my money on a
+caffeine addiction.  But suddenly I realize I have been foolishly spending my
+money on sugar.</p>
+
+<h1>No dessert forever</h1>
+
+<p>As part of my long term plan to someday somehow acquire a svelte physique, I
+hereby <strong>reject and repudiate</strong> the harmful cultural ritual known as dessert.
+The rules are:</p>
+
+<ul>
+<li>No dessert forever.  No ice cream, no cake, no pie.</li>
+<li>No candy forever.  No free candy or chocolate from the nice people at the office.</li>
+<li>No fruit juice forever.</li>
+<li>Exceptions
+
+<ul>
+<li>85%+ dark chocolate</li>
+<li>Honey</li>
+<li>Fruit</li>
+<li>Small quantities of desserts that I have never had before.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Sources:</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Food_energy">Wikipedia: Food energy</a></li>
+<li><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2235907/">Evidence for sugar addiction</a></li>
+<li><a href="http://www.health.harvard.edu/newsletters/Harvard_Heart_Letter/2011/September/abundance-of-fructose-not-good-for-the-liver-heart">Abundance of fructose not good for the liver, heart</a></li>
+<li><a href="http://nickwinter.net/experiments">Nick Winter</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Salt and pepper - How to encrypt database passwords]]></title>
@@ -1562,51 +1619,6 @@ total: 90   avg: 7   max: 22
 
 <p>Of course you still need to consider the quality of commits and not just how
 many there are.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[git-spark plots your commit history]]></title>
-    <link href="http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits/"/>
-    <updated>2013-01-23T00:00:00+00:00</updated>
-    <id>http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits</id>
-    <content type="html"><![CDATA[<p>I recently rediscovered <a href="https://github.com/holman/spark">spark</a>, Zach Holman&rsquo;s
-cool little sparklines graphing tool for the command line.  I used a little
-Perl to mash it up with &lsquo;git log&rsquo; and came up with
-<a href="https://gist.github.com/4598480">git-spark</a> which works like this:</p>
-
-<pre><code>⚡ git spark --hours 8
-Commits by Godzilla over the last 8 hours
-▃▃▁▆▅▁▁▃█
-⚡ git spark -d 14 HulkHogan
-Commits by HulkHogan over the last 14 days
-▇▅▄▁▁▄▅▂█▂▁▁▁▅
-⚡ git spark -w 52 Tarzan
-Commits by Tarzan over the last 52 weeks
-▃▁▂▃▃▃▂▁█▆▁▄▄▃▂▂▁▁▂▃▃▄▃▃▂▃▁▁▁▁▁▂▂▃▆▅▂▁▄▃▂▄▄▄▁▂▁▁▂▂▂▃
-</code></pre>
-
-<p>And heres the usage/help:</p>
-
-<pre><code>⚡ git spark -h
-usage: git spark [-dhmowy] [long options...] [AUTHOR]
-        -o --hours      commits from the last x hours
-        -d --days       commits from the last x days
-        -w --weeks      commits from the last x weeks
-        -m --months     commits from the last x months
-        -y --years      commits from the last x years
-        -h --help       show this message
-</code></pre>
-
-<p>It was fun to build, but afterward I realized its totally useless.  Clearly
-&lsquo;commits&rsquo; are a problematic metric.  But its much worse than that.  The peaks
-on the graph are relative to the lows on the same graph.  So a peak on one
-graph has no relation to a peak on another.  That means I can&rsquo;t compare one
-sparkline with another.</p>
-
-<p>Back to the drawing board.  I&rsquo;ll have to come up with something else.</p>
-
-<p><strong>UPDATE:</strong> I solved this problem in <a href="http://blog.kablamo.org/git-spark-revisited/">git-spark revisted</a>.</p>
 ]]></content>
   </entry>
   

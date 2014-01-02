@@ -9,8 +9,9 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I have been in a rabbit hole for the last week. I started looking at
-Docker. Its a really interesting project that all the hosting providers seem to &hellip;">
+  <meta name="description" content="I have been in a rabbit hole for the last week. I started by looking at Docker
+(See my previous post). It turns
+out Docker is written in Go and so &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,6 +58,208 @@ Docker. Its a really interesting project that all the hosting providers seem to 
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/11/13/go/">Down a Rabbit Hole - Go-lang and Its Decentralized CPAN</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-11-13T00:00:00+00:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have been in a rabbit hole for the last week.  I started by looking at Docker
+(<a href="http://blog.kablamo.org/2013/11/13/docker/">See my previous post</a>).  It turns
+out Docker is written in Go and so somehow I ended up learning
+<a href="http://golang.org/">Go</a>.  Well &ldquo;learning&rdquo; is an overstatement.  I&rsquo;ve read
+about it for a few days and wrote a tiny bit of code.</p>
+
+<p>But anyway, the coolest thing about Go so far is its decentralized libraries.
+<em>Centralized</em> collections of libraries have been all the rage the last few years
+and it seems like all the languages have gotten hip to that &mdash; CPAN, rubygems,
+pypi, npm, etc.</p>
+
+<p>But one of the biggest problems with publishing Perl modules on CPAN is how
+difficult it is to do.  Sure its easy after you figure out the PAUSE website
+exists, create a PAUSE account, read all the Dist::Zilla docs and some of the
+source code, and write your own personalized plugin.  After that it just takes
+one little command.</p>
+
+<h1>How it works in Go</h1>
+
+<p>If you want to use some libraries in your Go code, it looks like this:</p>
+
+<pre><code>import (
+    "log" 
+    "time"
+    "errors"
+    "github.com/dotcloud/docker"
+    "github.com/fsouza/go-dockerclient"
+)
+</code></pre>
+
+<p>The first 3 are core libraries distributed as part of Go.  But the last two you
+have to download and install yourself.  Doing that is very simple:</p>
+
+<pre><code>export GOROOT=$HOME/go
+go get github.com/dotcloud/docker
+</code></pre>
+
+<p>This downloads all the dependencies too.  Of course.</p>
+
+<p>The next question you will ask me is how do people learn about new libraries in
+a decentralized world?  There are websites like
+<a href="http://gowalker.org/">http://gowalker.org/</a> which scrape GitHub&rsquo;s recent updates
+page.  They also do this for BitBucket, Google Project Hosting, and a couple
+other sites.</p>
+
+<p>This new language has shiny modern features and is very easy to get up and
+running.</p>
+
+<pre style="font: 4px/2px monospace; color: #333; background: transparent; border: 0px; border-radius: 0; box-shadow: 0 0 0 0;">
+                              ,'#@@@@@@@#+';;;''#@@@@@#,                            
+                          ;@@@@#;.                    '@@@;                         
+                       ;@@@:                             ,@@@                       
+                     #@@.                                   +@@                     
+                   @@+                                        +@;   +@@@@@#         
+         ,,      +@+                               #@@@@+       @@@@#  @@       
+     .@@@@@@@@' @@      .+@@@+.                 :@        @,     @@         @@      
+    @@:      .@@;     ++       #+              @            @     #@         @@     
+   @@         @;               @            @              @     @@         @     
+  ;@         @#    ,:             '        @                @     @' :    #+    
+  @         +@     ;               '        ;                  ,     @@@@;    ,@    
+  @      '' @     @                 @       #                  @     '@@@@     @    
+ :@     @@@@:    :                   .     ,                          @@@@     @    
+ ;#     @@@@     @                   @     #  +@@@:             +     ,@@     ,@    
+ :@     @@@    : ,@@@@             +     @ #@@@@@:            @      @    @;    
+  @     .@@     @@@@@                  @ @@@@@@@            @      :@     @     
+  @      @,     . @@@@@@@                  @ @@@@@:@            @       @    @:     
+  ;@     @      . @@@@@.@.                 @ @@@@@            #       #' .@'      
+   @@   '#       @@@@ ,            :     ; ,@@@@@             :       @@.       
+    @@. @.       # @@@@@'            @      ;  #@#             :         @:         
+     ,@@@        @  '@#.             +      @                  @         @:         
+       .@         :                 '        @                '          :@         
+       '#         +                 ;         '              .,           @         
+       @:          @               @  @@@@@@,  @            ;,            @         
+       @          @             @  @@@@@@@@.  @:        .@              @,        
+       @             ;+         #,  #@@@@@@@@'    +@+::+@#                ++        
+       @               ;@;,.,'@:    @@@@@@@@@@:                           :@        
+       @                          #, ,@@@@@@   @                           @        
+      .@                         @              '                          @        
+      ;#                                       @                         @        
+      ++                        :                ;                         @        
+      +'                                         '                         @        
+      #:                         @    ;@;@'@     @                         @      
+      @,                          :+''   @  .@@@:                          @.       
+      @,                                 @   :                             @.       
+      @.                            ,    @   .                             @,       
+      @,                            ;    @                                 @,       
+      @,                            '    @                                 @:       
+      #:                            :    @                                 @:       
+      #;                             +  @ :  @                             @:       
+      ++                              +;   ;.                              @:       
+      ;#                                                                   @:       
+      ,@                                                                   @:       
+       @                                                                   @:       
+       @                                                                   @,       
+       @                                                                   @,       
+       @                                                                 @,       
+       @,                                                                  @,       
+       +'                                                                  @,       
+       :@                                                                  @:       
+       .@                                                                  @:       
+        @                                                                  @:       
+        @                                                                  #;       
+        @                                                                  #;       
+        @                                                                  +@@,     
+      '#@                                                                  '+  ;@.  
+   +@.  @                                                                  '#     @ 
+ ';     @                                                                  ;@      @
+.       @                                                                  :@      #
+@       @                                                                  ,@    @ @
++ @  ,@                                                                  .@@    # 
+ @    ':@                                                                   +; .+ 
+ ,.  @ .@                                                                   @     
+   ;   .@                                                                   @       
+       ,@                                                                   @       
+       :@                                                                   @       
+       ;#                                                                   @       
+       '#                                                                   @       
+       '+                                                                   @       
+       +'                                                                   @       
+       #;                                                                   @       
+       #;                                                                   @       
+       @:                                                                   @     
+       @:                                                                   @.      
+       @,                                                                   @,      
+       @,                                                                   @,      
+       @,                                                                   @,      
+       @,                                                                   @,      
+       @.                                                                   @.      
+       @.                                                                   @     
+       @.                                                                   @       
+       @.                                                                   @       
+       @,                                                                   @       
+       @,                                                                   @       
+       @,                                                                  .@       
+       @,                                                                  '#       
+       @:                                                                  @:       
+       @:                                                                  @        
+       #;                                                                  @        
+       +'                                                                 ,@        
+       '+                                                                 #'        
+       ,@                                                                 @         
+        @                                                                         
+        @.                                                               @'         
+        ;@                                                               @          
+         @                                                              +@          
+         '@                                                             @           
+          @,                                                           #@           
+          .@                                                           @            
+           #@                                                         @:            
+            @#                                                       @#             
+             @+                                                     @@              
+              @#                                                  .@@               
+               @@@#                                              @   .#             
+             ''    #                                            @      @            
+            @       @                                          @        '           
+           @         @                                       @@+        ;           
+          :   .       @+                                  :@@+  +.    @  +          
+          @  @      @, #@@;                            ;@@@,     ;    .  @          
+          ' @     ':     ,@@@#:                   :+@@@@:         #    @ @          
+          @ :    #           ;@@@@@@@#####@@@@@@@@@+.              @   ; .          
+           @    @                  ,:;''';;:,                     @  #,           
+            ;@##                                                     `             
+</pre>
+
+
+<p>(the golang mascot)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -920,79 +1123,6 @@ many there are.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/23/git-spark-plots-your-commits/">Git-spark Plots Your Commit History</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-01-23T00:00:00+00:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I recently rediscovered <a href="https://github.com/holman/spark">spark</a>, Zach Holman&rsquo;s
-cool little sparklines graphing tool for the command line.  I used a little
-Perl to mash it up with &lsquo;git log&rsquo; and came up with
-<a href="https://gist.github.com/4598480">git-spark</a> which works like this:</p>
-
-<pre><code>⚡ git spark --hours 8
-Commits by Godzilla over the last 8 hours
-▃▃▁▆▅▁▁▃█
-⚡ git spark -d 14 HulkHogan
-Commits by HulkHogan over the last 14 days
-▇▅▄▁▁▄▅▂█▂▁▁▁▅
-⚡ git spark -w 52 Tarzan
-Commits by Tarzan over the last 52 weeks
-▃▁▂▃▃▃▂▁█▆▁▄▄▃▂▂▁▁▂▃▃▄▃▃▂▃▁▁▁▁▁▂▂▃▆▅▂▁▄▃▂▄▄▄▁▂▁▁▂▂▂▃
-</code></pre>
-
-<p>And heres the usage/help:</p>
-
-<pre><code>⚡ git spark -h
-usage: git spark [-dhmowy] [long options...] [AUTHOR]
-        -o --hours      commits from the last x hours
-        -d --days       commits from the last x days
-        -w --weeks      commits from the last x weeks
-        -m --months     commits from the last x months
-        -y --years      commits from the last x years
-        -h --help       show this message
-</code></pre>
-
-<p>It was fun to build, but afterward I realized its totally useless.  Clearly
-&lsquo;commits&rsquo; are a problematic metric.  But its much worse than that.  The peaks
-on the graph are relative to the lows on the same graph.  So a peak on one
-graph has no relation to a peak on another.  That means I can&rsquo;t compare one
-sparkline with another.</p>
-
-<p>Back to the drawing board.  I&rsquo;ll have to come up with something else.</p>
-
-<p><strong>UPDATE:</strong> I solved this problem in <a href="http://blog.kablamo.org/git-spark-revisited/">git-spark revisted</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1031,6 +1161,10 @@ sparkline with another.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/01/01/no-dessert-forever/">No Dessert Forever</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/12/18/authen-passphrase/">Salt and Pepper - How to Encrypt Database Passwords</a>
       </li>
     
@@ -1044,10 +1178,6 @@ sparkline with another.</p>
     
       <li class="post">
         <a href="/2013/11/27/tmux-reloaded/">Tmux Reloaded</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/11/26/tmux-status-updates/">Configure Tmux to Give You Status Updates About Anything</a>
       </li>
     
   </ul>

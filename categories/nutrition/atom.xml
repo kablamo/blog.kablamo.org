@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: nutrition | KABLAMO]]></title>
+  <link href="http://blog.kablamo.org/categories/nutrition/atom.xml" rel="self"/>
+  <link href="http://blog.kablamo.org/"/>
+  <updated>2014-01-02T21:33:57+00:00</updated>
+  <id>http://blog.kablamo.org/</id>
+  <author>
+    <name><![CDATA[Eric Johnson]]></name>
+    <email><![CDATA[kablamo@kablamo.org]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[No dessert forever]]></title>
+    <link href="http://blog.kablamo.org/2014/01/01/no-dessert-forever/"/>
+    <updated>2014-01-01T00:00:00+00:00</updated>
+    <id>http://blog.kablamo.org/2014/01/01/no-dessert-forever</id>
+    <content type="html"><![CDATA[<p>For years I have been hearing people say sugar is the new bad thing.  So I
+finally got around to reading up on this claim.  Here is what I learned.</p>
+
+<h1>Nutrition</h1>
+
+<p>Food is composed of <strong>carbohydrates, fats, proteins, water, vitamins,</strong> and
+<strong>minerals</strong>.  Of course, I sometimes swallow stuff that is not on that list
+but the list is comprehensive in the sense that it covers everything my body
+needs.  Notice that sugar is not in the list.  My body breaks down carbs and
+fats into glucose (sugar) which can be used by my body as energy.</p>
+
+<p>This means sugar has <em>zero</em> nutritional value.  There is no reason to ever
+eat any.  Humans do not require sugar.</p>
+
+<p>I have always been smug about the fact that I don&rsquo;t throw away my money on a
+caffeine addiction.  But suddenly I realize I have been foolishly spending my
+money on sugar.</p>
+
+<h1>No dessert forever</h1>
+
+<p>As part of my long term plan to someday somehow acquire a svelte physique, I
+hereby <strong>reject and repudiate</strong> the harmful cultural ritual known as dessert.
+The rules are:</p>
+
+<ul>
+<li>No dessert forever.  No ice cream, no cake, no pie.</li>
+<li>No candy forever.  No free candy or chocolate from the nice people at the office.</li>
+<li>No fruit juice forever.</li>
+<li>Exceptions
+
+<ul>
+<li>85%+ dark chocolate</li>
+<li>Honey</li>
+<li>Fruit</li>
+<li>Small quantities of desserts that I have never had before.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Sources:</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Food_energy">Wikipedia: Food energy</a></li>
+<li><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2235907/">Evidence for sugar addiction</a></li>
+<li><a href="http://www.health.harvard.edu/newsletters/Harvard_Heart_Letter/2011/September/abundance-of-fructose-not-good-for-the-liver-heart">Abundance of fructose not good for the liver, heart</a></li>
+<li><a href="http://nickwinter.net/experiments">Nick Winter</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
