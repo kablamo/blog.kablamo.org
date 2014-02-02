@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/perl/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-01-02T21:33:57+00:00</updated>
+  <updated>2014-02-03T01:14:05+08:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -14,9 +14,55 @@
 
   
   <entry>
+    <title type="html"><![CDATA[I made a Readline cheat sheet]]></title>
+    <link href="http://blog.kablamo.org/2014/01/01/readline-cheat-sheet/"/>
+    <updated>2014-01-01T00:00:00+08:00</updated>
+    <id>http://blog.kablamo.org/2014/01/01/readline-cheat-sheet</id>
+    <content type="html"><![CDATA[<p>Recently Ovid pointed out <a href="http://blogs.perl.org/users/ovid/2014/01/ditching-a-language.html">large projects are much more likely to fail</a>.
+I have a few large goals I&rsquo;d like to accomplish.  For example I want to improve
+my front end design skills.  Rather than trying to tackle this problem all
+at once, I made up a small project for myself.</p>
+
+<p>I created a <a href="http://readline.kablamo.org/emacs.html">Readline cheat sheet</a> and
+I was able to complete this project in about a day.  Here are some
+of the things I learned:</p>
+
+<ul>
+<li><p><strong>Bootstrap</strong> &ndash; I always worry libraries and frameworks like
+<a href="http://getbootstrap.com">Bootstrap</a> are overkill and bloat since I only need
+a tiny portion of their features.  But its undeniable that I was able to quickly
+build a responsive mobile friendly website without needing to worry about the
+technical details.</p></li>
+<li><p><strong>Readline commands</strong> &ndash; If I had to pick one keyboad shortcut to recommend it
+would be <code>Ctrl-r</code> which allows you to search backwards through your
+history.  I also like the incremental undo command: <code>Ctrl-_</code>.</p></li>
+<li><p><strong>Text::Xslate</strong> &ndash; People keep mentioning
+<a href="https://metacpan.org/pod/Text::Xslate">Text::Xslate</a> so I wanted to give it a try.
+The docs say its full featured and very fast.  I liked that HTML metacharacters
+are escaped by default to avoid cross site scripting attacks.  Also it supports
+Template Toolkit syntax.  I didn&rsquo;t find any new killer features, but it was a
+pleasure to work with.</p></li>
+<li><p><strong>Some new <a href="http://helabs.com.br/blog/2014/01/21/prevent-common-problems-when-writing-css-from-scratch/">CSS tricks</a></strong> &ndash;
+The best trick I learned is how to keep my footer at the bottom of the page
+even when it has only a few lines of content.</p></li>
+</ul>
+
+
+<p>I was able to practice design, layout, color, and font selection.  And who
+knows &mdash; perhaps this project will also drive a tiny bit of traffic to my
+github profile and increase my
+<a href="http://www.codusoperandi.com/posts/increasing-your-luck-surface-area">luck surface area</a>.</p>
+
+<p>The momentum feels good.  I need to remember to keep my projects small more often.</p>
+
+<p><img src="/images/for-posts/2014-02-02.png" width="700" height="424"></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Salt and pepper - How to encrypt database passwords]]></title>
     <link href="http://blog.kablamo.org/2013/12/18/authen-passphrase/"/>
-    <updated>2013-12-18T00:00:00+00:00</updated>
+    <updated>2013-12-18T00:00:00+08:00</updated>
     <id>http://blog.kablamo.org/2013/12/18/authen-passphrase</id>
     <content type="html"><![CDATA[<p>To explain how salt and pepper work in encryption, I will walk through a few
 scenarios.</p>
@@ -197,7 +243,7 @@ characters or more.</p>
   <entry>
     <title type="html"><![CDATA[Anyenv + Plenv + Carton]]></title>
     <link href="http://blog.kablamo.org/2013/11/25/plenv/"/>
-    <updated>2013-11-25T00:00:00+00:00</updated>
+    <updated>2013-11-25T00:00:00+08:00</updated>
     <id>http://blog.kablamo.org/2013/11/25/plenv</id>
     <content type="html"><![CDATA[<p>Recently I started breaking out of my Perl-only isolation bubble and dabbling
 with other languages. I was surprised how easy and comfortable other languages
@@ -307,7 +353,7 @@ way I can be sure my code will run as successfully for them as it did for me.</p
   <entry>
     <title type="html"><![CDATA[Monit - How to know when your web site is down]]></title>
     <link href="http://blog.kablamo.org/2013/11/24/monit/"/>
-    <updated>2013-11-24T00:00:00+00:00</updated>
+    <updated>2013-11-24T00:00:00+08:00</updated>
     <id>http://blog.kablamo.org/2013/11/24/monit</id>
     <content type="html"><![CDATA[<p>If your website goes down, you want to find out fast.  There are a few ways to
 accomplish this, but I&rsquo;m using <a href="http://mmonit.com/monit">monit</a>.  Monit is a
@@ -398,7 +444,7 @@ something ever gets misconfigured somewhere. <code>/etc/monit/conf.d/end2end</co
   <entry>
     <title type="html"><![CDATA[Devops with Rex]]></title>
     <link href="http://blog.kablamo.org/2013/11/22/rex/"/>
-    <updated>2013-11-22T00:00:00+00:00</updated>
+    <updated>2013-11-22T00:00:00+08:00</updated>
     <id>http://blog.kablamo.org/2013/11/22/rex</id>
     <content type="html"><![CDATA[<p>I have recently been playing with <a href="http://www.rexify.org/">Rex</a> and wanted to
 write down some of my initial thoughts.</p>
@@ -475,180 +521,6 @@ DSL.</p>
 
 <p>If anyone uses Rex to manage more than 50 servers, I would love to get in touch
 with you and ask a few questions.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Down a rabbit hole - Go-lang and its decentralized CPAN]]></title>
-    <link href="http://blog.kablamo.org/2013/11/13/go/"/>
-    <updated>2013-11-13T00:00:00+00:00</updated>
-    <id>http://blog.kablamo.org/2013/11/13/go</id>
-    <content type="html"><![CDATA[<p>I have been in a rabbit hole for the last week.  I started by looking at Docker
-(<a href="http://blog.kablamo.org/2013/11/13/docker/">See my previous post</a>).  It turns
-out Docker is written in Go and so somehow I ended up learning
-<a href="http://golang.org/">Go</a>.  Well &ldquo;learning&rdquo; is an overstatement.  I&rsquo;ve read
-about it for a few days and wrote a tiny bit of code.</p>
-
-<p>But anyway, the coolest thing about Go so far is its decentralized libraries.
-<em>Centralized</em> collections of libraries have been all the rage the last few years
-and it seems like all the languages have gotten hip to that &mdash; CPAN, rubygems,
-pypi, npm, etc.</p>
-
-<p>But one of the biggest problems with publishing Perl modules on CPAN is how
-difficult it is to do.  Sure its easy after you figure out the PAUSE website
-exists, create a PAUSE account, read all the Dist::Zilla docs and some of the
-source code, and write your own personalized plugin.  After that it just takes
-one little command.</p>
-
-<h1>How it works in Go</h1>
-
-<p>If you want to use some libraries in your Go code, it looks like this:</p>
-
-<pre><code>import (
-    "log" 
-    "time"
-    "errors"
-    "github.com/dotcloud/docker"
-    "github.com/fsouza/go-dockerclient"
-)
-</code></pre>
-
-<p>The first 3 are core libraries distributed as part of Go.  But the last two you
-have to download and install yourself.  Doing that is very simple:</p>
-
-<pre><code>export GOROOT=$HOME/go
-go get github.com/dotcloud/docker
-</code></pre>
-
-<p>This downloads all the dependencies too.  Of course.</p>
-
-<p>The next question you will ask me is how do people learn about new libraries in
-a decentralized world?  There are websites like
-<a href="http://gowalker.org/">http://gowalker.org/</a> which scrape GitHub&rsquo;s recent updates
-page.  They also do this for BitBucket, Google Project Hosting, and a couple
-other sites.</p>
-
-<p>This new language has shiny modern features and is very easy to get up and
-running.</p>
-
-<pre style="font: 4px/2px monospace; color: #333; background: transparent; border: 0px; border-radius: 0; box-shadow: 0 0 0 0;">
-                              ,'#@@@@@@@#+';;;''#@@@@@#,                            
-                          ;@@@@#;.                    '@@@;                         
-                       ;@@@:                             ,@@@                       
-                     #@@.                                   +@@                     
-                   @@+                                        +@;   +@@@@@#         
-         ,,      +@+                               #@@@@+       @@@@#  @@       
-     .@@@@@@@@' @@      .+@@@+.                 :@        @,     @@         @@      
-    @@:      .@@;     ++       #+              @            @     #@         @@     
-   @@         @;               @            @              @     @@         @     
-  ;@         @#    ,:             '        @                @     @' :    #+    
-  @         +@     ;               '        ;                  ,     @@@@;    ,@    
-  @      '' @     @                 @       #                  @     '@@@@     @    
- :@     @@@@:    :                   .     ,                          @@@@     @    
- ;#     @@@@     @                   @     #  +@@@:             +     ,@@     ,@    
- :@     @@@    : ,@@@@             +     @ #@@@@@:            @      @    @;    
-  @     .@@     @@@@@                  @ @@@@@@@            @      :@     @     
-  @      @,     . @@@@@@@                  @ @@@@@:@            @       @    @:     
-  ;@     @      . @@@@@.@.                 @ @@@@@            #       #' .@'      
-   @@   '#       @@@@ ,            :     ; ,@@@@@             :       @@.       
-    @@. @.       # @@@@@'            @      ;  #@#             :         @:         
-     ,@@@        @  '@#.             +      @                  @         @:         
-       .@         :                 '        @                '          :@         
-       '#         +                 ;         '              .,           @         
-       @:          @               @  @@@@@@,  @            ;,            @         
-       @          @             @  @@@@@@@@.  @:        .@              @,        
-       @             ;+         #,  #@@@@@@@@'    +@+::+@#                ++        
-       @               ;@;,.,'@:    @@@@@@@@@@:                           :@        
-       @                          #, ,@@@@@@   @                           @        
-      .@                         @              '                          @        
-      ;#                                       @                         @        
-      ++                        :                ;                         @        
-      +'                                         '                         @        
-      #:                         @    ;@;@'@     @                         @      
-      @,                          :+''   @  .@@@:                          @.       
-      @,                                 @   :                             @.       
-      @.                            ,    @   .                             @,       
-      @,                            ;    @                                 @,       
-      @,                            '    @                                 @:       
-      #:                            :    @                                 @:       
-      #;                             +  @ :  @                             @:       
-      ++                              +;   ;.                              @:       
-      ;#                                                                   @:       
-      ,@                                                                   @:       
-       @                                                                   @:       
-       @                                                                   @,       
-       @                                                                   @,       
-       @                                                                 @,       
-       @,                                                                  @,       
-       +'                                                                  @,       
-       :@                                                                  @:       
-       .@                                                                  @:       
-        @                                                                  @:       
-        @                                                                  #;       
-        @                                                                  #;       
-        @                                                                  +@@,     
-      '#@                                                                  '+  ;@.  
-   +@.  @                                                                  '#     @ 
- ';     @                                                                  ;@      @
-.       @                                                                  :@      #
-@       @                                                                  ,@    @ @
-+ @  ,@                                                                  .@@    # 
- @    ':@                                                                   +; .+ 
- ,.  @ .@                                                                   @     
-   ;   .@                                                                   @       
-       ,@                                                                   @       
-       :@                                                                   @       
-       ;#                                                                   @       
-       '#                                                                   @       
-       '+                                                                   @       
-       +'                                                                   @       
-       #;                                                                   @       
-       #;                                                                   @       
-       @:                                                                   @     
-       @:                                                                   @.      
-       @,                                                                   @,      
-       @,                                                                   @,      
-       @,                                                                   @,      
-       @,                                                                   @,      
-       @.                                                                   @.      
-       @.                                                                   @     
-       @.                                                                   @       
-       @.                                                                   @       
-       @,                                                                   @       
-       @,                                                                   @       
-       @,                                                                  .@       
-       @,                                                                  '#       
-       @:                                                                  @:       
-       @:                                                                  @        
-       #;                                                                  @        
-       +'                                                                 ,@        
-       '+                                                                 #'        
-       ,@                                                                 @         
-        @                                                                         
-        @.                                                               @'         
-        ;@                                                               @          
-         @                                                              +@          
-         '@                                                             @           
-          @,                                                           #@           
-          .@                                                           @            
-           #@                                                         @:            
-            @#                                                       @#             
-             @+                                                     @@              
-              @#                                                  .@@               
-               @@@#                                              @   .#             
-             ''    #                                            @      @            
-            @       @                                          @        '           
-           @         @                                       @@+        ;           
-          :   .       @+                                  :@@+  +.    @  +          
-          @  @      @, #@@;                            ;@@@,     ;    .  @          
-          ' @     ':     ,@@@#:                   :+@@@@:         #    @ @          
-          @ :    #           ;@@@@@@@#####@@@@@@@@@+.              @   ; .          
-           @    @                  ,:;''';;:,                     @  #,           
-            ;@##                                                     `             
-</pre>
-
-
-<p>(the golang mascot)</p>
 ]]></content>
   </entry>
   

@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Whats in your $PERL5LIB? - KABLAMO</title>
+  <title>I made a Readline cheat sheet - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="Ever wonder whats in your $PERL5LIB? Here is one way to find out: ⚡ echo $PERL5LIB
-.:./lib:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5:/ &hellip;">
+  <meta name="description" content="Recently Ovid pointed out large projects are much more likely to fail.
+I have a few large goals I&rsquo;d like to accomplish. For example I want to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2013/01/29/whats-in-your-perl5lib">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/01/01/readline-cheat-sheet">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -60,7 +60,7 @@
   
   <header>
     
-      <h1 class="entry-title">Whats in Your $PERL5LIB?</h1>
+      <h1 class="entry-title">I Made a Readline Cheat Sheet</h1>
     
     
       <p class="meta">
@@ -77,42 +77,51 @@
 
 
 
-<time datetime="2013-01-29T00:00:00+08:00" pubdate data-updated="true">Jan 29<span>th</span>, 2013</time>
+<time datetime="2014-01-01T00:00:00+08:00" pubdate data-updated="true">Jan 1<span>st</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Ever wonder whats in your $PERL5LIB?  Here is one way to find out:</p>
+<div class="entry-content"><p>Recently Ovid pointed out <a href="http://blogs.perl.org/users/ovid/2014/01/ditching-a-language.html">large projects are much more likely to fail</a>.
+I have a few large goals I&rsquo;d like to accomplish.  For example I want to improve
+my front end design skills.  Rather than trying to tackle this problem all
+at once, I made up a small project for myself.</p>
 
-<pre><code>⚡ echo $PERL5LIB
-.:./lib:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5:/home/eri
-c/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux:/home/eric/perl
-5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux-gnu-thread-multi-64in
-t:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/site_perl:/home/eric/
-perl5/perlbrew/perls/perl-5.16.2/lib/5.16.2
-</code></pre>
+<p>I created a <a href="http://readline.kablamo.org/emacs.html">Readline cheat sheet</a> and
+I was able to complete this project in about a day.  Here are some
+of the things I learned:</p>
 
-<p>My human eyeballs are not equipped to parse that.  Unhelpful.  So I put this in
-my .bashrc:</p>
+<ul>
+<li><p><strong>Bootstrap</strong> &ndash; I always worry libraries and frameworks like
+<a href="http://getbootstrap.com">Bootstrap</a> are overkill and bloat since I only need
+a tiny portion of their features.  But its undeniable that I was able to quickly
+build a responsive mobile friendly website without needing to worry about the
+technical details.</p></li>
+<li><p><strong>Readline commands</strong> &ndash; If I had to pick one keyboad shortcut to recommend it
+would be <code>Ctrl-r</code> which allows you to search backwards through your
+history.  I also like the incremental undo command: <code>Ctrl-_</code>.</p></li>
+<li><p><strong>Text::Xslate</strong> &ndash; People keep mentioning
+<a href="https://metacpan.org/pod/Text::Xslate">Text::Xslate</a> so I wanted to give it a try.
+The docs say its full featured and very fast.  I liked that HTML metacharacters
+are escaped by default to avoid cross site scripting attacks.  Also it supports
+Template Toolkit syntax.  I didn&rsquo;t find any new killer features, but it was a
+pleasure to work with.</p></li>
+<li><p><strong>Some new <a href="http://helabs.com.br/blog/2014/01/21/prevent-common-problems-when-writing-css-from-scratch/">CSS tricks</a></strong> &ndash;
+The best trick I learned is how to keep my footer at the bottom of the page
+even when it has only a few lines of content.</p></li>
+</ul>
 
-<pre><code>alias perl5lib='perl -E "say join \"\n\", split \":\", \$ENV{PERL5LIB}"'
-</code></pre>
 
-<p>Here it is in action:</p>
+<p>I was able to practice design, layout, color, and font selection.  And who
+knows &mdash; perhaps this project will also drive a tiny bit of traffic to my
+github profile and increase my
+<a href="http://www.codusoperandi.com/posts/increasing-your-luck-surface-area">luck surface area</a>.</p>
 
-<pre><code>⚡ perl5lib
-.
-./lib
-/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5
-/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux
-/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux-gnu-thread-multi-64int
-/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/site_perl
-/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/5.16.2
-</code></pre>
+<p>The momentum feels good.  I need to remember to keep my projects small more often.</p>
 
-<p>Better.</p>
+<p><img src="/images/for-posts/2014-02-02.png" width="700" height="424"></p>
 </div>
 
 
@@ -131,7 +140,7 @@ my .bashrc:</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/01/29/whats-in-your-perl5lib/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/01/29/whats-in-your-perl5lib/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2014/01/01/readline-cheat-sheet/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2014/01/01/readline-cheat-sheet/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -145,10 +154,8 @@ my .bashrc:</p>
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/01/27/git-spark-revisited/" title="Previous Post: git-spark revisited">&laquo; git-spark revisited</a>
+        <a class="basic-alignment left" href="/2014/01/01/no-dessert-forever/" title="Previous Post: No dessert forever">&laquo; No dessert forever</a>
       
-      
-        <a class="basic-alignment right" href="/2013/02/02/git-ribbon/" title="Next Post: git-ribbon">git-ribbon &raquo;</a>
       
     </p>
   </footer>
@@ -226,8 +233,8 @@ my .bashrc:</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2013/01/29/whats-in-your-perl5lib/';
-        var disqus_url = 'http://blog.kablamo.org/2013/01/29/whats-in-your-perl5lib/';
+        var disqus_identifier = 'http://blog.kablamo.org/2014/01/01/readline-cheat-sheet/';
+        var disqus_url = 'http://blog.kablamo.org/2014/01/01/readline-cheat-sheet/';
         var disqus_script = 'embed.js';
       
     (function () {
