@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/perl/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-02-03T01:14:05+08:00</updated>
+  <updated>2014-02-26T13:19:26-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[I made a Readline cheat sheet]]></title>
     <link href="http://blog.kablamo.org/2014/01/01/readline-cheat-sheet/"/>
-    <updated>2014-01-01T00:00:00+08:00</updated>
+    <updated>2014-01-01T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2014/01/01/readline-cheat-sheet</id>
     <content type="html"><![CDATA[<p>Recently Ovid pointed out <a href="http://blogs.perl.org/users/ovid/2014/01/ditching-a-language.html">large projects are much more likely to fail</a>.
 I have a few large goals I&rsquo;d like to accomplish.  For example I want to improve
@@ -62,7 +62,7 @@ github profile and increase my
   <entry>
     <title type="html"><![CDATA[Salt and pepper - How to encrypt database passwords]]></title>
     <link href="http://blog.kablamo.org/2013/12/18/authen-passphrase/"/>
-    <updated>2013-12-18T00:00:00+08:00</updated>
+    <updated>2013-12-18T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/12/18/authen-passphrase</id>
     <content type="html"><![CDATA[<p>To explain how salt and pepper work in encryption, I will walk through a few
 scenarios.</p>
@@ -243,7 +243,7 @@ characters or more.</p>
   <entry>
     <title type="html"><![CDATA[Anyenv + Plenv + Carton]]></title>
     <link href="http://blog.kablamo.org/2013/11/25/plenv/"/>
-    <updated>2013-11-25T00:00:00+08:00</updated>
+    <updated>2013-11-25T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/25/plenv</id>
     <content type="html"><![CDATA[<p>Recently I started breaking out of my Perl-only isolation bubble and dabbling
 with other languages. I was surprised how easy and comfortable other languages
@@ -353,7 +353,7 @@ way I can be sure my code will run as successfully for them as it did for me.</p
   <entry>
     <title type="html"><![CDATA[Monit - How to know when your web site is down]]></title>
     <link href="http://blog.kablamo.org/2013/11/24/monit/"/>
-    <updated>2013-11-24T00:00:00+08:00</updated>
+    <updated>2013-11-24T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/24/monit</id>
     <content type="html"><![CDATA[<p>If your website goes down, you want to find out fast.  There are a few ways to
 accomplish this, but I&rsquo;m using <a href="http://mmonit.com/monit">monit</a>.  Monit is a
@@ -444,7 +444,7 @@ something ever gets misconfigured somewhere. <code>/etc/monit/conf.d/end2end</co
   <entry>
     <title type="html"><![CDATA[Devops with Rex]]></title>
     <link href="http://blog.kablamo.org/2013/11/22/rex/"/>
-    <updated>2013-11-22T00:00:00+08:00</updated>
+    <updated>2013-11-22T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/22/rex</id>
     <content type="html"><![CDATA[<p>I have recently been playing with <a href="http://www.rexify.org/">Rex</a> and wanted to
 write down some of my initial thoughts.</p>

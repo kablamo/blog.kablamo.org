@@ -4,7 +4,7 @@
   <title><![CDATA[Category: go | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/go/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-02-03T01:14:05+08:00</updated>
+  <updated>2014-02-26T13:19:26-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Down a rabbit hole - Go-lang and its decentralized CPAN]]></title>
     <link href="http://blog.kablamo.org/2013/11/13/go/"/>
-    <updated>2013-11-13T00:00:00+08:00</updated>
+    <updated>2013-11-13T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/13/go</id>
     <content type="html"><![CDATA[<p>I have been in a rabbit hole for the last week.  I started by looking at Docker
 (<a href="http://blog.kablamo.org/2013/11/13/docker/">See my previous post</a>).  It turns
