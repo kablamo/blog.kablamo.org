@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: perl,duckduckgo | KABLAMO]]></title>
+  <link href="http://blog.kablamo.org/categories/perl-duckduckgo/atom.xml" rel="self"/>
+  <link href="http://blog.kablamo.org/"/>
+  <updated>2014-02-28T23:10:16-05:00</updated>
+  <id>http://blog.kablamo.org/</id>
+  <author>
+    <name><![CDATA[Eric Johnson]]></name>
+    <email><![CDATA[kablamo@kablamo.org]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to build a Duck Duck Go instant answer]]></title>
+    <link href="http://blog.kablamo.org/2014/02/28/duckduckgo/"/>
+    <updated>2014-02-28T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/02/28/duckduckgo</id>
+    <content type="html"><![CDATA[<p>Instant answers are those little boxes at the top of the DuckDuckGo search
+results page.  I made one for discovering international calling codes &mdash; or
+dialing codes if you prefer.</p>
+
+<p>{%img /images/for-posts/2014-02-28-singapore.png 700 424 %}
+{%img /images/for-posts/2014-02-28-down-under.png 700 424 %}</p>
+
+<p>If you want to hack on DuckDuckGo its pretty simple to <a href="http://duckduckhack.com">get started</a>.
+You can use Vagrant and VirtualBox to get a complete working dev environment.
+But if you are already running Ubuntu or OSX the following recipe is easier:</p>
+
+<pre><code>curl http://duckpan.org/install.pl | perl
+cpanm App::DuckPAN
+duckpan installdeps
+</code></pre>
+
+<p>Next fork the repo you want to hack on.  This depends on what data source you use
+to generate your instant answer.</p>
+
+<ul>
+<li> <a href="https://github.com/duckduckgo/zeroclickinfo-spice/fork">Fork the spice repo</a>
+ if you have a real time data source like a JSON API.</li>
+<li> <a href="https://github.com/duckduckgo/zeroclickinfo-goodie/fork">Fork the goodie repo</a>
+ if you generate your instant answer with code and need no network access.</li>
+<li> <a href="https://github.com/duckduckgo/zeroclickinfo-fathead/fork">Fork the fathead repo</a>
+ if your data source can be placed in a key/value store.</li>
+<li> <a href="https://github.com/duckduckgo/zeroclickinfo-fathead/fork">Fork the longtail repo</a>
+ if your data source requires a full text search.</li>
+</ul>
+
+
+<p>Now you can start hacking.  I&rsquo;ll show you a very simple goodie from the repo,
+but I added comments to explain whats happening.</p>
+
+<pre><code>package DDG::Goodie::Capitalize;
+use DDG::Goodie;
+
+# If a DuckDuckGo search query contains any of these words at the start or
+# end of the query, the 'remainder' handler below will run.
+triggers startend =&gt; 'capitalize', 'uppercase', 'upper case';
+
+# This block of code is pretty much meta data describing this instant
+# answer.  Mostly it is used by https://duckduckgo.com/goodies.
+zci answer_type =&gt; "capitalize";
+primary_example_queries 'capitalize this';
+secondary_example_queries 'uppercase that';
+description 'capitalize a string';
+name 'Capitalize';
+code_url 'https://github.com/duckduckgo/zeroclickinfo-goodies/blob/master/lib/DDG/Goodie/Capitalize.pm';
+category 'conversions';
+topics 'programming';
+attribution twitter =&gt; 'crazedpsyc',
+            cpan    =&gt; 'CRZEDPSYC' ;
+
+# This is is where the magic happens.  $_ contains the query minus the
+# trigger word.  The return value from this sub shows up on the DuckDuckGo
+# search results page as an instant answer.
+handle remainder =&gt; sub { uc ($_) };
+</code></pre>
+
+<p>To see your code in action launch a little web server with the following command:</p>
+
+<pre><code>duckpan server
+</code></pre>
+
+<p>Then open your favorite web browser and surf to <a href="http://0:5000/.">http://0:5000/.</a></p>
+]]></content>
+  </entry>
+  
+</feed>
