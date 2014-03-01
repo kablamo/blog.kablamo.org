@@ -94,17 +94,18 @@ dialing codes if you prefer.</p>
 <p><img src="/images/for-posts/2014-02-28-singapore.png" width="700" height="424">
 <img src="/images/for-posts/2014-02-28-down-under.png" width="700" height="424"></p>
 
-<p>If you want to hack on DuckDuckGo its pretty simple to <a href="http://duckduckhack.com">get started</a>.
-You can use Vagrant and VirtualBox to get a complete working dev environment.
-But if you are already running Ubuntu or OSX the following recipe is easier:</p>
+<p>If you want to hack on DuckDuckGo and add your own instant answer its pretty
+simple to <a href="http://duckduckhack.com">get started</a>.  You can use Vagrant and
+VirtualBox to get a complete working dev environment.  But if you are already
+running Ubuntu or OSX the following recipe is easier:</p>
 
-<pre><code>curl http://duckpan.org/install.pl | perl
+<pre><code>curl http://duckpan.org/install.pl | perl 
 cpanm App::DuckPAN
-duckpan installdeps
+duckpan installdeps # installs dependencies from DuckPAN (not CPAN) to locallib
 </code></pre>
 
-<p>Next fork the repo you want to hack on.  This depends on what data source you use
-to generate your instant answer.</p>
+<p>Next fork the repository you want to hack on.  Pick the repo appropriate for
+data source you use to generate your instant answer.</p>
 
 <ul>
 <li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-spice">spice repo</a>
@@ -118,8 +119,9 @@ to generate your instant answer.</p>
 </ul>
 
 
-<p>Now you can start hacking.  I&rsquo;ll show you a very simple goodie from the repo,
-but I added comments to explain whats happening.</p>
+<p>Now you can start hacking.  I&rsquo;ll show you how the capitalization instant answer
+from the goodie repo works.  Below is the code.  I added comments to explain
+things a bit.</p>
 
 <pre><code>package DDG::Goodie::Capitalize;
 use DDG::Goodie;
@@ -152,7 +154,11 @@ handle remainder =&gt; sub { uc ($_) };
 <pre><code>duckpan server
 </code></pre>
 
-<p>Then open your favorite web browser and surf to <a href="http://0:5000/.">http://0:5000/.</a></p>
+<p>Then open your favorite web browser and surf to
+<a href="http://0:5000/?q=capitalize+aliens+smell+better+than+dinosaurs">http://0:5000/?q=capitalize+aliens+smell+better+than+dinosaurs</a> and you should
+see something like this:</p>
+
+<p><img src="/images/for-posts/2014-02-28-capitalize.png" width="700" height="424"></p>
 </div>
   
   
