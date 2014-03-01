@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-03-01T11:26:46-05:00</updated>
+  <updated>2014-03-01T11:30:59-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -35,8 +35,8 @@ cpanm App::DuckPAN
 duckpan installdeps # installs dependencies from DuckPAN (not CPAN) to locallib
 </code></pre>
 
-<p>Next fork the repository you want to hack on.  Pick the repo appropriate for
-data source you use to generate your instant answer.</p>
+<p>Next fork the repository you want to hack on.  To choose the correct repository
+think about what kind of data source you are using to generate your instant answer.</p>
 
 <ul>
 <li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-spice">spice repo</a>
