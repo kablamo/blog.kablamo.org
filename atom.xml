@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-02-28T23:10:13-05:00</updated>
+  <updated>2014-03-01T10:13:26-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -38,13 +38,13 @@ duckpan installdeps
 to generate your instant answer.</p>
 
 <ul>
-<li> <a href="https://github.com/duckduckgo/zeroclickinfo-spice/fork">Fork the spice repo</a>
- if you have a real time data source like a JSON API.</li>
-<li> <a href="https://github.com/duckduckgo/zeroclickinfo-goodie/fork">Fork the goodie repo</a>
+<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-spice">spice repo</a>
+ if you have a real time data source like a JSON web API.</li>
+<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-goodie">goodie repo</a>
  if you generate your instant answer with code and need no network access.</li>
-<li> <a href="https://github.com/duckduckgo/zeroclickinfo-fathead/fork">Fork the fathead repo</a>
+<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-fathead">fathead repo</a>
  if your data source can be placed in a key/value store.</li>
-<li> <a href="https://github.com/duckduckgo/zeroclickinfo-fathead/fork">Fork the longtail repo</a>
+<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-fathead">longtail repo</a>
  if your data source requires a full text search.</li>
 </ul>
 
