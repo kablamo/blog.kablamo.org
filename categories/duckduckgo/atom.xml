@@ -4,7 +4,7 @@
   <title><![CDATA[Category: duckduckgo | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/duckduckgo/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-03-01T11:30:59-05:00</updated>
+  <updated>2014-03-01T12:07:43-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -80,7 +80,7 @@ attribution twitter =&gt; 'crazedpsyc',
 handle remainder =&gt; sub { uc ($_) };
 </code></pre>
 
-<p>To see your code in action launch a little web server with the following command:</p>
+<p>To test your new instant answer you can launch a little web server with the following command:</p>
 
 <pre><code>duckpan server
 </code></pre>
