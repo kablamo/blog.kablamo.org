@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-03-01T12:07:43-05:00</updated>
+  <updated>2014-03-14T09:23:15-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -14,9 +14,75 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Questions I ask in interviews]]></title>
+    <link href="http://blog.kablamo.org/2014/03/14/interview-questions/"/>
+    <updated>2014-03-14T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/03/14/interview-questions</id>
+    <content type="html"><![CDATA[<p>I recently relocated from London to the Chicago area so I have been doing
+interviews.  When I interview a potential client or employer I carry this list of
+questions with me.  Most of the questions I have taken from other sources
+online.  I have listed them in roughly the order I ask them.</p>
+
+<h1>Understanding the job</h1>
+
+<ul>
+<li>What will I be doing every day (precisely)?</li>
+<li>Why are you hiring? New product? Scaling? Someone quit?</li>
+<li>Who will I report to?</li>
+<li>Who will I be working with?  How big are the teams?</li>
+<li>What are my boss&#8217; goals for the next 6 months/year?</li>
+<li>What is the key metric for the company? For my group? For my boss?</li>
+</ul>
+
+
+<h1>Understanding the culture</h1>
+
+<ul>
+<li>How do you build software?  Where do requirements and features come from?
+Is it a very formal process or is there no process?</li>
+<li>What problems does the group have that need to be solved?</li>
+<li>Is there a mandate to fix legacy code and problems that exist?</li>
+<li>What do you wish you had known before starting work here?</li>
+<li>Whats the worst part of this job and whats the coolest thing you have built here, personally?</li>
+</ul>
+
+
+<h1>Tools and best practices</h1>
+
+<ul>
+<li>What tools are being used?
+
+<ul>
+<li>bug tracking</li>
+<li>version control</li>
+<li>which version of Perl</li>
+<li>what operating system</li>
+<li>why were those choices made</li>
+</ul>
+</li>
+<li>Is there a mandate to use the latest stuff from CPAN?</li>
+<li>Are there tests?</li>
+<li>Are there automated tests?</li>
+<li>What is deployment like?</li>
+<li>Is Moose used? OO?</li>
+</ul>
+
+
+<h1>Miscellaneous</h1>
+
+<ul>
+<li>Is there any allowance for remote work?</li>
+<li>Are there core business hours?</li>
+<li>Will I be oncall?</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[How to build a Duck Duck Go instant answer]]></title>
     <link href="http://blog.kablamo.org/2014/02/28/duckduckgo/"/>
-    <updated>2014-02-28T00:00:00-05:00</updated>
+    <updated>2014-02-28T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2014/02/28/duckduckgo</id>
     <content type="html"><![CDATA[<p>Instant answers are those little boxes at the top of the DuckDuckGo search
 results page.  I made one for discovering international calling codes &mdash; or
@@ -96,7 +162,7 @@ see something like this:</p>
   <entry>
     <title type="html"><![CDATA[I made a Readline cheat sheet]]></title>
     <link href="http://blog.kablamo.org/2014/01/01/readline-cheat-sheet/"/>
-    <updated>2014-01-01T00:00:00-05:00</updated>
+    <updated>2014-01-01T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2014/01/01/readline-cheat-sheet</id>
     <content type="html"><![CDATA[<p>Recently Ovid pointed out <a href="http://blogs.perl.org/users/ovid/2014/01/ditching-a-language.html">large projects are much more likely to fail</a>.
 I have a few large goals I&rsquo;d like to accomplish.  For example I want to improve
@@ -142,7 +208,7 @@ github profile and increase my
   <entry>
     <title type="html"><![CDATA[No dessert forever]]></title>
     <link href="http://blog.kablamo.org/2014/01/01/no-dessert-forever/"/>
-    <updated>2014-01-01T00:00:00-05:00</updated>
+    <updated>2014-01-01T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2014/01/01/no-dessert-forever</id>
     <content type="html"><![CDATA[<p>For years I have been hearing people say sugar is the new bad thing.  So I
 finally got around to reading up on this claim.  Here is what I learned.</p>
@@ -199,7 +265,7 @@ The rules are:</p>
   <entry>
     <title type="html"><![CDATA[Salt and pepper - How to encrypt database passwords]]></title>
     <link href="http://blog.kablamo.org/2013/12/18/authen-passphrase/"/>
-    <updated>2013-12-18T00:00:00-05:00</updated>
+    <updated>2013-12-18T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/12/18/authen-passphrase</id>
     <content type="html"><![CDATA[<p>To explain how salt and pepper work in encryption, I will walk through a few
 scenarios.</p>
@@ -380,7 +446,7 @@ characters or more.</p>
   <entry>
     <title type="html"><![CDATA[Ray Dalio's "Principles"]]></title>
     <link href="http://blog.kablamo.org/2013/12/15/dalios-principles/"/>
-    <updated>2013-12-15T00:00:00-05:00</updated>
+    <updated>2013-12-15T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/12/15/dalios-principles</id>
     <content type="html"><![CDATA[<p>I have been reading Ray Dalio&rsquo;s <em>Principles</em>.  Ray Dalio is the CEO of
 Bridgewater which is a big famous successful hedge fund he started in the 70&rsquo;s.
@@ -429,7 +495,7 @@ always interesting and is a great source of new ideas for me.</p>
   <entry>
     <title type="html"><![CDATA[How to find and restore deleted files with git]]></title>
     <link href="http://blog.kablamo.org/2013/12/08/git-restore/"/>
-    <updated>2013-12-08T00:00:00-05:00</updated>
+    <updated>2013-12-08T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/12/08/git-restore</id>
     <content type="html"><![CDATA[<p>Don&rsquo;t be afraid to delete files from your git repository.  You can get restore
 them.  You can even search for a string in a deleted file.  Here is how to find
@@ -481,7 +547,7 @@ lord of source control.</p>
   <entry>
     <title type="html"><![CDATA[Tmux reloaded]]></title>
     <link href="http://blog.kablamo.org/2013/11/27/tmux-reloaded/"/>
-    <updated>2013-11-27T00:00:00-05:00</updated>
+    <updated>2013-11-27T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/11/27/tmux-reloaded</id>
     <content type="html"><![CDATA[<p>To reload your tmux configuration without restarting the server, add this to
 your <code>~/.tmux.conf</code> file:</p>
@@ -497,7 +563,7 @@ bind R source-file ~/.tmux.conf \; display-message "Config reloaded"
   <entry>
     <title type="html"><![CDATA[Configure tmux to give you status updates about anything]]></title>
     <link href="http://blog.kablamo.org/2013/11/26/tmux-status-updates/"/>
-    <updated>2013-11-26T00:00:00-05:00</updated>
+    <updated>2013-11-26T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/11/26/tmux-status-updates</id>
     <content type="html"><![CDATA[<p>I use and love OSX growl and Ubuntu notify style desktop notifications.  They
 are gorgeous.  But they are also distracting and after a few vibrant and
@@ -542,7 +608,7 @@ status bar.</p>
   <entry>
     <title type="html"><![CDATA[Anyenv + Plenv + Carton]]></title>
     <link href="http://blog.kablamo.org/2013/11/25/plenv/"/>
-    <updated>2013-11-25T00:00:00-05:00</updated>
+    <updated>2013-11-25T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/11/25/plenv</id>
     <content type="html"><![CDATA[<p>Recently I started breaking out of my Perl-only isolation bubble and dabbling
 with other languages. I was surprised how easy and comfortable other languages
@@ -652,7 +718,7 @@ way I can be sure my code will run as successfully for them as it did for me.</p
   <entry>
     <title type="html"><![CDATA[Monit - How to know when your web site is down]]></title>
     <link href="http://blog.kablamo.org/2013/11/24/monit/"/>
-    <updated>2013-11-24T00:00:00-05:00</updated>
+    <updated>2013-11-24T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/11/24/monit</id>
     <content type="html"><![CDATA[<p>If your website goes down, you want to find out fast.  There are a few ways to
 accomplish this, but I&rsquo;m using <a href="http://mmonit.com/monit">monit</a>.  Monit is a
@@ -743,7 +809,7 @@ something ever gets misconfigured somewhere. <code>/etc/monit/conf.d/end2end</co
   <entry>
     <title type="html"><![CDATA[Devops with Rex]]></title>
     <link href="http://blog.kablamo.org/2013/11/22/rex/"/>
-    <updated>2013-11-22T00:00:00-05:00</updated>
+    <updated>2013-11-22T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/11/22/rex</id>
     <content type="html"><![CDATA[<p>I have recently been playing with <a href="http://www.rexify.org/">Rex</a> and wanted to
 write down some of my initial thoughts.</p>
@@ -826,7 +892,7 @@ with you and ask a few questions.</p>
   <entry>
     <title type="html"><![CDATA[Learning Ruby with online university classes]]></title>
     <link href="http://blog.kablamo.org/2013/11/19/learning-ruby/"/>
-    <updated>2013-11-19T00:00:00-05:00</updated>
+    <updated>2013-11-19T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/11/19/learning-ruby</id>
     <content type="html"><![CDATA[<p>I just completed UC Berkeley&rsquo;s Software as a Service class (via
 <a href="http://edx.com">edX.com</a>).  I had a great experience and highly recommend
@@ -967,7 +1033,7 @@ My next class is Chinese History.</p>
   <entry>
     <title type="html"><![CDATA[Down a rabbit hole - Go-lang and its decentralized CPAN]]></title>
     <link href="http://blog.kablamo.org/2013/11/13/go/"/>
-    <updated>2013-11-13T00:00:00-05:00</updated>
+    <updated>2013-11-13T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/11/13/go</id>
     <content type="html"><![CDATA[<p>I have been in a rabbit hole for the last week.  I started by looking at Docker
 (<a href="http://blog.kablamo.org/2013/11/13/docker/">See my previous post</a>).  It turns
@@ -1141,7 +1207,7 @@ running.</p>
   <entry>
     <title type="html"><![CDATA[Down a rabbit hole - Docker]]></title>
     <link href="http://blog.kablamo.org/2013/11/13/docker/"/>
-    <updated>2013-11-13T00:00:00-05:00</updated>
+    <updated>2013-11-13T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/11/13/docker</id>
     <content type="html"><![CDATA[<p>I have been in a rabbit hole for the last week.  I started looking at
 <a href="http://www.docker.io/">Docker</a>.</p>
@@ -1287,7 +1353,7 @@ More on that tomorrow.</p>
   <entry>
     <title type="html"><![CDATA[My contribution to the Linux ate my RAM problem]]></title>
     <link href="http://blog.kablamo.org/2013/11/12/linux_ate_my_ram/"/>
-    <updated>2013-11-12T00:00:00-05:00</updated>
+    <updated>2013-11-12T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/11/12/linux_ate_my_ram</id>
     <content type="html"><![CDATA[<p>I can never remember how to know how much free memory I have.</p>
 
@@ -1341,7 +1407,7 @@ Use it like this:</p>
   <entry>
     <title type="html"><![CDATA[git-vspark plots your commits vertically with Term::Vspark]]></title>
     <link href="http://blog.kablamo.org/2013/03/17/git-vspark/"/>
-    <updated>2013-03-17T00:00:00-04:00</updated>
+    <updated>2013-03-17T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/03/17/git-vspark</id>
     <content type="html"><![CDATA[<p>I added a <strong>git-vspark</strong> script to my App::Git::Spark CPAN module.  It does the
 same thing as <a href="https://github.com/kablamo/git-spark">git-spark</a> but instead of
@@ -1377,7 +1443,7 @@ in your own Perl code.</p>
   <entry>
     <title type="html"><![CDATA[Chinese zombie flashcards on GitHub (Catalyst & Perl)]]></title>
     <link href="http://blog.kablamo.org/2013/02/28/chinese-flashcards/"/>
-    <updated>2013-02-28T00:00:00-05:00</updated>
+    <updated>2013-02-28T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/02/28/chinese-flashcards</id>
     <content type="html"><![CDATA[<p>There seem to be quite a few Perl people learning Chinese so maybe this will be
 relevant here.</p>
@@ -1447,7 +1513,7 @@ course there are YouTube videos:</p>
   <entry>
     <title type="html"><![CDATA[Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome]]></title>
     <link href="http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/"/>
-    <updated>2013-02-20T00:00:00-05:00</updated>
+    <updated>2013-02-20T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve been using <a href="https://metacpan.org/module/Dist::Zilla">Dist::Zilla</a> for a
 couple years.  It&rsquo;s a powerful way to automate CPAN releases.</p>
@@ -1510,7 +1576,7 @@ weaver_config = @FLORA
   <entry>
     <title type="html"><![CDATA[CPAN release of App::Git::Ribbon, App::Git::Spark]]></title>
     <link href="http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/"/>
-    <updated>2013-02-12T00:00:00-05:00</updated>
+    <updated>2013-02-12T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark</id>
     <content type="html"><![CDATA[<p>I packaged up these scripts and released them on CPAN to make them a little
 easier to install and manage.</p>
@@ -1524,130 +1590,6 @@ previous <a href="http://blog.kablamo.org/git-ribbon">blog post</a></p>
 on <a href="https://metacpan.org/module/App::Git::Spark">CPAN</a><br>
 on <a href="https://github.com/kablamo/git-spark">GitHub</a><br>
 previous <a href="http://blog.kablamo.org/git-spark-revisited">blog post</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[git-ribbon]]></title>
-    <link href="http://blog.kablamo.org/2013/02/02/git-ribbon/"/>
-    <updated>2013-02-02T00:00:00-05:00</updated>
-    <id>http://blog.kablamo.org/2013/02/02/git-ribbon</id>
-    <content type="html"><![CDATA[<p>I wrote a little Perl script called
-<a href="https://github.com/kablamo/git-ribbon">git-ribbon</a> to help me review the
-latest changes in a git repository.</p>
-
-<p>The way I used to review changes was by reading through the <code>git log</code>.  I try
-to do this every morning at work to keep up with whats going on.  But I was
-having a few problems:</p>
-
-<ol>
-<li>Its hard to know exactly which changes are new.</li>
-<li>I want to review commits in the order they happened (instead of most recent first).</li>
-<li><code>git log</code> diff output can be hard to read and may not have enough context
-&mdash; sometimes I want a side by side diff like I get from <code>vimdiff</code> or <code>git
-difftool</code>.</li>
-</ol>
-
-
-<p>Basically I wanted a quick and easy way to review the latest changes in a way
-that feels a little more like an RSS feed.  So I wrote this script.</p>
-
-<h2>How to use git-ribbon</h2>
-
-<p><strong>First</strong> mark your current place in the commit history.  This command will
-place a tag named _ribbon at origin/master.  Basically its a bookmark at your
-current location.</p>
-
-<pre><code>⚡ git ribbon --save
-</code></pre>
-
-<p><strong>Next</strong>, pull the latest changes made by your fellow conspirators from the
-remote repository.</p>
-
-<pre><code>⚡ git pull
-</code></pre>
-
-<p><strong>Then</strong> use <code>git ribbon</code> to review only the changes that have occurred since _ribbon:</p>
-
-<pre><code>⚡ git ribbon
-Eric Johnson 6 weeks ago ecf43db
-Css tweaks.
-root/html/calculator/realCost.tt
-
-press 's' to skip 
-
-Eric Johnson 4 weeks ago 9595fa0
-fix css margin class.
-root/css/networth.css
-root/css/style.less
-root/css/style.less.old
-root/html/calculator/realCost.tt
-root/html/fi.tt
-
-press 's' to skip 
-
-Eric Johnson 2 weeks ago 5ef0fb2
-Added daysPerYear.
-lib/Networth/Controller/Calculator.pm
-lib/Networth/Out/RealCost.pm
-root/html/calculator/realCost.tt
-
-press 's' to skip 
-</code></pre>
-
-<p>The script will pause and wait for input when it prints <code>press 's' to skip</code>.
-If you type anything other than <code>s</code>, it will show you the side by side diff
-using <code>git difftool</code>.</p>
-
-<p><a href="http://farm9.staticflickr.com/8107/8457314152_7f8b3c955c_b.jpg" title="click to view large version"><img src="http://farm9.staticflickr.com/8107/8457314152_7f8b3c955c.jpg" width="500" height="201" alt="vimdiff"></a></p>
-
-<p>After you have reviewed all the changes, be sure to mark your place again so
-its ready to go next time you want to do a pull:</p>
-
-<pre><code>git ribbon --save
-</code></pre>
-
-<h2>Bonus tips</h2>
-
-<p>In your .gitconfig try this:</p>
-
-<pre><code>[diff]
-    tool = vimdiff
-</code></pre>
-
-<p>The default colors for vimdiff look like they were created by strange clowns so
-try this instead:</p>
-
-<pre><code>⚡ mkdir -p ~/.vim/colors/
-⚡ wget https://github.com/kablamo/dotfiles/blob/master/links/.vim/colors/iijo.vim -O ~/.vim/colors/iijo.vim
-⚡ echo "colorscheme iijo" &gt;&gt; ~/.vimrc
-</code></pre>
-
-<p>Then learn to use vimdiff:</p>
-
-<ul>
-<li>To switch windows type <code>ctl-w l</code> and <code>ctl-w h</code>.
-For more help type <code>:help window-move-cursor</code>.</li>
-<li>To open and close folds type <code>zo</code> and <code>zc</code>.
-For more help type <code>:help fold-commands</code>.</li>
-<li>To close vimdiff with less typing try <code>ZZ</code>.</li>
-</ul>
-
-
-<h2>Alternatives to vimdiff</h2>
-
-<p>If you don&rsquo;t want to invest the time just yet to learn vim, use an alternative like meld, opendiff,
-p4merge, xxdiff, etc.  Side by side diffs are worth it!</p>
-
-<h2>See also</h2>
-
-<p>This script was inspired by a great <a href="http://gitready.com/advanced/2011/10/21/ribbon-and-catchup-reading-new-commits.html">blog
-post</a>
-on gitready.com which has a number of awesome git tricks for both beginners and
-advanced users.</p>
-
-<p>I also ended up writing a <a href="https://github.com/kablamo/vim-ribbon">vim plugin</a>
-that is probably better user experience if you very comfortable in vim.</p>
 ]]></content>
   </entry>
   

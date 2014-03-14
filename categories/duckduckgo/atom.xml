@@ -4,7 +4,7 @@
   <title><![CDATA[Category: duckduckgo | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/duckduckgo/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-03-01T12:07:43-05:00</updated>
+  <updated>2014-03-14T09:23:15-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[How to build a Duck Duck Go instant answer]]></title>
     <link href="http://blog.kablamo.org/2014/02/28/duckduckgo/"/>
-    <updated>2014-02-28T00:00:00-05:00</updated>
+    <updated>2014-02-28T00:00:00-06:00</updated>
     <id>http://blog.kablamo.org/2014/02/28/duckduckgo</id>
     <content type="html"><![CDATA[<p>Instant answers are those little boxes at the top of the DuckDuckGo search
 results page.  I made one for discovering international calling codes &mdash; or
