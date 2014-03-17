@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-03-14T09:23:15-05:00</updated>
+  <updated>2014-03-16T21:16:05-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to disagree with an interviewer]]></title>
+    <link href="http://blog.kablamo.org/2014/03/16/disagree-interview/"/>
+    <updated>2014-03-16T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/03/16/disagree-interview</id>
+    <content type="html"><![CDATA[<p>Today I&rsquo;m writing about something I noticed while doing interviews recently.</p>
+
+<p>If I disagree with a decision a company made, I need to jump into that with
+both feet.  There is sometimes an instinct to say &ldquo;I suppose I can live with
+that&rdquo; or &ldquo;I don&rsquo;t know enough about why this choice was made to complain about
+it&rdquo;.  But the goal is not to complain or to highlight their ignorance or to
+have an argument.</p>
+
+<p>Disagreeing starts a discussion.  This creates an opportunity to do 2 things.</p>
+
+<p>First, it allows me to show case what I know.  The fact I have an opinion shows
+I have worked on this problem before and over the course of the discussion I
+will be able to demonstrate I understand the pros and cons of the different
+options and have expertise there.</p>
+
+<p>Second, I will come to understand why the company got into the position they
+are in.  Usually there is a good reason.  If it was made through ignorance I
+will find out if are they open to fixing the problem &mdash; subject to priorities
+of course.  I may also learn if they are interested in my opinion or are
+looking for a soldier who follows orders.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Questions I ask in interviews]]></title>
@@ -1570,26 +1598,6 @@ AutoMetaResources.repository.github = user:kablamo
 AutoMetaResources.bugtracker.github = user:kablamo
 weaver_config = @FLORA
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CPAN release of App::Git::Ribbon, App::Git::Spark]]></title>
-    <link href="http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/"/>
-    <updated>2013-02-12T00:00:00-06:00</updated>
-    <id>http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark</id>
-    <content type="html"><![CDATA[<p>I packaged up these scripts and released them on CPAN to make them a little
-easier to install and manage.</p>
-
-<p><strong>App::Git::Ribbon</strong> <br>
-on <a href="https://metacpan.org/module/App::Git::Ribbon">CPAN</a><br>
-on <a href="https://github.com/kablamo/git-ribbon">GitHub</a><br>
-previous <a href="http://blog.kablamo.org/git-ribbon">blog post</a></p>
-
-<p><strong>App::Git::Spark</strong> <br>
-on <a href="https://metacpan.org/module/App::Git::Spark">CPAN</a><br>
-on <a href="https://github.com/kablamo/git-spark">GitHub</a><br>
-previous <a href="http://blog.kablamo.org/git-spark-revisited">blog post</a></p>
 ]]></content>
   </entry>
   
