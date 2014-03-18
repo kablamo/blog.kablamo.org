@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-03-16T21:28:30-05:00</updated>
+  <updated>2014-03-17T22:39:04-04:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -14,9 +14,79 @@
 
   
   <entry>
+    <title type="html"><![CDATA[my vs our vs local]]></title>
+    <link href="http://blog.kablamo.org/2014/03/17/our-my-local/"/>
+    <updated>2014-03-17T00:00:00-04:00</updated>
+    <id>http://blog.kablamo.org/2014/03/17/our-my-local</id>
+    <content type="html"><![CDATA[<h1>The short version for the impatient</h1>
+
+<ul>
+<li> <code>my()</code> creates a local variable</li>
+<li> <code>our()</code> creates a package variable</li>
+<li> <code>local()</code> temporarily changes the local value of a global variable</li>
+<li> The above is mostly true.</li>
+</ul>
+
+
+<h1>The long version for the irrepressibly quixotic</h1>
+
+<h2>my()</h2>
+
+<p><code>my</code> declares the listed variable to be local to the enclosing block, file,
+or <code>eval</code>.  That is to say its <em>scope</em> is local.  This kind of variable is
+known as a <em>lexical variable</em>.  Note that lexical variables are hidden from
+subroutines which are called from within the enclosing block.  This is known as
+<em>lexical scoping</em>.</p>
+
+<h2>our()</h2>
+
+<p><code>our</code> creates an alias to a <em>package variable</em>.  The alias is local to the
+enclosing block, file, or <code>eval</code>.  That is to say the alias is lexically scoped
+just like any lexical variable.  However a package variable belongs to a
+package.  It can be accessed from anywhere if you use its fully qualified name.
+Here are two examples of fully qualified package variables:</p>
+
+<pre><code>$main::a
+%MyPackage::boop
+</code></pre>
+
+<p>Note that package variables are also global variables.</p>
+
+<h2>local()</h2>
+
+<p><code>local</code> gives temporary values to global variables.  It does not create a local
+variable.  It is most commonly used when you want to locally modify a global
+variable such as one of the punctuation variables.  For example:</p>
+
+<pre><code>{ 
+    local $| = 1; # enable autoflush for STDOUT
+    say "hi mom";
+}
+</code></pre>
+
+<p><code>local</code> modifies the listed variable to be local to the enclosing block,
+file, or <code>eval</code> &mdash; AND to any subroutine called from within that block.  This
+is known as <em>dynamic scoping</em>.</p>
+
+<h1>Sources</h1>
+
+<p>For a more complete understanding I recommend <code>perldoc perlfunc</code> and especially
+<code>perldoc perlsub</code>.  Also the following links may be helpful:</p>
+
+<ul>
+<li><a href="https://metacpan.org/pod/perlfunc">https://metacpan.org/pod/perlfunc</a></li>
+<li><a href="https://metacpan.org/pod/perlsub">https://metacpan.org/pod/perlsub</a></li>
+<li><a href="http://perlmaven.com/package-variables-and-lexical-variables-in-perl">http://perlmaven.com/package-variables-and-lexical-variables-in-perl</a></li>
+<li><a href="http://www.perlmonks.org/?node_id=95813">http://www.perlmonks.org/?node_id=95813</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Why you should disagree in an interview]]></title>
     <link href="http://blog.kablamo.org/2014/03/16/disagree-interview/"/>
-    <updated>2014-03-16T00:00:00-05:00</updated>
+    <updated>2014-03-16T00:00:00-04:00</updated>
     <id>http://blog.kablamo.org/2014/03/16/disagree-interview</id>
     <content type="html"><![CDATA[<p>Today I&rsquo;m writing about something I noticed while doing interviews recently.</p>
 
@@ -44,7 +114,7 @@ looking for a soldier who follows orders.</p>
   <entry>
     <title type="html"><![CDATA[Questions I ask in interviews]]></title>
     <link href="http://blog.kablamo.org/2014/03/14/interview-questions/"/>
-    <updated>2014-03-14T00:00:00-05:00</updated>
+    <updated>2014-03-14T00:00:00-04:00</updated>
     <id>http://blog.kablamo.org/2014/03/14/interview-questions</id>
     <content type="html"><![CDATA[<p>I recently relocated from London to the Chicago area so I have been doing
 interviews.  When I interview a potential client or employer I carry this list of
@@ -110,7 +180,7 @@ Is it a very formal process or is there no process?</li>
   <entry>
     <title type="html"><![CDATA[How to build a Duck Duck Go instant answer]]></title>
     <link href="http://blog.kablamo.org/2014/02/28/duckduckgo/"/>
-    <updated>2014-02-28T00:00:00-06:00</updated>
+    <updated>2014-02-28T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2014/02/28/duckduckgo</id>
     <content type="html"><![CDATA[<p>Instant answers are those little boxes at the top of the DuckDuckGo search
 results page.  I made one for discovering international calling codes &mdash; or
@@ -190,7 +260,7 @@ see something like this:</p>
   <entry>
     <title type="html"><![CDATA[I made a Readline cheat sheet]]></title>
     <link href="http://blog.kablamo.org/2014/01/01/readline-cheat-sheet/"/>
-    <updated>2014-01-01T00:00:00-06:00</updated>
+    <updated>2014-01-01T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2014/01/01/readline-cheat-sheet</id>
     <content type="html"><![CDATA[<p>Recently Ovid pointed out <a href="http://blogs.perl.org/users/ovid/2014/01/ditching-a-language.html">large projects are much more likely to fail</a>.
 I have a few large goals I&rsquo;d like to accomplish.  For example I want to improve
@@ -236,7 +306,7 @@ github profile and increase my
   <entry>
     <title type="html"><![CDATA[No dessert forever]]></title>
     <link href="http://blog.kablamo.org/2014/01/01/no-dessert-forever/"/>
-    <updated>2014-01-01T00:00:00-06:00</updated>
+    <updated>2014-01-01T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2014/01/01/no-dessert-forever</id>
     <content type="html"><![CDATA[<p>For years I have been hearing people say sugar is the new bad thing.  So I
 finally got around to reading up on this claim.  Here is what I learned.</p>
@@ -293,7 +363,7 @@ The rules are:</p>
   <entry>
     <title type="html"><![CDATA[Salt and pepper - How to encrypt database passwords]]></title>
     <link href="http://blog.kablamo.org/2013/12/18/authen-passphrase/"/>
-    <updated>2013-12-18T00:00:00-06:00</updated>
+    <updated>2013-12-18T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/12/18/authen-passphrase</id>
     <content type="html"><![CDATA[<p>To explain how salt and pepper work in encryption, I will walk through a few
 scenarios.</p>
@@ -474,7 +544,7 @@ characters or more.</p>
   <entry>
     <title type="html"><![CDATA[Ray Dalio's "Principles"]]></title>
     <link href="http://blog.kablamo.org/2013/12/15/dalios-principles/"/>
-    <updated>2013-12-15T00:00:00-06:00</updated>
+    <updated>2013-12-15T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/12/15/dalios-principles</id>
     <content type="html"><![CDATA[<p>I have been reading Ray Dalio&rsquo;s <em>Principles</em>.  Ray Dalio is the CEO of
 Bridgewater which is a big famous successful hedge fund he started in the 70&rsquo;s.
@@ -523,7 +593,7 @@ always interesting and is a great source of new ideas for me.</p>
   <entry>
     <title type="html"><![CDATA[How to find and restore deleted files with git]]></title>
     <link href="http://blog.kablamo.org/2013/12/08/git-restore/"/>
-    <updated>2013-12-08T00:00:00-06:00</updated>
+    <updated>2013-12-08T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/12/08/git-restore</id>
     <content type="html"><![CDATA[<p>Don&rsquo;t be afraid to delete files from your git repository.  You can get restore
 them.  You can even search for a string in a deleted file.  Here is how to find
@@ -575,7 +645,7 @@ lord of source control.</p>
   <entry>
     <title type="html"><![CDATA[Tmux reloaded]]></title>
     <link href="http://blog.kablamo.org/2013/11/27/tmux-reloaded/"/>
-    <updated>2013-11-27T00:00:00-06:00</updated>
+    <updated>2013-11-27T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/27/tmux-reloaded</id>
     <content type="html"><![CDATA[<p>To reload your tmux configuration without restarting the server, add this to
 your <code>~/.tmux.conf</code> file:</p>
@@ -591,7 +661,7 @@ bind R source-file ~/.tmux.conf \; display-message "Config reloaded"
   <entry>
     <title type="html"><![CDATA[Configure tmux to give you status updates about anything]]></title>
     <link href="http://blog.kablamo.org/2013/11/26/tmux-status-updates/"/>
-    <updated>2013-11-26T00:00:00-06:00</updated>
+    <updated>2013-11-26T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/26/tmux-status-updates</id>
     <content type="html"><![CDATA[<p>I use and love OSX growl and Ubuntu notify style desktop notifications.  They
 are gorgeous.  But they are also distracting and after a few vibrant and
@@ -636,7 +706,7 @@ status bar.</p>
   <entry>
     <title type="html"><![CDATA[Anyenv + Plenv + Carton]]></title>
     <link href="http://blog.kablamo.org/2013/11/25/plenv/"/>
-    <updated>2013-11-25T00:00:00-06:00</updated>
+    <updated>2013-11-25T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/25/plenv</id>
     <content type="html"><![CDATA[<p>Recently I started breaking out of my Perl-only isolation bubble and dabbling
 with other languages. I was surprised how easy and comfortable other languages
@@ -746,7 +816,7 @@ way I can be sure my code will run as successfully for them as it did for me.</p
   <entry>
     <title type="html"><![CDATA[Monit - How to know when your web site is down]]></title>
     <link href="http://blog.kablamo.org/2013/11/24/monit/"/>
-    <updated>2013-11-24T00:00:00-06:00</updated>
+    <updated>2013-11-24T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/24/monit</id>
     <content type="html"><![CDATA[<p>If your website goes down, you want to find out fast.  There are a few ways to
 accomplish this, but I&rsquo;m using <a href="http://mmonit.com/monit">monit</a>.  Monit is a
@@ -837,7 +907,7 @@ something ever gets misconfigured somewhere. <code>/etc/monit/conf.d/end2end</co
   <entry>
     <title type="html"><![CDATA[Devops with Rex]]></title>
     <link href="http://blog.kablamo.org/2013/11/22/rex/"/>
-    <updated>2013-11-22T00:00:00-06:00</updated>
+    <updated>2013-11-22T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/22/rex</id>
     <content type="html"><![CDATA[<p>I have recently been playing with <a href="http://www.rexify.org/">Rex</a> and wanted to
 write down some of my initial thoughts.</p>
@@ -920,7 +990,7 @@ with you and ask a few questions.</p>
   <entry>
     <title type="html"><![CDATA[Learning Ruby with online university classes]]></title>
     <link href="http://blog.kablamo.org/2013/11/19/learning-ruby/"/>
-    <updated>2013-11-19T00:00:00-06:00</updated>
+    <updated>2013-11-19T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/19/learning-ruby</id>
     <content type="html"><![CDATA[<p>I just completed UC Berkeley&rsquo;s Software as a Service class (via
 <a href="http://edx.com">edX.com</a>).  I had a great experience and highly recommend
@@ -1061,7 +1131,7 @@ My next class is Chinese History.</p>
   <entry>
     <title type="html"><![CDATA[Down a rabbit hole - Go-lang and its decentralized CPAN]]></title>
     <link href="http://blog.kablamo.org/2013/11/13/go/"/>
-    <updated>2013-11-13T00:00:00-06:00</updated>
+    <updated>2013-11-13T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/13/go</id>
     <content type="html"><![CDATA[<p>I have been in a rabbit hole for the last week.  I started by looking at Docker
 (<a href="http://blog.kablamo.org/2013/11/13/docker/">See my previous post</a>).  It turns
@@ -1235,7 +1305,7 @@ running.</p>
   <entry>
     <title type="html"><![CDATA[Down a rabbit hole - Docker]]></title>
     <link href="http://blog.kablamo.org/2013/11/13/docker/"/>
-    <updated>2013-11-13T00:00:00-06:00</updated>
+    <updated>2013-11-13T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/13/docker</id>
     <content type="html"><![CDATA[<p>I have been in a rabbit hole for the last week.  I started looking at
 <a href="http://www.docker.io/">Docker</a>.</p>
@@ -1381,7 +1451,7 @@ More on that tomorrow.</p>
   <entry>
     <title type="html"><![CDATA[My contribution to the Linux ate my RAM problem]]></title>
     <link href="http://blog.kablamo.org/2013/11/12/linux_ate_my_ram/"/>
-    <updated>2013-11-12T00:00:00-06:00</updated>
+    <updated>2013-11-12T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/11/12/linux_ate_my_ram</id>
     <content type="html"><![CDATA[<p>I can never remember how to know how much free memory I have.</p>
 
@@ -1435,7 +1505,7 @@ Use it like this:</p>
   <entry>
     <title type="html"><![CDATA[git-vspark plots your commits vertically with Term::Vspark]]></title>
     <link href="http://blog.kablamo.org/2013/03/17/git-vspark/"/>
-    <updated>2013-03-17T00:00:00-05:00</updated>
+    <updated>2013-03-17T00:00:00-04:00</updated>
     <id>http://blog.kablamo.org/2013/03/17/git-vspark</id>
     <content type="html"><![CDATA[<p>I added a <strong>git-vspark</strong> script to my App::Git::Spark CPAN module.  It does the
 same thing as <a href="https://github.com/kablamo/git-spark">git-spark</a> but instead of
@@ -1471,7 +1541,7 @@ in your own Perl code.</p>
   <entry>
     <title type="html"><![CDATA[Chinese zombie flashcards on GitHub (Catalyst & Perl)]]></title>
     <link href="http://blog.kablamo.org/2013/02/28/chinese-flashcards/"/>
-    <updated>2013-02-28T00:00:00-06:00</updated>
+    <updated>2013-02-28T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2013/02/28/chinese-flashcards</id>
     <content type="html"><![CDATA[<p>There seem to be quite a few Perl people learning Chinese so maybe this will be
 relevant here.</p>
@@ -1535,69 +1605,6 @@ course there are YouTube videos:</p>
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome]]></title>
-    <link href="http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/"/>
-    <updated>2013-02-20T00:00:00-06:00</updated>
-    <id>http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been using <a href="https://metacpan.org/module/Dist::Zilla">Dist::Zilla</a> for a
-couple years.  It&rsquo;s a powerful way to automate CPAN releases.</p>
-
-<p>But learning how to use it was not as easy as I hoped.</p>
-
-<p>I remember when <code>Dist::Zilla</code> first debuted.  It was very exciting.  But I think
-I may have drank too much of the cool aid becuase my expectations were very
-high when I finally sat down to learn it.  I expected my experience to be
-composed entirely of rainbows and puppy dog tails.</p>
-
-<h2>Writing your own dist.ini or PluginBundle is hard</h2>
-
-<p>Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
-are a huge number of plugins and it&rsquo;s difficult for a newcomer to know which
-are old, which are new, and how they work together.  If you look, for example,
-at <code>Dist::Zilla::PluginBundle::DAGOLDEN</code> it uses 23 different plugins and the
-<em>synopsis</em> is 132 lines long.</p>
-
-<p>In retrospect, it was not reasonable to expect I could build something
-comparable after a few minutes of perusing the docs.  It&rsquo;s more complex than
-that.  So if you are looking to quickly add <code>Dist::Zilla</code> to your toolchain, you
-need to use a PluginBundle and not write your own.</p>
-
-<h2>How to quickly add Dist::Zilla to your toolchain</h2>
-
-<p>One way is to just use <code>Dist::Zilla::PluginBundle::Basic</code>.  But this was not like
-the promised land I had been dreaming of.  I wanted more.  So I kept looking.</p>
-
-<p>Happily, there is a PluginBundle which I think works well as a reusable
-component suitable for public consumption thats also very configurable.  I
-doubt it&rsquo;s well known because the name sounds very personal.  That module is,
-of course,
-<a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN">Dist::Zilla::PluginBundle::DAGOLDEN</a>.</p>
-
-<p>I think the workflow it uses will work for many people.  Even if it
-doesn&rsquo;t, reading the code is a great way to learn how to write your own
-PluginBundle.  And because it&rsquo;s so comprehensive it&rsquo;s like having a up-to-date
-map of the state of the art in <code>Dist::Zilla</code> plugins and how they work
-together.</p>
-
-<p>Here&rsquo;s what my dist.ini looks like:</p>
-
-<pre><code>name    = App-Git-Ribbon
-author  = Eric Johnson &lt;cpan at iijo dot nospamthanks dot org&gt;
-license = Perl_5
-copyright_holder = Eric Johnson
-main_module = lib/App/Git/Ribbon.pm
-
-[@DAGOLDEN]
-no_spellcheck = 1
-AutoMetaResources.bugtracker.rt = 0
-AutoMetaResources.repository.github = user:kablamo
-AutoMetaResources.bugtracker.github = user:kablamo
-weaver_config = @FLORA
-</code></pre>
 ]]></content>
   </entry>
   

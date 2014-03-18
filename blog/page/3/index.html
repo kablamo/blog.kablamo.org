@@ -9,10 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I packaged up these scripts and released them on CPAN to make them a little
-easier to install and manage. App::Git::Ribbon on CPAN
-on GitHub
-previous &hellip;">
+  <meta name="description" content="I&rsquo;ve been using Dist::Zilla for a
+couple years. It&rsquo;s a powerful way to automate CPAN releases. But learning how to use it was not as easy &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +63,97 @@ previous &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/2013/02/20/how-to-learn-dist-zilla/">Dist::Zilla::PluginBundle::DAGOLDEN Is Pretty Awesome</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-02-20T00:00:00-05:00" pubdate data-updated="true">Feb 20<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve been using <a href="https://metacpan.org/module/Dist::Zilla">Dist::Zilla</a> for a
+couple years.  It&rsquo;s a powerful way to automate CPAN releases.</p>
+
+<p>But learning how to use it was not as easy as I hoped.</p>
+
+<p>I remember when <code>Dist::Zilla</code> first debuted.  It was very exciting.  But I think
+I may have drank too much of the cool aid becuase my expectations were very
+high when I finally sat down to learn it.  I expected my experience to be
+composed entirely of rainbows and puppy dog tails.</p>
+
+<h2>Writing your own dist.ini or PluginBundle is hard</h2>
+
+<p>Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
+are a huge number of plugins and it&rsquo;s difficult for a newcomer to know which
+are old, which are new, and how they work together.  If you look, for example,
+at <code>Dist::Zilla::PluginBundle::DAGOLDEN</code> it uses 23 different plugins and the
+<em>synopsis</em> is 132 lines long.</p>
+
+<p>In retrospect, it was not reasonable to expect I could build something
+comparable after a few minutes of perusing the docs.  It&rsquo;s more complex than
+that.  So if you are looking to quickly add <code>Dist::Zilla</code> to your toolchain, you
+need to use a PluginBundle and not write your own.</p>
+
+<h2>How to quickly add Dist::Zilla to your toolchain</h2>
+
+<p>One way is to just use <code>Dist::Zilla::PluginBundle::Basic</code>.  But this was not like
+the promised land I had been dreaming of.  I wanted more.  So I kept looking.</p>
+
+<p>Happily, there is a PluginBundle which I think works well as a reusable
+component suitable for public consumption thats also very configurable.  I
+doubt it&rsquo;s well known because the name sounds very personal.  That module is,
+of course,
+<a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN">Dist::Zilla::PluginBundle::DAGOLDEN</a>.</p>
+
+<p>I think the workflow it uses will work for many people.  Even if it
+doesn&rsquo;t, reading the code is a great way to learn how to write your own
+PluginBundle.  And because it&rsquo;s so comprehensive it&rsquo;s like having a up-to-date
+map of the state of the art in <code>Dist::Zilla</code> plugins and how they work
+together.</p>
+
+<p>Here&rsquo;s what my dist.ini looks like:</p>
+
+<pre><code>name    = App-Git-Ribbon
+author  = Eric Johnson &lt;cpan at iijo dot nospamthanks dot org&gt;
+license = Perl_5
+copyright_holder = Eric Johnson
+main_module = lib/App/Git/Ribbon.pm
+
+[@DAGOLDEN]
+no_spellcheck = 1
+AutoMetaResources.bugtracker.rt = 0
+AutoMetaResources.repository.github = user:kablamo
+AutoMetaResources.bugtracker.github = user:kablamo
+weaver_config = @FLORA
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2013/02/12/cpan-release-git-ribbon-git-spark/">CPAN Release of App::Git::Ribbon, App::Git::Spark</a></h1>
     
     
@@ -82,7 +171,7 @@ previous &hellip;">
 
 
 
-<time datetime="2013-02-12T00:00:00-06:00" pubdate data-updated="true">Feb 12<span>th</span>, 2013</time>
+<time datetime="2013-02-12T00:00:00-05:00" pubdate data-updated="true">Feb 12<span>th</span>, 2013</time>
         
       </p>
     
@@ -130,7 +219,7 @@ previous <a href="/git-spark-revisited">blog post</a></p>
 
 
 
-<time datetime="2013-02-02T00:00:00-06:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2013</time>
+<time datetime="2013-02-02T00:00:00-05:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2013</time>
         
       </p>
     
@@ -282,7 +371,7 @@ that is probably better user experience if you very comfortable in vim.</p>
 
 
 
-<time datetime="2013-01-29T00:00:00-06:00" pubdate data-updated="true">Jan 29<span>th</span>, 2013</time>
+<time datetime="2013-01-29T00:00:00-05:00" pubdate data-updated="true">Jan 29<span>th</span>, 2013</time>
         
       </p>
     
@@ -347,7 +436,7 @@ my .bashrc:</p>
 
 
 
-<time datetime="2013-01-27T00:00:00-06:00" pubdate data-updated="true">Jan 27<span>th</span>, 2013</time>
+<time datetime="2013-01-27T00:00:00-05:00" pubdate data-updated="true">Jan 27<span>th</span>, 2013</time>
         
       </p>
     
@@ -435,7 +524,7 @@ many there are.</p>
 
 
 
-<time datetime="2013-01-23T00:00:00-06:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+<time datetime="2013-01-23T00:00:00-05:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
         
       </p>
     
@@ -508,7 +597,7 @@ sparkline with another.</p>
 
 
 
-<time datetime="2013-01-19T00:00:00-06:00" pubdate data-updated="true">Jan 19<span>th</span>, 2013</time>
+<time datetime="2013-01-19T00:00:00-05:00" pubdate data-updated="true">Jan 19<span>th</span>, 2013</time>
         
       </p>
     
@@ -605,7 +694,7 @@ package.)</p>
 
 
 
-<time datetime="2012-09-05T00:00:00-05:00" pubdate data-updated="true">Sep 5<span>th</span>, 2012</time>
+<time datetime="2012-09-05T00:00:00-04:00" pubdate data-updated="true">Sep 5<span>th</span>, 2012</time>
         
       </p>
     
@@ -677,7 +766,7 @@ winning.  But thats not the best part.  Lets see how to use it.</p>
 
 
 
-<time datetime="2012-08-26T00:00:00-05:00" pubdate data-updated="true">Aug 26<span>th</span>, 2012</time>
+<time datetime="2012-08-26T00:00:00-04:00" pubdate data-updated="true">Aug 26<span>th</span>, 2012</time>
         
       </p>
     
@@ -727,7 +816,7 @@ download them for some reason, they are hosted on
 
 
 
-<time datetime="2012-05-17T00:00:00-05:00" pubdate data-updated="true">May 17<span>th</span>, 2012</time>
+<time datetime="2012-05-17T00:00:00-04:00" pubdate data-updated="true">May 17<span>th</span>, 2012</time>
         
       </p>
     
@@ -780,67 +869,6 @@ heavy drinking.</p></li>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/05/10/new-on-cpan-moosex-cachingproxy/">New on CPAN - MooseX::CachingProxy</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-05-10T00:00:00-05:00" pubdate data-updated="true">May 10<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Last week I released <a href="https://metacpan.org/module/MooseX::CachingProxy">MooseX::CachingProxy</a> to CPAN.</p>
-
-<p>Its a small module that intercepts requests from your LWP based application.
-Those requests are relayed on to the intended server unless they already exist
-in the cache.</p>
-
-<p>To toggle on and off the caching proxy, MooseX::CachingProxy provides the
-attribute &lsquo;caching_proxy&rsquo;.  Here is a quick demo:</p>
-
-<pre><code>package MyApp;
-use Moose;
-use WWW::Mechanize; # or any LWP based library
-with 'MooseX::CachingProxy';
-
-sub url { 'http://example.com' } # required by MooseX::CachingProxy
-
-sub download { 
-    my $self = shift;
-    $self-&gt;start_caching_proxy;
-    return WWW::Mechanize-&gt;new()-&gt;get($self-&gt;url . '/foo'); 
-}
-</code></pre>
-
-<p>Under the covers, its a tiny Plack application that mashes up
-<a href="https://metacpan.org/module/Plack::Middleware::Cache">Plack::Middleware::Cache</a> and <a href="https://metacpan.org/module/Plack::App::Proxy">Plack::App::Proxy</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -879,6 +907,10 @@ sub download {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/17/our-my-local/">My vs Our vs Local</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/16/disagree-interview/">Why You Should Disagree in an Interview</a>
       </li>
     
@@ -892,10 +924,6 @@ sub download {
     
       <li class="post">
         <a href="/2014/01/01/readline-cheat-sheet/">I Made a Readline Cheat Sheet</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/01/01/no-dessert-forever/">No Dessert Forever</a>
       </li>
     
   </ul>
