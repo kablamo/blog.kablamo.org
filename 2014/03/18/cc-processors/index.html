@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: strategy - KABLAMO</title>
+  <title>Introduction to online credit card processing - part 1 - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="Category: strategy">
+  <meta name="description" content="I want to understand credit card processing. So I will probably write a few
+articles about it. This article has some fundamental definitions. gateway &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.orgcategories/strategy">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/03/18/cc-processors">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -55,41 +56,139 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Strategy</h1>
+    
+      <h1 class="entry-title">Introduction to Online Credit Card Processing - Part 1</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-03-18T00:00:00-04:00" pubdate data-updated="true">Mar 18<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  
-<a href="/atom.xml" rel="subscribe-rss" title="subscribe to strategy posts via RSS">Subscribe to all posts via RSS</a><br>
-<a href="atom.xml" rel="subscribe-rss" title="subscribe to strategy posts via RSS">Subscribe to strategy posts via RSS</a>
 
 
-<div id="blog-archives" class="category">
+<div class="entry-content"><p>I want to understand credit card processing.  So I will probably write a few
+articles about it.  This article has some fundamental definitions.</p>
 
+<h1>gateway</h1>
 
+<p>A <a href="https://en.wikipedia.org/wiki/Payment_gateway">payment gateway</a> is a service
+which authorizes credit card payments by facillitating the transfer of
+information between a merchant&rsquo;s bank (the acquiring bank) and a customer&rsquo;s
+bank (the issuing bank).</p>
 
-  
-  <h2>2013</h2>
+<h1>acquiring bank</h1>
 
-<article>
-  
-<h1><a href="/2013/12/15/dalios-principles/">Ray Dalio's "Principles"</a></h1>
-<time datetime="2013-12-15T00:00:00-05:00" pubdate><span class='month'>Dec</span> <span class='day'>15</span> <span class='year'>2013</span></time>
+<p>An <a href="https://en.wikipedia.org/wiki/Acquiring_bank">acquiring bank</a> is a bank
+which processes card payments on behalf of a merchant.  The term &lsquo;acquirer&rsquo;
+indicates the bank accepts (or acquires) credit card payments from card
+issuing banks within a credit card association.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/philosophy/'>philosophy</a>, <a class='category' href='/categories/strategy/'>strategy</a></span>
-</footer>
+<h1>credit card association</h1>
 
+<p>Examples of credit card associations include Visa, MasterCard, Discover,
+American Express, etc.</p>
 
-</article>
+<h1>issuing bank</h1>
 
+<p>An <a href="https://en.wikipedia.org/wiki/Issuing_bank">issuing bank</a> is a bank which
+provides credit cards to consumers.  The term &lsquo;issue&rsquo; indicates the bank issues
+payments to the acquiring bank on behalf of the consumer.</p>
+
+<h1>merchant account</h1>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Merchant_account">merchant account</a> is a type
+of bank account provided by an acquiring bank which allows merchants to accept
+payments via credit card.</p>
+
+<h1>interchange fee</h1>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Interchange_fee">interchange fee</a> is
+the fee paid the the issuing bank by the acquiring bank.  The amount varies by
+card type, card brand, transaction amount, and other factors and is set by the
+card associations like Visa, Mastercard, or Discover.</p>
+
+<h1>discount rate</h1>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Merchant_account#Discount_Rates">discount rate</a>
+is made up of several different fees which are charged to the merchant.  This
+sometimes includes the interchange fee.</p>
+
+<h1>basis point</h1>
+
+<p>1 <a href="https://en.wikipedia.org/wiki/Merchant_account#Terms_to_know">basis point</a>
+is 1%.  A term sometimes used when discussing the discount rate.</p>
+
+<h1>PCI DSS</h1>
+
+<p>PCI stands for Payment Card Industry.  DSS stands for Data Security Standard.
+It is a set of security standards for organizations who handle cardholder
+information.  It is defined by the PCI Security Standards Council (PCI SSC)
+which was formed in 2006 by the major card associations.  Note that there is a
+difference between being compliant being validated as compliant.  Validation is
+done annually by a Qualified Security Accessor (QSA) who creates a Report on
+Compliance (ROC) for organizations handle lots of transactions or a
+Self-Assessment Questionaire (SAQ) for companies handling less transactions.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+    
+      
+
+<span class="categories">
   
+    <a class='category' href='/categories/creditcards/'>creditcards</a>
+  
+</span>
+
+
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2014/03/18/cc-processors/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2014/03/18/cc-processors/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/03/17/our-my-local/" title="Previous Post: my vs our vs local">&laquo; my vs our vs local</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -157,7 +256,10 @@
       var disqus_shortname = 'kablamo';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2014/03/18/cc-processors/';
+        var disqus_url = 'http://blog.kablamo.org/2014/03/18/cc-processors/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
