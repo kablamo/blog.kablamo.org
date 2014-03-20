@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-03-19T22:01:45-04:00</updated>
+  <updated>2014-03-19T22:51:08-04:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What does 'use strict' do?]]></title>
+    <link href="http://blog.kablamo.org/2014/03/19/use-strict/"/>
+    <updated>2014-03-19T00:00:00-04:00</updated>
+    <id>http://blog.kablamo.org/2014/03/19/use-strict</id>
+    <content type="html"><![CDATA[<p>I always <code>use strict</code> in all my code.  But what does that actually mean?</p>
+
+<h1>Enables strict refs</h1>
+
+<p>Strict refs generates runtime errors when you use symbolic references.</p>
+
+<pre><code>use strict 'refs';
+$ref = "yarrr matey";
+print $$ref;        # runtime error but without strict refs this is ok
+</code></pre>
+
+<h1>Enables strict vars</h1>
+
+<p>Strict vars generates a compile time error if you access a variable that was
+not declared or is not fully qualified.</p>
+
+<pre><code>use strict 'vars';
+$X::foo = 1;         # ok because its fully qualified
+my $foo = 10;        # ok because my() was used.
+$baz = 9;            # compile time error because $baz not declared before
+</code></pre>
+
+<h1>Enables strict subs</h1>
+
+<p>Strict subs generates a compile time error if you use a bareword identifier
+that&rsquo;s not a subroutine, unless it is a simple identifier (no colons) and that
+it appears in curly braces or on the left hand side of the => symbol.</p>
+
+<pre><code>no strict 'subs';
+my $a = boop;
+print $a; 
+sub boop { return "dinosaurs smell good" }
+</code></pre>
+
+<p>The above prints &ldquo;boop&rdquo; instead of &ldquo;dinosaurs smell good&rdquo;.</p>
+
+<pre><code>use strict 'subs';
+my $b = splarf;      # &lt;--- compile time error here
+sub splarf { return "dinosaurs smell good" }
+</code></pre>
+
+<p>The above generates a compile time error on line 2.</p>
+
+<pre><code>use strict 'subs';
+my $b = splarf(); 
+sub splarf { return "dinosaurs smell good" }
+</code></pre>
+
+<p>The above prints &ldquo;dinosaurs smell good&rdquo; which is probably the desired output.</p>
+
+<p>Sources:</p>
+
+<pre><code>* https://metacpan.org/pod/strict
+* http://www.perl.com/pub/2001/01/begperl6.html#use strict
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Introduction to online credit card processing - part 1]]></title>
@@ -1589,42 +1652,6 @@ Use it like this:</p>
 </code></pre>
 
 <p>See also &lsquo;htop&rsquo; (sudo apt-get install htop).</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[git-vspark plots your commits vertically with Term::Vspark]]></title>
-    <link href="http://blog.kablamo.org/2013/03/17/git-vspark/"/>
-    <updated>2013-03-17T00:00:00-04:00</updated>
-    <id>http://blog.kablamo.org/2013/03/17/git-vspark</id>
-    <content type="html"><![CDATA[<p>I added a <strong>git-vspark</strong> script to my App::Git::Spark CPAN module.  It does the
-same thing as <a href="https://github.com/kablamo/git-spark">git-spark</a> but instead of
-normal horizontal sparklines, it uses &ldquo;vertical&rdquo; sparklines.  Here&rsquo;s what that
-looks like:</p>
-
-<pre><code>$ git vspark --months 8 batman
-Commits by batman over the last 8 months
-total: 233   avg: 29   max: 69
- 12 ██▋
- 18 ████
- 69 ███████████████▏
- 59 ████████████▉
- 16 ███▌
- 28 ██████▏
- 12 ██▋
- 19 ████▎
-</code></pre>
-
-<p>This effect is achieved using
-<a href="https://metacpan.org/module/Term::Vspark">Term::Vspark</a>.  Its companion module
-<a href="https://metacpan.org/module/Term::Spark">Term::Spark</a> is a small pure Perl
-replacement for Zach Holman&rsquo;s original <a href="https://github.com/holman/spark">spark</a>
-implementation and it now powers my git-spark script.</p>
-
-<p>These libraries were fun little projects developed over the past few weeks
-mainly by <a href="https://github.com/LuRsT">Gil Gonçalves</a> with a few pull requests
-from myself.  Having them available on CPAN means you can easily use sparklines
-in your own Perl code.</p>
 ]]></content>
   </entry>
   

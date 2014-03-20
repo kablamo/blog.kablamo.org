@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome - KABLAMO</title>
+  <title>What does 'use strict' do? - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I&rsquo;ve been using Dist::Zilla for a
-couple years. It&rsquo;s a powerful way to automate CPAN releases. But learning how to use it was not as easy &hellip;">
+  <meta name="description" content="I always use strict in all my code. But what does that actually mean? Enables strict refs Strict refs generates runtime errors when you use symbolic &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ couple years. It&rsquo;s a powerful way to automate CPAN releases. But learning 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/03/19/use-strict">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -60,7 +59,7 @@ couple years. It&rsquo;s a powerful way to automate CPAN releases. But learning 
   
   <header>
     
-      <h1 class="entry-title">Dist::Zilla::PluginBundle::DAGOLDEN Is Pretty Awesome</h1>
+      <h1 class="entry-title">What Does 'Use Strict' Do?</h1>
     
     
       <p class="meta">
@@ -77,67 +76,67 @@ couple years. It&rsquo;s a powerful way to automate CPAN releases. But learning 
 
 
 
-<time datetime="2013-02-20T00:00:00-05:00" pubdate data-updated="true">Feb 20<span>th</span>, 2013</time>
+<time datetime="2014-03-19T00:00:00-04:00" pubdate data-updated="true">Mar 19<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I&rsquo;ve been using <a href="https://metacpan.org/module/Dist::Zilla">Dist::Zilla</a> for a
-couple years.  It&rsquo;s a powerful way to automate CPAN releases.</p>
+<div class="entry-content"><p>I always <code>use strict</code> in all my code.  But what does that actually mean?</p>
 
-<p>But learning how to use it was not as easy as I hoped.</p>
+<h1>Enables strict refs</h1>
 
-<p>I remember when <code>Dist::Zilla</code> first debuted.  It was very exciting.  But I think
-I may have drank too much of the cool aid becuase my expectations were very
-high when I finally sat down to learn it.  I expected my experience to be
-composed entirely of rainbows and puppy dog tails.</p>
+<p>Strict refs generates runtime errors when you use symbolic references.</p>
 
-<h2>Writing your own dist.ini or PluginBundle is hard</h2>
+<pre><code>use strict 'refs';
+$ref = "yarrr matey";
+print $$ref;        # runtime error but without strict refs this is ok
+</code></pre>
 
-<p>Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
-are a huge number of plugins and it&rsquo;s difficult for a newcomer to know which
-are old, which are new, and how they work together.  If you look, for example,
-at <code>Dist::Zilla::PluginBundle::DAGOLDEN</code> it uses 23 different plugins and the
-<em>synopsis</em> is 132 lines long.</p>
+<h1>Enables strict vars</h1>
 
-<p>In retrospect, it was not reasonable to expect I could build something
-comparable after a few minutes of perusing the docs.  It&rsquo;s more complex than
-that.  So if you are looking to quickly add <code>Dist::Zilla</code> to your toolchain, you
-need to use a PluginBundle and not write your own.</p>
+<p>Strict vars generates a compile time error if you access a variable that was
+not declared or is not fully qualified.</p>
 
-<h2>How to quickly add Dist::Zilla to your toolchain</h2>
+<pre><code>use strict 'vars';
+$X::foo = 1;         # ok because its fully qualified
+my $foo = 10;        # ok because my() was used.
+$baz = 9;            # compile time error because $baz not declared before
+</code></pre>
 
-<p>One way is to just use <code>Dist::Zilla::PluginBundle::Basic</code>.  But this was not like
-the promised land I had been dreaming of.  I wanted more.  So I kept looking.</p>
+<h1>Enables strict subs</h1>
 
-<p>Happily, there is a PluginBundle which I think works well as a reusable
-component suitable for public consumption thats also very configurable.  I
-doubt it&rsquo;s well known because the name sounds very personal.  That module is,
-of course,
-<a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN">Dist::Zilla::PluginBundle::DAGOLDEN</a>.</p>
+<p>Strict subs generates a compile time error if you use a bareword identifier
+that&rsquo;s not a subroutine, unless it is a simple identifier (no colons) and that
+it appears in curly braces or on the left hand side of the => symbol.</p>
 
-<p>I think the workflow it uses will work for many people.  Even if it
-doesn&rsquo;t, reading the code is a great way to learn how to write your own
-PluginBundle.  And because it&rsquo;s so comprehensive it&rsquo;s like having a up-to-date
-map of the state of the art in <code>Dist::Zilla</code> plugins and how they work
-together.</p>
+<pre><code>no strict 'subs';
+my $a = boop;
+print $a; 
+sub boop { return "dinosaurs smell good" }
+</code></pre>
 
-<p>Here&rsquo;s what my dist.ini looks like:</p>
+<p>The above prints &ldquo;boop&rdquo; instead of &ldquo;dinosaurs smell good&rdquo;.</p>
 
-<pre><code>name    = App-Git-Ribbon
-author  = Eric Johnson &lt;cpan at iijo dot nospamthanks dot org&gt;
-license = Perl_5
-copyright_holder = Eric Johnson
-main_module = lib/App/Git/Ribbon.pm
+<pre><code>use strict 'subs';
+my $b = splarf;      # &lt;--- compile time error here
+sub splarf { return "dinosaurs smell good" }
+</code></pre>
 
-[@DAGOLDEN]
-no_spellcheck = 1
-AutoMetaResources.bugtracker.rt = 0
-AutoMetaResources.repository.github = user:kablamo
-AutoMetaResources.bugtracker.github = user:kablamo
-weaver_config = @FLORA
+<p>The above generates a compile time error on line 2.</p>
+
+<pre><code>use strict 'subs';
+my $b = splarf(); 
+sub splarf { return "dinosaurs smell good" }
+</code></pre>
+
+<p>The above prints &ldquo;dinosaurs smell good&rdquo; which is probably the desired output.</p>
+
+<p>Sources:</p>
+
+<pre><code>* https://metacpan.org/pod/strict
+* http://www.perl.com/pub/2001/01/begperl6.html#use strict
 </code></pre>
 </div>
 
@@ -157,7 +156,7 @@ weaver_config = @FLORA
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2014/03/19/use-strict/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2014/03/19/use-strict/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -171,10 +170,8 @@ weaver_config = @FLORA
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/02/12/cpan-release-git-ribbon-git-spark/" title="Previous Post: CPAN release of App::Git::Ribbon, App::Git::Spark">&laquo; CPAN release of App::Git::Ribbon, App::Git::Spark</a>
+        <a class="basic-alignment left" href="/2014/03/18/cc-processors/" title="Previous Post: Introduction to online credit card processing - part 1">&laquo; Introduction to online credit card processing - part 1</a>
       
-      
-        <a class="basic-alignment right" href="/2013/02/28/chinese-flashcards/" title="Next Post: Chinese zombie flashcards on GitHub (Catalyst & Perl)">Chinese zombie flashcards on GitHub (Catalyst & Perl) &raquo;</a>
       
     </p>
   </footer>
@@ -252,8 +249,8 @@ weaver_config = @FLORA
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/';
-        var disqus_url = 'http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/';
+        var disqus_identifier = 'http://blog.kablamo.org/2014/03/19/use-strict/';
+        var disqus_url = 'http://blog.kablamo.org/2014/03/19/use-strict/';
         var disqus_script = 'embed.js';
       
     (function () {
