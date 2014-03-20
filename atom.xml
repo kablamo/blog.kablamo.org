@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-03-19T16:10:32-04:00</updated>
+  <updated>2014-03-19T22:01:45-04:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -61,9 +61,18 @@ card associations like Visa, Mastercard, or Discover.</p>
 
 <h2>discount rate</h2>
 
-<p>The <a href="https://en.wikipedia.org/wiki/Merchant_account#Discount_Rates">discount rate</a>
+<p>The <a href="http://merchantwarehouse.com/understanding-merchant-account-discount-rates">discount rate</a>
 is made up of several different fees which are charged to the merchant.  This
-sometimes includes the interchange fee.</p>
+sometimes includes the interchange fee.  The discount rate is a fixed
+percentage-based fee charged for each transaction.  The fee goes to the
+acquiring bank who likely passes a portion to the issuing bank who in turn
+passes a portion to the credit card association.</p>
+
+<p>Rates are influenced by the many things including the level of risk. Brick and
+mortar stores where a card is physically present are considered the lowest
+risk.  There are three categories of transaction types based on risk and each
+have a different discount rate: qualified, mid-qualified and non-qualified.
+Internet transactions are non-qualified which is the most expensive category.</p>
 
 <h2>basis point</h2>
 
