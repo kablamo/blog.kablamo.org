@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>CPAN release of App::Git::Ribbon, App::Git::Spark - KABLAMO</title>
+  <title>Introduction to online credit card processing - part 2 - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I packaged up these scripts and released them on CPAN to make them a little
-easier to install and manage. App::Git::Ribbon on CPAN
-on GitHub
-previous &hellip;">
+  <meta name="description" content="I am learning about online credit card processing.
+Part 1 introduced a number of basic definitions. The number of online payments is going to grow. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@ previous &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/03/21/cc-processors">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -62,7 +60,7 @@ previous &hellip;">
   
   <header>
     
-      <h1 class="entry-title">CPAN Release of App::Git::Ribbon, App::Git::Spark</h1>
+      <h1 class="entry-title">Introduction to Online Credit Card Processing - Part 2</h1>
     
     
       <p class="meta">
@@ -79,25 +77,73 @@ previous &hellip;">
 
 
 
-<time datetime="2013-02-12T00:00:00-05:00" pubdate data-updated="true">Feb 12<span>th</span>, 2013</time>
+<time datetime="2014-03-21T00:00:00-04:00" pubdate data-updated="true">Mar 21<span>st</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I packaged up these scripts and released them on CPAN to make them a little
-easier to install and manage.</p>
+<div class="entry-content"><p>I am learning about online credit card processing.
+<a href="/2014/03/18/cc-processors/">Part 1</a> introduced a number of basic definitions.</p>
 
-<p><strong>App::Git::Ribbon</strong> <br>
-on <a href="https://metacpan.org/module/App::Git::Ribbon">CPAN</a><br>
-on <a href="https://github.com/kablamo/git-ribbon">GitHub</a><br>
-previous <a href="/git-ribbon">blog post</a></p>
+<p>The number of online payments is going to grow.  Only <a href="http://www.huffingtonpost.com/2012/06/07/credit-card-payments-growth_n_1575417.html">6% of credit card transactions are currently done online</a>.
+With so much at stake, there are hundreds of payment gateways who provide a
+variety of services. But I have chosen to divide them into two categories.</p>
 
-<p><strong>App::Git::Spark</strong> <br>
-on <a href="https://metacpan.org/module/App::Git::Spark">CPAN</a><br>
-on <a href="https://github.com/kablamo/git-spark">GitHub</a><br>
-previous <a href="/git-spark-revisited">blog post</a></p>
+<p>First there are <em>traditional gateways</em> who charge a monthly fee (in addition to
+a variety of other fees) and often you need to obtain a merchant account on
+your own which also has various fees associated with it.</p>
+
+<p>The second category contains newer <em>full stack gateways</em> who are more user
+friendly and provide a merchant account and a much simpler fee structure which
+is generally a percentage charge on a per transaction basis with no monthly
+fees.</p>
+
+<p>These &ldquo;full stack&rdquo; gateways are convenient and easy but they can cost more.
+They generally charge 2.9% + $0.30 per transaction.  Compare that to a
+more traditional gateway such as <a href="http://www.authorize.net/">Authorize.net</a> who
+charges $20 per month and $0.10 per transaction.  However you also have to
+factor in the cost of a merchant account.  And both the gateway and merchant&rsquo;s
+bank often charge a variety of fees which makes it difficult to assess the true
+cost.</p>
+
+<p>If you are doing a large number of transactions, saving small amounts of money
+is going to make a big difference.  If you are not then it may be cheaper to
+use a full stack processor and save yourself the dev work and accounting
+effort.</p>
+
+<p>One interesting company I would like to note is
+<a href="https://spreedly.com">Spreedly</a>.  Spreedly provides an api layer on top many
+other payment gateways so you can swap out gateways whenever you feel like it.
+Their service works with a large number of payment gateways &mdash; currently 60
+gateways in 73 countries.  They also give you the ability to deposit funds in
+different merchant accounts based on location or other business logic.  They do
+have a monthly fee structure and clearly you would only choose this solution if
+you are processing a large number of transactions.</p>
+
+<h1>Additional reading and resources</h1>
+
+<ul>
+<li><a href="http://www.nerdwallet.com/blog/credit-card-data/credit-card-transaction-volume-statistics/">Credit card and debit card transaction volume statistics</a></li>
+<li><a href="http://blog.zactownsend.com/credit-card-processing-as-a-commodity-business">Credit card processing as a commodity business</a> by Zac Townsend</li>
+<li><a href="http://gatewayindex.spreedly.com/">Compare gateways</a></li>
+<li><a href="http://www.cardpaymentoptions.com/credit-card-processors">Credit card processor reviews</a></li>
+<li><a href="http://www.jeffmould.com/2014/02/16/comparing-stripe-vs-braintree-vs-balanced-vs-dwolla/">Stripe vs Braintree vs Balanced vs Dwolla</a></li>
+</ul>
+
+
+<p>Also I found this series of videos was an excellent introduction to
+understanding payments at a lower level.  Be aware this is probably more than
+most web developers need/want to know.</p>
+
+<ol>
+<li> <a href="http://www.youtube.com/watch?v=fkUFizLjQo0">Names and nomenclature</a></li>
+<li> <a href="http://www.youtube.com/watch?v=WvSEDRkyg0Q">Mechanics of an electronic payment</a></li>
+<li> <a href="http://www.youtube.com/watch?v=tq316S9vW0s">Understanding interchange, Opening Visa &amp; Mastercards&#8217; kimono</a></li>
+<li> <a href="http://www.youtube.com/watch?v=Ru4Dy-5IJEQ">Multicurrency in electronic payments</a></li>
+</ol>
+
 </div>
 
 
@@ -108,7 +154,7 @@ previous <a href="/git-spark-revisited">blog post</a></p>
 
 <span class="categories">
   
-    <a class='category' href='/categories/perl/'>perl</a>
+    <a class='category' href='/categories/payments/'>payments</a>
   
 </span>
 
@@ -116,7 +162,7 @@ previous <a href="/git-spark-revisited">blog post</a></p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2014/03/21/cc-processors/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2014/03/21/cc-processors/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -130,10 +176,10 @@ previous <a href="/git-spark-revisited">blog post</a></p>
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/02/02/git-ribbon/" title="Previous Post: git-ribbon">&laquo; git-ribbon</a>
+        <a class="basic-alignment left" href="/2014/03/19/use-strict/" title="Previous Post: What does 'use strict' do?">&laquo; What does 'use strict' do?</a>
       
       
-        <a class="basic-alignment right" href="/2013/02/20/how-to-learn-dist-zilla/" title="Next Post: Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome">Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome &raquo;</a>
+        <a class="basic-alignment right" href="/2014/03/22/cc-processors/" title="Next Post: Introduction to online credit card processing - part 3">Introduction to online credit card processing - part 3 &raquo;</a>
       
     </p>
   </footer>
@@ -211,8 +257,8 @@ previous <a href="/git-spark-revisited">blog post</a></p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/';
-        var disqus_url = 'http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/';
+        var disqus_identifier = 'http://blog.kablamo.org/2014/03/21/cc-processors/';
+        var disqus_url = 'http://blog.kablamo.org/2014/03/21/cc-processors/';
         var disqus_script = 'embed.js';
       
     (function () {

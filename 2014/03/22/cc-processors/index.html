@@ -5,14 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>CPAN release of App::Git::Ribbon, App::Git::Spark - KABLAMO</title>
+  <title>Introduction to online credit card processing - part 3 - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I packaged up these scripts and released them on CPAN to make them a little
-easier to install and manage. App::Git::Ribbon on CPAN
-on GitHub
-previous &hellip;">
+  <meta name="description" content="I am learning about online credit card processing.
+Part 1 introduced a number of basic definitions.
+Part 2 discussed the difference between &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +20,7 @@ previous &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/03/22/cc-processors">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -62,7 +61,7 @@ previous &hellip;">
   
   <header>
     
-      <h1 class="entry-title">CPAN Release of App::Git::Ribbon, App::Git::Spark</h1>
+      <h1 class="entry-title">Introduction to Online Credit Card Processing - Part 3</h1>
     
     
       <p class="meta">
@@ -79,25 +78,111 @@ previous &hellip;">
 
 
 
-<time datetime="2013-02-12T00:00:00-05:00" pubdate data-updated="true">Feb 12<span>th</span>, 2013</time>
+<time datetime="2014-03-22T00:00:00-04:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I packaged up these scripts and released them on CPAN to make them a little
-easier to install and manage.</p>
+<div class="entry-content"><p>I am learning about online credit card processing.
+<a href="/2014/03/18/cc-processors/">Part 1</a> introduced a number of basic definitions.
+<a href="/2014/03/21/cc-processors/">Part 2</a> discussed the difference between traditional gateways and the newer full stack gateways.</p>
 
-<p><strong>App::Git::Ribbon</strong> <br>
-on <a href="https://metacpan.org/module/App::Git::Ribbon">CPAN</a><br>
-on <a href="https://github.com/kablamo/git-ribbon">GitHub</a><br>
-previous <a href="/git-ribbon">blog post</a></p>
+<p>In Part 3, I am exploring some of the new &ldquo;full stack&rdquo; gateways which are a bit
+more developer friendly and listing some key facts about each one.  All of
+these provide a merchant account, gateway, payment processor etc and handle all
+that complexity for you.</p>
 
-<p><strong>App::Git::Spark</strong> <br>
-on <a href="https://metacpan.org/module/App::Git::Spark">CPAN</a><br>
-on <a href="https://github.com/kablamo/git-spark">GitHub</a><br>
-previous <a href="/git-spark-revisited">blog post</a></p>
+<ul>
+<li><a href="https://www.braintreepayments.com/">Braintree</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>Tools to build a marketplace</li>
+<li>Free for the first $50,000 in transactions</li>
+<li>2.9% + $0.30 per transaction</li>
+<li>$15 fee for each chargeback</li>
+<li>Client side encryption of cc numbers with Braintree.js</li>
+</ul>
+</li>
+<li><a href="https://stripe.com/">Stripe</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>2.9% + $0.30 per transaction</li>
+<li>$15 fee for each chargeback</li>
+<li>Client side encryption of cc numbers with Stripe.js</li>
+</ul>
+</li>
+<li><a href="https://www.balancedpayments.com/">Balanced</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>Tools to build a marketplace</li>
+<li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
+<li>Payouts to the business are $.25 each</li>
+<li>No fees for chargebacks?</li>
+<li>Client side encryption of cc numbers with Balanced.js</li>
+</ul>
+</li>
+<li><a href="https://www.wepay.com/">WePay</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>Tools to build a marketplace</li>
+<li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
+<li>No client side encryption of cc numbers?</li>
+</ul>
+</li>
+<li><a href="https://www.dwolla.com">Dwolla</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>Tools to build a marketplace</li>
+<li>Transactions under $10 are free, everything else is $0.25 per transaction</li>
+<li>Does not accept credit or debit cards only ACH (so no gateway/merchant account are required)</li>
+<li>Requires customers to create a Dwolla account</li>
+<li>No client side encryption of cc numbers?</li>
+</ul>
+</li>
+<li><a href="https://payments.amazon.com/home">Amazon FPS Payments</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>Tools to build a marketplace</li>
+<li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
+<li>2.9% + $0.30 per transaction, volume discounts</li>
+<li>Can keep the customer on your site and customize the form for free</li>
+<li>To contest a chargeback costs $10.</li>
+<li>Merchants are not liable for chargebacks for physical goods (not services)</li>
+<li>No client side encryption of cc numbers?</li>
+</ul>
+</li>
+<li><a href="https://www.paypal.com/">Paypal</a>
+
+<ul>
+<li>Turn your computer into a credit card terminal</li>
+<li>Swipe cards with a device that plugs into your phone or iPad.</li>
+<li>2.9% + $0.30 per transaction, volume discounts</li>
+<li>No monthly fee to send a customer to the Paypal site for payment</li>
+<li>$30 monthly fee if you want to keep the customer on your site or customize the
+form</li>
+<li>No client side encryption of cc numbers?</li>
+</ul>
+</li>
+<li><a href="http://square.com">Square</a> is in a similar space and positions themselves as being very simple.
+
+<ul>
+<li>Swipe cards with a device that plugs into your phone or iPad.</li>
+<li>No developer api &mdash; you must use their web marketplace to sell online</li>
+<li>2.75% per transaction</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Please let me know if I&rsquo;ve made any errors and I will correct them.</p>
 </div>
 
 
@@ -108,7 +193,7 @@ previous <a href="/git-spark-revisited">blog post</a></p>
 
 <span class="categories">
   
-    <a class='category' href='/categories/perl/'>perl</a>
+    <a class='category' href='/categories/payments/'>payments</a>
   
 </span>
 
@@ -116,7 +201,7 @@ previous <a href="/git-spark-revisited">blog post</a></p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2014/03/22/cc-processors/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2014/03/22/cc-processors/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -130,10 +215,8 @@ previous <a href="/git-spark-revisited">blog post</a></p>
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/02/02/git-ribbon/" title="Previous Post: git-ribbon">&laquo; git-ribbon</a>
+        <a class="basic-alignment left" href="/2014/03/21/cc-processors/" title="Previous Post: Introduction to online credit card processing - part 2">&laquo; Introduction to online credit card processing - part 2</a>
       
-      
-        <a class="basic-alignment right" href="/2013/02/20/how-to-learn-dist-zilla/" title="Next Post: Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome">Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome &raquo;</a>
       
     </p>
   </footer>
@@ -211,8 +294,8 @@ previous <a href="/git-spark-revisited">blog post</a></p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/';
-        var disqus_url = 'http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/';
+        var disqus_identifier = 'http://blog.kablamo.org/2014/03/22/cc-processors/';
+        var disqus_url = 'http://blog.kablamo.org/2014/03/22/cc-processors/';
         var disqus_script = 'embed.js';
       
     (function () {

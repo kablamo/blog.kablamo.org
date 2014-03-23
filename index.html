@@ -9,7 +9,9 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I always use strict in all my code. But what does that actually mean? Enables strict refs Strict refs generates runtime errors when you use symbolic &hellip;">
+  <meta name="description" content="I am learning about online credit card processing.
+Part 1 introduced a number of basic definitions.
+Part 2 discussed the difference between &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -56,6 +58,236 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/22/cc-processors/">Introduction to Online Credit Card Processing - Part 3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-03-22T00:00:00-04:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am learning about online credit card processing.
+<a href="/2014/03/18/cc-processors/">Part 1</a> introduced a number of basic definitions.
+<a href="/2014/03/21/cc-processors/">Part 2</a> discussed the difference between traditional gateways and the newer full stack gateways.</p>
+
+<p>In Part 3, I am exploring some of the new &ldquo;full stack&rdquo; gateways which are a bit
+more developer friendly and listing some key facts about each one.  All of
+these provide a merchant account, gateway, payment processor etc and handle all
+that complexity for you.</p>
+
+<ul>
+<li><a href="https://www.braintreepayments.com/">Braintree</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>Tools to build a marketplace</li>
+<li>Free for the first $50,000 in transactions</li>
+<li>2.9% + $0.30 per transaction</li>
+<li>$15 fee for each chargeback</li>
+<li>Client side encryption of cc numbers with Braintree.js</li>
+</ul>
+</li>
+<li><a href="https://stripe.com/">Stripe</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>2.9% + $0.30 per transaction</li>
+<li>$15 fee for each chargeback</li>
+<li>Client side encryption of cc numbers with Stripe.js</li>
+</ul>
+</li>
+<li><a href="https://www.balancedpayments.com/">Balanced</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>Tools to build a marketplace</li>
+<li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
+<li>Payouts to the business are $.25 each</li>
+<li>No fees for chargebacks?</li>
+<li>Client side encryption of cc numbers with Balanced.js</li>
+</ul>
+</li>
+<li><a href="https://www.wepay.com/">WePay</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>Tools to build a marketplace</li>
+<li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
+<li>No client side encryption of cc numbers?</li>
+</ul>
+</li>
+<li><a href="https://www.dwolla.com">Dwolla</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>Tools to build a marketplace</li>
+<li>Transactions under $10 are free, everything else is $0.25 per transaction</li>
+<li>Does not accept credit or debit cards only ACH (so no gateway/merchant account are required)</li>
+<li>Requires customers to create a Dwolla account</li>
+<li>No client side encryption of cc numbers?</li>
+</ul>
+</li>
+<li><a href="https://payments.amazon.com/home">Amazon FPS Payments</a>
+
+<ul>
+<li>Tools for recurring billing</li>
+<li>Tools to build a marketplace</li>
+<li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
+<li>2.9% + $0.30 per transaction, volume discounts</li>
+<li>Can keep the customer on your site and customize the form for free</li>
+<li>To contest a chargeback costs $10.</li>
+<li>Merchants are not liable for chargebacks for physical goods (not services)</li>
+<li>No client side encryption of cc numbers?</li>
+</ul>
+</li>
+<li><a href="https://www.paypal.com/">Paypal</a>
+
+<ul>
+<li>Turn your computer into a credit card terminal</li>
+<li>Swipe cards with a device that plugs into your phone or iPad.</li>
+<li>2.9% + $0.30 per transaction, volume discounts</li>
+<li>No monthly fee to send a customer to the Paypal site for payment</li>
+<li>$30 monthly fee if you want to keep the customer on your site or customize the
+form</li>
+<li>No client side encryption of cc numbers?</li>
+</ul>
+</li>
+<li><a href="http://square.com">Square</a> is in a similar space and positions themselves as being very simple.
+
+<ul>
+<li>Swipe cards with a device that plugs into your phone or iPad.</li>
+<li>No developer api &mdash; you must use their web marketplace to sell online</li>
+<li>2.75% per transaction</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Please let me know if I&rsquo;ve made any errors and I will correct them.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/21/cc-processors/">Introduction to Online Credit Card Processing - Part 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-03-21T00:00:00-04:00" pubdate data-updated="true">Mar 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am learning about online credit card processing.
+<a href="/2014/03/18/cc-processors/">Part 1</a> introduced a number of basic definitions.</p>
+
+<p>The number of online payments is going to grow.  Only <a href="http://www.huffingtonpost.com/2012/06/07/credit-card-payments-growth_n_1575417.html">6% of credit card transactions are currently done online</a>.
+With so much at stake, there are hundreds of payment gateways who provide a
+variety of services. But I have chosen to divide them into two categories.</p>
+
+<p>First there are <em>traditional gateways</em> who charge a monthly fee (in addition to
+a variety of other fees) and often you need to obtain a merchant account on
+your own which also has various fees associated with it.</p>
+
+<p>The second category contains newer <em>full stack gateways</em> who are more user
+friendly and provide a merchant account and a much simpler fee structure which
+is generally a percentage charge on a per transaction basis with no monthly
+fees.</p>
+
+<p>These &ldquo;full stack&rdquo; gateways are convenient and easy but they can cost more.
+They generally charge 2.9% + $0.30 per transaction.  Compare that to a
+more traditional gateway such as <a href="http://www.authorize.net/">Authorize.net</a> who
+charges $20 per month and $0.10 per transaction.  However you also have to
+factor in the cost of a merchant account.  And both the gateway and merchant&rsquo;s
+bank often charge a variety of fees which makes it difficult to assess the true
+cost.</p>
+
+<p>If you are doing a large number of transactions, saving small amounts of money
+is going to make a big difference.  If you are not then it may be cheaper to
+use a full stack processor and save yourself the dev work and accounting
+effort.</p>
+
+<p>One interesting company I would like to note is
+<a href="https://spreedly.com">Spreedly</a>.  Spreedly provides an api layer on top many
+other payment gateways so you can swap out gateways whenever you feel like it.
+Their service works with a large number of payment gateways &mdash; currently 60
+gateways in 73 countries.  They also give you the ability to deposit funds in
+different merchant accounts based on location or other business logic.  They do
+have a monthly fee structure and clearly you would only choose this solution if
+you are processing a large number of transactions.</p>
+
+<h1>Additional reading and resources</h1>
+
+<ul>
+<li><a href="http://www.nerdwallet.com/blog/credit-card-data/credit-card-transaction-volume-statistics/">Credit card and debit card transaction volume statistics</a></li>
+<li><a href="http://blog.zactownsend.com/credit-card-processing-as-a-commodity-business">Credit card processing as a commodity business</a> by Zac Townsend</li>
+<li><a href="http://gatewayindex.spreedly.com/">Compare gateways</a></li>
+<li><a href="http://www.cardpaymentoptions.com/credit-card-processors">Credit card processor reviews</a></li>
+<li><a href="http://www.jeffmould.com/2014/02/16/comparing-stripe-vs-braintree-vs-balanced-vs-dwolla/">Stripe vs Braintree vs Balanced vs Dwolla</a></li>
+</ul>
+
+
+<p>Also I found this series of videos was an excellent introduction to
+understanding payments at a lower level.  Be aware this is probably more than
+most web developers need/want to know.</p>
+
+<ol>
+<li> <a href="http://www.youtube.com/watch?v=fkUFizLjQo0">Names and nomenclature</a></li>
+<li> <a href="http://www.youtube.com/watch?v=WvSEDRkyg0Q">Mechanics of an electronic payment</a></li>
+<li> <a href="http://www.youtube.com/watch?v=tq316S9vW0s">Understanding interchange, Opening Visa &amp; Mastercards&#8217; kimono</a></li>
+<li> <a href="http://www.youtube.com/watch?v=Ru4Dy-5IJEQ">Multicurrency in electronic payments</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -181,19 +413,14 @@ sub splarf { return "dinosaurs smell good" }
   <div class="entry-content"><p>I want to understand credit card processing.  So I will probably write a few
 articles about it.  This article has some fundamental definitions.</p>
 
-<h2>gateway</h2>
-
-<p>A <a href="https://en.wikipedia.org/wiki/Payment_gateway">payment gateway</a> is a service
-which authorizes credit card payments by facillitating the transfer of
-information between a merchant&rsquo;s bank (the acquiring bank) and a customer&rsquo;s
-bank (the issuing bank).</p>
-
 <h2>acquiring bank</h2>
 
 <p>An <a href="https://en.wikipedia.org/wiki/Acquiring_bank">acquiring bank</a> is a bank
 which processes card payments on behalf of a merchant.  The term &lsquo;acquirer&rsquo;
 indicates the bank accepts (or acquires) credit card payments from card
-issuing banks within a credit card association.</p>
+issuing banks within a credit card association.  Acquirers take all the risk
+and bear the burdern of most of the regulation.  Examples of acquirers are
+Bank of America, FirstData, and Chase.</p>
 
 <h2>credit card association</h2>
 
@@ -204,7 +431,26 @@ American Express, etc.</p>
 
 <p>An <a href="https://en.wikipedia.org/wiki/Issuing_bank">issuing bank</a> is a bank which
 provides credit cards to consumers.  The term &lsquo;issue&rsquo; indicates the bank issues
-payments to the acquiring bank on behalf of the consumer.</p>
+payments to the acquiring bank on behalf of the consumer.  The top issuers in
+the US are American Express and Chase.</p>
+
+<h2>payment processor</h2>
+
+<p>A <a href="http://storecoach.com/blog/whats-difference-between-payment-processor-gateway/">payment processor</a>
+is a company which peforms the actual funds transfer.  Its the technical
+underpinning of a transaction.  Processors do authorization, funds transfer,
+statements, calculate the interchange fee, and handle dispute management.
+Processors take no risk on a transaction.  Examples of companies who are
+processors are FirstData, Chase, and RBS WorldPay.</p>
+
+<h2>gateway</h2>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Payment_gateway">payment gateway</a> is a service
+which ties all the various groups together and provides a nice simple interface for
+the merchant to build a shopping cart or marketplace without needing to
+understand all the gory details.  The gateway authorizes credit card payments
+by facillitating the transfer of information between a merchant&rsquo;s bank (the
+acquiring bank) and a customer&rsquo;s bank (the issuing bank).</p>
 
 <h2>merchant account</h2>
 
@@ -215,7 +461,7 @@ payments via credit card.</p>
 <h2>interchange fee</h2>
 
 <p>The <a href="https://en.wikipedia.org/wiki/Interchange_fee">interchange fee</a> is
-the fee paid the the issuing bank by the acquiring bank.  The amount varies by
+the fee paid to the issuing bank by the acquiring bank.  The amount varies by
 card type, card brand, transaction amount, and other factors and is set by the
 card associations like Visa, Mastercard, or Discover.</p>
 
@@ -223,12 +469,12 @@ card associations like Visa, Mastercard, or Discover.</p>
 
 <p>The <a href="http://merchantwarehouse.com/understanding-merchant-account-discount-rates">discount rate</a>
 is made up of several different fees which are charged to the merchant.  This
-sometimes includes the interchange fee.  The discount rate is a fixed
-percentage-based fee charged for each transaction.  The fee goes to the
-acquiring bank who likely passes a portion to the issuing bank who in turn
-passes a portion to the credit card association.</p>
+usually includes the interchange fee.  The discount rate is a fixed
+percentage-based fee charged for each transaction.  A portion of the fee is
+passed to the acquiring bank who likely passes a portion to the issuing bank
+who in turn passes a portion to the credit card association.</p>
 
-<p>Rates are influenced by the many things including the level of risk. Brick and
+<p>Rates are influenced by many things including the level of risk. Brick and
 mortar stores where a card is physically present are considered the lowest
 risk.  There are three categories of transaction types based on risk and each
 have a different discount rate: qualified, mid-qualified and non-qualified.
@@ -782,292 +1028,6 @@ The rules are:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/12/18/authen-passphrase/">Salt and Pepper - How to Encrypt Database Passwords</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-12-18T00:00:00-05:00" pubdate data-updated="true">Dec 18<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>To explain how salt and pepper work in encryption, I will walk through a few
-scenarios.</p>
-
-<h1>No salt</h1>
-
-<p><strong>Summary for the impatient:</strong>  <em>Using no salt means an attacker doesn&rsquo;t need
-to generate a rainbow table because they can reuse an existing one.</em></p>
-
-<p>If an attacker obtains my database of encrypted passwords it will be very time
-consuming to brute force them.  However there exist pre-computed tables of
-encrypted values of thousands of commonly used passwords.  These tables are called
-rainbow tables.  It is computationally inexpensive to match the encrypted
-values in a rainbow table with the encrypted values in my database.</p>
-
-<h1>One salt</h1>
-
-<p><strong>Summary for the impatient:</strong>  <em>Using the same salt for all your passwords
-means an attacker must generate 1 rainbow table.</em></p>
-
-<p>Salt is data used as an additional input to the algorthim that encrypts a
-password.  If I use a salt when I encrypt a password the resulting output will
-be different from someone who did not use the same salt.  That means my
-attacker cannot reuse an existing rainbow table.  They must generate a new one
-using the same salt I used.</p>
-
-<p>Note that salt is usually stored as plain text in the database with the
-encrypted passwords.  So the attacker usually has access to the salt.  Even so,
-I have successfully made the attack more expensive.</p>
-
-<h1>A random salt per password</h1>
-
-<p><strong>Summary for the impatient:</strong>  <em>Using a random salt for each password means an
-attacker must generate 1 rainbow table per password.</em></p>
-
-<p>Instead of using a single salt for the entire database I can use a different
-(random) salt for each user&rsquo;s password.  This means the attacker must generate
-a set of rainbow tables for each password which is even more expensive.</p>
-
-<p>Note that I also need to store the salt for each password I have generated.
-This is a pain to do manually.  Happily some clever person came up with RFC
-2307 which suggests a much simpler solution.</p>
-
-<p>Instead of storing the just the encrypted password in the password column, store
-a string which concatenates the salt and the encrypted password.  This may not
-sound easier.  It implies the need to parse and concatenate strings.  However
-this is handled for me by the encryption libraries so its 100% pain free.  Lets
-see an example.</p>
-
-<p>To encrypt the plaintext string &lsquo;pie&rsquo; use the following Perl code</p>
-
-<pre><code>my $blowfish = Authen::Passphrase::BlowfishCrypt-&gt;new(
-   passphrase  =&gt; 'pie',
-   salt_random =&gt; 1,
-   cost        =&gt; 16,
-);
-
-say $blowfish-&gt;as_rfc2307; 
-# the output will look like this:
-# {CRYPT}$2a$14$sS80d1JlF3oR6Q4UHT.9w.DIXnV0/dLQMoVBsOp2gMRT65bWvP0P2
-</code></pre>
-
-<p>That crazy <em>{CRYPT}$2a$blarblar</em> mumbo jumbo is what we will save to the db in the password
-column.  However if I know what to look for, I can see the mumbo jumbo is actually
-several things smushed together:</p>
-
-<pre><code>{CRYPT} $ 2a $ 16 $ sS80d1JlF3oR6Q4UHT.9w.DIXnV0/dLQMoVBsOp2gMRT65bWvP0P2
-</code></pre>
-
-<ul>
-<li><strong>{CRYPT}</strong> &ndash; This is the scheme identifier.  It indicates which scheme is being used
-so I know how to parse the rest of the string.</li>
-<li><strong>$</strong> &ndash; These are field separators</li>
-<li><strong>2a</strong> &ndash; A version number for this scheme</li>
-<li><strong>16</strong> &ndash; The cost</li>
-<li>Then there is the <strong>salt</strong> (22 base 64 digits &mdash; plain text)</li>
-<li>Followed by the <strong>encrypted password</strong> (31 base 64 digits)</li>
-</ul>
-
-
-<p>To check if a user has submitted a valid <code>$password</code>  use the following code</p>
-
-<pre><code>my $secret   = ''{CRYPT}$2a$16$sS80d1JlF3oR6Q4UHT.9w.DIXnV0/dLQMoVBsOp2gMRT65bWvP0P2';
-my $blowfish = Authen::Passphrase-&gt;from_rfc2307($secret);
-
-if ($blowfish-&gt;match($password)) {
-    say "You may enter";
-}
-else {
-    say "You did not say the magic word";
-}
-</code></pre>
-
-<p>Of course we want to build this into our ORM so the Authen::Passphrase objects
-are inflated and deflated for us.  Here is what that looks like in a DBIx
-Result class:</p>
-
-<pre><code>__PACKAGE__-&gt;load_components(qw/FilterColumn/);
-__PACKAGE__-&gt;filter_column( password =&gt; {
-    filter_to_storage   =&gt; sub { $_[1]-&gt;as_rfc2307() },                      # deflate
-    filter_from_storage =&gt; sub { Authen::Passphrase-&gt;from_rfc2307($_[1]) },  # inflate
-});
-</code></pre>
-
-<p>But I only showed you that so you would understand what
-DBIx::Class::InflateColumn::Authen::Passphrase does under the covers.  I use
-that because it makes my code simpler:</p>
-
-<pre><code>__PACKAGE__-&gt;load_components(qw/InflateColumn::Authen::Passphrase/);
-__PACKAGE__-&gt;add_columns(
-    ...,
-    password =&gt; {
-        data_type          =&gt; 'text',
-        inflate_passphrase =&gt; 'rfc2307',
-    },
-    ...,
-);
-</code></pre>
-
-<p>This is how I encrypt passwords on <a href="https://networthify.com">networthify.com</a>
-and <a href="http://iijo.org">iijo.org</a>.</p>
-
-<h1>Adding pepper</h1>
-
-<p><strong>Summary for the impatient:</strong>  <em>Using pepper means an attacker must generate
-many rainbow tables per password. But few people use pepper and its
-controversial.</em></p>
-
-<p>Pepper is the same as salt except that I don&rsquo;t save the value anywhere.  Lets
-say I choose an 8 bit value for my pepper.  That means there are 256
-possible values.  If I don&rsquo;t save that value anywhere then when a user logs
-in I will need to try up to 256 values to see if the user has the right
-password.  However it means my attacker will need to generate up to 256
-rainbow tables for each password.</p>
-
-<p>One big problem is that trying 256 possible values is going to take me about 4
-minutes on average hardware.</p>
-
-<p>Even if I ignore that issue, this option is controversial and my understanding
-is that few people do it.  It is generally accepted that messing about with
-salt and pepper should be left to the professionals who are writing the
-encryption libraries.  Pepper is not supported by Authen::Passphrase.</p>
-
-<h1>Caveats</h1>
-
-<p>Salting is done to make rainbow tables inneffective.  For various reasons
-crackers rarely use rainbow tables anymore.  Instead they use sophisticated
-brute force algorithms which combine dictionary attacks with databases of known
-or commonly used passwords.  These kinds of brute force attacks can often crack
-battery-horse-staple <a href="http://xkcd.com/936/">XKCD</a> style passwords even if they
-are very long.  Password are not secure unless they are very long <em>and</em>
-very random.</p>
-
-<p>And there is more bad news.  While salting makes it harder to crack all the
-passwords in the database, cracking a single targeted password is often not
-computationally hard.  A single completely random 8 character password can be
-cracked with brute force in 10 days.</p>
-
-<p>The only way to protect your users is to require very long and very random
-passwords.  Make sure your website requires a minimum password length of 8
-characters or more.</p>
-
-<h4>Sources</h4>
-
-<ul>
-<li><a href="http://www.wired.co.uk/news/archive/2013-05/28/password-cracking/viewall">Anatomy of a hack: even your &lsquo;complicated&rsquo; password is easy to crack</a> (Wired magazine)</li>
-<li><a href="https://metacpan.org/pod/Authen::Passphrase">Authen::Passphrase</a></li>
-<li><a href="https://metacpan.org/pod/Authen::Passphrase::BlowfishCrypt">Authen::Passphrase::BlowfishCrypt</a></li>
-<li><a href="https://metacpan.org/pod/DBIx::Class::InflateColumn::Authen::Passphrase">DBIx::Class::InflateColumn::Authen::Passphrase</a></li>
-<li><a href="http://blog.afoolishmanifesto.com/archives/1910">frew</a></li>
-<li><a href="http://crypto.stackexchange.com/questions/1776/can-you-help-me-understand-what-a-cryptographic-salt-is">crypto.stackexchange.com</a></li>
-<li><a href="http://security.stackexchange.com/questions/3272/password-hashing-add-salt-pepper-or-is-salt-enough">security.stackexchange.com</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/12/15/dalios-principles/">Ray Dalio&#8217;s &#8220;Principles&#8221;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-12-15T00:00:00-05:00" pubdate data-updated="true">Dec 15<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I have been reading Ray Dalio&rsquo;s <em>Principles</em>.  Ray Dalio is the CEO of
-Bridgewater which is a big famous successful hedge fund he started in the 70&rsquo;s.
-<em>Principles</em>, is a 123 page philosophical text he published in 2011 about how
-to live your life and how to manage people and organizations.  Its extremely
-good.  I&rsquo;m not done yet but I have a feeling it is something I&rsquo;m going to be
-rereading many times over the next few years.  You can download it from the
-<a href="http://www.bwater.com/Uploads/FileManager/Principles/Bridgewater-Associates-Ray-Dalio-Principles.pdf">Bridewater website</a>.</p>
-
-<p>Here is a sample:</p>
-
-<blockquote><p>Most people react to pain badly. They have “fight or flight” reactions to it:
-they either strike out at whatever brought them the pain or they try to run
-away from it. As a result, they don’t learn to find ways around their barriers,
-so they encounter them over and over again and make little or no progress
-toward what they want&hellip;</p>
-
-<p>Believe it or not, you are lucky to feel the pain if you approach it correctly,
-because it will signal that you need to find solutions and to progress. Since
-the only way you are going to find solutions to painful problems is by thinking
-deeply about them &ndash; i.e., reflecting &ndash; if you can develop a knee-jerk reaction
-to pain that is to reflect rather than to fight or flee, it will lead to your
-rapid learning/evolving.</p></blockquote>
-
-<p>And from that he derives this equation:</p>
-
-<blockquote><p>Pain + Reflection = Progress</p></blockquote>
-
-<p>So I&rsquo;ve been trying to do this.  Whenever I experience conflict, stress, anger,
-or pain, I will try to make that into an opportunity to evolve and to become
-stronger.</p>
-
-<p>Quite a lot of <em>Principles</em> feels like common sense.  But at the same time I
-can see that some of that common sense stuff is stuff I haven&rsquo;t been doing or
-have been doing half way or just have not thought through as much as Dalio has.
-I think that having this set of considered formalized principles to refer
-to will help me to get what I want from life.</p>
-
-<p>By the way, I discovered <em>Principles</em> via
-<a href="http://sebastianmarshall.com/">Sebastian Marshall</a>.  Sebastion is an American
-who has been living and working in Japan for about 10 years.  His writing is
-always interesting and is a great source of new ideas for me.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1104,6 +1064,14 @@ always interesting and is a great source of new ideas for me.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/22/cc-processors/">Introduction to Online Credit Card Processing - Part 3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/21/cc-processors/">Introduction to Online Credit Card Processing - Part 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/19/use-strict/">What Does &#8216;Use Strict&#8217; Do?</a>
       </li>
     
@@ -1113,14 +1081,6 @@ always interesting and is a great source of new ideas for me.</p>
     
       <li class="post">
         <a href="/2014/03/17/our-my-local/">My vs Our vs Local</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/16/disagree-interview/">Why You Should Disagree in an Interview</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/14/interview-questions/">Questions I Ask in Interviews</a>
       </li>
     
   </ul>
