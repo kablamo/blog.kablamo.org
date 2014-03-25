@@ -9,8 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="To explain how salt and pepper work in encryption, I will walk through a few
-scenarios. No salt Summary for the impatient: Using no salt means an &hellip;">
+  <meta name="description" content="For years I have been hearing people say sugar is the new bad thing. So I
+finally got around to reading up on this claim. Here is what I learned. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,6 +57,91 @@ scenarios. No salt Summary for the impatient: Using no salt means an &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/01/01/no-dessert-forever/">An Experiment - No Dessert Forever</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-01-01T00:00:00-05:00" pubdate data-updated="true">Jan 1<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For years I have been hearing people say sugar is the new bad thing.  So I
+finally got around to reading up on this claim.  Here is what I learned.</p>
+
+<h1>Nutrition</h1>
+
+<p>Food is composed of <strong>carbohydrates, fats, proteins, water, vitamins,</strong> and
+<strong>minerals</strong>.  Of course, I sometimes swallow stuff that is not on that list
+but the list is comprehensive in the sense that it covers everything my body
+needs.  Notice that sugar is not in the list.  My body breaks down carbs and
+fats into glucose (sugar) which can be used by my body as energy.</p>
+
+<p>This means sugar has <em>zero</em> nutritional value.  There is no reason to ever
+eat any.  Humans do not require sugar.</p>
+
+<p>I have always been smug about the fact that I don&rsquo;t throw away my money on a
+caffeine addiction.  But suddenly I realize I have been foolishly spending my
+money on sugar.</p>
+
+<h1>No dessert forever</h1>
+
+<p>As part of my long term plan to someday somehow acquire a svelte physique, I
+hereby <strong>reject and repudiate</strong> the harmful cultural ritual known as dessert.
+The rules are:</p>
+
+<ul>
+<li>No dessert forever.  No ice cream, no cake, no pie.</li>
+<li>No candy forever.  No free candy or chocolate from the nice people at the office.</li>
+<li>No fruit juice forever.</li>
+<li>Exceptions
+
+<ul>
+<li>85%+ dark chocolate</li>
+<li>Honey</li>
+<li>Fruit</li>
+<li>Small quantities of desserts that I have never had before.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Sources:</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Food_energy">Wikipedia: Food energy</a></li>
+<li><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2235907/">Evidence for sugar addiction</a></li>
+<li><a href="http://www.health.harvard.edu/newsletters/Harvard_Heart_Letter/2011/September/abundance-of-fructose-not-good-for-the-liver-heart">Abundance of fructose not good for the liver, heart</a></li>
+<li><a href="http://nickwinter.net/experiments">Nick Winter</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1078,208 +1163,6 @@ My next class is Chinese History.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/11/13/go/">Down a Rabbit Hole - Go-lang and Its Decentralized CPAN</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-11-13T00:00:00-05:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I have been in a rabbit hole for the last week.  I started by looking at Docker
-(<a href="http://blog.kablamo.org/2013/11/13/docker/">See my previous post</a>).  It turns
-out Docker is written in Go and so somehow I ended up learning
-<a href="http://golang.org/">Go</a>.  Well &ldquo;learning&rdquo; is an overstatement.  I&rsquo;ve read
-about it for a few days and wrote a tiny bit of code.</p>
-
-<p>But anyway, the coolest thing about Go so far is its decentralized libraries.
-<em>Centralized</em> collections of libraries have been all the rage the last few years
-and it seems like all the languages have gotten hip to that &mdash; CPAN, rubygems,
-pypi, npm, etc.</p>
-
-<p>But one of the biggest problems with publishing Perl modules on CPAN is how
-difficult it is to do.  Sure its easy after you figure out the PAUSE website
-exists, create a PAUSE account, read all the Dist::Zilla docs and some of the
-source code, and write your own personalized plugin.  After that it just takes
-one little command.</p>
-
-<h1>How it works in Go</h1>
-
-<p>If you want to use some libraries in your Go code, it looks like this:</p>
-
-<pre><code>import (
-    "log" 
-    "time"
-    "errors"
-    "github.com/dotcloud/docker"
-    "github.com/fsouza/go-dockerclient"
-)
-</code></pre>
-
-<p>The first 3 are core libraries distributed as part of Go.  But the last two you
-have to download and install yourself.  Doing that is very simple:</p>
-
-<pre><code>export GOROOT=$HOME/go
-go get github.com/dotcloud/docker
-</code></pre>
-
-<p>This downloads all the dependencies too.  Of course.</p>
-
-<p>The next question you will ask me is how do people learn about new libraries in
-a decentralized world?  There are websites like
-<a href="http://gowalker.org/">http://gowalker.org/</a> which scrape GitHub&rsquo;s recent updates
-page.  They also do this for BitBucket, Google Project Hosting, and a couple
-other sites.</p>
-
-<p>This new language has shiny modern features and is very easy to get up and
-running.</p>
-
-<pre style="font: 4px/2px monospace; color: #333; background: transparent; border: 0px; border-radius: 0; box-shadow: 0 0 0 0;">
-                              ,'#@@@@@@@#+';;;''#@@@@@#,                            
-                          ;@@@@#;.                    '@@@;                         
-                       ;@@@:                             ,@@@                       
-                     #@@.                                   +@@                     
-                   @@+                                        +@;   +@@@@@#         
-         ,,      +@+                               #@@@@+       @@@@#  @@       
-     .@@@@@@@@' @@      .+@@@+.                 :@        @,     @@         @@      
-    @@:      .@@;     ++       #+              @            @     #@         @@     
-   @@         @;               @            @              @     @@         @     
-  ;@         @#    ,:             '        @                @     @' :    #+    
-  @         +@     ;               '        ;                  ,     @@@@;    ,@    
-  @      '' @     @                 @       #                  @     '@@@@     @    
- :@     @@@@:    :                   .     ,                          @@@@     @    
- ;#     @@@@     @                   @     #  +@@@:             +     ,@@     ,@    
- :@     @@@    : ,@@@@             +     @ #@@@@@:            @      @    @;    
-  @     .@@     @@@@@                  @ @@@@@@@            @      :@     @     
-  @      @,     . @@@@@@@                  @ @@@@@:@            @       @    @:     
-  ;@     @      . @@@@@.@.                 @ @@@@@            #       #' .@'      
-   @@   '#       @@@@ ,            :     ; ,@@@@@             :       @@.       
-    @@. @.       # @@@@@'            @      ;  #@#             :         @:         
-     ,@@@        @  '@#.             +      @                  @         @:         
-       .@         :                 '        @                '          :@         
-       '#         +                 ;         '              .,           @         
-       @:          @               @  @@@@@@,  @            ;,            @         
-       @          @             @  @@@@@@@@.  @:        .@              @,        
-       @             ;+         #,  #@@@@@@@@'    +@+::+@#                ++        
-       @               ;@;,.,'@:    @@@@@@@@@@:                           :@        
-       @                          #, ,@@@@@@   @                           @        
-      .@                         @              '                          @        
-      ;#                                       @                         @        
-      ++                        :                ;                         @        
-      +'                                         '                         @        
-      #:                         @    ;@;@'@     @                         @      
-      @,                          :+''   @  .@@@:                          @.       
-      @,                                 @   :                             @.       
-      @.                            ,    @   .                             @,       
-      @,                            ;    @                                 @,       
-      @,                            '    @                                 @:       
-      #:                            :    @                                 @:       
-      #;                             +  @ :  @                             @:       
-      ++                              +;   ;.                              @:       
-      ;#                                                                   @:       
-      ,@                                                                   @:       
-       @                                                                   @:       
-       @                                                                   @,       
-       @                                                                   @,       
-       @                                                                 @,       
-       @,                                                                  @,       
-       +'                                                                  @,       
-       :@                                                                  @:       
-       .@                                                                  @:       
-        @                                                                  @:       
-        @                                                                  #;       
-        @                                                                  #;       
-        @                                                                  +@@,     
-      '#@                                                                  '+  ;@.  
-   +@.  @                                                                  '#     @ 
- ';     @                                                                  ;@      @
-.       @                                                                  :@      #
-@       @                                                                  ,@    @ @
-+ @  ,@                                                                  .@@    # 
- @    ':@                                                                   +; .+ 
- ,.  @ .@                                                                   @     
-   ;   .@                                                                   @       
-       ,@                                                                   @       
-       :@                                                                   @       
-       ;#                                                                   @       
-       '#                                                                   @       
-       '+                                                                   @       
-       +'                                                                   @       
-       #;                                                                   @       
-       #;                                                                   @       
-       @:                                                                   @     
-       @:                                                                   @.      
-       @,                                                                   @,      
-       @,                                                                   @,      
-       @,                                                                   @,      
-       @,                                                                   @,      
-       @.                                                                   @.      
-       @.                                                                   @     
-       @.                                                                   @       
-       @.                                                                   @       
-       @,                                                                   @       
-       @,                                                                   @       
-       @,                                                                  .@       
-       @,                                                                  '#       
-       @:                                                                  @:       
-       @:                                                                  @        
-       #;                                                                  @        
-       +'                                                                 ,@        
-       '+                                                                 #'        
-       ,@                                                                 @         
-        @                                                                         
-        @.                                                               @'         
-        ;@                                                               @          
-         @                                                              +@          
-         '@                                                             @           
-          @,                                                           #@           
-          .@                                                           @            
-           #@                                                         @:            
-            @#                                                       @#             
-             @+                                                     @@              
-              @#                                                  .@@               
-               @@@#                                              @   .#             
-             ''    #                                            @      @            
-            @       @                                          @        '           
-           @         @                                       @@+        ;           
-          :   .       @+                                  :@@+  +.    @  +          
-          @  @      @, #@@;                            ;@@@,     ;    .  @          
-          ' @     ':     ,@@@#:                   :+@@@@:         #    @ @          
-          @ :    #           ;@@@@@@@#####@@@@@@@@@+.              @   ; .          
-           @    @                  ,:;''';;:,                     @  #,           
-            ;@##                                                     `             
-</pre>
-
-
-<p>(the golang mascot)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1318,6 +1201,10 @@ running.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/24/experiments/">An Experiment - Living With Less Than 200 Things</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/22/cc-processors/">Introduction to Online Credit Card Processing - Part 3</a>
       </li>
     
@@ -1331,10 +1218,6 @@ running.</p>
     
       <li class="post">
         <a href="/2014/03/18/cc-processors/">Introduction to Online Credit Card Processing - Part 1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/17/our-my-local/">My vs Our vs Local</a>
       </li>
     
   </ul>
