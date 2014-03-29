@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vim | KABLAMO]]></title>
+  <link href="http://blog.kablamo.org/categories/vim/atom.xml" rel="self"/>
+  <link href="http://blog.kablamo.org/"/>
+  <updated>2014-03-29T10:50:47-04:00</updated>
+  <id>http://blog.kablamo.org/</id>
+  <author>
+    <name><![CDATA[Eric Johnson]]></name>
+    <email><![CDATA[kablamo@kablamo.org]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Vim cheat sheet]]></title>
+    <link href="http://blog.kablamo.org/2014/03/28/ddg-vim/"/>
+    <updated>2014-03-28T00:00:00-04:00</updated>
+    <id>http://blog.kablamo.org/2014/03/28/ddg-vim</id>
+    <content type="html"><![CDATA[<p>I created a Vim cheat sheet instant answer for DuckDuckDuckGo.  If you search
+for <a href="https://duckduckgo.com/?q=vim+cheat+sheet">vim cheat sheet</a> or
+<a href="https://duckduckgo.com/?q=vim+help">vim help</a> you will get a result like this:</p>
+
+<p>{%img /images/for-posts/2014-03-28-ddg-vim.png 700 424 %}</p>
+
+<p>The data is from rtorruellas&rsquo;s excellent <a href="http://rtorruellas.com/vim-cheat-sheet/">vim cheat sheet</a>
+(also available on <a href="https://github.com/rtorr/vim-cheat-sheet">github</a>) which has a responsive
+mobile friendly layout and is also available in Japanese.</p>
+]]></content>
+  </entry>
+  
+</feed>
