@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/perl/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-03-29T10:50:47-04:00</updated>
+  <updated>2014-03-31T14:54:40-04:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,75 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Look around assertions in Perl regular expressions]]></title>
+    <link href="http://blog.kablamo.org/2014/03/31/regex/"/>
+    <updated>2014-03-31T00:00:00-04:00</updated>
+    <id>http://blog.kablamo.org/2014/03/31/regex</id>
+    <content type="html"><![CDATA[<p>When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one
+letter at a time checking the match at each position.  That position is called
+the <em>current match position</em>.</p>
+
+<p>Look around assertions allow you to match a specific pattern before or after
+the current match position without moving the match position.</p>
+
+<h1>Look ahead assertions</h1>
+
+<p>Look ahead assertions match the text after the current match position
+(without moving the match position).  They look like <code>(?=pattern)</code>.</p>
+
+<pre><code>my $job = "space cowboy";
+$job =~ /space (?=cow)/;    # matches
+$job =~ /space (?=cow)cow/; # also matches
+</code></pre>
+
+<h1>Look behind assertions</h1>
+
+<p>Look behind assertions match the text before the current match position
+(without moving the match position).  They look like <code>(?&lt;=pattern)</code>.</p>
+
+<pre><code>my $job = "space cowboy";
+$job =~ /(?&lt;=space) cowboy/;      # matches
+$job =~ /(?&lt;=space)space cowboy/; # also matches
+</code></pre>
+
+<h1>Positive and negative look ahead assertions</h1>
+
+<p><em>Positive</em> look ahead assertions are look ahead assertions which match when their
+subpattern matches. They look like <code>(?=pattern)</code>.</p>
+
+<pre><code> my $job = "space cowboy";
+ $job =~ /space (?=cowboy)/;   # matches
+</code></pre>
+
+<p><em>Negative</em> look ahead assertions are look ahead assertions which match when their
+subpattern fails. They look like <code>(?!pattern)</code>.</p>
+
+<pre><code> my $job = "space cowboy";
+ $job =~ /space (?!mooseboy)/;   # matches
+</code></pre>
+
+<h1>Positive and negative look behind assertions</h1>
+
+<p>Positive look behind assertions are look behind assertions which match when their
+subpattern matches. They look like <code>(?&lt;=pattern)</code>.</p>
+
+<pre><code> my $job = "space cowboy";
+ $job =~ /(?&lt;=space) cowboy/;   # matches
+</code></pre>
+
+<p>Negative look behind assertions are look behind assertions which match when
+their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
+
+<pre><code> my $job = "space cowboy";
+ $job =~ /(?&lt;!earth) cowboy/;   # matches
+</code></pre>
+
+<p>For more details see <code>perldoc perlre</code>.  I also recommend the DuckDuckGo
+<a href="https://duckduckgo.com/?q=regex+cheat+sheet">regex cheat sheet</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Vim cheat sheet]]></title>
@@ -22,7 +91,7 @@
 for <a href="https://duckduckgo.com/?q=vim+cheat+sheet">vim cheat sheet</a> or
 <a href="https://duckduckgo.com/?q=vim+help">vim help</a> you will get a result like this:</p>
 
-<p>{%img /images/for-posts/2014-03-28-ddg-vim.png 700 424 %}</p>
+<p><img src="/images/for-posts/2014-03-28-ddg-vim.png" width="700" height="424"></p>
 
 <p>The data is from rtorruellas&rsquo;s excellent <a href="http://rtorruellas.com/vim-cheat-sheet/">vim cheat sheet</a>
 (also available on <a href="https://github.com/rtorr/vim-cheat-sheet">github</a>) which has a responsive
@@ -189,72 +258,6 @@ are in.  Usually there is a good reason.  If it was made through ignorance I
 will find out if are they open to fixing the problem &mdash; subject to priorities
 of course.  I may also learn if they are interested in my opinion or are
 looking for a soldier who follows orders.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Questions I ask in interviews]]></title>
-    <link href="http://blog.kablamo.org/2014/03/14/interview-questions/"/>
-    <updated>2014-03-14T00:00:00-04:00</updated>
-    <id>http://blog.kablamo.org/2014/03/14/interview-questions</id>
-    <content type="html"><![CDATA[<p>I recently relocated from London to the Chicago area so I have been doing
-interviews.  When I interview a potential client or employer I carry this list of
-questions with me.  Most of the questions I have taken from other sources
-online.  I have listed them in roughly the order I ask them.</p>
-
-<h1>Understanding the job</h1>
-
-<ul>
-<li>What will I be doing every day (precisely)?</li>
-<li>Why are you hiring? New product? Scaling? Someone quit?</li>
-<li>Who will I report to?</li>
-<li>Who will I be working with?  How big are the teams?</li>
-<li>What are my boss' goals for the next 6 months/year?</li>
-<li>What is the key metric for the company? For my group? For my boss?</li>
-</ul>
-
-
-<h1>Understanding the culture</h1>
-
-<ul>
-<li>How do you build software?  Where do requirements and features come from?
-Is it a very formal process or is there no process?</li>
-<li>What problems does the group have that need to be solved?</li>
-<li>Is there a mandate to fix legacy code and problems that exist?</li>
-<li>What do you wish you had known before starting work here?</li>
-<li>Whats the worst part of this job and whats the coolest thing you have built here, personally?</li>
-</ul>
-
-
-<h1>Tools and best practices</h1>
-
-<ul>
-<li>What tools are being used?
-
-<ul>
-<li>bug tracking</li>
-<li>version control</li>
-<li>which version of Perl</li>
-<li>what operating system</li>
-<li>why were those choices made</li>
-</ul>
-</li>
-<li>Is there a mandate to use the latest stuff from CPAN?</li>
-<li>Are there tests?</li>
-<li>Are there automated tests?</li>
-<li>What is deployment like?</li>
-<li>Is Moose used? OO?</li>
-</ul>
-
-
-<h1>Miscellaneous</h1>
-
-<ul>
-<li>Is there any allowance for remote work?</li>
-<li>Are there core business hours?</li>
-<li>Will I be oncall?</li>
-</ul>
-
 ]]></content>
   </entry>
   

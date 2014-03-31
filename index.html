@@ -9,9 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I created a Vim cheat sheet instant answer for DuckDuckDuckGo. If you search
-for vim cheat sheet or
-vim help you will get a result like this: The &hellip;">
+  <meta name="description" content="When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one
+letter at a time checking the match at each position. That &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -58,6 +57,103 @@ vim help you will get a result like this: The &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/31/regex/">Look Around Assertions in Perl Regular Expressions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-03-31T00:00:00-04:00" pubdate data-updated="true">Mar 31<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one
+letter at a time checking the match at each position.  That position is called
+the <em>current match position</em>.</p>
+
+<p>Look around assertions allow you to match a specific pattern before or after
+the current match position without moving the match position.</p>
+
+<h1>Look ahead assertions</h1>
+
+<p>Look ahead assertions match the text after the current match position
+(without moving the match position).  They look like <code>(?=pattern)</code>.</p>
+
+<pre><code>my $job = "space cowboy";
+$job =~ /space (?=cow)/;    # matches
+$job =~ /space (?=cow)cow/; # also matches
+</code></pre>
+
+<h1>Look behind assertions</h1>
+
+<p>Look behind assertions match the text before the current match position
+(without moving the match position).  They look like <code>(?&lt;=pattern)</code>.</p>
+
+<pre><code>my $job = "space cowboy";
+$job =~ /(?&lt;=space) cowboy/;      # matches
+$job =~ /(?&lt;=space)space cowboy/; # also matches
+</code></pre>
+
+<h1>Positive and negative look ahead assertions</h1>
+
+<p><em>Positive</em> look ahead assertions are look ahead assertions which match when their
+subpattern matches. They look like <code>(?=pattern)</code>.</p>
+
+<pre><code> my $job = "space cowboy";
+ $job =~ /space (?=cowboy)/;   # matches
+</code></pre>
+
+<p><em>Negative</em> look ahead assertions are look ahead assertions which match when their
+subpattern fails. They look like <code>(?!pattern)</code>.</p>
+
+<pre><code> my $job = "space cowboy";
+ $job =~ /space (?!mooseboy)/;   # matches
+</code></pre>
+
+<h1>Positive and negative look behind assertions</h1>
+
+<p>Positive look behind assertions are look behind assertions which match when their
+subpattern matches. They look like <code>(?&lt;=pattern)</code>.</p>
+
+<pre><code> my $job = "space cowboy";
+ $job =~ /(?&lt;=space) cowboy/;   # matches
+</code></pre>
+
+<p>Negative look behind assertions are look behind assertions which match when
+their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
+
+<pre><code> my $job = "space cowboy";
+ $job =~ /(?&lt;!earth) cowboy/;   # matches
+</code></pre>
+
+<p>For more details see <code>perldoc perlre</code>.  I also recommend the DuckDuckGo
+<a href="https://duckduckgo.com/?q=regex+cheat+sheet">regex cheat sheet</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -880,114 +976,6 @@ Is it a very formal process or is there no process?</li>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/02/28/duckduckgo/">How to Build a Duck Duck Go Instant Answer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2014-02-28T00:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Instant answers are those little boxes at the top of the DuckDuckGo search
-results page.  I made one for discovering international calling codes &mdash; or
-dialing codes if you prefer.</p>
-
-<p><img src="/images/for-posts/2014-02-28-singapore.png" width="700" height="424">
-<img src="/images/for-posts/2014-02-28-down-under.png" width="700" height="424"></p>
-
-<p>If you want to hack on DuckDuckGo and add your own instant answer its pretty
-simple to <a href="http://duckduckhack.com">get started</a>.  You can use Vagrant and
-VirtualBox to get a complete working dev environment.  But if you are already
-running Ubuntu or OSX the following recipe is easier:</p>
-
-<pre><code>curl http://duckpan.org/install.pl | perl 
-cpanm App::DuckPAN
-duckpan installdeps # installs dependencies from DuckPAN (not CPAN) to locallib
-</code></pre>
-
-<p>Next fork the repository you want to hack on.  To choose the correct repository
-think about what kind of data source you are using to generate your instant answer.</p>
-
-<ul>
-<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-spice">spice repo</a>
- if you have a real time data source like a JSON web API.</li>
-<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-goodie">goodie repo</a>
- if you generate your instant answer with code and need no network access.</li>
-<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-fathead">fathead repo</a>
- if your data source can be placed in a key/value store.</li>
-<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-fathead">longtail repo</a>
- if your data source requires a full text search.</li>
-</ul>
-
-
-<p>Now you can start hacking.  I&rsquo;ll show you how the capitalization instant answer
-from the goodie repo works.  Below is the code.  I added comments to explain
-things a bit.</p>
-
-<pre><code>package DDG::Goodie::Capitalize;
-use DDG::Goodie;
-
-# If a DuckDuckGo search query contains any of these words at the start or
-# end of the query, the 'remainder' handler below will run.
-triggers startend =&gt; 'capitalize', 'uppercase', 'upper case';
-
-# This block of code is pretty much meta data describing this instant
-# answer.  Mostly it is used by https://duckduckgo.com/goodies.
-zci answer_type =&gt; "capitalize";
-primary_example_queries 'capitalize this';
-secondary_example_queries 'uppercase that';
-description 'capitalize a string';
-name 'Capitalize';
-code_url 'https://github.com/duckduckgo/zeroclickinfo-goodies/blob/master/lib/DDG/Goodie/Capitalize.pm';
-category 'conversions';
-topics 'programming';
-attribution twitter =&gt; 'crazedpsyc',
-            cpan    =&gt; 'CRZEDPSYC' ;
-
-# This is is where the magic happens.  $_ contains the query minus the
-# trigger word.  The return value from this sub shows up on the DuckDuckGo
-# search results page as an instant answer.
-handle remainder =&gt; sub { uc ($_) };
-</code></pre>
-
-<p>To test your new instant answer you can launch a little web server with the following command:</p>
-
-<pre><code>duckpan server
-</code></pre>
-
-<p>Then open your favorite web browser and surf to
-<a href="http://0:5000/?q=capitalize+aliens+smell+better+than+dinosaurs">http://0:5000/?q=capitalize+aliens+smell+better+than+dinosaurs</a> and you should
-see something like this:</p>
-
-<p><img src="/images/for-posts/2014-02-28-capitalize.png" width="700" height="424"></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1024,6 +1012,10 @@ see something like this:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/03/31/regex/">Look Around Assertions in Perl Regular Expressions</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/03/28/ddg-vim/">Vim Cheat Sheet</a>
       </li>
     
@@ -1037,10 +1029,6 @@ see something like this:</p>
     
       <li class="post">
         <a href="/2014/03/21/cc-processors/">Introduction to Online Credit Card Processing - Part 2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/19/use-strict/">What Does &#8216;Use Strict&#8217; Do?</a>
       </li>
     
   </ul>
