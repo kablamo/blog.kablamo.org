@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/perl/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-03-31T14:54:40-04:00</updated>
+  <updated>2014-04-03T16:25:53-04:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -42,7 +42,7 @@ $job =~ /space (?=cow)cow/; # also matches
 
 <pre><code>my $job = "space cowboy";
 $job =~ /(?&lt;=space) cowboy/;      # matches
-$job =~ /(?&lt;=space)space cowboy/; # also matches
+$job =~ /space(?&lt;=space) cowboy/; # also matches
 </code></pre>
 
 <h1>Positive and negative look ahead assertions</h1>

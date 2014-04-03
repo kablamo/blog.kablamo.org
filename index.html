@@ -111,7 +111,7 @@ $job =~ /space (?=cow)cow/; # also matches
 
 <pre><code>my $job = "space cowboy";
 $job =~ /(?&lt;=space) cowboy/;      # matches
-$job =~ /(?&lt;=space)space cowboy/; # also matches
+$job =~ /space(?&lt;=space) cowboy/; # also matches
 </code></pre>
 
 <h1>Positive and negative look ahead assertions</h1>
