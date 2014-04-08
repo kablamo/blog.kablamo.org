@@ -1,24 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: perl | KABLAMO]]></title>
-  <link href="http://blog.kablamo.org/categories/perl/atom.xml" rel="self"/>
-  <link href="http://blog.kablamo.org/"/>
-  <updated>2014-04-08T11:23:42-04:00</updated>
-  <id>http://blog.kablamo.org/</id>
-  <author>
-    <name><![CDATA[Eric Johnson]]></name>
-    <email><![CDATA[kablamo@kablamo.org]]></email>
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Reading code - Plack - KABLAMO</title>
+  <meta name="author" content="Eric Johnson">
 
   
-  <entry>
-    <title type="html"><![CDATA[Reading code - Plack]]></title>
-    <link href="http://blog.kablamo.org/2014/04/08/read-plack-1/"/>
-    <updated>2014-04-08T00:00:00-04:00</updated>
-    <id>http://blog.kablamo.org/2014/04/08/read-plack-1</id>
-    <content type="html"><![CDATA[<p>I write lots of code.  But I want to be better and faster at reading code.
+  <meta name="description" content="I write lots of code. But I want to be better and faster at reading code.
+When I had the privilege of working with @ranguard I discovered he is a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.kablamo.org/2014/04/08/read-plack-1">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body  class="collapse-sidebar sidebar-footer">
+  <header role="banner"><hgroup>
+  <h1><a href="/">KABLAMO</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe to all posts via RSS">RSS</a></li>
+  
+</ul>
+  
+<ul class="main-navigation">
+  <li><a href="/blog/archives">everything</a></li>
+  <li><a href="/categories/perl">perl</a></li>
+  <li><a href="/categories/business">business</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Reading Code - Plack</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-04-08T00:00:00-04:00" pubdate data-updated="true">Apr 8<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I write lots of code.  But I want to be better and faster at reading code.
 When I had the privilege of working with @ranguard I discovered he is a code
 reading <em>cheetah</em> and I always envied that.  So I&rsquo;ve decided to practice
 by reading the source code of various CPAN modules.  I&rsquo;m starting with Plack.</p>
@@ -252,227 +318,164 @@ lib
 │   └── Util.pm                   # Misc but important utilities used throughout the code base
 └── Plack.pm                   # No code here -- just pod and a version number
 </code></pre>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+    
+      
+
+<span class="categories">
   
-  <entry>
-    <title type="html"><![CDATA[Look around assertions in Perl regular expressions]]></title>
-    <link href="http://blog.kablamo.org/2014/03/31/regex/"/>
-    <updated>2014-03-31T00:00:00-04:00</updated>
-    <id>http://blog.kablamo.org/2014/03/31/regex</id>
-    <content type="html"><![CDATA[<p>When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one
-letter at a time checking the match at each position.  That position is called
-the <em>current match position</em>.</p>
-
-<p>Look around assertions allow you to match a specific pattern before or after
-the current match position without moving the match position.</p>
-
-<h1>Look ahead assertions</h1>
-
-<p>Look ahead assertions match the text after the current match position
-(without moving the match position).  They look like <code>(?=pattern)</code>.</p>
-
-<pre><code>my $job = "space cowboy";
-$job =~ /space (?=cow)/;    # matches
-$job =~ /space (?=cow)cow/; # also matches
-</code></pre>
-
-<h1>Look behind assertions</h1>
-
-<p>Look behind assertions match the text before the current match position
-(without moving the match position).  They look like <code>(?&lt;=pattern)</code>.</p>
-
-<pre><code>my $job = "space cowboy";
-$job =~ /(?&lt;=space) cowboy/;      # matches
-$job =~ /space(?&lt;=space) cowboy/; # also matches
-</code></pre>
-
-<h1>Positive and negative look ahead assertions</h1>
-
-<p><em>Positive</em> look ahead assertions are look ahead assertions which match when their
-subpattern matches. They look like <code>(?=pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /space (?=cowboy)/;   # matches
-</code></pre>
-
-<p><em>Negative</em> look ahead assertions are look ahead assertions which match when their
-subpattern fails. They look like <code>(?!pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /space (?!mooseboy)/;   # matches
-</code></pre>
-
-<h1>Positive and negative look behind assertions</h1>
-
-<p>Positive look behind assertions are look behind assertions which match when their
-subpattern matches. They look like <code>(?&lt;=pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /(?&lt;=space) cowboy/;   # matches
-</code></pre>
-
-<p>Negative look behind assertions are look behind assertions which match when
-their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /(?&lt;!earth) cowboy/;   # matches
-</code></pre>
-
-<p>For more details see <code>perldoc perlre</code>.  I also recommend the DuckDuckGo
-<a href="https://duckduckgo.com/?q=regex+cheat+sheet">regex cheat sheet</a>.</p>
-]]></content>
-  </entry>
+    <a class='category' href='/categories/perl/'>perl</a>
   
-  <entry>
-    <title type="html"><![CDATA[Vim cheat sheet]]></title>
-    <link href="http://blog.kablamo.org/2014/03/28/ddg-vim/"/>
-    <updated>2014-03-28T00:00:00-04:00</updated>
-    <id>http://blog.kablamo.org/2014/03/28/ddg-vim</id>
-    <content type="html"><![CDATA[<p>I created a Vim cheat sheet instant answer for DuckDuckDuckGo.  If you search
-for <a href="https://duckduckgo.com/?q=vim+cheat+sheet">vim cheat sheet</a> or
-<a href="https://duckduckgo.com/?q=vim+help">vim help</a> you will get a result like this:</p>
+</span>
 
-<p><img src="/images/for-posts/2014-03-28-ddg-vim.png" width="700" height="424"></p>
 
-<p>The data is from rtorruellas&rsquo;s excellent <a href="http://rtorruellas.com/vim-cheat-sheet/">vim cheat sheet</a>
-(also available on <a href="https://github.com/rtorr/vim-cheat-sheet">github</a>) which has a responsive
-mobile friendly layout and is also available in Japanese.</p>
-]]></content>
-  </entry>
+    
+      <div class="sharing">
   
-  <entry>
-    <title type="html"><![CDATA[What does 'use strict' do?]]></title>
-    <link href="http://blog.kablamo.org/2014/03/19/use-strict/"/>
-    <updated>2014-03-19T00:00:00-04:00</updated>
-    <id>http://blog.kablamo.org/2014/03/19/use-strict</id>
-    <content type="html"><![CDATA[<p>I always <code>use strict</code> in all my code.  But what does that actually mean?</p>
-
-<h1>Enables strict refs</h1>
-
-<p>Strict refs generates runtime errors when you use symbolic references.</p>
-
-<pre><code>use strict 'refs';
-$ref = "yarrr matey";
-print $$ref;        # runtime error but without strict refs this is ok
-</code></pre>
-
-<h1>Enables strict vars</h1>
-
-<p>Strict vars generates a compile time error if you access a variable that was
-not declared or is not fully qualified.</p>
-
-<pre><code>use strict 'vars';
-$X::foo = 1;         # ok because its fully qualified
-my $foo = 10;        # ok because my() was used.
-$baz = 9;            # compile time error because $baz not declared before
-</code></pre>
-
-<h1>Enables strict subs</h1>
-
-<p>Strict subs generates a compile time error if you use a bareword identifier
-that&rsquo;s not a subroutine.</p>
-
-<pre><code>no strict 'subs';
-my $a = boop;
-print $a; 
-sub boop { return "dinosaurs smell good" }
-</code></pre>
-
-<p>The above prints &ldquo;boop&rdquo; instead of &ldquo;dinosaurs smell good&rdquo;.</p>
-
-<pre><code>use strict 'subs';
-my $b = splarf;      # &lt;--- compile time error here
-sub splarf { return "dinosaurs smell good" }
-</code></pre>
-
-<p>The above generates a compile time error on line 2.</p>
-
-<pre><code>use strict 'subs';
-my $b = splarf(); 
-sub splarf { return "dinosaurs smell good" }
-</code></pre>
-
-<p>The above prints &ldquo;dinosaurs smell good&rdquo; which is probably the desired output.</p>
-
-<p>Sources:</p>
-
-<ul>
-<li><a href="https://metacpan.org/pod/strict">https://metacpan.org/pod/strict</a></li>
-<li><a href="http://www.perl.com/pub/2001/01/begperl6.html#use">http://www.perl.com/pub/2001/01/begperl6.html#use</a> strict</li>
-</ul>
-
-]]></content>
-  </entry>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2014/04/08/read-plack-1/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2014/04/08/read-plack-1/" >Tweet</a>
   
-  <entry>
-    <title type="html"><![CDATA[my vs our vs local]]></title>
-    <link href="http://blog.kablamo.org/2014/03/17/our-my-local/"/>
-    <updated>2014-03-17T00:00:00-04:00</updated>
-    <id>http://blog.kablamo.org/2014/03/17/our-my-local</id>
-    <content type="html"><![CDATA[<h1>The short version for the impatient</h1>
-
-<ul>
-<li> <code>my()</code> creates a local variable</li>
-<li> <code>our()</code> creates a package variable</li>
-<li> <code>local()</code> temporarily changes the local value of a global variable</li>
-<li> The above is mostly true.</li>
-</ul>
-
-
-<h1>The long version for the irrepressibly quixotic</h1>
-
-<h2>my()</h2>
-
-<p><code>my</code> declares the listed variable to be local to the enclosing block, file,
-or <code>eval</code>.  That is to say its <em>scope</em> is local.  This kind of variable is
-known as a <em>lexical variable</em>.  Note that lexical variables are hidden from
-subroutines which are called from within the enclosing block.  This is known as
-<em>lexical scoping</em>.</p>
-
-<h2>our()</h2>
-
-<p><code>our</code> creates an alias to a <em>package variable</em>.  The alias is local to the
-enclosing block, file, or <code>eval</code>.  That is to say the alias is lexically scoped
-just like any lexical variable.  However a package variable belongs to a
-package.  It can be accessed from anywhere if you use its fully qualified name.
-Here are two examples of fully qualified package variables:</p>
-
-<pre><code>$main::a
-%MyPackage::boop
-</code></pre>
-
-<p>Note that package variables are also global variables.</p>
-
-<h2>local()</h2>
-
-<p><code>local</code> gives temporary values to global variables.  It does not create a local
-variable.  It is most commonly used when you want to locally modify a global
-variable such as one of the punctuation variables.  For example:</p>
-
-<pre><code>{ 
-    local $| = 1; # enable autoflush for STDOUT
-    say "hi mom";
-}
-</code></pre>
-
-<p><code>local</code> modifies the listed variable to be local to the enclosing block,
-file, or <code>eval</code> &mdash; AND to any subroutine called from within that block.  This
-is known as <em>dynamic scoping</em>.</p>
-
-<h1>Sources</h1>
-
-<p>For a more complete understanding I recommend <code>perldoc perlfunc</code> and especially
-<code>perldoc perlsub</code>.  Also the following links may be helpful:</p>
-
-<ul>
-<li><a href="https://metacpan.org/pod/perlfunc">https://metacpan.org/pod/perlfunc</a></li>
-<li><a href="https://metacpan.org/pod/perlsub">https://metacpan.org/pod/perlsub</a></li>
-<li><a href="http://perlmaven.com/package-variables-and-lexical-variables-in-perl">http://perlmaven.com/package-variables-and-lexical-variables-in-perl</a></li>
-<li><a href="http://www.perlmonks.org/?node_id=95813">http://www.perlmonks.org/?node_id=95813</a></li>
-</ul>
-
-]]></content>
-  </entry>
   
-</feed>
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/03/31/regex/" title="Previous Post: Look around assertions in Perl regular expressions">&laquo; Look around assertions in Perl regular expressions</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About</h1>
+  <p>
+    Hi I'm Eric Johnson.  I solve problems for humans with my keyboard.
+  </p>
+  <p>
+    By day I'm a mild mannered web developer.  But at night I'm a mild
+    mannered web developer working on my side project. I'm building a better
+    Mint.com for early retirement savants and savings extremists at
+    <a style="text-decoration: underline" href="http://networthify.com/calculator/fi">Networthify.com</a>
+  </p>
+  <p>
+  You can also find me in the following places: <br>
+    on <a href="https://github.com/kablamo">github</a><br>
+    on <a href="http://www.linkedin.com/profile/view?id=8671375">linked in</a><br>
+    on <a href="http://pinboard.in/u:kablamo">pinboard</a><br>
+    on <a href="http://twitter.com/kablamo_">twitter</a><br>
+    on <a href="http://stackoverflow.com/users/58089/eric-johnson">stackoverflow</a><br>
+  </p>
+    <img src="http://www.gravatar.com/avatar/a1baab856c33f7b8cd94e62cf5f227a2?s=200" width="200" height="200">
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/04/08/read-plack-1/">Reading Code - Plack</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/31/regex/">Look Around Assertions in Perl Regular Expressions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/28/ddg-vim/">Vim Cheat Sheet</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/24/experiments/">An Experiment - Living With Less Than 200 Things</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/22/cc-processors/">Introduction to Online Credit Card Processing - Part 3</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2014/04/08/read-plack-1/';
+        var disqus_url = 'http://blog.kablamo.org/2014/04/08/read-plack-1/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
