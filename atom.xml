@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-04-08T11:23:42-04:00</updated>
+  <updated>2014-04-09T10:09:20-04:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,112 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Reading code - plackup Architecture]]></title>
+    <link href="http://blog.kablamo.org/2014/04/09/read-plack-2/"/>
+    <updated>2014-04-09T00:00:00-04:00</updated>
+    <id>http://blog.kablamo.org/2014/04/09/read-plack-2</id>
+    <content type="html"><![CDATA[<ul>
+<li><a href="http://blog.kablamo.org/2014/04/08/read-plack-1">Part 1 &ndash; An Overview</a></li>
+<li><a href="http://blog.kablamo.org/2014/04/09/read-plack-2"><strong>Part 2 &ndash; plackup Architecture</strong></a></li>
+<li><a href="http://blog.kablamo.org/2014/04/10/read-plack-3">Part 3 &ndash; Application Architecture</a></li>
+<li><a href="http://blog.kablamo.org/2014/04/11/read-plack-4">Part 4 &ndash; Plack::Builder</a></li>
+</ul>
+
+
+<h1>Plack::Runner and plackup</h1>
+
+<p><code>plackup</code> starts a PSGI server which executes a PSGI application.  However
+the script itself is just a very small wrapper around Plack::Runner which does
+all the heavy lifting.  Plack::Runner</p>
+
+<ol>
+<li> parses the command line options.</li>
+<li> instantiates the chosen loader class (which is in the Plack::Loader namespace).</li>
+<li> instatiates the chosen server library (which is in the Plack::Handler namespace).</li>
+<li> starts the PSGI server and passes it a PSGI application</li>
+</ol>
+
+
+<h1>Plack::Loader</h1>
+
+<p>Loaders are responsible for instantiating and running the PSGI server.  Here are
+the more interesting capabilities a <code>$loader</code> object has:</p>
+
+<ul>
+<li><code>$loader-&gt;guess()</code> guesses which server library should be loaded by looking at command line opts, $ENV, and %INC.</li>
+<li><code>$loader-&gt;load()</code> instantiates the server library and returns the object.</li>
+<li><code>$loader-&gt;run()</code> starts the server.</li>
+</ul>
+
+
+<p>The Plack::Loader namespace contains 3 kinds of loaders:</p>
+
+<ul>
+<li>Plack::Loader::Delayed &ndash; delays compilation of the web app until the first request occurs</li>
+<li>Plack::Loader::Restarter &ndash; reloads the server if any files are changed</li>
+<li>Plack::Loader::Shotgun &ndash; foreach request, forks a child which compiles the web app and runs it</li>
+</ul>
+
+
+<p>I can choose which loader I want using <code>plack --loader</code></p>
+
+<h1>Plack::Handler</h1>
+
+<p>The <a href="https://metacpan.org/pod/distribution/PSGI/PSGI.pod">PSGI spec</a>
+tells me that PSGI defines the interface between an application and a server.
+Because the PSGI spec is (intentionally) very minimal, there is a good deal of
+wiggle room to interpret how an application and a server might want to play
+together.</p>
+
+<p>A library in the Plack::Handler namespace is the place where the application
+meets the server.  This layer contains all the wiggling.</p>
+
+<p>Lets say I wrote a new server called AngryBrontosaurus and I want to be able to
+use it with <code>plackup --server AngryBrontosaurus</code>.  I could implement a small
+class like this:</p>
+
+<pre><code>package Plack::Handler::AngryBrontosaurus
+use strict;
+use AngryBrontosaurus;
+
+sub new {
+    my $class = shift;
+    bless { @_ }, $class;
+}
+
+sub run {
+    my ($self, $app) = @_; 
+    AngryBrontosaurus-&gt;new-&gt;run($app, $self);
+}
+</code></pre>
+
+<p>Then, to make sure AngryBrontosaurus and Plack::Handler::AngryBrontosaurus
+correctly implement the PSGI spec, I should also test my code with
+Plack::Test::Suite.</p>
+
+<pre><code>use Test::More;
+use Plack::Test::Suite;
+Plack::Test::Suite-&gt;run_server_tests('AngryBrontosaurus');
+done_testing;
+</code></pre>
+
+<p>Notice that while the Plack::Handler namespace contains classes for several
+PSGI servers like Plack::Handler::Starman or Plack::Handler::Twiggy, it also
+includes some classes like Plack::Handler::Apache2 and Plack::Handler::FCGI.
+Clearly Apache2 was not written with PSGI compliance in mind, but there is glue
+in the Plack::Handler::Apache2 layer to enable it to speak with PSGI compliant
+applications.</p>
+
+<h1>Sequence diagram</h1>
+
+<p>This diagram describes how Plack::Runner, Plack::Handler, and Plack::Loader
+interact.</p>
+
+<p><img src="http://blog.kablamo.org/images/for-posts/2014-04-01-plack.png"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Reading code - Plack]]></title>
@@ -1416,116 +1522,6 @@ possibly:</p>
 
 <p>Also don&rsquo;t miss the tmux <a href="https://github.com/Lokaltog/powerline">powerline</a>
 status bar.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Anyenv + Plenv + Carton]]></title>
-    <link href="http://blog.kablamo.org/2013/11/25/plenv/"/>
-    <updated>2013-11-25T00:00:00-05:00</updated>
-    <id>http://blog.kablamo.org/2013/11/25/plenv</id>
-    <content type="html"><![CDATA[<p>Recently I started breaking out of my Perl-only isolation bubble and dabbling
-with other languages. I was surprised how easy and comfortable other languages
-are. I think its because these days good ideas spread from one language to the
-next incredibly fast. Even in a new language when I reach for a tool I can
-usually find some Perl technology analogue.</p>
-
-<p>For example, I&rsquo;ve been a perlbrew person for a long time and it has served me
-well.  Ruby has its own version of perlbrew called rbenv which is pretty great.
-But actually it seems every language has a clone of rbenv.</p>
-
-<ul>
-<li>Python has pyenv.</li>
-<li>PHP has phpenv.</li>
-<li>Node has ndenv.</li>
-<li>Java has jenv.</li>
-<li>Perl has plenv.</li>
-</ul>
-
-
-<p>So I thought, what the heck &mdash; lets try that out.  The nice thing
-is all the envs have pretty much the same command line options and the same
-approach to managing dependencies.  I thought it might be calming and soothing
-for my brain to have one way of doing things.</p>
-
-<p>I found <a href="https://github.com/riywo/anyenv">Anyenv</a> just a second ago as I was
-writing this.  It claims it will manage all my envs. Looks like brilliant
-stuff. Fortune favors the bold. (I eat danger for breakfast.)  I&rsquo;ll try it.</p>
-
-<pre><code>git clone https://github.com/riywo/anyenv ~/.anyenv
-echo 'export PATH="$HOME/.anyenv/bin:$PATH"' &gt;&gt; ~/.my_profile
-echo 'eval "$(anyenv init -)"'               &gt;&gt; ~/.my_profile
-exec bash -l
-anyenv install rbenv    # ruby
-anyenv install plenv    # perl
-anyenv install pyenv    # python
-anyenv install phpenv   # php
-anyenv install ndenv    # nodejs
-anyenv install denv     # dunno
-anyenv install jenv     # java
-exec bash -l            # &lt;-- useful trick btw
-anyenv versions
-</code></pre>
-
-<p>Ok now I have all the envs.  But I want to actually do some work with plenv.
-Lets see if I can do that.</p>
-
-<pre><code>plenv install --list  # list all the potential perl versions you can use
-plenv install 5.19.6  # install perl v5.19.6
-plenv rehash          # reload the shell environment with the new perl
-plenv global 5.19.6   # use v5.19.6 everywhere by default
-plenv local  5.19.6   # use v5.19.6 in this directory for this project
-plenv install-cpanm   # install cpanm for this version of perl
-plenv rehash          #
-plenv which cpanm     # see where cpanm is installed. should be ~/.anyenv
-</code></pre>
-
-<p>Now I will install the dependencies for my project.  I will manage them with
-<a href="https://metacpan.org/pod/Carton">Carton</a>.</p>
-
-<pre><code>cpanm Carton          # install carton for this version of perl
-plenv list-modules
-</code></pre>
-
-<p>At this point I need to create a <code>cpanfile</code>.  There are all kinds of cool
-things you can do in this file, but with your permision I will begin with baby
-steps.  Here is mine cpanfile for now:</p>
-
-<pre><code>requires "Catalyst";
-requires "Plack";
-requires "DBD::SQLite";
-</code></pre>
-
-<p>And then I run carton to install these modules locally into local/lib/perl5.</p>
-
-<pre><code>carton               # install all the dependencies from the cpanfile
-ls local/lib/perl5/  # see all the new modules installed here
-plenv list-modules   # see mountains of installed stuff
-cd /tmp
-plenv list-modules   # see nothing installed except Carton
-</code></pre>
-
-<p>Notice that a carton.snapshot file was created.  If I look inside, I can see a
-list of all my project dependencies, and all their dependencies, etc all the
-way down to the first turtle &mdash; AND there are version numbers for everything.</p>
-
-<pre><code># carton snapshot format: version 1.0
-DISTRIBUTIONS
-Apache-LogFormat-Compiler-0.13
-  pathname: K/KA/KAZEBURO/Apache-LogFormat-Compiler-0.13.tar.gz
-    provides:
-      Apache::LogFormat::Compiler 0.13
-    requirements:
-      CPAN::Meta 0
-      CPAN::Meta::Prereqs 0
-      Module::Build 0.38
-...blah biddee blah etc...
-</code></pre>
-
-<p>I can add <code>cpanfile</code> and <code>cpanfile.snapshot</code> to my git repo.  Now when I deploy
-or share the code, the user at the destination can run Carton and they will end
-up with the exact dependencies with the exact same version numbers I had. This
-way I can be sure my code will run as successfully for them as it did for me.</p>
 ]]></content>
   </entry>
   
