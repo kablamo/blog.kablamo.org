@@ -11,8 +11,8 @@
   
   <meta name="description" content="Part 1 &ndash; An Overview
 Part 2 &ndash; plackup Architecture
-Part 3 &ndash; Application Architecture
-Part 4 &ndash; Plack::Builder Plack::Runner &hellip;">
+Part 3 &ndash; PSGI Application Architecture
+Part 4 &ndash; Plack::Builder PSGI &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,156 @@ Part 4 &ndash; Plack::Builder Plack::Runner &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/2014/04/11/read-plack-3/">Reading Code - PSGI Application Architecture</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-04-11T00:00:00-04:00" pubdate data-updated="true">Apr 11<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li><a href="/2014/04/08/read-plack-1">Part 1 &ndash; An Overview</a></li>
+<li><a href="/2014/04/09/read-plack-2">Part 2 &ndash; plackup Architecture</a></li>
+<li><a href="/2014/04/10/read-plack-3"><strong>Part 3 &ndash; PSGI Application Architecture</strong></a></li>
+<li><a href="/2014/04/11/read-plack-4">Part 4 &ndash; Plack::Builder</a></li>
+</ul>
+
+
+<h1>PSGI Applications</h1>
+
+<p>The <a href="https://metacpan.org/pod/distribution/PSGI/PSGI.pod">PSGI spec</a> defines
+a PSGI application.</p>
+
+<blockquote><p>A PSGI application is a Perl code reference. It takes exactly one argument,
+the environment, and returns an array reference containing exactly three
+values [(a status, header, and body)].</p></blockquote>
+
+<p>Here is an example:</p>
+
+<pre><code>my $app = sub {
+    my $env = shift;
+    return [
+        '200',
+        [ 'Content-Type' =&gt; 'text/plain' ],
+        [ "Hello World" ], # or IO::Handle-like object
+    ];
+};
+</code></pre>
+
+<h1>The PSGI environment hash</h1>
+
+<p>The PSGI environment hash is a hashref with many keys.  But mostly it is the
+data (headers, body, etc) from a <a href="HTTP::Request">HTTP::Request</a> which have been parsed put into
+a hash for convenient access.</p>
+
+<h1>Middleware</h1>
+
+<p>A middleware component takes a PSGI application and runs it, passing in the
+PSGI environment hash.  But before it runs the app, it gets to modify the
+environment if it wants to.  And after running the app, it can modify the
+response if it wants to.</p>
+
+<h1>Plack::Middleware</h1>
+
+<p>Middleware is a wrapper around a PSGI app.  More than one middleware can be
+wrapped around an app, creating a series of layers like an
+<a href="http://blogs.perl.org/users/jakob/2012/09/28/middleware-onion.png/500px-MiddlewareOnion.svg.png">onion</a>.
+What makes the middleware onion a somewhat unusual construct is the event
+driven / callback nature of it.  Lets look at how its implemented.</p>
+
+<p>All middleware inherits from Plack::Middleware which is an itsy bitsy (teeny
+weeny) module.  The middleware onion is created with just 2 short subroutines
+(notice the <code>call()</code> and <code>prepare_app()</code> subs are written by middleware authors):</p>
+
+<pre><code>sub wrap {
+    my($self, $app, @args) = @_;
+    if (ref $self) {
+        $self-&gt;{app} = $app;
+    } else {
+        $self = $self-&gt;new({ app =&gt; $app, @args });
+    }
+    return $self-&gt;to_app;
+}
+
+sub to_app {
+    my $self = shift;
+    $self-&gt;prepare_app;
+    return sub { $self-&gt;call(@_) };
+}
+</code></pre>
+
+<p>How do these subs work together?  The middleware onion is sometimes constructed as follows:</p>
+
+<pre><code>my $app = MyWebApp-&gt;new-&gt;to_app;
+$app = Plack::Middleware::A-&gt;wrap($app);
+$app = Plack::Middleware::B-&gt;wrap($app);
+$app = Plack::Middleware::C-&gt;wrap($app);
+</code></pre>
+
+<p>But it might be more clear to write it this way</p>
+
+<pre><code>my $app0 = MyWebApp-&gt;new-&gt;to_app;           # $app0-&gt;($env) runs the web app
+$app1 = Plack::Middleware::A-&gt;wrap($app0);  # $app1-&gt;($env) calls P::M::A-&gt;call() which calls $app0-&gt;($env)
+$app2 = Plack::Middleware::B-&gt;wrap($app1);  # $app2-&gt;($env) calls P::M::B-&gt;call() which calls $app1-&gt;($env)
+$app3 = Plack::Middleware::C-&gt;wrap($app2);  # $app3-&gt;($env) calls P::M::C-&gt;call() which calls $app2-&gt;($env)
+                                            # When the server receives a request it calls $app3-&gt;($env)
+</code></pre>
+
+<p>So when an event occurs &mdash; for example the PSGI server sees a new request &mdash; it
+passes the event to the app.  The app is a chain of callbacks which run each
+other.  This is clearly an example of event driven programming.</p>
+
+<h1>Plack::Component and Plack::App</h1>
+
+<p>Plack::Middleware inherits from Plack::Component.  So the most common use of
+Plack::Component is in middleware.</p>
+
+<p>Plack::Component can also be used as a tool for creating PSGI applications.  It
+has a light dusting of code, but mostly its an interface which is implemented
+by modules in the Plack::App namespace.  For example Plack::App::File is a web
+app which serves static files from a root directory, and Plack::App::URLMap is
+a web app which maps multiple web apps to multiple urls.</p>
+
+<p>But notice that I am not required to use Plack::Component to create a PSGI
+application. A PSGI application is just a code reference.  The PSGI spec does
+not say that a PSGI application is a reference to code that inherits from
+Plack::Component.</p>
+
+<p>The nice thing about using Plack::Component to build my app is that it
+provides a common interface for all PSGI apps.  Whenever I see <code>$app</code>, I
+can rely on that behavior.  This is clearly important for middleware.  And it
+feels good from a design point of view.</p>
+
+<p>But its not required and it adds some complexity.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2014/04/09/read-plack-2/">Reading Code - Plackup Architecture</a></h1>
     
     
@@ -92,7 +242,7 @@ Part 4 &ndash; Plack::Builder Plack::Runner &hellip;">
   <div class="entry-content"><ul>
 <li><a href="/2014/04/08/read-plack-1">Part 1 &ndash; An Overview</a></li>
 <li><a href="/2014/04/09/read-plack-2"><strong>Part 2 &ndash; plackup Architecture</strong></a></li>
-<li><a href="/2014/04/10/read-plack-3">Part 3 &ndash; Application Architecture</a></li>
+<li><a href="/2014/04/10/read-plack-3">Part 3 &ndash; PSGI Application Architecture</a></li>
 <li><a href="/2014/04/11/read-plack-4">Part 4 &ndash; Plack::Builder</a></li>
 </ul>
 
@@ -231,7 +381,7 @@ by reading the source code of various CPAN modules.  I&rsquo;m starting with Pla
 <ul>
 <li><a href="/2014/04/08/read-plack-1"><strong>Part 1 &ndash; An Overview</strong></a></li>
 <li><a href="/2014/04/09/read-plack-2">Part 2 &ndash; plackup Architecture</a></li>
-<li><a href="/2014/04/10/read-plack-3">Part 3 &ndash; Application Architecture</a></li>
+<li><a href="/2014/04/10/read-plack-3">Part 3 &ndash; PSGI Application Architecture</a></li>
 <li><a href="/2014/04/11/read-plack-4">Part 4 &ndash; Plack::Builder</a></li>
 </ul>
 
@@ -1134,104 +1284,6 @@ Self-Assessment Questionaire (SAQ) for companies handling less transactions.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/03/17/our-my-local/">My vs Our vs Local</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2014-03-17T00:00:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>The short version for the impatient</h1>
-
-<ul>
-<li> <code>my()</code> creates a local variable</li>
-<li> <code>our()</code> creates a package variable</li>
-<li> <code>local()</code> temporarily changes the local value of a global variable</li>
-<li> The above is mostly true.</li>
-</ul>
-
-
-<h1>The long version for the irrepressibly quixotic</h1>
-
-<h2>my()</h2>
-
-<p><code>my</code> declares the listed variable to be local to the enclosing block, file,
-or <code>eval</code>.  That is to say its <em>scope</em> is local.  This kind of variable is
-known as a <em>lexical variable</em>.  Note that lexical variables are hidden from
-subroutines which are called from within the enclosing block.  This is known as
-<em>lexical scoping</em>.</p>
-
-<h2>our()</h2>
-
-<p><code>our</code> creates an alias to a <em>package variable</em>.  The alias is local to the
-enclosing block, file, or <code>eval</code>.  That is to say the alias is lexically scoped
-just like any lexical variable.  However a package variable belongs to a
-package.  It can be accessed from anywhere if you use its fully qualified name.
-Here are two examples of fully qualified package variables:</p>
-
-<pre><code>$main::a
-%MyPackage::boop
-</code></pre>
-
-<p>Note that package variables are also global variables.</p>
-
-<h2>local()</h2>
-
-<p><code>local</code> gives temporary values to global variables.  It does not create a local
-variable.  It is most commonly used when you want to locally modify a global
-variable such as one of the punctuation variables.  For example:</p>
-
-<pre><code>{ 
-    local $| = 1; # enable autoflush for STDOUT
-    say "hi mom";
-}
-</code></pre>
-
-<p><code>local</code> modifies the listed variable to be local to the enclosing block,
-file, or <code>eval</code> &mdash; AND to any subroutine called from within that block.  This
-is known as <em>dynamic scoping</em>.</p>
-
-<h1>Sources</h1>
-
-<p>For a more complete understanding I recommend <code>perldoc perlfunc</code> and especially
-<code>perldoc perlsub</code>.  Also the following links may be helpful:</p>
-
-<ul>
-<li><a href="https://metacpan.org/pod/perlfunc">https://metacpan.org/pod/perlfunc</a></li>
-<li><a href="https://metacpan.org/pod/perlsub">https://metacpan.org/pod/perlsub</a></li>
-<li><a href="http://perlmaven.com/package-variables-and-lexical-variables-in-perl">http://perlmaven.com/package-variables-and-lexical-variables-in-perl</a></li>
-<li><a href="http://www.perlmonks.org/?node_id=95813">http://www.perlmonks.org/?node_id=95813</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1268,6 +1320,10 @@ is known as <em>dynamic scoping</em>.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/04/11/read-plack-3/">Reading Code - PSGI Application Architecture</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/09/read-plack-2/">Reading Code - Plackup Architecture</a>
       </li>
     
@@ -1281,10 +1337,6 @@ is known as <em>dynamic scoping</em>.</p>
     
       <li class="post">
         <a href="/2014/03/28/ddg-vim/">Vim Cheat Sheet</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/24/experiments/">An Experiment - Living With Less Than 200 Things</a>
       </li>
     
   </ul>

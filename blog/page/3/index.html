@@ -9,8 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="Recently I started breaking out of my Perl-only isolation bubble and dabbling
-with other languages. I was surprised how easy and comfortable other &hellip;">
+  <meta name="description" content="I use and love OSX growl and Ubuntu notify style desktop notifications. They
+are gorgeous. But they are also distracting and after a few vibrant and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,6 +57,79 @@ with other languages. I was surprised how easy and comfortable other &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/11/26/tmux-status-updates/">Configure Tmux to Give You Status Updates About Anything</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-11-26T00:00:00-05:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I use and love OSX growl and Ubuntu notify style desktop notifications.  They
+are gorgeous.  But they are also distracting and after a few vibrant and
+whimsical but fleeting seconds they are gone forever and you have no way to get
+them back.</p>
+
+<p>A more useful (and less glorious) way to receive notifications is in your
+<a href="http://tmux.sourceforge.net/">tmux</a> status bar.  tmux is the brilliant
+successor to the venerable screen which hasn&rsquo;t been actively developed for
+quite a while.</p>
+
+<p>Here is how I configure notifications in my .tmux.conf file:</p>
+
+<pre><code>set -g status-interval 15    
+set -g status-right !exec my_shell_script
+</code></pre>
+
+<p>This tells tmux to run <code>my_shell_script</code> every 15 seconds.  It displays the
+first line of output from the shell script.  Now I can get unobtrusive status
+updates which don&rsquo;t go away. And if I ate a good breakfast, feel rested, and
+have the wind at my back I can write some code to log my notifications to a
+file so that I don&rsquo;t miss any.</p>
+
+<p>Here are some ideas that might be useful which I might someday do maybe perhaps
+possibly:</p>
+
+<ul>
+<li>Status updates when someone says your name on irc</li>
+<li>Status updates when jenkins tests fail</li>
+<li>Status updates when people push code live</li>
+<li>Status updates when people merge branches</li>
+</ul>
+
+
+<p>Any other ideas?</p>
+
+<p>Also don&rsquo;t miss the tmux <a href="https://github.com/Lokaltog/powerline">powerline</a>
+status bar.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1215,97 +1288,6 @@ course there are YouTube videos:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/02/20/how-to-learn-dist-zilla/">Dist::Zilla::PluginBundle::DAGOLDEN Is Pretty Awesome</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-02-20T00:00:00-05:00" pubdate data-updated="true">Feb 20<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve been using <a href="https://metacpan.org/module/Dist::Zilla">Dist::Zilla</a> for a
-couple years.  It&rsquo;s a powerful way to automate CPAN releases.</p>
-
-<p>But learning how to use it was not as easy as I hoped.</p>
-
-<p>I remember when <code>Dist::Zilla</code> first debuted.  It was very exciting.  But I think
-I may have drank too much of the cool aid becuase my expectations were very
-high when I finally sat down to learn it.  I expected my experience to be
-composed entirely of rainbows and puppy dog tails.</p>
-
-<h2>Writing your own dist.ini or PluginBundle is hard</h2>
-
-<p>Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
-are a huge number of plugins and it&rsquo;s difficult for a newcomer to know which
-are old, which are new, and how they work together.  If you look, for example,
-at <code>Dist::Zilla::PluginBundle::DAGOLDEN</code> it uses 23 different plugins and the
-<em>synopsis</em> is 132 lines long.</p>
-
-<p>In retrospect, it was not reasonable to expect I could build something
-comparable after a few minutes of perusing the docs.  It&rsquo;s more complex than
-that.  So if you are looking to quickly add <code>Dist::Zilla</code> to your toolchain, you
-need to use a PluginBundle and not write your own.</p>
-
-<h2>How to quickly add Dist::Zilla to your toolchain</h2>
-
-<p>One way is to just use <code>Dist::Zilla::PluginBundle::Basic</code>.  But this was not like
-the promised land I had been dreaming of.  I wanted more.  So I kept looking.</p>
-
-<p>Happily, there is a PluginBundle which I think works well as a reusable
-component suitable for public consumption thats also very configurable.  I
-doubt it&rsquo;s well known because the name sounds very personal.  That module is,
-of course,
-<a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN">Dist::Zilla::PluginBundle::DAGOLDEN</a>.</p>
-
-<p>I think the workflow it uses will work for many people.  Even if it
-doesn&rsquo;t, reading the code is a great way to learn how to write your own
-PluginBundle.  And because it&rsquo;s so comprehensive it&rsquo;s like having a up-to-date
-map of the state of the art in <code>Dist::Zilla</code> plugins and how they work
-together.</p>
-
-<p>Here&rsquo;s what my dist.ini looks like:</p>
-
-<pre><code>name    = App-Git-Ribbon
-author  = Eric Johnson &lt;cpan at iijo dot nospamthanks dot org&gt;
-license = Perl_5
-copyright_holder = Eric Johnson
-main_module = lib/App/Git/Ribbon.pm
-
-[@DAGOLDEN]
-no_spellcheck = 1
-AutoMetaResources.bugtracker.rt = 0
-AutoMetaResources.repository.github = user:kablamo
-AutoMetaResources.bugtracker.github = user:kablamo
-weaver_config = @FLORA
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1344,6 +1326,10 @@ weaver_config = @FLORA
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/04/11/read-plack-3/">Reading Code - PSGI Application Architecture</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/09/read-plack-2/">Reading Code - Plackup Architecture</a>
       </li>
     
@@ -1357,10 +1343,6 @@ weaver_config = @FLORA
     
       <li class="post">
         <a href="/2014/03/28/ddg-vim/">Vim Cheat Sheet</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/24/experiments/">An Experiment - Living With Less Than 200 Things</a>
       </li>
     
   </ul>

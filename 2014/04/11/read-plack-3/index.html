@@ -5,12 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>New on CPAN - MooseX::CachingProxy - KABLAMO</title>
+  <title>Reading code - PSGI Application Architecture - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="Last week I released MooseX::CachingProxy to CPAN. Its a small module that intercepts requests from your LWP based application.
-Those requests are &hellip;">
+  <meta name="description" content="Part 1 &ndash; An Overview
+Part 2 &ndash; plackup Architecture
+Part 3 &ndash; PSGI Application Architecture
+Part 4 &ndash; Plack::Builder PSGI &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +21,7 @@ Those requests are &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2012/05/10/new-on-cpan-moosex-cachingproxy">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/04/11/read-plack-3">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -60,7 +62,7 @@ Those requests are &hellip;">
   
   <header>
     
-      <h1 class="entry-title">New on CPAN - MooseX::CachingProxy</h1>
+      <h1 class="entry-title">Reading Code - PSGI Application Architecture</h1>
     
     
       <p class="meta">
@@ -77,38 +79,127 @@ Those requests are &hellip;">
 
 
 
-<time datetime="2012-05-10T00:00:00-04:00" pubdate data-updated="true">May 10<span>th</span>, 2012</time>
+<time datetime="2014-04-11T00:00:00-04:00" pubdate data-updated="true">Apr 11<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Last week I released <a href="https://metacpan.org/module/MooseX::CachingProxy">MooseX::CachingProxy</a> to CPAN.</p>
+<div class="entry-content"><ul>
+<li><a href="/2014/04/08/read-plack-1">Part 1 &ndash; An Overview</a></li>
+<li><a href="/2014/04/09/read-plack-2">Part 2 &ndash; plackup Architecture</a></li>
+<li><a href="/2014/04/10/read-plack-3"><strong>Part 3 &ndash; PSGI Application Architecture</strong></a></li>
+<li><a href="/2014/04/11/read-plack-4">Part 4 &ndash; Plack::Builder</a></li>
+</ul>
 
-<p>Its a small module that intercepts requests from your LWP based application.
-Those requests are relayed on to the intended server unless they already exist
-in the cache.</p>
 
-<p>To toggle on and off the caching proxy, MooseX::CachingProxy provides the
-attribute &lsquo;caching_proxy&rsquo;.  Here is a quick demo:</p>
+<h1>PSGI Applications</h1>
 
-<pre><code>package MyApp;
-use Moose;
-use WWW::Mechanize; # or any LWP based library
-with 'MooseX::CachingProxy';
+<p>The <a href="https://metacpan.org/pod/distribution/PSGI/PSGI.pod">PSGI spec</a> defines
+a PSGI application.</p>
 
-sub url { 'http://example.com' } # required by MooseX::CachingProxy
+<blockquote><p>A PSGI application is a Perl code reference. It takes exactly one argument,
+the environment, and returns an array reference containing exactly three
+values [(a status, header, and body)].</p></blockquote>
 
-sub download { 
+<p>Here is an example:</p>
+
+<pre><code>my $app = sub {
+    my $env = shift;
+    return [
+        '200',
+        [ 'Content-Type' =&gt; 'text/plain' ],
+        [ "Hello World" ], # or IO::Handle-like object
+    ];
+};
+</code></pre>
+
+<h1>The PSGI environment hash</h1>
+
+<p>The PSGI environment hash is a hashref with many keys.  But mostly it is the
+data (headers, body, etc) from a <a href="HTTP::Request">HTTP::Request</a> which have been parsed put into
+a hash for convenient access.</p>
+
+<h1>Middleware</h1>
+
+<p>A middleware component takes a PSGI application and runs it, passing in the
+PSGI environment hash.  But before it runs the app, it gets to modify the
+environment if it wants to.  And after running the app, it can modify the
+response if it wants to.</p>
+
+<h1>Plack::Middleware</h1>
+
+<p>Middleware is a wrapper around a PSGI app.  More than one middleware can be
+wrapped around an app, creating a series of layers like an
+<a href="http://blogs.perl.org/users/jakob/2012/09/28/middleware-onion.png/500px-MiddlewareOnion.svg.png">onion</a>.
+What makes the middleware onion a somewhat unusual construct is the event
+driven / callback nature of it.  Lets look at how its implemented.</p>
+
+<p>All middleware inherits from Plack::Middleware which is an itsy bitsy (teeny
+weeny) module.  The middleware onion is created with just 2 short subroutines
+(notice the <code>call()</code> and <code>prepare_app()</code> subs are written by middleware authors):</p>
+
+<pre><code>sub wrap {
+    my($self, $app, @args) = @_;
+    if (ref $self) {
+        $self-&gt;{app} = $app;
+    } else {
+        $self = $self-&gt;new({ app =&gt; $app, @args });
+    }
+    return $self-&gt;to_app;
+}
+
+sub to_app {
     my $self = shift;
-    $self-&gt;start_caching_proxy;
-    return WWW::Mechanize-&gt;new()-&gt;get($self-&gt;url . '/foo'); 
+    $self-&gt;prepare_app;
+    return sub { $self-&gt;call(@_) };
 }
 </code></pre>
 
-<p>Under the covers, its a tiny Plack application that mashes up
-<a href="https://metacpan.org/module/Plack::Middleware::Cache">Plack::Middleware::Cache</a> and <a href="https://metacpan.org/module/Plack::App::Proxy">Plack::App::Proxy</a>.</p>
+<p>How do these subs work together?  The middleware onion is sometimes constructed as follows:</p>
+
+<pre><code>my $app = MyWebApp-&gt;new-&gt;to_app;
+$app = Plack::Middleware::A-&gt;wrap($app);
+$app = Plack::Middleware::B-&gt;wrap($app);
+$app = Plack::Middleware::C-&gt;wrap($app);
+</code></pre>
+
+<p>But it might be more clear to write it this way</p>
+
+<pre><code>my $app0 = MyWebApp-&gt;new-&gt;to_app;           # $app0-&gt;($env) runs the web app
+$app1 = Plack::Middleware::A-&gt;wrap($app0);  # $app1-&gt;($env) calls P::M::A-&gt;call() which calls $app0-&gt;($env)
+$app2 = Plack::Middleware::B-&gt;wrap($app1);  # $app2-&gt;($env) calls P::M::B-&gt;call() which calls $app1-&gt;($env)
+$app3 = Plack::Middleware::C-&gt;wrap($app2);  # $app3-&gt;($env) calls P::M::C-&gt;call() which calls $app2-&gt;($env)
+                                            # When the server receives a request it calls $app3-&gt;($env)
+</code></pre>
+
+<p>So when an event occurs &mdash; for example the PSGI server sees a new request &mdash; it
+passes the event to the app.  The app is a chain of callbacks which run each
+other.  This is clearly an example of event driven programming.</p>
+
+<h1>Plack::Component and Plack::App</h1>
+
+<p>Plack::Middleware inherits from Plack::Component.  So the most common use of
+Plack::Component is in middleware.</p>
+
+<p>Plack::Component can also be used as a tool for creating PSGI applications.  It
+has a light dusting of code, but mostly its an interface which is implemented
+by modules in the Plack::App namespace.  For example Plack::App::File is a web
+app which serves static files from a root directory, and Plack::App::URLMap is
+a web app which maps multiple web apps to multiple urls.</p>
+
+<p>But notice that I am not required to use Plack::Component to create a PSGI
+application. A PSGI application is just a code reference.  The PSGI spec does
+not say that a PSGI application is a reference to code that inherits from
+Plack::Component.</p>
+
+<p>The nice thing about using Plack::Component to build my app is that it
+provides a common interface for all PSGI apps.  Whenever I see <code>$app</code>, I
+can rely on that behavior.  This is clearly important for middleware.  And it
+feels good from a design point of view.</p>
+
+<p>But its not required and it adds some complexity.</p>
 </div>
 
 
@@ -127,7 +218,7 @@ sub download {
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2012/05/10/new-on-cpan-moosex-cachingproxy/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2012/05/10/new-on-cpan-moosex-cachingproxy/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2014/04/11/read-plack-3/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2014/04/11/read-plack-3/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -141,10 +232,8 @@ sub download {
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/04/29/new-on-cpan-log-json/" title="Previous Post: New on CPAN - Log::JSON">&laquo; New on CPAN - Log::JSON</a>
+        <a class="basic-alignment left" href="/2014/04/09/read-plack-2/" title="Previous Post: Reading code - plackup Architecture">&laquo; Reading code - plackup Architecture</a>
       
-      
-        <a class="basic-alignment right" href="/2012/05/17/test-www-selenium-more/" title="Next Post: Test::WWW::Selenium::More">Test::WWW::Selenium::More &raquo;</a>
       
     </p>
   </footer>
@@ -222,8 +311,8 @@ sub download {
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2012/05/10/new-on-cpan-moosex-cachingproxy/';
-        var disqus_url = 'http://blog.kablamo.org/2012/05/10/new-on-cpan-moosex-cachingproxy/';
+        var disqus_identifier = 'http://blog.kablamo.org/2014/04/11/read-plack-3/';
+        var disqus_url = 'http://blog.kablamo.org/2014/04/11/read-plack-3/';
         var disqus_script = 'embed.js';
       
     (function () {

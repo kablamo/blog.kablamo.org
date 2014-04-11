@@ -9,7 +9,7 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="Today I&rsquo;m writing about something I noticed while doing interviews recently. If I disagree with a decision a company made, I need to jump into &hellip;">
+  <meta name="description" content="The short version for the impatient my() creates a local variable our() creates a package variable local() temporarily changes the local value of a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -56,6 +56,104 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/17/our-my-local/">My vs Our vs Local</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-03-17T00:00:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>The short version for the impatient</h1>
+
+<ul>
+<li> <code>my()</code> creates a local variable</li>
+<li> <code>our()</code> creates a package variable</li>
+<li> <code>local()</code> temporarily changes the local value of a global variable</li>
+<li> The above is mostly true.</li>
+</ul>
+
+
+<h1>The long version for the irrepressibly quixotic</h1>
+
+<h2>my()</h2>
+
+<p><code>my</code> declares the listed variable to be local to the enclosing block, file,
+or <code>eval</code>.  That is to say its <em>scope</em> is local.  This kind of variable is
+known as a <em>lexical variable</em>.  Note that lexical variables are hidden from
+subroutines which are called from within the enclosing block.  This is known as
+<em>lexical scoping</em>.</p>
+
+<h2>our()</h2>
+
+<p><code>our</code> creates an alias to a <em>package variable</em>.  The alias is local to the
+enclosing block, file, or <code>eval</code>.  That is to say the alias is lexically scoped
+just like any lexical variable.  However a package variable belongs to a
+package.  It can be accessed from anywhere if you use its fully qualified name.
+Here are two examples of fully qualified package variables:</p>
+
+<pre><code>$main::a
+%MyPackage::boop
+</code></pre>
+
+<p>Note that package variables are also global variables.</p>
+
+<h2>local()</h2>
+
+<p><code>local</code> gives temporary values to global variables.  It does not create a local
+variable.  It is most commonly used when you want to locally modify a global
+variable such as one of the punctuation variables.  For example:</p>
+
+<pre><code>{ 
+    local $| = 1; # enable autoflush for STDOUT
+    say "hi mom";
+}
+</code></pre>
+
+<p><code>local</code> modifies the listed variable to be local to the enclosing block,
+file, or <code>eval</code> &mdash; AND to any subroutine called from within that block.  This
+is known as <em>dynamic scoping</em>.</p>
+
+<h1>Sources</h1>
+
+<p>For a more complete understanding I recommend <code>perldoc perlfunc</code> and especially
+<code>perldoc perlsub</code>.  Also the following links may be helpful:</p>
+
+<ul>
+<li><a href="https://metacpan.org/pod/perlfunc">https://metacpan.org/pod/perlfunc</a></li>
+<li><a href="https://metacpan.org/pod/perlsub">https://metacpan.org/pod/perlsub</a></li>
+<li><a href="http://perlmaven.com/package-variables-and-lexical-variables-in-perl">http://perlmaven.com/package-variables-and-lexical-variables-in-perl</a></li>
+<li><a href="http://www.perlmonks.org/?node_id=95813">http://www.perlmonks.org/?node_id=95813</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -884,79 +982,6 @@ bind R source-file ~/.tmux.conf \; display-message "Config reloaded"
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/11/26/tmux-status-updates/">Configure Tmux to Give You Status Updates About Anything</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-11-26T00:00:00-05:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I use and love OSX growl and Ubuntu notify style desktop notifications.  They
-are gorgeous.  But they are also distracting and after a few vibrant and
-whimsical but fleeting seconds they are gone forever and you have no way to get
-them back.</p>
-
-<p>A more useful (and less glorious) way to receive notifications is in your
-<a href="http://tmux.sourceforge.net/">tmux</a> status bar.  tmux is the brilliant
-successor to the venerable screen which hasn&rsquo;t been actively developed for
-quite a while.</p>
-
-<p>Here is how I configure notifications in my .tmux.conf file:</p>
-
-<pre><code>set -g status-interval 15    
-set -g status-right !exec my_shell_script
-</code></pre>
-
-<p>This tells tmux to run <code>my_shell_script</code> every 15 seconds.  It displays the
-first line of output from the shell script.  Now I can get unobtrusive status
-updates which don&rsquo;t go away. And if I ate a good breakfast, feel rested, and
-have the wind at my back I can write some code to log my notifications to a
-file so that I don&rsquo;t miss any.</p>
-
-<p>Here are some ideas that might be useful which I might someday do maybe perhaps
-possibly:</p>
-
-<ul>
-<li>Status updates when someone says your name on irc</li>
-<li>Status updates when jenkins tests fail</li>
-<li>Status updates when people push code live</li>
-<li>Status updates when people merge branches</li>
-</ul>
-
-
-<p>Any other ideas?</p>
-
-<p>Also don&rsquo;t miss the tmux <a href="https://github.com/Lokaltog/powerline">powerline</a>
-status bar.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -995,6 +1020,10 @@ status bar.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/04/11/read-plack-3/">Reading Code - PSGI Application Architecture</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/09/read-plack-2/">Reading Code - Plackup Architecture</a>
       </li>
     
@@ -1008,10 +1037,6 @@ status bar.</p>
     
       <li class="post">
         <a href="/2014/03/28/ddg-vim/">Vim Cheat Sheet</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/24/experiments/">An Experiment - Living With Less Than 200 Things</a>
       </li>
     
   </ul>
