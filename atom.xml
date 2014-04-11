@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-04-11T08:27:31-04:00</updated>
+  <updated>2014-04-11T08:29:13-04:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -33,9 +33,9 @@ a PSGI application.</p>
 
 <blockquote><p>A PSGI application is a Perl code reference. It takes exactly one argument,
 the environment, and returns an array reference containing exactly three
-values [(a status, header, and body)].</p></blockquote>
+values.</p></blockquote>
 
-<p>Here is an example:</p>
+<p>The three values are a status, headers, and a body.  Here is an example:</p>
 
 <pre><code>my $app = sub {
     my $env = shift;
