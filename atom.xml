@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-04-11T08:29:13-04:00</updated>
+  <updated>2014-04-11T08:29:55-04:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -50,7 +50,7 @@ values.</p></blockquote>
 <h1>The PSGI environment hash</h1>
 
 <p>The PSGI environment hash is a hashref with many keys.  But mostly it is the
-data (headers, body, etc) from a <a href="HTTP::Request">HTTP::Request</a> which have been parsed put into
+data (headers, body, etc) from an <a href="HTTP::Request">HTTP::Request</a> which has been parsed and put into
 a hash for convenient access.</p>
 
 <h1>Middleware</h1>
