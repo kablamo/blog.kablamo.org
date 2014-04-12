@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-04-11T08:29:55-04:00</updated>
+  <updated>2014-04-12T08:54:00-04:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Reading code - Plack::Builder]]></title>
+    <link href="http://blog.kablamo.org/2014/04/12/read-plack-4/"/>
+    <updated>2014-04-12T00:00:00-04:00</updated>
+    <id>http://blog.kablamo.org/2014/04/12/read-plack-4</id>
+    <content type="html"><![CDATA[<ul>
+<li><a href="http://blog.kablamo.org/2014/04/08/read-plack-1">Part 1 &ndash; An Overview</a></li>
+<li><a href="http://blog.kablamo.org/2014/04/09/read-plack-2">Part 2 &ndash; plackup Architecture</a></li>
+<li><a href="http://blog.kablamo.org/2014/04/11/read-plack-3">Part 3 &ndash; PSGI Application Architecture</a></li>
+<li><a href="http://blog.kablamo.org/2014/04/12/read-plack-4"><strong>Part 4 &ndash; Plack::Builder</strong></a></li>
+</ul>
+
+
+<p>Plack::Builder provides a domain specific language (DSL) for middleware
+developers.  It looks like this:</p>
+
+<pre><code>use Plack::Builder;
+
+my $app1 = sub { ... };
+my $app2 = sub { ... };
+
+builder {
+    enable "Deflater";
+    enable "Session", store =&gt; "File";
+    enable "Debug", panels =&gt; [ qw(DBITrace Memory Timer) ];
+
+    mount "/narwhale" =&gt; $app1;
+    mount "/unicorn"  =&gt; $app2;
+};
+</code></pre>
+
+<p>How does it work?  With three artful tricks.</p>
+
+<h1>Artful trick #1</h1>
+
+<p>The first artful trick is the <code>builder</code> block.</p>
+
+<pre><code>sub builder(&amp;) {
+    my $block = shift;
+    ...
+}
+</code></pre>
+
+<p>The <code>&amp;</code> is a function prototype.  Perl offers some limited compile time checking
+for parameters passed to subs.  Here is what <code>perldoc perlsub</code> says about <code>&amp;</code>:</p>
+
+<blockquote><p>An &ldquo;&amp;&rdquo; requires an anonymous subroutine, which, if passed as the first
+argument, does not require the &ldquo;sub&rdquo; keyword or a subsequent comma.</p></blockquote>
+
+<p>So if I try to pass <code>builder()</code> a scalar or an array or anything thats not an
+anonymous subroutine, I will get a compile time error.  But if I pass it an
+anonymous subroutine, the compiler will allow things to continue.</p>
+
+<h1>Artful trick #2</h1>
+
+<p>The next artful trick is that Plack::Builder implements the DSL keywords as
+subs and then exports those subs.</p>
+
+<pre><code>package Plack::Builder;
+use strict;
+use parent qw( Exporter );
+our @EXPORT = qw( builder enable enable_if mount );
+...
+sub enable    {...}
+sub enable_if {...}
+sub mount     {...}
+# etc
+</code></pre>
+
+<p>Actually thats 90% of the whole thing isn&rsquo;t it?  Now its starting to look
+obvious.  But lets continue.</p>
+
+<h1>Artful trick #3</h1>
+
+<p>There is one more interesting idea here.  Notice that if I use <code>enable</code>,
+<code>enable_if</code>, or <code>mount</code> outside of a <code>builder</code> block I will get an
+error.  This works because the DSL keywords are subs which run code references.
+By default those code references refer to code which croaks an error.  But when
+<code>builder</code> runs, those references are temporarily replaced with real working
+code.</p>
+
+<p>Here&rsquo;s some simplified code to illustrate how it works.</p>
+
+<pre><code>our $_enable = sub { Carp::croak(...) }; # &lt;&lt; default code reference
+
+sub enable { $_enable-&gt;(@_) }
+
+sub builder(&amp;) {
+    my $block = shift;
+    ...
+    local $_enable = sub {...}; # &lt;&lt; temporarily assign real working code
+    ...
+    my $app = $block-&gt;();
+    ...
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Reading code - PSGI Application Architecture]]></title>
@@ -1583,22 +1682,6 @@ existed in git for a string:</p>
 
 <p>Git is all knowing and all seeing and all powerful.  Hail git, powerful arcane
 lord of source control.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tmux reloaded]]></title>
-    <link href="http://blog.kablamo.org/2013/11/27/tmux-reloaded/"/>
-    <updated>2013-11-27T00:00:00-05:00</updated>
-    <id>http://blog.kablamo.org/2013/11/27/tmux-reloaded</id>
-    <content type="html"><![CDATA[<p>To reload your tmux configuration without restarting the server, add this to
-your <code>~/.tmux.conf</code> file:</p>
-
-<pre><code># reload the config file without restarting the tmux server
-bind R source-file ~/.tmux.conf \; display-message "Config reloaded"
-</code></pre>
-
-<p>Notice thats a capital <code>R</code> not a lowercase <code>r</code>.  I keep forgetting that.</p>
 ]]></content>
   </entry>
   

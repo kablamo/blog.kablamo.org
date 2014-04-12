@@ -12,7 +12,7 @@
   <meta name="description" content="Part 1 &ndash; An Overview
 Part 2 &ndash; plackup Architecture
 Part 3 &ndash; PSGI Application Architecture
-Part 4 &ndash; Plack::Builder PSGI &hellip;">
+Part 4 &ndash; Plack::Builder Plack:: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -59,6 +59,133 @@ Part 4 &ndash; Plack::Builder PSGI &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/04/12/read-plack-4/">Reading Code - Plack::Builder</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-04-12T00:00:00-04:00" pubdate data-updated="true">Apr 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li><a href="/2014/04/08/read-plack-1">Part 1 &ndash; An Overview</a></li>
+<li><a href="/2014/04/09/read-plack-2">Part 2 &ndash; plackup Architecture</a></li>
+<li><a href="/2014/04/11/read-plack-3">Part 3 &ndash; PSGI Application Architecture</a></li>
+<li><a href="/2014/04/12/read-plack-4"><strong>Part 4 &ndash; Plack::Builder</strong></a></li>
+</ul>
+
+
+<p>Plack::Builder provides a domain specific language (DSL) for middleware
+developers.  It looks like this:</p>
+
+<pre><code>use Plack::Builder;
+
+my $app1 = sub { ... };
+my $app2 = sub { ... };
+
+builder {
+    enable "Deflater";
+    enable "Session", store =&gt; "File";
+    enable "Debug", panels =&gt; [ qw(DBITrace Memory Timer) ];
+
+    mount "/narwhale" =&gt; $app1;
+    mount "/unicorn"  =&gt; $app2;
+};
+</code></pre>
+
+<p>How does it work?  With three artful tricks.</p>
+
+<h1>Artful trick #1</h1>
+
+<p>The first artful trick is the <code>builder</code> block.</p>
+
+<pre><code>sub builder(&amp;) {
+    my $block = shift;
+    ...
+}
+</code></pre>
+
+<p>The <code>&amp;</code> is a function prototype.  Perl offers some limited compile time checking
+for parameters passed to subs.  Here is what <code>perldoc perlsub</code> says about <code>&amp;</code>:</p>
+
+<blockquote><p>An &ldquo;&amp;&rdquo; requires an anonymous subroutine, which, if passed as the first
+argument, does not require the &ldquo;sub&rdquo; keyword or a subsequent comma.</p></blockquote>
+
+<p>So if I try to pass <code>builder()</code> a scalar or an array or anything thats not an
+anonymous subroutine, I will get a compile time error.  But if I pass it an
+anonymous subroutine, the compiler will allow things to continue.</p>
+
+<h1>Artful trick #2</h1>
+
+<p>The next artful trick is that Plack::Builder implements the DSL keywords as
+subs and then exports those subs.</p>
+
+<pre><code>package Plack::Builder;
+use strict;
+use parent qw( Exporter );
+our @EXPORT = qw( builder enable enable_if mount );
+...
+sub enable    {...}
+sub enable_if {...}
+sub mount     {...}
+# etc
+</code></pre>
+
+<p>Actually thats 90% of the whole thing isn&rsquo;t it?  Now its starting to look
+obvious.  But lets continue.</p>
+
+<h1>Artful trick #3</h1>
+
+<p>There is one more interesting idea here.  Notice that if I use <code>enable</code>,
+<code>enable_if</code>, or <code>mount</code> outside of a <code>builder</code> block I will get an
+error.  This works because the DSL keywords are subs which run code references.
+By default those code references refer to code which croaks an error.  But when
+<code>builder</code> runs, those references are temporarily replaced with real working
+code.</p>
+
+<p>Here&rsquo;s some simplified code to illustrate how it works.</p>
+
+<pre><code>our $_enable = sub { Carp::croak(...) }; # &lt;&lt; default code reference
+
+sub enable { $_enable-&gt;(@_) }
+
+sub builder(&amp;) {
+    my $block = shift;
+    ...
+    local $_enable = sub {...}; # &lt;&lt; temporarily assign real working code
+    ...
+    my $app = $block-&gt;();
+    ...
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1152,138 +1279,6 @@ sub splarf { return "dinosaurs smell good" }
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/03/18/cc-processors/">Introduction to Online Credit Card Processing - Part 1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2014-03-18T00:00:00-04:00" pubdate data-updated="true">Mar 18<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I want to understand credit card processing.  So I will probably write a few
-articles about it.  This article has some fundamental definitions.</p>
-
-<h2>acquiring bank</h2>
-
-<p>An <a href="https://en.wikipedia.org/wiki/Acquiring_bank">acquiring bank</a> is a bank
-which processes card payments on behalf of a merchant.  The term &lsquo;acquirer&rsquo;
-indicates the bank accepts (or acquires) credit card payments from card
-issuing banks within a credit card association.  Acquirers take all the risk
-and bear the burdern of most of the regulation.  Examples of acquirers are
-Bank of America, FirstData, and Chase.</p>
-
-<h2>credit card association</h2>
-
-<p>Examples of credit card associations include Visa, MasterCard, Discover,
-American Express, etc.</p>
-
-<h2>issuing bank</h2>
-
-<p>An <a href="https://en.wikipedia.org/wiki/Issuing_bank">issuing bank</a> is a bank which
-provides credit cards to consumers.  The term &lsquo;issue&rsquo; indicates the bank issues
-payments to the acquiring bank on behalf of the consumer.  The top issuers in
-the US are American Express and Chase.</p>
-
-<h2>payment processor</h2>
-
-<p>A <a href="http://storecoach.com/blog/whats-difference-between-payment-processor-gateway/">payment processor</a>
-is a company which peforms the actual funds transfer.  Its the technical
-underpinning of a transaction.  Processors do authorization, funds transfer,
-statements, calculate the interchange fee, and handle dispute management.
-Processors take no risk on a transaction.  Examples of companies who are
-processors are FirstData, Chase, and RBS WorldPay.</p>
-
-<h2>gateway</h2>
-
-<p>A <a href="https://en.wikipedia.org/wiki/Payment_gateway">payment gateway</a> is a service
-which ties all the various groups together and provides a nice simple interface for
-the merchant to build a shopping cart or marketplace without needing to
-understand all the gory details.  The gateway authorizes credit card payments
-by facillitating the transfer of information between a merchant&rsquo;s bank (the
-acquiring bank) and a customer&rsquo;s bank (the issuing bank).</p>
-
-<h2>merchant account</h2>
-
-<p>A <a href="https://en.wikipedia.org/wiki/Merchant_account">merchant account</a> is a type
-of bank account provided by an acquiring bank which allows merchants to accept
-payments via credit card.</p>
-
-<h2>interchange fee</h2>
-
-<p>The <a href="https://en.wikipedia.org/wiki/Interchange_fee">interchange fee</a> is
-the fee paid to the issuing bank by the acquiring bank.  The amount varies by
-card type, card brand, transaction amount, and other factors and is set by the
-card associations like Visa, Mastercard, or Discover.</p>
-
-<h2>discount rate</h2>
-
-<p>The <a href="http://merchantwarehouse.com/understanding-merchant-account-discount-rates">discount rate</a>
-is made up of several different fees which are charged to the merchant.  This
-usually includes the interchange fee.  The discount rate is a fixed
-percentage-based fee charged for each transaction.  A portion of the fee is
-passed to the acquiring bank who likely passes a portion to the issuing bank
-who in turn passes a portion to the credit card association.</p>
-
-<p>Rates are influenced by many things including the level of risk. Brick and
-mortar stores where a card is physically present are considered the lowest
-risk.  There are three categories of transaction types based on risk and each
-have a different discount rate: qualified, mid-qualified and non-qualified.
-Internet transactions are non-qualified which is the most expensive category.</p>
-
-<h2>basis point</h2>
-
-<p>1 <a href="https://en.wikipedia.org/wiki/Merchant_account#Terms_to_know">basis point</a>
-is 1%.  A term sometimes used when discussing the discount rate.</p>
-
-<h2>Average Ticket Size (AVT)</h2>
-
-<p>The might make more sense to outsiders if they had called it Average
-Transaction Size.  Its the total monthly sales amount divided by the total
-number of transactions for that month.  Merchant account rates and fees are
-often based on a merchant&rsquo;s monthly AVT.</p>
-
-<h2>PCI DSS</h2>
-
-<p>PCI stands for Payment Card Industry.  DSS stands for Data Security Standard.
-It is a set of security standards for organizations who handle cardholder
-information.  It is defined by the PCI Security Standards Council (PCI SSC)
-which was formed in 2006 by the major card associations.  Note that there is a
-difference between being compliant being validated as compliant.  Validation is
-done annually by a Qualified Security Accessor (QSA) who creates a Report on
-Compliance (ROC) for organizations handle lots of transactions or a
-Self-Assessment Questionaire (SAQ) for companies handling less transactions.</p>
-
-<h1>See also</h1>
-
-<p><a href="http://merchantwarehouse.com/glossary">http://merchantwarehouse.com/glossary</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1320,6 +1315,10 @@ Self-Assessment Questionaire (SAQ) for companies handling less transactions.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/04/12/read-plack-4/">Reading Code - Plack::Builder</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/11/read-plack-3/">Reading Code - PSGI Application Architecture</a>
       </li>
     
@@ -1333,10 +1332,6 @@ Self-Assessment Questionaire (SAQ) for companies handling less transactions.</p>
     
       <li class="post">
         <a href="/2014/03/31/regex/">Look Around Assertions in Perl Regular Expressions</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/28/ddg-vim/">Vim Cheat Sheet</a>
       </li>
     
   </ul>
