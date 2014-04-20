@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Test::WWW::Selenium::More - KABLAMO</title>
+  <title>Codecube.io now supports Perl - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I recently released
-Test::WWW::Selenium::More
-to CPAN. It is a small collection of utilities to help you write Selenium
-tests. Here are some reasons &hellip;">
+  <meta name="description" content="Codecube.io is a jsfiddle type service which runs Perl
+code (and other languages) and shows the results in your browser. The website is written in Go &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@ tests. Here are some reasons &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2012/05/17/test-www-selenium-more">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/04/19/codecube">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -62,7 +60,7 @@ tests. Here are some reasons &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Test::WWW::Selenium::More</h1>
+      <h1 class="entry-title">Codecube.io Now Supports Perl</h1>
     
     
       <p class="meta">
@@ -79,52 +77,30 @@ tests. Here are some reasons &hellip;">
 
 
 
-<time datetime="2012-05-17T00:00:00-05:00" pubdate data-updated="true">May 17<span>th</span>, 2012</time>
+<time datetime="2014-04-19T00:00:00-05:00" pubdate data-updated="true">Apr 19<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I recently released
-<a href="https://metacpan.org/module/Test::WWW::Selenium::More">Test::WWW::Selenium::More</a>
-to CPAN.  It is a small collection of utilities to help you write Selenium
-tests.  Here are some reasons to use it:</p>
+<div class="entry-content"><p><a href="http://codecube.io">Codecube.io</a> is a jsfiddle type service which runs Perl
+code (and other languages) and shows the results in your browser.</p>
 
-<ol>
-<li><p>It has a
-<a href="https://metacpan.org/module/Test::WWW::Selenium::More::Manual">manual</a> which
-provides a concise but fairly comprehensive howto guide to Selenium testing in
-Perl.</p></li>
-<li><p>It uses Moose so you can more easily use roles.  For example you might want
-a role for methods that deal with authentication and a role for methods that
-deal with payments.</p></li>
-<li><p>Smarter testing with methods like wait_for_jquery() and jquery_click().  You
-should never sleep() in your Selenium tests because that leads to slow tests
-with random failures which leads to frustration, low morale, hair pulling, and
-heavy drinking.</p></li>
-<li><p>Method chaining.  Here is what this looks like:</p>
+<p>The website is written in Go and runs your code inside a Docker container.  It
+originally had support for C, Go, Python, and Ruby.  I was looking for an
+excuse to play with Docker and Go so I submitted a pull request which added
+support for Perl.</p>
 
-<pre><code> use Test::Most;
- use Test::WWW::Selenium::More;
+<p>See also:</p>
 
- Test::WWW::Selenium::More-&gt;new()
+<ul>
+<li> The original Codecube <a href="http://hmarr.com/2013/oct/16/codecube-runnable-gists/">blog post</a> which is a good introduction to Docker.</li>
+<li> The <a href="https://github.com/hmarr/codecube">Codecube github repo</a>.</li>
+<li> My previous post on <a href="http://golang.org/">Go</a>.</li>
+<li> My previous post on <a href="http://www.docker.io/">Docker</a>.</li>
+</ul>
 
- -&gt;note('Search google')
- -&gt;open_ok("http://www.google.com")
- -&gt;title_like(qr/Google Search/)
- -&gt;type_ok('cat pictures')
- -&gt;follow_link_ok('Search')
-
- -&gt;note('Check the number of results')
- -&gt;is_text_present_ok('2 bajillion results');
-
- done_testing;
-</code></pre></li>
-</ol>
-
-
-<p>Bugs or patches?  <a href="https://github.com/kablamo/Test-WWW-Selenium-More">https://github.com/kablamo/Test-WWW-Selenium-More</a></p>
 </div>
 
 
@@ -143,7 +119,7 @@ heavy drinking.</p></li>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2012/05/17/test-www-selenium-more/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2012/05/17/test-www-selenium-more/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2014/04/19/codecube/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2014/04/19/codecube/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -157,10 +133,8 @@ heavy drinking.</p></li>
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/05/10/new-on-cpan-moosex-cachingproxy/" title="Previous Post: New on CPAN - MooseX::CachingProxy">&laquo; New on CPAN - MooseX::CachingProxy</a>
+        <a class="basic-alignment left" href="/2014/04/12/read-plack-4/" title="Previous Post: Reading code - Plack::Builder">&laquo; Reading code - Plack::Builder</a>
       
-      
-        <a class="basic-alignment right" href="/2012/08/26/slides-from-my-selenium-talk-at-yapc-eu-2012/" title="Next Post: Slides from my Selenium talk at YAPCEU 2012">Slides from my Selenium talk at YAPCEU 2012 &raquo;</a>
       
     </p>
   </footer>
@@ -238,8 +212,8 @@ heavy drinking.</p></li>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2012/05/17/test-www-selenium-more/';
-        var disqus_url = 'http://blog.kablamo.org/2012/05/17/test-www-selenium-more/';
+        var disqus_identifier = 'http://blog.kablamo.org/2014/04/19/codecube/';
+        var disqus_url = 'http://blog.kablamo.org/2014/04/19/codecube/';
         var disqus_script = 'embed.js';
       
     (function () {

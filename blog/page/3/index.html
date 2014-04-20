@@ -9,8 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="To reload your tmux configuration without restarting the server, add this to
-your ~/.tmux.conf file: # reload the config file without restarting the &hellip;">
+  <meta name="description" content="Don&rsquo;t be afraid to delete files from your git repository. You can get restore
+them. You can even search for a string in a deleted file. Here is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -63,6 +63,86 @@ your ~/.tmux.conf file: # reload the config file without restarting the &hellip;
       
   <header>
     
+      <h1 class="entry-title"><a href="/2013/12/08/git-restore/">How to Find and Restore Deleted Files With Git</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-12-08T00:00:00-06:00" pubdate data-updated="true">Dec 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Don&rsquo;t be afraid to delete files from your git repository.  You can get restore
+them.  You can even search for a string in a deleted file.  Here is how to find
+a deleted file and its commit:</p>
+
+<pre><code>git log --diff-filter=D --summary                  # all deleted files ever
+git log --diff-filter=D --summary .                # all deleted files in cwd 
+git log --diff-filter=D --author=Batman --summary  # all files deleted by Batman
+</code></pre>
+
+<p>How to restore a deleted file:</p>
+
+<pre><code>git checkout &lt;commit&gt;~1 &lt;filename&gt;
+</code></pre>
+
+<p>To make this process a little easier next time I need to do it, I created a git
+alias for finding deleted files by adding this to my .gitconfig file:</p>
+
+<pre><code>[aliases]
+deleted = log --diff-filter=D --summary
+</code></pre>
+
+<p>Now I can find and restore files like this:</p>
+
+<pre><code>git deleted                         # find a deleted file and its commit
+git checkout &lt;commit&gt;~1 &lt;filename&gt;  # restore the deleted file
+</code></pre>
+
+<h2>How to search the contents of deleted files</h2>
+
+<p>But lets say I don&rsquo;t remember the filename of that file I deleted in a fit of
+cleanup passion.  I do remember the name of one of the functions in it though.
+Here is how to deal with that.  Search the contents of all files that have ever
+existed in git for a string:</p>
+
+<pre><code>git log --summary -S&lt;string&gt; [&lt;path/to/file&gt;] [--since=2009.1.1] [--until=2010.1.1]
+</code></pre>
+
+<p>Another way to do this:</p>
+
+<pre><code>git rev-list --all | xargs git grep 'string'
+</code></pre>
+
+<p>Git is all knowing and all seeing and all powerful.  Hail git, powerful arcane
+lord of source control.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2013/11/27/tmux-reloaded/">Tmux Reloaded</a></h1>
     
     
@@ -80,7 +160,7 @@ your ~/.tmux.conf file: # reload the config file without restarting the &hellip;
 
 
 
-<time datetime="2013-11-27T00:00:00-05:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
+<time datetime="2013-11-27T00:00:00-06:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
         
       </p>
     
@@ -124,7 +204,7 @@ bind R source-file ~/.tmux.conf \; display-message "Config reloaded"
 
 
 
-<time datetime="2013-11-26T00:00:00-05:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
+<time datetime="2013-11-26T00:00:00-06:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
         
       </p>
     
@@ -197,7 +277,7 @@ status bar.</p>
 
 
 
-<time datetime="2013-11-25T00:00:00-05:00" pubdate data-updated="true">Nov 25<span>th</span>, 2013</time>
+<time datetime="2013-11-25T00:00:00-06:00" pubdate data-updated="true">Nov 25<span>th</span>, 2013</time>
         
       </p>
     
@@ -335,7 +415,7 @@ way I can be sure my code will run as successfully for them as it did for me.</p
 
 
 
-<time datetime="2013-11-24T00:00:00-05:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
+<time datetime="2013-11-24T00:00:00-06:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
         
       </p>
     
@@ -454,7 +534,7 @@ something ever gets misconfigured somewhere. <code>/etc/monit/conf.d/end2end</co
 
 
 
-<time datetime="2013-11-22T00:00:00-05:00" pubdate data-updated="true">Nov 22<span>nd</span>, 2013</time>
+<time datetime="2013-11-22T00:00:00-06:00" pubdate data-updated="true">Nov 22<span>nd</span>, 2013</time>
         
       </p>
     
@@ -565,7 +645,7 @@ with you and ask a few questions.</p>
 
 
 
-<time datetime="2013-11-19T00:00:00-05:00" pubdate data-updated="true">Nov 19<span>th</span>, 2013</time>
+<time datetime="2013-11-19T00:00:00-06:00" pubdate data-updated="true">Nov 19<span>th</span>, 2013</time>
         
       </p>
     
@@ -734,7 +814,7 @@ My next class is Chinese History.</p>
 
 
 
-<time datetime="2013-11-13T00:00:00-05:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+<time datetime="2013-11-13T00:00:00-06:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
         
       </p>
     
@@ -936,7 +1016,7 @@ running.</p>
 
 
 
-<time datetime="2013-11-13T00:00:00-05:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+<time datetime="2013-11-13T00:00:00-06:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
         
       </p>
     
@@ -1110,7 +1190,7 @@ More on that tomorrow.</p>
 
 
 
-<time datetime="2013-11-12T00:00:00-05:00" pubdate data-updated="true">Nov 12<span>th</span>, 2013</time>
+<time datetime="2013-11-12T00:00:00-06:00" pubdate data-updated="true">Nov 12<span>th</span>, 2013</time>
         
       </p>
     
@@ -1170,70 +1250,6 @@ Use it like this:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/03/17/git-vspark/">Git-vspark Plots Your Commits Vertically With Term::Vspark</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-03-17T00:00:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I added a <strong>git-vspark</strong> script to my App::Git::Spark CPAN module.  It does the
-same thing as <a href="https://github.com/kablamo/git-spark">git-spark</a> but instead of
-normal horizontal sparklines, it uses &ldquo;vertical&rdquo; sparklines.  Here&rsquo;s what that
-looks like:</p>
-
-<pre><code>$ git vspark --months 8 batman
-Commits by batman over the last 8 months
-total: 233   avg: 29   max: 69
- 12 ██▋
- 18 ████
- 69 ███████████████▏
- 59 ████████████▉
- 16 ███▌
- 28 ██████▏
- 12 ██▋
- 19 ████▎
-</code></pre>
-
-<p>This effect is achieved using
-<a href="https://metacpan.org/module/Term::Vspark">Term::Vspark</a>.  Its companion module
-<a href="https://metacpan.org/module/Term::Spark">Term::Spark</a> is a small pure Perl
-replacement for Zach Holman&rsquo;s original <a href="https://github.com/holman/spark">spark</a>
-implementation and it now powers my git-spark script.</p>
-
-<p>These libraries were fun little projects developed over the past few weeks
-mainly by <a href="https://github.com/LuRsT">Gil Gonçalves</a> with a few pull requests
-from myself.  Having them available on CPAN means you can easily use sparklines
-in your own Perl code.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1272,6 +1288,10 @@ in your own Perl code.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/04/19/codecube/">Codecube.io Now Supports Perl</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/12/read-plack-4/">Reading Code - Plack::Builder</a>
       </li>
     
@@ -1285,10 +1305,6 @@ in your own Perl code.</p>
     
       <li class="post">
         <a href="/2014/04/08/read-plack-1/">Reading Code - Plack</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/03/31/regex/">Look Around Assertions in Perl Regular Expressions</a>
       </li>
     
   </ul>

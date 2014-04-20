@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/perl/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-04-12T08:54:00-04:00</updated>
+  <updated>2014-04-19T19:55:40-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -14,9 +14,34 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Codecube.io now supports Perl]]></title>
+    <link href="http://blog.kablamo.org/2014/04/19/codecube/"/>
+    <updated>2014-04-19T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/04/19/codecube</id>
+    <content type="html"><![CDATA[<p><a href="http://codecube.io">Codecube.io</a> is a jsfiddle type service which runs Perl
+code (and other languages) and shows the results in your browser.</p>
+
+<p>The website is written in Go and runs your code inside a Docker container.  It
+originally had support for C, Go, Python, and Ruby.  I was looking for an
+excuse to play with Docker and Go so I submitted a pull request which added
+support for Perl.</p>
+
+<p>See also:</p>
+
+<ul>
+<li> The original Codecube <a href="http://hmarr.com/2013/oct/16/codecube-runnable-gists/">blog post</a> which is a good introduction to Docker.</li>
+<li> The <a href="https://github.com/hmarr/codecube">Codecube github repo</a>.</li>
+<li> My previous post on <a href="http://golang.org/">Go</a>.</li>
+<li> My previous post on <a href="http://www.docker.io/">Docker</a>.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Reading code - Plack::Builder]]></title>
     <link href="http://blog.kablamo.org/2014/04/12/read-plack-4/"/>
-    <updated>2014-04-12T00:00:00-04:00</updated>
+    <updated>2014-04-12T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2014/04/12/read-plack-4</id>
     <content type="html"><![CDATA[<ul>
 <li><a href="/2014/04/08/read-plack-1">Part 1 &ndash; An Overview</a></li>
@@ -115,7 +140,7 @@ sub builder(&amp;) {
   <entry>
     <title type="html"><![CDATA[Reading code - PSGI Application Architecture]]></title>
     <link href="http://blog.kablamo.org/2014/04/11/read-plack-3/"/>
-    <updated>2014-04-11T00:00:00-04:00</updated>
+    <updated>2014-04-11T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2014/04/11/read-plack-3</id>
     <content type="html"><![CDATA[<ul>
 <li><a href="/2014/04/08/read-plack-1">Part 1 &ndash; An Overview</a></li>
@@ -237,7 +262,7 @@ feels good from a design point of view.</p>
   <entry>
     <title type="html"><![CDATA[Reading code - plackup Architecture]]></title>
     <link href="http://blog.kablamo.org/2014/04/09/read-plack-2/"/>
-    <updated>2014-04-09T00:00:00-04:00</updated>
+    <updated>2014-04-09T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2014/04/09/read-plack-2</id>
     <content type="html"><![CDATA[<ul>
 <li><a href="/2014/04/08/read-plack-1">Part 1 &ndash; An Overview</a></li>
@@ -343,7 +368,7 @@ interact.</p>
   <entry>
     <title type="html"><![CDATA[Reading code - Plack]]></title>
     <link href="http://blog.kablamo.org/2014/04/08/read-plack-1/"/>
-    <updated>2014-04-08T00:00:00-04:00</updated>
+    <updated>2014-04-08T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2014/04/08/read-plack-1</id>
     <content type="html"><![CDATA[<p>I write lots of code.  But I want to be better and faster at reading code.
 When I had the privilege of working with @ranguard I discovered he is a code
@@ -579,75 +604,6 @@ lib
 │   └── Util.pm                   # Misc but important utilities used throughout the code base
 └── Plack.pm                   # No code here -- just pod and a version number
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Look around assertions in Perl regular expressions]]></title>
-    <link href="http://blog.kablamo.org/2014/03/31/regex/"/>
-    <updated>2014-03-31T00:00:00-04:00</updated>
-    <id>http://blog.kablamo.org/2014/03/31/regex</id>
-    <content type="html"><![CDATA[<p>When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one
-letter at a time checking the match at each position.  That position is called
-the <em>current match position</em>.</p>
-
-<p>Look around assertions allow you to match a specific pattern before or after
-the current match position without moving the match position.</p>
-
-<h1>Look ahead assertions</h1>
-
-<p>Look ahead assertions match the text after the current match position
-(without moving the match position).  They look like <code>(?=pattern)</code>.</p>
-
-<pre><code>my $job = "space cowboy";
-$job =~ /space (?=cow)/;    # matches
-$job =~ /space (?=cow)cow/; # also matches
-</code></pre>
-
-<h1>Look behind assertions</h1>
-
-<p>Look behind assertions match the text before the current match position
-(without moving the match position).  They look like <code>(?&lt;=pattern)</code>.</p>
-
-<pre><code>my $job = "space cowboy";
-$job =~ /(?&lt;=space) cowboy/;      # matches
-$job =~ /space(?&lt;=space) cowboy/; # also matches
-</code></pre>
-
-<h1>Positive and negative look ahead assertions</h1>
-
-<p><em>Positive</em> look ahead assertions are look ahead assertions which match when their
-subpattern matches. They look like <code>(?=pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /space (?=cowboy)/;   # matches
-</code></pre>
-
-<p><em>Negative</em> look ahead assertions are look ahead assertions which match when their
-subpattern fails. They look like <code>(?!pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /space (?!mooseboy)/;   # matches
-</code></pre>
-
-<h1>Positive and negative look behind assertions</h1>
-
-<p>Positive look behind assertions are look behind assertions which match when their
-subpattern matches. They look like <code>(?&lt;=pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /(?&lt;=space) cowboy/;   # matches
-</code></pre>
-
-<p>Negative look behind assertions are look behind assertions which match when
-their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /(?&lt;!earth) cowboy/;   # matches
-</code></pre>
-
-<p>For more details see <code>perldoc perlre</code>.  I also recommend the DuckDuckGo
-<a href="https://duckduckgo.com/?q=regex+cheat+sheet">regex cheat sheet</a>.</p>
 ]]></content>
   </entry>
   
