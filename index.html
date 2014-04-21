@@ -9,7 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="If you missed John Resig&rsquo;s recent post about writing code everyday I highly recommend it. He is a busy guy with a full time job (at Khan &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -62,7 +63,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2014/04/23/write-code-every-day/">An Experiment - Write Code Every Day</a></h1>
+      <h1 class="entry-title"><a href="/2014/04/23/reading-code/">Why Reading Code Is Good for You</a></h1>
     
     
       <p class="meta">
@@ -80,6 +81,43 @@
 
 
 <time datetime="2014-04-23T00:00:00-05:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/04/20/write-code-every-day/">An Experiment - Write Code Every Day</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-04-20T00:00:00-05:00" pubdate data-updated="true">Apr 20<span>th</span>, 2014</time>
         
       </p>
     
@@ -1074,140 +1112,6 @@ months.  Maybe I&rsquo;ll be hard core at some point in the future.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/03/22/cc-processors/">Introduction to Online Credit Card Processing - Part 3</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2014-03-22T00:00:00-05:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I am learning about online credit card processing.
-<a href="/2014/03/18/cc-processors/">Part 1</a> introduced a number of basic definitions.
-<a href="/2014/03/21/cc-processors/">Part 2</a> discussed the difference between traditional gateways and the newer full stack gateways.</p>
-
-<p>In Part 3, I am exploring some of the new &ldquo;full stack&rdquo; gateways which are a bit
-more developer friendly and listing some key facts about each one.  All of
-these provide a merchant account, gateway, payment processor etc and handle all
-that complexity for you.</p>
-
-<ul>
-<li><a href="https://www.braintreepayments.com/">Braintree</a>
-
-<ul>
-<li>Tools for recurring billing</li>
-<li>Tools to build a marketplace</li>
-<li>Free for the first $50,000 in transactions</li>
-<li>2.9% + $0.30 per transaction</li>
-<li>$15 fee for each chargeback</li>
-<li>Client side encryption of cc numbers with Braintree.js</li>
-</ul>
-</li>
-<li><a href="https://stripe.com/">Stripe</a>
-
-<ul>
-<li>Tools for recurring billing</li>
-<li>2.9% + $0.30 per transaction</li>
-<li>$15 fee for each chargeback</li>
-<li>Client side encryption of cc numbers with Stripe.js</li>
-</ul>
-</li>
-<li><a href="https://www.balancedpayments.com/">Balanced</a>
-
-<ul>
-<li>Tools for recurring billing</li>
-<li>Tools to build a marketplace</li>
-<li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
-<li>Payouts to the business are $.25 each</li>
-<li>No fees for chargebacks?</li>
-<li>Client side encryption of cc numbers with Balanced.js</li>
-</ul>
-</li>
-<li><a href="https://www.wepay.com/">WePay</a>
-
-<ul>
-<li>Tools for recurring billing</li>
-<li>Tools to build a marketplace</li>
-<li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
-<li>No client side encryption of cc numbers?</li>
-</ul>
-</li>
-<li><a href="https://www.dwolla.com">Dwolla</a>
-
-<ul>
-<li>Tools for recurring billing</li>
-<li>Tools to build a marketplace</li>
-<li>Transactions under $10 are free, everything else is $0.25 per transaction</li>
-<li>Does not accept credit or debit cards only ACH (so no gateway/merchant account are required)</li>
-<li>Requires customers to create a Dwolla account</li>
-<li>No client side encryption of cc numbers?</li>
-</ul>
-</li>
-<li><a href="https://payments.amazon.com/home">Amazon FPS Payments</a>
-
-<ul>
-<li>Tools for recurring billing</li>
-<li>Tools to build a marketplace</li>
-<li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
-<li>2.9% + $0.30 per transaction, volume discounts</li>
-<li>Can keep the customer on your site and customize the form for free</li>
-<li>To contest a chargeback costs $10.</li>
-<li>Merchants are not liable for chargebacks for physical goods (not services)</li>
-<li>No client side encryption of cc numbers?</li>
-</ul>
-</li>
-<li><a href="https://www.paypal.com/">Paypal</a>
-
-<ul>
-<li>Turn your computer into a credit card terminal</li>
-<li>Swipe cards with a device that plugs into your phone or iPad.</li>
-<li>2.9% + $0.30 per transaction, volume discounts</li>
-<li>No monthly fee to send a customer to the Paypal site for payment</li>
-<li>$30 monthly fee if you want to keep the customer on your site or customize the
-form</li>
-<li>No client side encryption of cc numbers?</li>
-</ul>
-</li>
-<li><a href="http://square.com">Square</a> is in a similar space and positions themselves as being very simple.
-
-<ul>
-<li>Swipe cards with a device that plugs into your phone or iPad.</li>
-<li>No developer api &mdash; you must use their web marketplace to sell online</li>
-<li>2.75% per transaction</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Please let me know if I&rsquo;ve made any errors and I will correct them.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1244,7 +1148,11 @@ form</li>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/04/23/write-code-every-day/">An Experiment - Write Code Every Day</a>
+        <a href="/2014/04/23/reading-code/">Why Reading Code Is Good for You</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/20/write-code-every-day/">An Experiment - Write Code Every Day</a>
       </li>
     
       <li class="post">
@@ -1257,10 +1165,6 @@ form</li>
     
       <li class="post">
         <a href="/2014/04/11/read-plack-3/">Reading Code - PSGI Application Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/04/09/read-plack-2/">Reading Code - Plackup Architecture</a>
       </li>
     
   </ul>

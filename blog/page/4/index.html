@@ -9,7 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I can never remember how to know how much free memory I have. The Linux kernel claims most of the operating system&rsquo;s memory. That doesn&rsquo;t &hellip;">
+  <meta name="description" content="I have been in a rabbit hole for the last week. I started looking at
+Docker. Its a really interesting project that all the hosting providers seem to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -56,6 +57,180 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/11/13/docker/">Down a Rabbit Hole - Docker</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-11-13T00:00:00-06:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have been in a rabbit hole for the last week.  I started looking at
+<a href="http://www.docker.io/">Docker</a>.</p>
+
+<p>Its a really interesting project that all the hosting providers seem to be
+moving towards.  Its helpful at first to think of Docker as a really fast and
+small virtual machine.  You can put an operating system in a virtual machine,
+setup all the dependencies and permissions, and then configure and install your
+app.  Its encapsulates your web app and makes it easy to move around.
+Thats what docker does too except a docker container is an operating system
+primitive &ndash; an <a href="http://linuxcontainers.org/">LXC</a>.  Which means its much faster
+and smaller than a virtual machine and that makes it much easier to work with.</p>
+
+<p>Docker also has a builtin version control system.  You can install a base
+operating system like Ubuntu in your container and then commit that change.
+Then you can install some dependencies and commit that change.  This commit
+history also allows you to reuse different commits across different containers.</p>
+
+<p>Docker also has builtin deployment that allows you to push your containers to
+public (or private) repositories similar to CPAN or Ruby gems or pypi.</p>
+
+<p>But I said this was a rabbit hole.  Because when I started playing with Docker
+I realized its written in Go.  So I started learning <a href="http://golang.org/">Go</a>.
+More on that tomorrow.</p>
+
+<pre style="font: 4px/2px monospace; color: #333; background: transparent; border: 0px; border-radius: 0; box-shadow: 0 0 0 0;">
+
+
+
+
+
+                                                              '''''''''''';
+                                                              '''''''''''';
+                                                              ''::;;::;;:';
+                                                              ''::''::'':';
+                                                              ''::''::'':';
+                                                              ''::''::'':';
+                                                              ''::''::'':';
+                                                              ''::''::'':';
+                                                              ''::''::'':';
+                                                              ''::''::'':';
+                                         ''''''''''''''''''''''':::::::::';
+                                         ''''''''''''''''''''''''''''''''';                          ''
+                                         '':::::::::':::::::::;':::::::::';                         ''''.
+                                         '':;';:''::':'::''::';'::''::'':';                         '':'',
+                                         '':;';:''::':'::''::';'::''::'':';                        '':::''`
+                                         '':;';:''::':'::''::';'::''::'':';                        ''::::''
+                                         '':;';:''::':'::''::';'::''::'':';                        ';:::::''
+                                         '':;';:''::':'::''::';'::''::'':';                       ,'::::::''.
+                                         '':;';:''::':'::''::';'::''::'':';                       ;':::::::''
+                                         '':;';:''::':'::''::';'::''::'':';                       '':::::::;'
+                                         '':::::::::':::::::::;':::::::::';                       ''::::::::';
+                               ''''''''''''''''''''''''''''''''''''''''''''''''''''''             ''::::::::'' `,;'':.
+                               '':::::::::':::::::::';::::::::;':::::::::':::::::::''             ;'::::::::'''''''''''':
+                               '';:;';:'':':;'::''::';';:''::';'::''::'':':''::'':;''             `'::::::::''';::::::'''',
+                               '';:;';:'':':;'::''::';';:''::';'::''::'':':''::'':;''              '':::::::::::::::::::;''
+                               '';:;';:'':':;'::''::';';:''::';'::''::'':':''::'':;''              '':::::::::::::::::::;';
+                               '';:;';:'':':;'::''::';';:''::';'::''::'':':''::'':;''              .';::::::::::::::::::''
+                               '';:;';:'':':;'::''::';';:''::';'::''::'':':''::'':;''               '':::::::::::::::::''
+                               '';:;';:'':':;'::''::';';:''::';'::''::'':':''::'':;''               `'':::::::::::::::''.
+                               '';:;';:'':':;'::''::';';:''::';'::''::'':':''::'':;''             .'''::::::::::::::'''`
+                               '';:;';:'':':;'::;'::';';:''::';'::;'::';:':''::'':;''          .'''''::::::::::::'''''
+                      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''';:::::::''''''''''
+                      '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''';:::::::::::''''';.
+                      '':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::''
+                      '':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::''
+                      ''::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::''
+                      '':::::::::::::::::::::::::::::::'::::::::::::::::::::::::::::::::::::::::::::::::''         ;
+               ':     ''::::::::;;::::::::::::::::::::''':::::::::::::::::'':::::::::::::::::::::':::::''         ''
+              '''',   ''::::::;'''':::::::::::::::::'''''';:::::::::::::'''''';::::::::::::::::;'''';::''       '''''
+            '''''''''''';''''''''''''';::::::::;''''''''''''''::::::;'''''''''''''';::::::::'''''''''''';,,:'''''''''',
+        .'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''';
+                      '';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;''
+                      ,';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;''.
+                       '';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;''
+                       '';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;''
+                       '';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;''
+                        '';;;;;;;;;;;;;;;;;;;;;;;;`.`;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'':
+                        '';;;;;;;;;;;;;;;;;;;;;;;`''``;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'''
+                        .'';;;;;;;;;;;;;;;;;;;;;;`'''`;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'''
+                         '';;;;;;;;;;;;;;;;;;;;;;`'''`;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'''
+                         .'';;;;;;;;;;;;;;;;;;;;;;```;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'''
+                          '';;;;;;;;;;;;;;;;;''';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'''
+                           '''''''''''''''''''';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'''
+                           `''''''''''''';.````;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'';
+                            :';........`````````;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'''`
+                             ;''..........``````;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;'''
+                              ;''..............``;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;''':
+                               ;''................;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;''''
+                                .'':...............;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;''''`
+                                  '''...............;;;;;;;;;;;;;;;;;;;;;;;;;;;''''.
+                                   :'''..............;;;;;;;;;;;;;;;;;;;;;;;'''''`
+                                     ''''.............;;;;;;;;;;;;;;;;;;;''''''
+                                       ;'''',...........;;;;;;;;;;;;;'''''''
+                                         `'''''';:........;;;;'''''''''':
+                                             :''''''''''''''''''''';.
+                                                  `,:;;;;;;,.
+
+
+
+                          .`
+                         ''';                                             ''':
+                         ''''                                             ''''
+                         ''''                                             ''''
+                         ''''                                             ''''
+                         ''''                                             ''''
+                         ''''                                             ''''
+               ;'''''.   ''''         ;'''''.                '''''',      ''''     `':         ,''''''                 :'''
+             '''''''''': ''''       '''''''''''           `'''''''''':    ''''    :'''       ,''''''''''            .'''''':
+           :'''''''''''''''''     :'''''''''''''         ;''''''''''''    ''''   :''''      ''''''''''''';         '''''''':
+          ;''''''''''''''''''    ;'''''''''''''''       ''''''''''''''    ''''  :'''''     ''''''''''''''''       '''''''''
+         .'''''      ;'''''''   .'''''      ;'''''     :'''''      :',    '''' :'''''     ''''':      '''''.     ''''''
+         '''';         ''''''   '''';         '''',    '''':              '''':'''''     ,''''         .''''    .''''`
+        :''''           '''''  :''''           ''''   ;''''               '''''''''      ''''          ;''''    ''''`
+        ''''            ;''''  ''''            ;'''   ''''                ''''''''       ''';         ''''''    ''''
+        ''''             ''''  ''''             ''';  ''''                '''''''       ''''         ''''';    :'''
+        '''.             ''''  '''.             ''''  '''.                ''''''        ''''        '''''.     ''''
+        '''              ''''  '''              ''''  '''                 '''''         ''''      `'''''       ''''
+        '''.             ''''  '''.             ''''  '''.                '''''.        ''''     ,'''''        ''''
+        ''';             ''''  ''';             ''''  ''';                ''''''.       ''''    ;'''''         ''''
+        ''''            ,''',  ''''            ,''',  ''''                '''''''.      `''':  ''''''          ''''
+        ;''':           ''''   '''':           ''''   :''':               ''''''''`      '''' ''''';           ''''
+         ''''`         '''''    ''''.         '''''    ''''.              '''''''''`     ,'''''''',            ''''
+         :'''''       '''''     ;'''''       '''''     ;'''''       ;     '''' '''''`     '''''''`    :'       ''''
+          ''''''',,;''''''`      ''''''',,:''''''`      ''''''';,;''''    ''''  '''''`     ''''''';;'''''      ''''
+           ''''''''''''''.        ''''''''''''''`        '''''''''''''    ''''   '''''      '''''''''''''      ''''
+            ;'''''''''''           ;'''''''''''           ''''''''''''    ''''    ''''`      '''''''''''`      ''''
+              ;'''''''               ;'''''''               ''''''''`     .''`     '''         ;'''''',        `'':
+
+
+
+
+
+
+
+
+
+</pre>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -818,103 +993,6 @@ sparkline with another.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/19/how-to-resolve-circular-dependencies/">Use Carp::Always to Fix Circular Dependencies</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-01-19T00:00:00-06:00" pubdate data-updated="true">Jan 19<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Circular dependencies happen when your library requires a library which
-requires your library.  Here&rsquo;s an example.  Lets say you have 2 packages:</p>
-
-<p><strong>AlienPlanet.pm</strong></p>
-
-<pre><code>package AlienPlanet;
-use Moose;
-use Dinosaurs;          # &lt;--- Circular dependency
-sub has_dinosaurs {1}
-1;
-</code></pre>
-
-<p><strong>Dinosaurs.pm</strong></p>
-
-<pre><code>package Dinosaurs;
-use Moose;
-use AlienPlanet;        # &lt;--- Circular dependency
-sub has_rabies {1}
-1;
-</code></pre>
-
-<p>If you try to compile this, you get the following warning:</p>
-
-<pre><code>⚡ perl -c lib/AlienPlanet.pm 
-Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 5.
-lib/AlienPlanet.pm syntax OK
-</code></pre>
-
-<p>In this case its obvious where the problem is.</p>
-
-<p>But if the package you included, included 25 other libraries, which included
-other libraries, which included your original library &mdash; then its harder to
-figure out where the circle is.</p>
-
-<p>Happily I discovered a good solution. First, modify <strong>AlienPlanet.pm</strong> to look
-like this:</p>
-
-<pre><code>package AlienPlanet;
-sub has_dinosaurs {1}   &lt;-- swap
-use Dinosaurs;          &lt;-- swap
-1;
-</code></pre>
-
-<p>Next, try compiling your code again but this time with
-<a href="http://perladvent.org/2011/2011-12-04.html">Carp::Always</a>:</p>
-
-<pre><code>⚡ perl -MCarp::Always -c lib/AlienPlanet.pm                                                                                                            
-Subroutine has_dinosaurs redefined at lib/AlienPlanet.pm line 4.
-        require AlienPlanet.pm called at lib/Dinosaurs.pm line 4
-        Dinosaurs::BEGIN() called at lib/AlienPlanet.pm line 4
-        eval {...} called at lib/AlienPlanet.pm line 4
-        require Dinosaurs.pm called at lib/AlienPlanet.pm line 5
-        AlienPlanet::BEGIN() called at lib/AlienPlanet.pm line 4
-        eval {...} called at lib/AlienPlanet.pm line 4
-lib/AlienPlanet.pm syntax OK
-</code></pre>
-
-<p>Now you&rsquo;ve got a stack trace and its easy to see where your problem is.  All
-thats left is figuring out how to solve it. (Fast solution: use
-<a href="https://metacpan.org/module/Class::Load">Class::Load</a> in the Dinosaurs
-package.)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -953,7 +1031,11 @@ package.)</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2014/04/23/write-code-every-day/">An Experiment - Write Code Every Day</a>
+        <a href="/2014/04/23/reading-code/">Why Reading Code Is Good for You</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/20/write-code-every-day/">An Experiment - Write Code Every Day</a>
       </li>
     
       <li class="post">
@@ -966,10 +1048,6 @@ package.)</p>
     
       <li class="post">
         <a href="/2014/04/11/read-plack-3/">Reading Code - PSGI Application Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/04/09/read-plack-2/">Reading Code - Plackup Architecture</a>
       </li>
     
   </ul>

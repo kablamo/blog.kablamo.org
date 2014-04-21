@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Look around assertions in Perl regular expressions - KABLAMO</title>
+  <title>An experiment - Write code every day - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one
-letter at a time checking the match at each position. That &hellip;">
+  <meta name="description" content="If you missed John Resig&rsquo;s recent post about writing code everyday I highly recommend it. He is a busy guy with a full time job (at Khan &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ letter at a time checking the match at each position. That &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2014/03/31/regex">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/04/20/write-code-every-day">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -60,7 +59,7 @@ letter at a time checking the match at each position. That &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Look Around Assertions in Perl Regular Expressions</h1>
+      <h1 class="entry-title">An Experiment - Write Code Every Day</h1>
     
     
       <p class="meta">
@@ -77,74 +76,44 @@ letter at a time checking the match at each position. That &hellip;">
 
 
 
-<time datetime="2014-03-31T00:00:00-05:00" pubdate data-updated="true">Mar 31<span>st</span>, 2014</time>
+<time datetime="2014-04-20T00:00:00-05:00" pubdate data-updated="true">Apr 20<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one
-letter at a time checking the match at each position.  That position is called
-the <em>current match position</em>.</p>
+<div class="entry-content"><p>If you missed John Resig&rsquo;s recent post about <a href="http://ejohn.org/blog/write-code-every-day/">writing code everyday</a> I highly recommend it.</p>
 
-<p>Look around assertions allow you to match a specific pattern before or after
-the current match position without moving the match position.</p>
+<p>He is a busy guy with a full time job (at Khan Academy), a few open source side
+projects (the author of jQuery), a wife, and a few hobbies.  How to sustainably
+get stuff done on his open source side projects without his wife leaving him?
+He decided to start writing (non work) code for 30 minutes every day.  This by
+itself is not a revolutionary idea.  What blew my mind out of my nose and on to
+the table are the benefits he encountered:</p>
 
-<h1>Look ahead assertions</h1>
+<ul>
+<li><strong>Minimum viable code</strong> &ndash; No time for more than that.</li>
+<li><strong>Small but continuous progress</strong> &ndash; No anxiety about not getting stuff done.</li>
+<li><strong>Free time on the weekends</strong> &ndash; Instead of working all
+weekend to catch up from doing nothing during the week.</li>
+<li><strong>Lowered cost of context switching</strong> &ndash; Compared to resuming work on a side project just on the weekends.</li>
+<li><strong>Brain solves side project issues in the background</strong></li>
+</ul>
 
-<p>Look ahead assertions match the text after the current match position
-(without moving the match position).  They look like <code>(?=pattern)</code>.</p>
 
-<pre><code>my $job = "space cowboy";
-$job =~ /space (?=cow)/;    # matches
-$job =~ /space (?=cow)cow/; # also matches
-</code></pre>
+<p>Wow, I need to do this too.  So this is
+<a href="http://blog.kablamo.org/2014/03/24/experiments/">another</a>
+<a href="http://blog.kablamo.org/2014/01/01/no-dessert-forever/">experiment</a> and here
+are the rules.</p>
 
-<h1>Look behind assertions</h1>
+<ol>
+<li> I will write code for a minimum of 30 minutes each day.</li>
+<li> I must push working code every day.</li>
+<li> I will write for a minimum of 10 minutes each day.</li>
+<li> I must publish a blog post at least once a week.</li>
+</ol>
 
-<p>Look behind assertions match the text before the current match position
-(without moving the match position).  They look like <code>(?&lt;=pattern)</code>.</p>
-
-<pre><code>my $job = "space cowboy";
-$job =~ /(?&lt;=space) cowboy/;      # matches
-$job =~ /space(?&lt;=space) cowboy/; # also matches
-</code></pre>
-
-<h1>Positive and negative look ahead assertions</h1>
-
-<p><em>Positive</em> look ahead assertions are look ahead assertions which match when their
-subpattern matches. They look like <code>(?=pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /space (?=cowboy)/;   # matches
-</code></pre>
-
-<p><em>Negative</em> look ahead assertions are look ahead assertions which match when their
-subpattern fails. They look like <code>(?!pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /space (?!mooseboy)/;   # matches
-</code></pre>
-
-<h1>Positive and negative look behind assertions</h1>
-
-<p>Positive look behind assertions are look behind assertions which match when their
-subpattern matches. They look like <code>(?&lt;=pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /(?&lt;=space) cowboy/;   # matches
-</code></pre>
-
-<p>Negative look behind assertions are look behind assertions which match when
-their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
-
-<pre><code> my $job = "space cowboy";
- $job =~ /(?&lt;!earth) cowboy/;   # matches
-</code></pre>
-
-<p>For more details see <code>perldoc perlre</code>.  I also recommend the DuckDuckGo
-<a href="https://duckduckgo.com/?q=regex+cheat+sheet">regex cheat sheet</a>.</p>
 </div>
 
 
@@ -155,7 +124,7 @@ their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
 
 <span class="categories">
   
-    <a class='category' href='/categories/perl/'>perl</a>
+    <a class='category' href='/categories/experiment/'>experiment</a>, <a class='category' href='/categories/perl/'>perl</a>
   
 </span>
 
@@ -163,7 +132,7 @@ their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2014/03/31/regex/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2014/03/31/regex/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.kablamo.org/2014/04/20/write-code-every-day/" data-via="kablamo_" data-counturl="http://blog.kablamo.org/2014/04/20/write-code-every-day/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -177,10 +146,10 @@ their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
     </p>
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2014/03/28/ddg-vim/" title="Previous Post: Vim cheat sheet">&laquo; Vim cheat sheet</a>
+        <a class="basic-alignment left" href="/2014/04/19/codecube/" title="Previous Post: Codecube.io now supports Perl">&laquo; Codecube.io now supports Perl</a>
       
       
-        <a class="basic-alignment right" href="/2014/04/08/read-plack-1/" title="Next Post: Reading code - Plack">Reading code - Plack &raquo;</a>
+        <a class="basic-alignment right" href="/2014/04/23/reading-code/" title="Next Post: Why reading code is good for you">Why reading code is good for you &raquo;</a>
       
     </p>
   </footer>
@@ -258,8 +227,8 @@ their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2014/03/31/regex/';
-        var disqus_url = 'http://blog.kablamo.org/2014/03/31/regex/';
+        var disqus_identifier = 'http://blog.kablamo.org/2014/04/20/write-code-every-day/';
+        var disqus_url = 'http://blog.kablamo.org/2014/04/20/write-code-every-day/';
         var disqus_script = 'embed.js';
       
     (function () {
