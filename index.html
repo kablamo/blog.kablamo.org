@@ -9,8 +9,7 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="Codecube.io is a jsfiddle type service which runs Perl
-code (and other languages) and shows the results in your browser. The website is written in Go &hellip;">
+  <meta name="description" content="If you missed John Resig&rsquo;s recent post about writing code everyday I highly recommend it. He is a busy guy with a full time job (at Khan &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,6 +56,73 @@ code (and other languages) and shows the results in your browser. The website is
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/04/23/write-code-every-day/">An Experiment - Write Code Every Day</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-04-23T00:00:00-05:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you missed John Resig&rsquo;s recent post about <a href="http://ejohn.org/blog/write-code-every-day/">writing code everyday</a> I highly recommend it.</p>
+
+<p>He is a busy guy with a full time job (at Khan Academy), a few open source side
+projects (the author of jQuery), a wife, and a few hobbies.  How to sustainably
+get stuff done on his open source side projects without his wife leaving him?
+He decided to start writing (non work) code for 30 minutes every day.  This by
+itself is not a revolutionary idea.  What blew my mind out of my nose and on to
+the table are the benefits he encountered:</p>
+
+<ul>
+<li><strong>Minimum viable code</strong> &ndash; No time for more than that.</li>
+<li><strong>Small but continuous progress</strong> &ndash; No anxiety about not getting stuff done.</li>
+<li><strong>Free time on the weekends</strong> &ndash; Instead of working all
+weekend to catch up from doing nothing during the week.</li>
+<li><strong>Lowered cost of context switching</strong> &ndash; Compared to resuming work on a side project just on the weekends.</li>
+<li><strong>Brain solves side project issues in the background</strong></li>
+</ul>
+
+
+<p>Wow, I need to do this too.  So this is
+<a href="http://blog.kablamo.org/2014/03/24/experiments/">another</a>
+<a href="http://blog.kablamo.org/2014/01/01/no-dessert-forever/">experiment</a> and here
+are the rules.</p>
+
+<ol>
+<li> I will write code for a minimum of 30 minutes each day.</li>
+<li> I must push working code every day.</li>
+<li> I will write for a minimum of 10 minutes each day.</li>
+<li> I must publish a blog post at least once a week.</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1142,102 +1208,6 @@ form</li>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2014/03/21/cc-processors/">Introduction to Online Credit Card Processing - Part 2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2014-03-21T00:00:00-05:00" pubdate data-updated="true">Mar 21<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I am learning about online credit card processing.
-<a href="/2014/03/18/cc-processors/">Part 1</a> introduced a number of basic definitions.</p>
-
-<p>The number of online payments is going to grow.  Only <a href="http://www.huffingtonpost.com/2012/06/07/credit-card-payments-growth_n_1575417.html">6% of credit card transactions are currently done online</a>.
-With so much at stake, there are hundreds of payment gateways who provide a
-variety of services. But I have chosen to divide them into two categories.</p>
-
-<p>First there are <em>traditional gateways</em> who charge a monthly fee (in addition to
-a variety of other fees) and often you need to obtain a merchant account on
-your own which also has various fees associated with it.</p>
-
-<p>The second category contains newer <em>full stack gateways</em> who are more user
-friendly and provide a merchant account and a much simpler fee structure which
-is generally a percentage charge on a per transaction basis with no monthly
-fees.</p>
-
-<p>These &ldquo;full stack&rdquo; gateways are convenient and easy but they can cost more.
-They generally charge 2.9% + $0.30 per transaction.  Compare that to a
-more traditional gateway such as <a href="http://www.authorize.net/">Authorize.net</a> who
-charges $20 per month and $0.10 per transaction.  However you also have to
-factor in the cost of a merchant account.  And both the gateway and merchant&rsquo;s
-bank often charge a variety of fees which makes it difficult to assess the true
-cost.</p>
-
-<p>If you are doing a large number of transactions, saving small amounts of money
-is going to make a big difference.  If you are not then it may be cheaper to
-use a full stack processor and save yourself the dev work and accounting
-effort.</p>
-
-<p>One interesting company I would like to note is
-<a href="https://spreedly.com">Spreedly</a>.  Spreedly provides an api layer on top many
-other payment gateways so you can swap out gateways whenever you feel like it.
-Their service works with a large number of payment gateways &mdash; currently 60
-gateways in 73 countries.  They also give you the ability to deposit funds in
-different merchant accounts based on location or other business logic.  They do
-have a monthly fee structure and clearly you would only choose this solution if
-you are processing a large number of transactions.</p>
-
-<h1>Additional reading and resources</h1>
-
-<ul>
-<li><a href="http://www.nerdwallet.com/blog/credit-card-data/credit-card-transaction-volume-statistics/">Credit card and debit card transaction volume statistics</a></li>
-<li><a href="http://blog.zactownsend.com/credit-card-processing-as-a-commodity-business">Credit card processing as a commodity business</a> by Zac Townsend</li>
-<li><a href="http://gatewayindex.spreedly.com/">Compare gateways</a></li>
-<li><a href="http://www.cardpaymentoptions.com/credit-card-processors">Credit card processor reviews</a></li>
-<li><a href="http://www.jeffmould.com/2014/02/16/comparing-stripe-vs-braintree-vs-balanced-vs-dwolla/">Stripe vs Braintree vs Balanced vs Dwolla</a></li>
-</ul>
-
-
-<p>Also I found this series of videos was an excellent introduction to
-understanding payments at a lower level.  Be aware this is probably more than
-most web developers need/want to know.</p>
-
-<ol>
-<li> <a href="http://www.youtube.com/watch?v=fkUFizLjQo0">Names and nomenclature</a></li>
-<li> <a href="http://www.youtube.com/watch?v=WvSEDRkyg0Q">Mechanics of an electronic payment</a></li>
-<li> <a href="http://www.youtube.com/watch?v=tq316S9vW0s">Understanding interchange, Opening Visa &amp; Mastercards&#8217; kimono</a></li>
-<li> <a href="http://www.youtube.com/watch?v=Ru4Dy-5IJEQ">Multicurrency in electronic payments</a></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1274,6 +1244,10 @@ most web developers need/want to know.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/04/23/write-code-every-day/">An Experiment - Write Code Every Day</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/19/codecube/">Codecube.io Now Supports Perl</a>
       </li>
     
@@ -1287,10 +1261,6 @@ most web developers need/want to know.</p>
     
       <li class="post">
         <a href="/2014/04/09/read-plack-2/">Reading Code - Plackup Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/04/08/read-plack-1/">Reading Code - Plack</a>
       </li>
     
   </ul>

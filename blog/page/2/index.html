@@ -9,7 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I always use strict in all my code. But what does that actually mean? Enables strict refs Strict refs generates runtime errors when you use symbolic &hellip;">
+  <meta name="description" content="I am learning about online credit card processing.
+Part 1 introduced a number of basic definitions. The number of online payments is going to grow. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -56,6 +57,102 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/21/cc-processors/">Introduction to Online Credit Card Processing - Part 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-03-21T00:00:00-05:00" pubdate data-updated="true">Mar 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am learning about online credit card processing.
+<a href="/2014/03/18/cc-processors/">Part 1</a> introduced a number of basic definitions.</p>
+
+<p>The number of online payments is going to grow.  Only <a href="http://www.huffingtonpost.com/2012/06/07/credit-card-payments-growth_n_1575417.html">6% of credit card transactions are currently done online</a>.
+With so much at stake, there are hundreds of payment gateways who provide a
+variety of services. But I have chosen to divide them into two categories.</p>
+
+<p>First there are <em>traditional gateways</em> who charge a monthly fee (in addition to
+a variety of other fees) and often you need to obtain a merchant account on
+your own which also has various fees associated with it.</p>
+
+<p>The second category contains newer <em>full stack gateways</em> who are more user
+friendly and provide a merchant account and a much simpler fee structure which
+is generally a percentage charge on a per transaction basis with no monthly
+fees.</p>
+
+<p>These &ldquo;full stack&rdquo; gateways are convenient and easy but they can cost more.
+They generally charge 2.9% + $0.30 per transaction.  Compare that to a
+more traditional gateway such as <a href="http://www.authorize.net/">Authorize.net</a> who
+charges $20 per month and $0.10 per transaction.  However you also have to
+factor in the cost of a merchant account.  And both the gateway and merchant&rsquo;s
+bank often charge a variety of fees which makes it difficult to assess the true
+cost.</p>
+
+<p>If you are doing a large number of transactions, saving small amounts of money
+is going to make a big difference.  If you are not then it may be cheaper to
+use a full stack processor and save yourself the dev work and accounting
+effort.</p>
+
+<p>One interesting company I would like to note is
+<a href="https://spreedly.com">Spreedly</a>.  Spreedly provides an api layer on top many
+other payment gateways so you can swap out gateways whenever you feel like it.
+Their service works with a large number of payment gateways &mdash; currently 60
+gateways in 73 countries.  They also give you the ability to deposit funds in
+different merchant accounts based on location or other business logic.  They do
+have a monthly fee structure and clearly you would only choose this solution if
+you are processing a large number of transactions.</p>
+
+<h1>Additional reading and resources</h1>
+
+<ul>
+<li><a href="http://www.nerdwallet.com/blog/credit-card-data/credit-card-transaction-volume-statistics/">Credit card and debit card transaction volume statistics</a></li>
+<li><a href="http://blog.zactownsend.com/credit-card-processing-as-a-commodity-business">Credit card processing as a commodity business</a> by Zac Townsend</li>
+<li><a href="http://gatewayindex.spreedly.com/">Compare gateways</a></li>
+<li><a href="http://www.cardpaymentoptions.com/credit-card-processors">Credit card processor reviews</a></li>
+<li><a href="http://www.jeffmould.com/2014/02/16/comparing-stripe-vs-braintree-vs-balanced-vs-dwolla/">Stripe vs Braintree vs Balanced vs Dwolla</a></li>
+</ul>
+
+
+<p>Also I found this series of videos was an excellent introduction to
+understanding payments at a lower level.  Be aware this is probably more than
+most web developers need/want to know.</p>
+
+<ol>
+<li> <a href="http://www.youtube.com/watch?v=fkUFizLjQo0">Names and nomenclature</a></li>
+<li> <a href="http://www.youtube.com/watch?v=WvSEDRkyg0Q">Mechanics of an electronic payment</a></li>
+<li> <a href="http://www.youtube.com/watch?v=tq316S9vW0s">Understanding interchange, Opening Visa &amp; Mastercards&#8217; kimono</a></li>
+<li> <a href="http://www.youtube.com/watch?v=Ru4Dy-5IJEQ">Multicurrency in electronic payments</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1005,83 +1102,6 @@ characters or more.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/12/15/dalios-principles/">Ray Dalio&#8217;s &#8220;Principles&#8221;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-12-15T00:00:00-06:00" pubdate data-updated="true">Dec 15<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I have been reading Ray Dalio&rsquo;s <em>Principles</em>.  Ray Dalio is the CEO of
-Bridgewater which is a big famous successful hedge fund he started in the 70&rsquo;s.
-<em>Principles</em>, is a 123 page philosophical text he published in 2011 about how
-to live your life and how to manage people and organizations.  Its extremely
-good.  I&rsquo;m not done yet but I have a feeling it is something I&rsquo;m going to be
-rereading many times over the next few years.  You can download it from the
-<a href="http://www.bwater.com/Uploads/FileManager/Principles/Bridgewater-Associates-Ray-Dalio-Principles.pdf">Bridewater website</a>.</p>
-
-<p>Here is a sample:</p>
-
-<blockquote><p>Most people react to pain badly. They have “fight or flight” reactions to it:
-they either strike out at whatever brought them the pain or they try to run
-away from it. As a result, they don’t learn to find ways around their barriers,
-so they encounter them over and over again and make little or no progress
-toward what they want&hellip;</p>
-
-<p>Believe it or not, you are lucky to feel the pain if you approach it correctly,
-because it will signal that you need to find solutions and to progress. Since
-the only way you are going to find solutions to painful problems is by thinking
-deeply about them &ndash; i.e., reflecting &ndash; if you can develop a knee-jerk reaction
-to pain that is to reflect rather than to fight or flee, it will lead to your
-rapid learning/evolving.</p></blockquote>
-
-<p>And from that he derives this equation:</p>
-
-<blockquote><p>Pain + Reflection = Progress</p></blockquote>
-
-<p>So I&rsquo;ve been trying to do this.  Whenever I experience conflict, stress, anger,
-or pain, I will try to make that into an opportunity to evolve and to become
-stronger.</p>
-
-<p>Quite a lot of <em>Principles</em> feels like common sense.  But at the same time I
-can see that some of that common sense stuff is stuff I haven&rsquo;t been doing or
-have been doing half way or just have not thought through as much as Dalio has.
-I think that having this set of considered formalized principles to refer
-to will help me to get what I want from life.</p>
-
-<p>By the way, I discovered <em>Principles</em> via
-<a href="http://sebastianmarshall.com/">Sebastian Marshall</a>.  Sebastion is an American
-who has been living and working in Japan for about 10 years.  His writing is
-always interesting and is a great source of new ideas for me.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1120,6 +1140,10 @@ always interesting and is a great source of new ideas for me.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/04/23/write-code-every-day/">An Experiment - Write Code Every Day</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/19/codecube/">Codecube.io Now Supports Perl</a>
       </li>
     
@@ -1133,10 +1157,6 @@ always interesting and is a great source of new ideas for me.</p>
     
       <li class="post">
         <a href="/2014/04/09/read-plack-2/">Reading Code - Plackup Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/04/08/read-plack-1/">Reading Code - Plack</a>
       </li>
     
   </ul>

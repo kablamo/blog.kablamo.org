@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-04-19T19:55:40-05:00</updated>
+  <updated>2014-04-20T21:06:03-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[An experiment - Write code every day]]></title>
+    <link href="http://blog.kablamo.org/2014/04/23/write-code-every-day/"/>
+    <updated>2014-04-23T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/04/23/write-code-every-day</id>
+    <content type="html"><![CDATA[<p>If you missed John Resig&rsquo;s recent post about <a href="http://ejohn.org/blog/write-code-every-day/">writing code everyday</a> I highly recommend it.</p>
+
+<p>He is a busy guy with a full time job (at Khan Academy), a few open source side
+projects (the author of jQuery), a wife, and a few hobbies.  How to sustainably
+get stuff done on his open source side projects without his wife leaving him?
+He decided to start writing (non work) code for 30 minutes every day.  This by
+itself is not a revolutionary idea.  What blew my mind out of my nose and on to
+the table are the benefits he encountered:</p>
+
+<ul>
+<li><strong>Minimum viable code</strong> &ndash; No time for more than that.</li>
+<li><strong>Small but continuous progress</strong> &ndash; No anxiety about not getting stuff done.</li>
+<li><strong>Free time on the weekends</strong> &ndash; Instead of working all
+weekend to catch up from doing nothing during the week.</li>
+<li><strong>Lowered cost of context switching</strong> &ndash; Compared to resuming work on a side project just on the weekends.</li>
+<li><strong>Brain solves side project issues in the background</strong></li>
+</ul>
+
+
+<p>Wow, I need to do this too.  So this is
+<a href="http://blog.kablamo.org/2014/03/24/experiments/">another</a>
+<a href="http://blog.kablamo.org/2014/01/01/no-dessert-forever/">experiment</a> and here
+are the rules.</p>
+
+<ol>
+<li> I will write code for a minimum of 30 minutes each day.</li>
+<li> I must push working code every day.</li>
+<li> I will write for a minimum of 10 minutes each day.</li>
+<li> I must publish a blog post at least once a week.</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Codecube.io now supports Perl]]></title>
@@ -1606,55 +1645,6 @@ characters or more.</p>
 <li><a href="http://security.stackexchange.com/questions/3272/password-hashing-add-salt-pepper-or-is-salt-enough">security.stackexchange.com</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ray Dalio's "Principles"]]></title>
-    <link href="http://blog.kablamo.org/2013/12/15/dalios-principles/"/>
-    <updated>2013-12-15T00:00:00-06:00</updated>
-    <id>http://blog.kablamo.org/2013/12/15/dalios-principles</id>
-    <content type="html"><![CDATA[<p>I have been reading Ray Dalio&rsquo;s <em>Principles</em>.  Ray Dalio is the CEO of
-Bridgewater which is a big famous successful hedge fund he started in the 70&rsquo;s.
-<em>Principles</em>, is a 123 page philosophical text he published in 2011 about how
-to live your life and how to manage people and organizations.  Its extremely
-good.  I&rsquo;m not done yet but I have a feeling it is something I&rsquo;m going to be
-rereading many times over the next few years.  You can download it from the
-<a href="http://www.bwater.com/Uploads/FileManager/Principles/Bridgewater-Associates-Ray-Dalio-Principles.pdf">Bridewater website</a>.</p>
-
-<p>Here is a sample:</p>
-
-<blockquote><p>Most people react to pain badly. They have “fight or flight” reactions to it:
-they either strike out at whatever brought them the pain or they try to run
-away from it. As a result, they don’t learn to find ways around their barriers,
-so they encounter them over and over again and make little or no progress
-toward what they want&hellip;</p>
-
-<p>Believe it or not, you are lucky to feel the pain if you approach it correctly,
-because it will signal that you need to find solutions and to progress. Since
-the only way you are going to find solutions to painful problems is by thinking
-deeply about them &ndash; i.e., reflecting &ndash; if you can develop a knee-jerk reaction
-to pain that is to reflect rather than to fight or flee, it will lead to your
-rapid learning/evolving.</p></blockquote>
-
-<p>And from that he derives this equation:</p>
-
-<blockquote><p>Pain + Reflection = Progress</p></blockquote>
-
-<p>So I&rsquo;ve been trying to do this.  Whenever I experience conflict, stress, anger,
-or pain, I will try to make that into an opportunity to evolve and to become
-stronger.</p>
-
-<p>Quite a lot of <em>Principles</em> feels like common sense.  But at the same time I
-can see that some of that common sense stuff is stuff I haven&rsquo;t been doing or
-have been doing half way or just have not thought through as much as Dalio has.
-I think that having this set of considered formalized principles to refer
-to will help me to get what I want from life.</p>
-
-<p>By the way, I discovered <em>Principles</em> via
-<a href="http://sebastianmarshall.com/">Sebastian Marshall</a>.  Sebastion is an American
-who has been living and working in Japan for about 10 years.  His writing is
-always interesting and is a great source of new ideas for me.</p>
 ]]></content>
   </entry>
   

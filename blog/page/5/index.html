@@ -9,9 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I gave my first YAPC::EU
-presentation this year in Frankfurt after doing a trial run at London.pm. I
-received some good questions and comments and a &hellip;">
+  <meta name="description" content="2 bajillion times a day I want to print a hashref and see whats inside.
+But every time I want to do that I have to type: use Data::Dumper::Concise; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -58,6 +57,78 @@ received some good questions and comments and a &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/05/data-dumper-concise/">Devel::Dwarn Helps Me Type Less</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2012-09-05T00:00:00-05:00" pubdate data-updated="true">Sep 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>2 bajillion times a day I want to print a hashref and see whats inside.
+But every time I want to do that I have to type:</p>
+
+<pre><code>use Data::Dumper::Concise;
+print Dumper $hashref;
+</code></pre>
+
+<p>First of all, thats too much typing.  And second of all I keep forgetting to
+delete my print statements when I check in.</p>
+
+<p>Happily I recently discovered
+<a href="https://metacpan.org/module/Devel::Dwarn">Devel::Dwarn</a> on CPAN.  It is
+(basically) an alias to
+<a href="https://metacpan.org/module/Data::Dumper::Concise">Data::Dumper::Concise</a>.</p>
+
+<p>The name is shorter which means its slightly less typing so I am already
+winning.  But thats not the best part.  Lets see how to use it.</p>
+
+<p>On the command line I do this:</p>
+
+<pre><code>perl -MDevel::Dwarn codeIWantToDebug.pl
+</code></pre>
+
+<p>And then in my code I do this:</p>
+
+<pre><code>print ::Dwarn $hashref;
+</code></pre>
+
+<p>There are 2 levels of good here:</p>
+
+<ol>
+<li> Less typing.</li>
+<li> When I run my code without &lsquo;perl -M&rsquo; I get compile time errors in all
+ the places I forgot to remove <code>print ::Dwarn $hashref</code>.</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -348,6 +419,10 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/04/23/write-code-every-day/">An Experiment - Write Code Every Day</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/19/codecube/">Codecube.io Now Supports Perl</a>
       </li>
     
@@ -361,10 +436,6 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
     
       <li class="post">
         <a href="/2014/04/09/read-plack-2/">Reading Code - Plackup Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/04/08/read-plack-1/">Reading Code - Plack</a>
       </li>
     
   </ul>

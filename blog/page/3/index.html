@@ -9,8 +9,8 @@
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="Don&rsquo;t be afraid to delete files from your git repository. You can get restore
-them. You can even search for a string in a deleted file. Here is &hellip;">
+  <meta name="description" content="I have been reading Ray Dalio&rsquo;s Principles. Ray Dalio is the CEO of
+Bridgewater which is a big famous successful hedge fund he started in the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,6 +57,83 @@ them. You can even search for a string in a deleted file. Here is &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/12/15/dalios-principles/">Ray Dalio&#8217;s &#8220;Principles&#8221;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-12-15T00:00:00-06:00" pubdate data-updated="true">Dec 15<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have been reading Ray Dalio&rsquo;s <em>Principles</em>.  Ray Dalio is the CEO of
+Bridgewater which is a big famous successful hedge fund he started in the 70&rsquo;s.
+<em>Principles</em>, is a 123 page philosophical text he published in 2011 about how
+to live your life and how to manage people and organizations.  Its extremely
+good.  I&rsquo;m not done yet but I have a feeling it is something I&rsquo;m going to be
+rereading many times over the next few years.  You can download it from the
+<a href="http://www.bwater.com/Uploads/FileManager/Principles/Bridgewater-Associates-Ray-Dalio-Principles.pdf">Bridewater website</a>.</p>
+
+<p>Here is a sample:</p>
+
+<blockquote><p>Most people react to pain badly. They have “fight or flight” reactions to it:
+they either strike out at whatever brought them the pain or they try to run
+away from it. As a result, they don’t learn to find ways around their barriers,
+so they encounter them over and over again and make little or no progress
+toward what they want&hellip;</p>
+
+<p>Believe it or not, you are lucky to feel the pain if you approach it correctly,
+because it will signal that you need to find solutions and to progress. Since
+the only way you are going to find solutions to painful problems is by thinking
+deeply about them &ndash; i.e., reflecting &ndash; if you can develop a knee-jerk reaction
+to pain that is to reflect rather than to fight or flee, it will lead to your
+rapid learning/evolving.</p></blockquote>
+
+<p>And from that he derives this equation:</p>
+
+<blockquote><p>Pain + Reflection = Progress</p></blockquote>
+
+<p>So I&rsquo;ve been trying to do this.  Whenever I experience conflict, stress, anger,
+or pain, I will try to make that into an opportunity to evolve and to become
+stronger.</p>
+
+<p>Quite a lot of <em>Principles</em> feels like common sense.  But at the same time I
+can see that some of that common sense stuff is stuff I haven&rsquo;t been doing or
+have been doing half way or just have not thought through as much as Dalio has.
+I think that having this set of considered formalized principles to refer
+to will help me to get what I want from life.</p>
+
+<p>By the way, I discovered <em>Principles</em> via
+<a href="http://sebastianmarshall.com/">Sebastian Marshall</a>.  Sebastion is an American
+who has been living and working in Japan for about 10 years.  His writing is
+always interesting and is a great source of new ideas for me.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1168,88 +1245,6 @@ More on that tomorrow.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/11/12/linux_ate_my_ram/">My Contribution to the Linux Ate My RAM Problem</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2013-11-12T00:00:00-06:00" pubdate data-updated="true">Nov 12<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I can never remember how to know how much free memory I have.</p>
-
-<p>The Linux kernel claims most of the operating system&rsquo;s memory.  That doesn&rsquo;t
-mean the operating system is out of memory.  It means the kernel has claimed it
-and is managing it.  The problem is that the Linux kernel defines &lsquo;free&rsquo; memory
-differently than any reasonable user.  There are excellent shiny reasons for
-that, but as a user I don&rsquo;t really care.</p>
-
-<pre><code>~ ⚡ free -m 
-            total       used       free     shared    buffers     cached
-Mem:          3822       2066       1755          0        147       1125
--/+ buffers/cache:        793       3029
-Swap:         3394          0       3394
-</code></pre>
-
-<p>Experienced users and sysadmins will know from this means my system currently
-has 3822 MB of total memory and 3029 MB of free memory.  Errr.  What?  See
-<a href="http://www.linuxatemyram.com">linuxatemyram.com</a> for a more detailed
-explanation.</p>
-
-<p>I think the world deserves something easier to deal with.  So I wrote &lsquo;mem&rsquo;.
-Use it like this:</p>
-
-<pre><code>~ ⚡ mem
-   927 MB used (24%)
-  3823 MB total
-</code></pre>
-
-<p>Its a bash function.  I put the following in my
-<a href="https://github.com/kablamo/dotfiles/blob/master/links/.bash/aliases.sh">.bashrc</a>:</p>
-
-<pre><code>mem() {
-    memfree=$( grep '^MemFree:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
-    buffers=$( grep '^Buffers:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
-    cached=$(  grep '^Cached:'  /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
-    free=$( echo $memfree+$buffers+$cached | bc -l )
-
-    total=$( grep '^MemTotal:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf "%0.0f", mem }' )
-    used=$( echo $total-$free | bc -l )
-    pct=$( echo 100*$used/$total | bc -l )
-
-    printf "%5.f MB used (%.0f%%)\n%5.f MB total\n" $used $pct $total
-}
-</code></pre>
-
-<p>See also &lsquo;htop&rsquo; (sudo apt-get install htop).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1288,6 +1283,10 @@ Use it like this:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/04/23/write-code-every-day/">An Experiment - Write Code Every Day</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/19/codecube/">Codecube.io Now Supports Perl</a>
       </li>
     
@@ -1301,10 +1300,6 @@ Use it like this:</p>
     
       <li class="post">
         <a href="/2014/04/09/read-plack-2/">Reading Code - Plackup Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/04/08/read-plack-1/">Reading Code - Plack</a>
       </li>
     
   </ul>
