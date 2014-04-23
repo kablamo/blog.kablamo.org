@@ -4,7 +4,7 @@
   <title><![CDATA[Category: experiment | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/experiment/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-04-20T21:07:48-05:00</updated>
+  <updated>2014-04-23T09:00:24-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -14,11 +14,26 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Why reading code is good for you]]></title>
+    <title type="html"><![CDATA[Why reading code is good for me]]></title>
     <link href="http://blog.kablamo.org/2014/04/23/reading-code/"/>
     <updated>2014-04-23T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2014/04/23/reading-code</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<ul>
+<li><strong>So I can start kicking butt faster</strong> &ndash; When I start a new job or a new
+contract. Or when I hack on a new feature.  Or every day of my life as a
+programmer that involves legacy code.  Yeah pretty much all the time.</li>
+<li><strong>So I can learn new tricks</strong> &ndash; Healthy languages evolve.  Idioms and slang
+are tools for more efficiently expressing ideas.  I want to be on top of
+that.  Also its best way to peak inside the mind of a talented developer and
+steal and copy their skills.</li>
+<li><strong>So I can work better with others</strong> &ndash; I understand their idioms because I have
+seen them before.  And I can probably articulate why their idioms are awesome
+or feeble.</li>
+</ul>
+
+
+<p>I must remember that attitude matters.  If I think of reading code as a painful
+chore it will be.  But if I look for opportunity I find it.</p>
 ]]></content>
   </entry>
   
