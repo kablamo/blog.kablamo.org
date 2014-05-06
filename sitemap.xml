@@ -2,197 +2,197 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://blog.kablamo.org/2012/04/29/new-on-cpan-log-json/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2012/05/10/new-on-cpan-moosex-cachingproxy/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2012/05/17/test-www-selenium-more/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.kablamo.org/2012/08/26/slides-from-my-selenium-talk-at-yapc-eu-2012/
         </loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2012/09/05/data-dumper-concise/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/01/19/how-to-resolve-circular-dependencies/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/01/27/git-spark-revisited/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/01/29/whats-in-your-perl5lib/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/02/02/git-ribbon/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/02/12/cpan-release-git-ribbon-git-spark/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/02/28/chinese-flashcards/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/03/17/git-vspark/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/11/12/linux_ate_my_ram/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/11/13/docker/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/11/13/go/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/11/19/learning-ruby/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/11/22/rex/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/11/24/monit/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/11/25/plenv/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/11/26/tmux-status-updates/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/11/27/tmux-reloaded/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/12/08/git-restore/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/12/15/dalios-principles/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2013/12/18/authen-passphrase/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/01/01/no-dessert-forever/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/01/01/readline-cheat-sheet/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/02/28/duckduckgo/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/03/14/interview-questions/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/03/16/disagree-interview/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/03/17/our-my-local/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/03/18/cc-processors/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/03/19/use-strict/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/03/21/cc-processors/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/03/22/cc-processors/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/03/24/experiments/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/03/28/ddg-vim/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/03/31/regex/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/04/08/read-plack-1/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/04/09/read-plack-2/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/04/11/read-plack-3/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/04/12/read-plack-4/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/04/19/codecube/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/04/20/write-code-every-day/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/2014/04/23/reading-code/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/</loc>
-        <lastmod>2014-04-26T22:00:00-05:00</lastmod>
+        <lastmod>2014-05-04T10:23:39-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/blog/archives/</loc>
-        <lastmod>2014-04-23T16:41:28-05:00</lastmod>
+        <lastmod>2014-05-03T21:18:30-05:00</lastmod>
     </url>
     <url>
         <loc>http://blog.kablamo.org/robots.txt</loc>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: duckduckgo | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/duckduckgo/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-05-03T17:40:12-05:00</updated>
+  <updated>2014-05-05T22:01:44-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -22,7 +22,7 @@
 for <a href="https://duckduckgo.com/?q=vim+cheat+sheet">vim cheat sheet</a> or
 <a href="https://duckduckgo.com/?q=vim+help">vim help</a> you will get a result like this:</p>
 
-<p><img src="/images/for-posts/2014-03-28-ddg-vim.png" width="700" height="424"></p>
+<p>{%img /images/for-posts/2014-03-28-ddg-vim.png 700 424 %}</p>
 
 <p>The data is from rtorruellas&rsquo;s excellent <a href="http://rtorruellas.com/vim-cheat-sheet/">vim cheat sheet</a>
 (also available on <a href="https://github.com/rtorr/vim-cheat-sheet">github</a>) which has a responsive
@@ -39,8 +39,8 @@ mobile friendly layout and is also available in Japanese.</p>
 results page.  I made one for discovering international calling codes &mdash; or
 dialing codes if you prefer.</p>
 
-<p><img src="/images/for-posts/2014-02-28-singapore.png" width="700" height="424">
-<img src="/images/for-posts/2014-02-28-down-under.png" width="700" height="424"></p>
+<p>{%img /images/for-posts/2014-02-28-singapore.png 700 424 %}
+{%img /images/for-posts/2014-02-28-down-under.png 700 424 %}</p>
 
 <p>If you want to hack on DuckDuckGo and add your own instant answer its pretty
 simple to <a href="http://duckduckhack.com">get started</a>.  You can use Vagrant and
@@ -106,7 +106,7 @@ handle remainder =&gt; sub { uc ($_) };
 <a href="http://0:5000/?q=capitalize+aliens+smell+better+than+dinosaurs">http://0:5000/?q=capitalize+aliens+smell+better+than+dinosaurs</a> and you should
 see something like this:</p>
 
-<p><img src="/images/for-posts/2014-02-28-capitalize.png" width="700" height="424"></p>
+<p>{%img /images/for-posts/2014-02-28-capitalize.png 700 424 %}</p>
 ]]></content>
   </entry>
   

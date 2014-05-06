@@ -4,7 +4,7 @@
   <title><![CDATA[Category: experiments | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/experiments/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-05-03T17:40:12-05:00</updated>
+  <updated>2014-05-05T22:01:44-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -14,7 +14,70 @@
 
   
   <entry>
-    <title type="html"><![CDATA[An experiment - living with less than 200 things]]></title>
+    <title type="html"><![CDATA[Why reading code is good for me]]></title>
+    <link href="http://blog.kablamo.org/2014/04/23/reading-code/"/>
+    <updated>2014-04-23T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/04/23/reading-code</id>
+    <content type="html"><![CDATA[<ul>
+<li><strong>So I can start kicking butt faster</strong> &ndash; When I start a new job or a new
+contract. Or when I hack on a new feature.  Or every day of my life as a
+programmer that involves legacy code.  Yeah pretty much all the time.</li>
+<li><strong>So I can learn new tricks</strong> &ndash; Healthy languages evolve.  Idioms and slang
+are tools for more efficiently expressing ideas.  I want to be on top of
+that.  Also its best way to peak inside the mind of a talented developer and
+steal and copy their skills.</li>
+<li><strong>So I can work better with others</strong> &ndash; I understand their idioms because I have
+seen them before.  And I can probably articulate why their idioms are awesome
+or feeble.</li>
+</ul>
+
+
+<p>I must remember that attitude matters.  If I think of reading code as a painful
+chore it will be.  But if I look for opportunity I find it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[An experiment - Write code every day]]></title>
+    <link href="http://blog.kablamo.org/2014/04/20/write-code-every-day/"/>
+    <updated>2014-04-20T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/04/20/write-code-every-day</id>
+    <content type="html"><![CDATA[<p>If you missed John Resig&rsquo;s recent post about <a href="http://ejohn.org/blog/write-code-every-day/">writing code everyday</a> I highly recommend it.</p>
+
+<p>He is a busy guy with a full time job (at Khan Academy), a few open source side
+projects (the author of jQuery), a wife, and a few hobbies.  How to sustainably
+get stuff done on his open source side projects without his wife leaving him?
+He decided to start writing (non work) code for 30 minutes every day.  This by
+itself is not a revolutionary idea.  What blew my mind out of my nose and on to
+the table are the benefits he encountered:</p>
+
+<ul>
+<li><strong>Minimum viable code</strong> &ndash; No time for more than that.</li>
+<li><strong>Small but continuous progress</strong> &ndash; No anxiety about not getting stuff done.</li>
+<li><strong>Free time on the weekends</strong> &ndash; Instead of working all
+weekend to catch up from doing nothing during the week.</li>
+<li><strong>Lowered cost of context switching</strong> &ndash; Compared to resuming work on a side project just on the weekends.</li>
+<li><strong>Brain solves side project issues in the background</strong></li>
+</ul>
+
+
+<p>Wow, I need to do this too.  So this is
+<a href="http://blog.kablamo.org/2014/03/24/experiments/">another</a>
+<a href="http://blog.kablamo.org/2014/01/01/no-dessert-forever/">experiment</a> and here
+are the rules.</p>
+
+<ol>
+<li> I will write code for a minimum of 30 minutes each day.</li>
+<li> I must push working code every day.</li>
+<li> I will write for a minimum of 10 minutes each day.</li>
+<li> I must publish a blog post at least once a week.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[An experiment - Living with less than 200 things]]></title>
     <link href="http://blog.kablamo.org/2014/03/24/experiments/"/>
     <updated>2014-03-24T00:00:00-05:00</updated>
     <id>http://blog.kablamo.org/2014/03/24/experiments</id>
