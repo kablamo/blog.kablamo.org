@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-05-08T21:53:27-05:00</updated>
+  <updated>2014-05-12T09:02:57-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -35,8 +35,9 @@
 </code></pre>
 
 <p>But typing extra characters is not fun.  Happily
-<a href="http://tokuhirom.github.io/">@tokuhirom</a> also created a prove plugin
-which allows me to do this:</p>
+<a href="http://tokuhirom.github.io/">@tokuhirom</a> also created a prove
+<a href="https://metacpan.org/pod/App::Prove::Plugin::retty">plugin</a> (which is included
+with the Test::Pretty module) which allows me to do this:</p>
 
 <pre><code>prove -Pretty -vlr t
 </code></pre>
