@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>New on CPAN - Log::JSON - KABLAMO</title>
+  <title>Category: readingcode - KABLAMO</title>
   <meta name="author" content="Eric Johnson">
 
   
-  <meta name="description" content="I released Log::JSON v0.001 to CPAN today. Its a very simple JSON logger. The advantage of a JSON logger is that a human can open a mysterious new &hellip;">
+  <meta name="description" content="Category: readingcode">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.kablamo.org/2012/04/29/new-on-cpan-log-json">
+  <link rel="canonical" href="http://blog.kablamo.orgcategories/readingcode">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
@@ -56,92 +56,50 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">New on CPAN - Log::JSON</h1>
-    
-    
-      <p class="date">
-
-
-
-
-
-
-
-
-  
-
-
-
-<time datetime="2012-04-29T00:00:00-05:00" pubdate data-updated="true">Apr 29<span>th</span>, 2012</time></p>
-      <p class="categories">
-
-<span class="categories">
-  tags:
-  
-    <a class='category' href='/categories/perl/'>perl</a>
-  
-</span>
-
-</p>
-      <p class="meta">
-        
-      </p>
+    <h1 class="entry-title">Category: Readingcode</h1>
     
   </header>
+  
+  
+<a href="/atom.xml" rel="subscribe-rss" title="subscribe to readingcode posts via RSS">Subscribe to all posts via RSS</a><br>
+<a href="atom.xml" rel="subscribe-rss" title="subscribe to readingcode posts via RSS">Subscribe to readingcode posts via RSS</a>
 
 
-<div class="entry-content"><p>I released Log::JSON v0.001 to CPAN today.  Its a very simple JSON logger.</p>
+   <div id="blog-archives">
+   
+   
+   
+   
+     
+     <div class="year">2014</div>
+   
+   
+     
+     <div class="month">May</div>
+   
+   <article>
+     <time datetime="2014-05-26T00:00:00-05:00" pubdate><span class='day'>26</span></time>
+<h1><a href="/2014/05/26/perl-camel-snake-kebab/">Reading code - Camel-Snake-Kebab</a></h1>
 
-<p>The advantage of a JSON logger is that a human can open a mysterious new log
-file and quickly decipher the content because each piece of information is
-labeled.  Using JSON also means that parsing the log file and reviving the data
-structures is trivial.</p>
+   </article>
+   
+   
+   
+   
+   
+   <article>
+     <time datetime="2014-05-26T00:00:00-05:00" pubdate><span class='day'>26</span></time>
+<h1><a href="/2014/05/26/idioms/">Idioms</a></h1>
 
-<p>Here is some example usage for you:</p>
+   </article>
+   
+   </div>
 
-<pre><code>use Log::JSON;
-my $logger = Log::JSON-&gt;new(
-    file            =&gt; '/path/errorlog.json', # required
-    date            =&gt; 1, # optional
-    remove_newlines =&gt; 1, # optional
-);
-$logger-&gt;log(a =&gt; 1, b =&gt; 2);
-# '/path/errorlog.json' now contains:
-# {"__date":"2010-03-28T23:15:52Z","a":1,"b":1}
-</code></pre>
-
-<p>I wish I had written it as a Log::Dispatch plugin, and perhaps I&rsquo;ll get around
-to that sometime.</p>
-
-<p>One problem with using JSON is that there is a lot repetition and if your log
-file is a bajillion lines long, then that&rsquo;s going to be a big file.  Happily,
-file compression solves this problem very well.  And Vim and less handle
-compressed files on the fly so viewing the file is not inconvenient.  And now
-that I write this, I think some kind of compression feature may be nice for
-Log::JSON and pretty great for Log::Dispatch too.</p>
-
-<p>Log::JSON on github: <a href="https://github.com/kablamo/Log-JSON">https://github.com/kablamo/Log-JSON</a></p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-      
-        <a class="basic-alignment right" href="/2012/05/10/new-on-cpan-moosex-cachingproxy/" title="Next Post: New on CPAN - MooseX::CachingProxy">New on CPAN - MooseX::CachingProxy &raquo;</a>
-      
-    </p>
-  </footer>
+  
 </article>
-
-  <section>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
 
 </div>
 
@@ -209,10 +167,7 @@ Log::JSON and pretty great for Log::Dispatch too.</p>
       var disqus_shortname = 'kablamo';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2012/04/29/new-on-cpan-log-json/';
-        var disqus_url = 'http://blog.kablamo.org/2012/04/29/new-on-cpan-log-json/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

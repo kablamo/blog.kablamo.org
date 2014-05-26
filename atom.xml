@@ -4,7 +4,7 @@
   <title><![CDATA[KABLAMO]]></title>
   <link href="http://blog.kablamo.org/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-05-12T09:02:57-05:00</updated>
+  <updated>2014-05-26T18:31:58-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -12,6 +12,175 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Reading code - Camel-Snake-Kebab]]></title>
+    <link href="http://blog.kablamo.org/2014/05/26/perl-camel-snake-kebab/"/>
+    <updated>2014-05-26T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/05/26/perl-camel-snake-kebab</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/qerub/camel-snake-kebab">Camel-Snake-Kebab</a> is a Clojure
+library for word case conversions.  I have wanted to see this on CPAN for a
+while so last week I finally ported it to Perl.  I even ported the test suite.
+Here is a synopsis of my
+<a href="https://metacpan.org/pod/String::CamelSnakeKebab">String::CamelSnakeKebab</a> Perl module:</p>
+
+<pre><code>use String::CamelSnakeKebab qw/:all/;
+
+lower_camel_case('flux-capacitor')
+       # Returns 'fluxCapacitor'
+
+upper_camel_case('flux-capacitor')
+       # Returns 'FluxCapacitor'
+
+lower_snake_case 'ASnakeSlithersSlyly'    
+       # Returns 'a_snake_slithers_slyly'
+
+upper_snake_case('ASnakeSlithersSlyly')
+       # Returns 'A_Snake_Slithers_Slyly'
+
+constant_case("I am constant")
+    # Returns "I_AM_CONSTANT"
+
+kebab_case('Peppers_Meat_Pineapple')
+ # Returns 'peppers-meat-pineapple'
+
+http_header_case("x-ssl-cipher")
+       # Returns "X-SSL-Cipher"
+</code></pre>
+
+<h1>Clojure</h1>
+
+<p>This was my first contact with Clojure and I found the code I was reading to be
+bite sized, concise, elegant code.  It reads a bit like math equations to
+me.  Or sort of vaguely BNF-like as you will see.  I suspect I would have had a
+hard time choosing a better library as my introduction to the language.</p>
+
+<h1>Functional programming</h1>
+
+<p>Clojure is a functional language &mdash; as contrasted with more common imperative
+languages.  I will admit I didn&rsquo;t really know what that means.  But hey I
+looked it up so I can now present to you 3 central concepts of functional
+programming.  (Btw Perl is usually imperative but it can be written
+functionally as well.  Although its a little easier and more natural in
+Clojure).</p>
+
+<h2>1. First class and higher order functions</h2>
+
+<p>These are functions which accept other functions as arguments.  So functional
+programmers enjoy passing around code refs.  Thats not radical for Perl
+developers.  Perl has always had excellent support for that.</p>
+
+<p>This flavor of code is often shorter, more general, and less repetitive.
+But its harder to read and requires me to use my brains causes me some
+discomfort.</p>
+
+<h3>Example</h3>
+
+<p>The most important function in Camel-Snake-Kebab is <code>convert-case</code>.  It is
+called by every case conversion function in the library.  It splits a string
+into words, applies a case rule to the first word and then a second possibly
+different case rule to the remaining words.  Then all the words are joined back
+together using the given separator.  Here it is written in Clojure:</p>
+
+<pre><code>(defn convert-case [first-fn rest-fn sep s]
+"Converts the case of a string according to the rule for the first
+word, remaining words, and the separator."
+(let [[first &amp; rest] (split s word-separator-pattern)]
+    (join sep (cons (first-fn first) (map rest-fn rest)))))
+</code></pre>
+
+<p>Using this I could implement lower snake case like this:</p>
+
+<pre><code>(defn lower-snake-case [s]
+    (convert-case lower-case lower-case "_" s))
+</code></pre>
+
+<p>Here is the translation in Perl I came up with:</p>
+
+<pre><code>sub convert_case {
+    my ($first_coderef, $rest_coderef, $separator, $string) = @_; 
+
+    my ($first, @rest) = split $WORD_SEPARATOR_PATTERN, $string;
+
+    my @words = $first_coderef-&gt;($first);
+    push @words, $rest_coderef-&gt;($_) for @rest;
+
+    return join $separator, @words;
+}
+
+sub my_lc { lc $_ }
+
+sub lower_snake_case {
+    convert_case( \&amp;my_lc, \&amp;my_lc, "_", shift );
+}
+</code></pre>
+
+<p>The cool thing about this is the different case methods (lower_camel_case,
+kebab_case, etc) are not actually implemented this way.  They are dynamically
+created when the module loads using a set of conversion rules that looks like
+this:</p>
+
+<pre><code>our %CONVERSION_RULES = (
+    'lower_camel_case' =&gt; [ \&amp;lc,               \&amp;ucfirst,          ""  ],
+    'upper_camel_case' =&gt; [ \&amp;ucfirst,          \&amp;ucfirst,          ""  ],
+    'lower_snake_case' =&gt; [ \&amp;lc,               \&amp;lc,               "_" ],
+    'upper_snake_case' =&gt; [ \&amp;ucfirst,          \&amp;ucfirst,          "_" ],
+    'constant_case'    =&gt; [ \&amp;uc,               \&amp;uc,               "_" ],
+    'kebab_case'       =&gt; [ \&amp;lc,               \&amp;lc,               "-" ],
+    'http_header_case' =&gt; [ \&amp;http_header_caps, \&amp;http_header_caps, "-" ],
+);
+</code></pre>
+
+<h2>2. Purely functional functions</h2>
+
+<p>These are functions with no state and no side effects.  In functional
+programming I can&rsquo;t do assignments because that alters state (and that is a
+side effect).  Which sounds rediculous.  How can I program without doing
+assignments?  I&rsquo;m not sure, but the advantage of no side effects is
+performance.  I can run functions in parallel without affecting each other.
+Also the function&rsquo;s output will depend entirely on the input which makes purely
+functional functions great for <a href="https://metacpan.org/pod/Memoize">memoization</a>.</p>
+
+<h3>Example</h3>
+
+<p>This concept was also evident in the code I ported.  Functions did not modify
+state.  There were very few if any assignments.  And the output of functions
+depended entirely on the input.</p>
+
+<p>I did try memoizing String::CamelSnakeKebab but it did not make it faster.  I&rsquo;m
+not sure why.  Perhaps case conversion is just not computationally intensive
+enough to make a difference?  So unfortunately I have no example for you.  Any
+help in the comments would be awesome.</p>
+
+<h2>3. No <code>for</code> loops</h2>
+
+<p><code>for</code> loops require state and assignments.  To implement loops in functional
+programming I&rsquo;m supposed to use recursion.  I didn&rsquo;t see any examples of this
+in this library and my brain is grateful to the author for sparing me the
+exertion.</p>
+
+<h1>The End</h1>
+
+<p>Thats the end of my story today.  If you are interested, compare the
+<a href="https://github.com/kablamo/perl-string-camelsnakekebab/blob/master/lib/String/CamelSnakeKebab.pm">Perl source code</a>
+with the
+<a href="https://github.com/qerub/camel-snake-kebab/blob/stable/src/camel_snake_kebab.clj">Clojure source code</a>.
+Each version is about 70 lines of code.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Idioms]]></title>
+    <link href="http://blog.kablamo.org/2014/05/26/idioms/"/>
+    <updated>2014-05-26T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/05/26/idioms</id>
+    <content type="html"><![CDATA[<p>Lately I have been enjoying learning new idioms by reading code.  People often
+resist new idioms.  When a new programmer joins a team there is often some
+discussion (or fights) about which idioms are best.  Probably some idioms are
+better than others.  But idioms are tools for expressing ideas and its useful
+to collect the good ones.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Test::Pretty - because TAP is unnattractive]]></title>
@@ -1353,132 +1522,6 @@ Is it a very formal process or is there no process?</li>
 <li>Will I be oncall?</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to build a Duck Duck Go instant answer]]></title>
-    <link href="http://blog.kablamo.org/2014/02/28/duckduckgo/"/>
-    <updated>2014-02-28T00:00:00-06:00</updated>
-    <id>http://blog.kablamo.org/2014/02/28/duckduckgo</id>
-    <content type="html"><![CDATA[<p>Instant answers are those little boxes at the top of the DuckDuckGo search
-results page.  I made one for discovering international calling codes &mdash; or
-dialing codes if you prefer.</p>
-
-<p><img src="http://blog.kablamo.org/images/for-posts/2014-02-28-singapore.png" width="700" height="424">
-<img src="http://blog.kablamo.org/images/for-posts/2014-02-28-down-under.png" width="700" height="424"></p>
-
-<p>If you want to hack on DuckDuckGo and add your own instant answer its pretty
-simple to <a href="http://duckduckhack.com">get started</a>.  You can use Vagrant and
-VirtualBox to get a complete working dev environment.  But if you are already
-running Ubuntu or OSX the following recipe is easier:</p>
-
-<pre><code>curl http://duckpan.org/install.pl | perl 
-cpanm App::DuckPAN
-duckpan installdeps # installs dependencies from DuckPAN (not CPAN) to locallib
-</code></pre>
-
-<p>Next fork the repository you want to hack on.  To choose the correct repository
-think about what kind of data source you are using to generate your instant answer.</p>
-
-<ul>
-<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-spice">spice repo</a>
- if you have a real time data source like a JSON web API.</li>
-<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-goodie">goodie repo</a>
- if you generate your instant answer with code and need no network access.</li>
-<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-fathead">fathead repo</a>
- if your data source can be placed in a key/value store.</li>
-<li> Fork the <a href="https://github.com/duckduckgo/zeroclickinfo-fathead">longtail repo</a>
- if your data source requires a full text search.</li>
-</ul>
-
-
-<p>Now you can start hacking.  I&rsquo;ll show you how the capitalization instant answer
-from the goodie repo works.  Below is the code.  I added comments to explain
-things a bit.</p>
-
-<pre><code>package DDG::Goodie::Capitalize;
-use DDG::Goodie;
-
-# If a DuckDuckGo search query contains any of these words at the start or
-# end of the query, the 'remainder' handler below will run.
-triggers startend =&gt; 'capitalize', 'uppercase', 'upper case';
-
-# This block of code is pretty much meta data describing this instant
-# answer.  Mostly it is used by https://duckduckgo.com/goodies.
-zci answer_type =&gt; "capitalize";
-primary_example_queries 'capitalize this';
-secondary_example_queries 'uppercase that';
-description 'capitalize a string';
-name 'Capitalize';
-code_url 'https://github.com/duckduckgo/zeroclickinfo-goodies/blob/master/lib/DDG/Goodie/Capitalize.pm';
-category 'conversions';
-topics 'programming';
-attribution twitter =&gt; 'crazedpsyc',
-            cpan    =&gt; 'CRZEDPSYC' ;
-
-# This is is where the magic happens.  $_ contains the query minus the
-# trigger word.  The return value from this sub shows up on the DuckDuckGo
-# search results page as an instant answer.
-handle remainder =&gt; sub { uc ($_) };
-</code></pre>
-
-<p>To test your new instant answer you can launch a little web server with the following command:</p>
-
-<pre><code>duckpan server
-</code></pre>
-
-<p>Then open your favorite web browser and surf to
-<a href="http://0:5000/?q=capitalize+aliens+smell+better+than+dinosaurs">http://0:5000/?q=capitalize+aliens+smell+better+than+dinosaurs</a> and you should
-see something like this:</p>
-
-<p><img src="http://blog.kablamo.org/images/for-posts/2014-02-28-capitalize.png" width="700" height="424"></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[I made a Readline cheat sheet]]></title>
-    <link href="http://blog.kablamo.org/2014/01/01/readline-cheat-sheet/"/>
-    <updated>2014-01-01T00:00:00-06:00</updated>
-    <id>http://blog.kablamo.org/2014/01/01/readline-cheat-sheet</id>
-    <content type="html"><![CDATA[<p>Recently Ovid pointed out <a href="http://blogs.perl.org/users/ovid/2014/01/ditching-a-language.html">large projects are much more likely to fail</a>.
-I have a few large goals I&rsquo;d like to accomplish.  For example I want to improve
-my front end design skills.  Rather than trying to tackle this problem all
-at once, I made up a small project for myself.</p>
-
-<p>I created a <a href="http://readline.kablamo.org/emacs.html">Readline cheat sheet</a> and
-I was able to complete this project in about a day.  Here are some
-of the things I learned:</p>
-
-<ul>
-<li><p><strong>Bootstrap</strong> &ndash; I always worry libraries and frameworks like
-<a href="http://getbootstrap.com">Bootstrap</a> are overkill and bloat since I only need
-a tiny portion of their features.  But its undeniable that I was able to quickly
-build a responsive mobile friendly website without needing to worry about the
-technical details.</p></li>
-<li><p><strong>Readline commands</strong> &ndash; If I had to pick one keyboad shortcut to recommend it
-would be <code>Ctrl-r</code> which allows you to search backwards through your
-history.  I also like the incremental undo command: <code>Ctrl-_</code>.</p></li>
-<li><p><strong>Text::Xslate</strong> &ndash; People keep mentioning
-<a href="https://metacpan.org/pod/Text::Xslate">Text::Xslate</a> so I wanted to give it a try.
-The docs say its full featured and very fast.  I liked that HTML metacharacters
-are escaped by default to avoid cross site scripting attacks.  Also it supports
-Template Toolkit syntax.  I didn&rsquo;t find any new killer features, but it was a
-pleasure to work with.</p></li>
-<li><p><strong>Some new <a href="http://helabs.com.br/blog/2014/01/21/prevent-common-problems-when-writing-css-from-scratch/">CSS tricks</a></strong> &ndash;
-The best trick I learned is how to keep my footer at the bottom of the page
-even when it has only a few lines of content.</p></li>
-</ul>
-
-
-<p>I was able to practice design, layout, color, and font selection.  And who
-knows &mdash; perhaps this project will also drive a tiny bit of traffic to my
-github profile and increase my
-<a href="http://www.codusoperandi.com/posts/increasing-your-luck-surface-area">luck surface area</a>.</p>
-
-<p>The momentum feels good.  I need to remember to keep my projects small more often.</p>
-
-<p><img src="http://blog.kablamo.org/images/for-posts/2014-02-02.png" width="700" height="424"></p>
 ]]></content>
   </entry>
   

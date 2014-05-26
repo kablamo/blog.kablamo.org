@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Reading code - Camel-Snake-Kebab - KABLAMO</title>
+  <meta name="author" content="Eric Johnson">
+
+  
+  <meta name="description" content="Camel-Snake-Kebab is a Clojure
+library for word case conversions. I have wanted to see this on CPAN for a
+while so last week I finally ported it to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.kablamo.org/2014/05/26/perl-camel-snake-kebab">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="KABLAMO" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body  class="collapse-sidebar sidebar-footer">
+  <header role="banner">
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe to all posts via RSS">RSS</a></li>
+  
+</ul>
+  
+<ul class="main-navigation">
+  <li>
+     <a href="/">
+         <h1 id="blog-title" ><span style="font-weight: normal">BLOG.</span>KABLAMO<span style="font-weight:normal">.ORG</span></h1>
+    </a>
+  </li>
+  <li><a href="/categories/perl">perl</a></li>
+  <li><a href="/categories/experiments">experiments</a></li>
+  <li><a href="/reading_list.html">what i'm reading</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Reading Code - Camel-Snake-Kebab</h1>
+    
+    
+      <p class="date">
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-05-26T00:00:00-05:00" pubdate data-updated="true">May 26<span>th</span>, 2014</time></p>
+      <p class="categories">
+
+<span class="categories">
+  tags:
+  
+    <a class='category' href='/categories/perl/'>perl</a>, <a class='category' href='/categories/readingcode/'>readingcode</a>, <a class='category' href='/categories/writingcode/'>writingcode</a>
+  
+</span>
+
+</p>
+      <p class="meta">
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="https://github.com/qerub/camel-snake-kebab">Camel-Snake-Kebab</a> is a Clojure
+library for word case conversions.  I have wanted to see this on CPAN for a
+while so last week I finally ported it to Perl.  I even ported the test suite.
+Here is a synopsis of my
+<a href="https://metacpan.org/pod/String::CamelSnakeKebab">String::CamelSnakeKebab</a> Perl module:</p>
+
+<pre><code>use String::CamelSnakeKebab qw/:all/;
+
+lower_camel_case('flux-capacitor')
+       # Returns 'fluxCapacitor'
+
+upper_camel_case('flux-capacitor')
+       # Returns 'FluxCapacitor'
+
+lower_snake_case 'ASnakeSlithersSlyly'    
+       # Returns 'a_snake_slithers_slyly'
+
+upper_snake_case('ASnakeSlithersSlyly')
+       # Returns 'A_Snake_Slithers_Slyly'
+
+constant_case("I am constant")
+    # Returns "I_AM_CONSTANT"
+
+kebab_case('Peppers_Meat_Pineapple')
+ # Returns 'peppers-meat-pineapple'
+
+http_header_case("x-ssl-cipher")
+       # Returns "X-SSL-Cipher"
+</code></pre>
+
+<h1>Clojure</h1>
+
+<p>This was my first contact with Clojure and I found the code I was reading to be
+bite sized, concise, elegant code.  It reads a bit like math equations to
+me.  Or sort of vaguely BNF-like as you will see.  I suspect I would have had a
+hard time choosing a better library as my introduction to the language.</p>
+
+<h1>Functional programming</h1>
+
+<p>Clojure is a functional language &mdash; as contrasted with more common imperative
+languages.  I will admit I didn&rsquo;t really know what that means.  But hey I
+looked it up so I can now present to you 3 central concepts of functional
+programming.  (Btw Perl is usually imperative but it can be written
+functionally as well.  Although its a little easier and more natural in
+Clojure).</p>
+
+<h2>1. First class and higher order functions</h2>
+
+<p>These are functions which accept other functions as arguments.  So functional
+programmers enjoy passing around code refs.  Thats not radical for Perl
+developers.  Perl has always had excellent support for that.</p>
+
+<p>This flavor of code is often shorter, more general, and less repetitive.
+But its harder to read and requires me to use my brains causes me some
+discomfort.</p>
+
+<h3>Example</h3>
+
+<p>The most important function in Camel-Snake-Kebab is <code>convert-case</code>.  It is
+called by every case conversion function in the library.  It splits a string
+into words, applies a case rule to the first word and then a second possibly
+different case rule to the remaining words.  Then all the words are joined back
+together using the given separator.  Here it is written in Clojure:</p>
+
+<pre><code>(defn convert-case [first-fn rest-fn sep s]
+"Converts the case of a string according to the rule for the first
+word, remaining words, and the separator."
+(let [[first &amp; rest] (split s word-separator-pattern)]
+    (join sep (cons (first-fn first) (map rest-fn rest)))))
+</code></pre>
+
+<p>Using this I could implement lower snake case like this:</p>
+
+<pre><code>(defn lower-snake-case [s]
+    (convert-case lower-case lower-case "_" s))
+</code></pre>
+
+<p>Here is the translation in Perl I came up with:</p>
+
+<pre><code>sub convert_case {
+    my ($first_coderef, $rest_coderef, $separator, $string) = @_; 
+
+    my ($first, @rest) = split $WORD_SEPARATOR_PATTERN, $string;
+
+    my @words = $first_coderef-&gt;($first);
+    push @words, $rest_coderef-&gt;($_) for @rest;
+
+    return join $separator, @words;
+}
+
+sub my_lc { lc $_ }
+
+sub lower_snake_case {
+    convert_case( \&amp;my_lc, \&amp;my_lc, "_", shift );
+}
+</code></pre>
+
+<p>The cool thing about this is the different case methods (lower_camel_case,
+kebab_case, etc) are not actually implemented this way.  They are dynamically
+created when the module loads using a set of conversion rules that looks like
+this:</p>
+
+<pre><code>our %CONVERSION_RULES = (
+    'lower_camel_case' =&gt; [ \&amp;lc,               \&amp;ucfirst,          ""  ],
+    'upper_camel_case' =&gt; [ \&amp;ucfirst,          \&amp;ucfirst,          ""  ],
+    'lower_snake_case' =&gt; [ \&amp;lc,               \&amp;lc,               "_" ],
+    'upper_snake_case' =&gt; [ \&amp;ucfirst,          \&amp;ucfirst,          "_" ],
+    'constant_case'    =&gt; [ \&amp;uc,               \&amp;uc,               "_" ],
+    'kebab_case'       =&gt; [ \&amp;lc,               \&amp;lc,               "-" ],
+    'http_header_case' =&gt; [ \&amp;http_header_caps, \&amp;http_header_caps, "-" ],
+);
+</code></pre>
+
+<h2>2. Purely functional functions</h2>
+
+<p>These are functions with no state and no side effects.  In functional
+programming I can&rsquo;t do assignments because that alters state (and that is a
+side effect).  Which sounds rediculous.  How can I program without doing
+assignments?  I&rsquo;m not sure, but the advantage of no side effects is
+performance.  I can run functions in parallel without affecting each other.
+Also the function&rsquo;s output will depend entirely on the input which makes purely
+functional functions great for <a href="https://metacpan.org/pod/Memoize">memoization</a>.</p>
+
+<h3>Example</h3>
+
+<p>This concept was also evident in the code I ported.  Functions did not modify
+state.  There were very few if any assignments.  And the output of functions
+depended entirely on the input.</p>
+
+<p>I did try memoizing String::CamelSnakeKebab but it did not make it faster.  I&rsquo;m
+not sure why.  Perhaps case conversion is just not computationally intensive
+enough to make a difference?  So unfortunately I have no example for you.  Any
+help in the comments would be awesome.</p>
+
+<h2>3. No <code>for</code> loops</h2>
+
+<p><code>for</code> loops require state and assignments.  To implement loops in functional
+programming I&rsquo;m supposed to use recursion.  I didn&rsquo;t see any examples of this
+in this library and my brain is grateful to the author for sparing me the
+exertion.</p>
+
+<h1>The End</h1>
+
+<p>Thats the end of my story today.  If you are interested, compare the
+<a href="https://github.com/kablamo/perl-string-camelsnakekebab/blob/master/lib/String/CamelSnakeKebab.pm">Perl source code</a>
+with the
+<a href="https://github.com/qerub/camel-snake-kebab/blob/stable/src/camel_snake_kebab.clj">Clojure source code</a>.
+Each version is about 70 lines of code.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/05/26/idioms/" title="Previous Post: Idioms">&laquo; Idioms</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About</h1>
+  <p>
+    Hi I'm Eric Johnson.  I solve problems for humans with my keyboard.
+  </p>
+  <p>
+    By day I'm a mild mannered web developer.  But at night I'm a mild
+    mannered web developer working on my side project. I'm building a better
+    Mint.com for early retirement savants and savings extremists at
+    <a style="text-decoration: underline" href="http://networthify.com/calculator/fi">Networthify.com</a>
+  </p>
+  <p>
+  You can also find me in the following places: <br>
+    on <a href="https://github.com/kablamo">github</a><br>
+    on <a href="http://www.linkedin.com/profile/view?id=8671375">linked in</a><br>
+    on <a href="http://pinboard.in/u:kablamo">pinboard</a><br>
+    on <a href="http://twitter.com/kablamo_">twitter</a><br>
+    on <a href="http://stackoverflow.com/users/58089/eric-johnson">stackoverflow</a><br>
+  </p>
+  <img src="http://www.gravatar.com/avatar/8cf8648d045411209074da30028d8b68.png?s=400" width="400" height="400" style="border: solid 3px #100b06; border-radius: 6px">
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/05/26/perl-camel-snake-kebab/">Reading Code - Camel-Snake-Kebab</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/05/26/idioms/">Idioms</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/05/08/test-pretty/">Test::Pretty - Because TAP Is Unnattractive</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/23/reading-code/">Why Reading Code Is Good for Me</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/20/write-code-every-day/">An Experiment - Write Code Every Day</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2014/05/26/perl-camel-snake-kebab/';
+        var disqus_url = 'http://blog.kablamo.org/2014/05/26/perl-camel-snake-kebab/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
