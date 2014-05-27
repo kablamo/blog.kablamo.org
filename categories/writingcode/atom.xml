@@ -4,7 +4,7 @@
   <title><![CDATA[Category: writingcode | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/writingcode/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-05-26T18:31:58-05:00</updated>
+  <updated>2014-05-27T16:32:45-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -166,19 +166,6 @@ exertion.</p>
 with the
 <a href="https://github.com/qerub/camel-snake-kebab/blob/stable/src/camel_snake_kebab.clj">Clojure source code</a>.
 Each version is about 70 lines of code.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Idioms]]></title>
-    <link href="http://blog.kablamo.org/2014/05/26/idioms/"/>
-    <updated>2014-05-26T00:00:00-05:00</updated>
-    <id>http://blog.kablamo.org/2014/05/26/idioms</id>
-    <content type="html"><![CDATA[<p>Lately I have been enjoying learning new idioms by reading code.  People often
-resist new idioms.  When a new programmer joins a team there is often some
-discussion (or fights) about which idioms are best.  Probably some idioms are
-better than others.  But idioms are tools for expressing ideas and its useful
-to collect the good ones.</p>
 ]]></content>
   </entry>
   

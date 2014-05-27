@@ -4,7 +4,7 @@
   <title><![CDATA[Category: perl | KABLAMO]]></title>
   <link href="http://blog.kablamo.org/categories/perl/atom.xml" rel="self"/>
   <link href="http://blog.kablamo.org/"/>
-  <updated>2014-05-26T18:31:58-05:00</updated>
+  <updated>2014-05-27T16:32:45-05:00</updated>
   <id>http://blog.kablamo.org/</id>
   <author>
     <name><![CDATA[Eric Johnson]]></name>
@@ -170,19 +170,6 @@ Each version is about 70 lines of code.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Idioms]]></title>
-    <link href="http://blog.kablamo.org/2014/05/26/idioms/"/>
-    <updated>2014-05-26T00:00:00-05:00</updated>
-    <id>http://blog.kablamo.org/2014/05/26/idioms</id>
-    <content type="html"><![CDATA[<p>Lately I have been enjoying learning new idioms by reading code.  People often
-resist new idioms.  When a new programmer joins a team there is often some
-discussion (or fights) about which idioms are best.  Probably some idioms are
-better than others.  But idioms are tools for expressing ideas and its useful
-to collect the good ones.</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Test::Pretty - because TAP is unnattractive]]></title>
     <link href="http://blog.kablamo.org/2014/05/08/test-pretty/"/>
     <updated>2014-05-08T00:00:00-05:00</updated>
@@ -289,6 +276,31 @@ are the rules.</p>
 <li> I will write for a minimum of 10 minutes each day.</li>
 <li> I must publish a blog post at least once a week.</li>
 </ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Codecube.io now supports Perl]]></title>
+    <link href="http://blog.kablamo.org/2014/04/19/codecube/"/>
+    <updated>2014-04-19T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/04/19/codecube</id>
+    <content type="html"><![CDATA[<p><a href="http://codecube.io">Codecube.io</a> is a jsfiddle type service which runs Perl
+code (and other languages) and shows the results in your browser.</p>
+
+<p>The website is written in Go and runs your code inside a Docker container.  It
+originally had support for C, Go, Python, and Ruby.  I was looking for an
+excuse to play with Docker and Go so I submitted a pull request which added
+support for Perl.</p>
+
+<p>See also:</p>
+
+<ul>
+<li> The original Codecube <a href="http://hmarr.com/2013/oct/16/codecube-runnable-gists/">blog post</a> which is a good introduction to Docker.</li>
+<li> The <a href="https://github.com/hmarr/codecube">Codecube github repo</a>.</li>
+<li> My previous post on <a href="http://golang.org/">Go</a>.</li>
+<li> My previous post on <a href="http://www.docker.io/">Docker</a>.</li>
+</ul>
 
 ]]></content>
   </entry>
