@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: code | KABLAMO]]></title>
+  <link href="http://blog.kablamo.org/categories/code/atom.xml" rel="self"/>
+  <link href="http://blog.kablamo.org/"/>
+  <updated>2014-05-27T22:05:32-05:00</updated>
+  <id>http://blog.kablamo.org/</id>
+  <author>
+    <name><![CDATA[Eric Johnson]]></name>
+    <email><![CDATA[kablamo@kablamo.org]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[HTTP::Request::AsCurl]]></title>
+    <link href="http://blog.kablamo.org/2014/05/27/http-request-ascurl/"/>
+    <updated>2014-05-27T00:00:00-05:00</updated>
+    <id>http://blog.kablamo.org/2014/05/27/http-request-ascurl</id>
+    <content type="html"><![CDATA[<p>Today, on a whim, I released a module called
+<a href="https://metacpan.org/pod/HTTP::Request::AsCurl">HTTP::Request::AsCurl</a> to
+CPAN.  It converts an <a href="HTTP::Request">HTTP::Request</a> object to a curl command.</p>
+
+<pre><code>use HTTP::Request::Common;
+use HTTP::Request::AsCurl;
+
+my $request = POST('api.earth.defense/weapon1', { 
+    target =&gt; 'mothership', 
+    when   =&gt; 'now' 
+});
+
+say join "\n", $request-&gt;as_curl;
+# curl --dump-header - -XPOST "api.earth.defense/weapon1" \
+# --data 'target=mothership' \
+# --data 'when=now'
+</code></pre>
+
+<p>It works by injecting the <code>as_curl()</code> method into the <a href="HTTP::Request">HTTP::Request</a> namespace.
+This must be a bad idea and probably not a great bit of code to rely on in a
+production environment.  But it is pretty convenient syntax for debugging a
+REST API and I couldn&rsquo;t resist.  Thoughts, suggestions, criticism?</p>
+]]></content>
+  </entry>
+  
+</feed>
