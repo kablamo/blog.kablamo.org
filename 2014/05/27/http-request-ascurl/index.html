@@ -118,6 +118,43 @@ say join "\n", $request-&gt;as_curl;
 This must be a bad idea and probably not a great bit of code to rely on in a
 production environment.  But it is pretty convenient syntax for debugging a
 REST API and I couldn&rsquo;t resist.  Thoughts, suggestions, criticism?</p>
+
+<h1>&mdash; UPDATE (2014-06-01) &mdash;</h1>
+
+<p>I released a new version which has a totally different user interface.  Here is
+the new synopsis:</p>
+
+<pre><code>use HTTP::Request::Common;
+use HTTP::Request::AsCurl qw/as_curl/;
+
+my $request = POST('api.earth.defense/weapon1', { 
+    target =&gt; 'mothership', 
+    when   =&gt; 'now' 
+});
+
+system as_curl($request);
+
+print as_curl($request, pretty =&gt; 1, newline =&gt; "\n", shell =&gt; 'bourne');
+# curl \
+# --request POST api.earth.defense/weapon1 \
+# --dump-header - \
+# --data target=mothership \
+# --data when=now
+</code></pre>
+
+<p>There are 2 major changes.</p>
+
+<ol>
+<li>I&rsquo;m no longer doing namespace injection.  I really liked the syntax, but it
+was problematic and unnecessary.</li>
+<li>The old version returned a formatted array of strings which was
+not very useful.  The problem with a formatted string (as was helpfully
+pointed out to me) is you have worry about stuff like newlines which
+depends on the system you are targeting and shell escaping which depends on
+the shell you are targeting.  This is a can of worms.  Hopefully this new
+interface is an improvement.</li>
+</ol>
+
 </div>
 
 
