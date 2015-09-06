@@ -3,7 +3,7 @@ layout: post
 title: Devel::Dwarn helps me type less
 date: '2012-09-05'
 comments: true
-tags: perl
+categories: perl
 
 ---
 

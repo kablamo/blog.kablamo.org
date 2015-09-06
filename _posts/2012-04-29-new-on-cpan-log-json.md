@@ -3,7 +3,7 @@ layout: post
 title: New on CPAN - Log::JSON
 date: '2012-04-29'
 comments: true
-tags: perl
+categories: perl
 
 ---
 

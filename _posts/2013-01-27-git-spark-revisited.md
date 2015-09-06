@@ -3,7 +3,7 @@ layout: post
 title: git-spark revisited
 date: '2013-01-27'
 comments: true
-tags: perl
+categories: perl
 
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: Chinese zombie flashcards on GitHub (Catalyst & Perl)
 date: '2013-02-28'
 comments: true
-tags: perl
+categories: perl
 
 ---
 

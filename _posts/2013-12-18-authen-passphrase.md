@@ -3,7 +3,7 @@ layout: post
 title: Salt and pepper - How to encrypt database passwords
 date: '2013-12-18'
 comments: true
-tags: perl
+categories: perl
 
 ---
 

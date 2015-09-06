@@ -3,7 +3,7 @@ layout: post
 title: Whats in your $PERL5LIB?
 date: '2013-01-29'
 comments: true
-tags: perl
+categories: perl
 
 ---
 

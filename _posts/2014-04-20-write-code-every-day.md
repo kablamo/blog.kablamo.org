@@ -3,7 +3,7 @@ layout: post
 title: An experiment - Write code every day
 date: '2014-04-20'
 comments: true
-tags: [perl, experiments]
+categories: [perl, experiments]
 
 ---
 

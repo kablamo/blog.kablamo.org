@@ -3,7 +3,7 @@ layout: post
 title: Why reading code is good for me
 date: '2014-04-23'
 comments: true
-tags: [perl, experiments]
+categories: [perl, experiments]
 
 ---
   

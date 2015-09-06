@@ -3,7 +3,7 @@ layout: post
 title: git-ribbon
 date: '2013-02-02'
 comments: true
-tags: perl
+categories: perl
 
 ---
 

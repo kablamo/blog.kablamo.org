@@ -3,7 +3,7 @@ layout: post
 title: CPAN release of App::Git::Ribbon, App::Git::Spark
 date: '2013-02-12'
 comments: true
-tags: perl
+categories: perl
 
 ---
 

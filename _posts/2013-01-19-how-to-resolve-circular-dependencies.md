@@ -3,7 +3,7 @@ layout: post
 title: Use Carp::Always to fix circular dependencies
 date: '2013-01-19'
 comments: true
-tags: perl
+categories: perl
 
 ---
 

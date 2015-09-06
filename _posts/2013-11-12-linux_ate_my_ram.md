@@ -3,7 +3,7 @@ layout: post
 title: My contribution to the Linux ate my RAM problem
 date: '2013-11-12'
 comments: true
-tags: bash
+categories: bash
 
 ---
 

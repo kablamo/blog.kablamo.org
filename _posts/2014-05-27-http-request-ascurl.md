@@ -3,7 +3,7 @@ layout: post
 title: HTTP::Request::AsCurl
 date: '2014-05-27'
 comments: true
-tags: [perl, code]
+categories: [perl, code]
 
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: An experiment - No dessert forever
 date: '2014-01-01'
 comments: true
-tags: [nutrition, experiments, early-retirement]
+categories: [nutrition, experiments, early-retirement]
 
 ---
 

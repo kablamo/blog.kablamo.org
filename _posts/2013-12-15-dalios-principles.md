@@ -3,7 +3,7 @@ layout: post
 title: Ray Dalio's "Principles"
 date: '2013-12-15'
 comments: true
-tags: [philosophy, strategy]
+categories: [philosophy, strategy]
 
 ---
 

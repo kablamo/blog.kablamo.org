@@ -3,7 +3,7 @@ layout: post
 title: Reading code - Camel-Snake-Kebab
 date: '2014-05-26'
 comments: true
-tags: [perl, readingcode, writingcode]
+categories: [perl, readingcode, writingcode]
 
 ---
 

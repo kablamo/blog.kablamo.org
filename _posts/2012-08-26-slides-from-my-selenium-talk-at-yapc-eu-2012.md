@@ -3,7 +3,7 @@ layout: post
 title: Slides from my Selenium talk at YAPCEU 2012
 date: '2012-08-26'
 comments: true
-tags: perl
+categories: perl
 
 ---
 

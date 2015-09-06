@@ -3,7 +3,7 @@ layout: post
 title: Learning Ruby with online university classes
 date: '2013-11-19'
 comments: true
-tags: ruby
+categories: ruby
 
 ---
 
