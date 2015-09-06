@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Reading code - Plack::Builder</title>
+  <meta name="description" content="  Part 1 - An Overview  Part 2 - plackup Architecture  Part 3 - PSGI Application Architecture  Part 4 - Plack::Builder">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/04/12/read-plack-4/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">blog.<span class="site-title-bold">kablamo</span>.org</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Reading code - Plack::Builder</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2014-04-12
+    </p>
+  </header>
+
+  <article class="post-content">
+    <ul>
+  <li><a href="/2014/04/08/read-plack-1">Part 1 - An Overview</a></li>
+  <li><a href="/2014/04/09/read-plack-2">Part 2 - plackup Architecture</a></li>
+  <li><a href="/2014/04/11/read-plack-3">Part 3 - PSGI Application Architecture</a></li>
+  <li><a href="/2014/04/12/read-plack-4"><strong>Part 4 - Plack::Builder</strong></a></li>
+</ul>
+
+<p>Plack::Builder provides a domain specific language (DSL) for middleware
+developers.  It looks like this:</p>
+
+<pre><code>use Plack::Builder;
+
+my $app1 = sub { ... };
+my $app2 = sub { ... };
+
+builder {
+    enable "Deflater";
+    enable "Session", store =&gt; "File";
+    enable "Debug", panels =&gt; [ qw(DBITrace Memory Timer) ];
+
+    mount "/narwhale" =&gt; $app1;
+    mount "/unicorn"  =&gt; $app2;
+};
+</code></pre>
+
+<p>How does it work?  With three artful tricks.</p>
+
+<h1 id="artful-trick-1">Artful trick #1</h1>
+
+<p>The first artful trick is the <code>builder</code> block.</p>
+
+<pre><code>sub builder(&amp;) {
+    my $block = shift;
+    ...
+}
+</code></pre>
+
+<p>The <code>&amp;</code> is a function prototype.  Perl offers some limited compile time checking
+for parameters passed to subs.  Here is what <code>perldoc perlsub</code> says about <code>&amp;</code>:</p>
+
+<blockquote>
+  <p>An “&amp;” requires an anonymous subroutine, which, if passed as the first
+argument, does not require the “sub” keyword or a subsequent comma.</p>
+</blockquote>
+
+<p>So if I try to pass <code>builder()</code> a scalar or an array or anything thats not an
+anonymous subroutine, I will get a compile time error.  But if I pass it an
+anonymous subroutine, the compiler will allow things to continue.</p>
+
+<h1 id="artful-trick-2">Artful trick #2</h1>
+
+<p>The next artful trick is that Plack::Builder implements the DSL keywords as
+subs and then exports those subs.</p>
+
+<pre><code>package Plack::Builder;
+use strict;
+use parent qw( Exporter );
+our @EXPORT = qw( builder enable enable_if mount );
+...
+sub enable    {...}
+sub enable_if {...}
+sub mount     {...}
+# etc
+</code></pre>
+
+<p>Actually thats 90% of the whole thing isn’t it?  Now its starting to look
+obvious.  But lets continue.</p>
+
+<h1 id="artful-trick-3">Artful trick #3</h1>
+
+<p>There is one more interesting idea here.  Notice that if I use <code>enable</code>,
+<code>enable_if</code>, or <code>mount</code> outside of a <code>builder</code> block I will get an
+error.  This works because the DSL keywords are subs which run code references.
+By default those code references refer to code which croaks an error.  But when
+<code>builder</code> runs, those references are temporarily replaced with real working
+code.</p>
+
+<p>Here’s some simplified code to illustrate how it works.</p>
+
+<pre><code>our $_enable = sub { Carp::croak(...) }; # &lt;&lt; default code reference
+
+sub enable { $_enable-&gt;(@_) }
+
+sub builder(&amp;) {
+    my $block = shift;
+    ...
+    local $_enable = sub {...}; # &lt;&lt; temporarily assign real working code
+    ...
+    my $app = $block-&gt;();
+    ...
+}
+</code></pre>
+
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2014/04/12/read-plack-4/';
+        var disqus_url = 'http://blog.kablamo.org/2014/04/12/read-plack-4/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

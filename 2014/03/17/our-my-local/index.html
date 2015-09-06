@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>my vs our vs local</title>
+  <meta name="description" content="The short version for the impatient">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/03/17/our-my-local/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">blog.<span class="site-title-bold">kablamo</span>.org</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">my vs our vs local</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2014-03-17
+    </p>
+  </header>
+
+  <article class="post-content">
+    <h1 id="the-short-version-for-the-impatient">The short version for the impatient</h1>
+
+<ul>
+  <li><code>my()</code> creates a local variable</li>
+  <li><code>our()</code> creates a package variable</li>
+  <li><code>local()</code> temporarily changes the local value of a global variable</li>
+  <li>The above is mostly true.</li>
+</ul>
+
+<h1 id="the-long-version-for-the-irrepressibly-quixotic">The long version for the irrepressibly quixotic</h1>
+
+<h2 id="my">my()</h2>
+
+<p><code>my</code> declares the listed variable to be local to the enclosing block, file,
+or <code>eval</code>.  That is to say its <em>scope</em> is local.  This kind of variable is
+known as a <em>lexical variable</em>.  Note that lexical variables are hidden from
+subroutines which are called from within the enclosing block.  This is known as
+<em>lexical scoping</em>.</p>
+
+<h2 id="our">our()</h2>
+
+<p><code>our</code> creates an alias to a <em>package variable</em>.  The alias is local to the
+enclosing block, file, or <code>eval</code>.  That is to say the alias is lexically scoped
+just like any lexical variable.  However a package variable belongs to a
+package.  It can be accessed from anywhere if you use its fully qualified name.
+Here are two examples of fully qualified package variables:</p>
+
+<pre><code>$main::a
+%MyPackage::boop
+</code></pre>
+
+<p>Note that package variables are also global variables.</p>
+
+<h2 id="local">local()</h2>
+
+<p><code>local</code> gives temporary values to global variables.  It does not create a local
+variable.  It is most commonly used when you want to locally modify a global
+variable such as one of the punctuation variables.  For example:</p>
+
+<pre><code>{ 
+    local $| = 1; # enable autoflush for STDOUT
+    say "hi mom";
+}
+</code></pre>
+
+<p><code>local</code> modifies the listed variable to be local to the enclosing block,
+file, or <code>eval</code> – AND to any subroutine called from within that block.  This
+is known as <em>dynamic scoping</em>.</p>
+
+<h1 id="sources">Sources</h1>
+
+<p>For a more complete understanding I recommend <code>perldoc perlfunc</code> and especially
+<code>perldoc perlsub</code>.  Also the following links may be helpful:</p>
+
+<ul>
+  <li>https://metacpan.org/pod/perlfunc</li>
+  <li>https://metacpan.org/pod/perlsub</li>
+  <li>http://perlmaven.com/package-variables-and-lexical-variables-in-perl</li>
+  <li>http://www.perlmonks.org/?node_id=95813</li>
+</ul>
+
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2014/03/17/our-my-local/';
+        var disqus_url = 'http://blog.kablamo.org/2014/03/17/our-my-local/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

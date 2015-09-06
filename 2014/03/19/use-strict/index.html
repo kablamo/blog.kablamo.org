@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>What does 'use strict' do?</title>
+  <meta name="description" content="I always use strict in all my code.  But what does that actually mean?">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/03/19/use-strict/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">blog.<span class="site-title-bold">kablamo</span>.org</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">What does 'use strict' do?</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2014-03-19
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>I always <code>use strict</code> in all my code.  But what does that actually mean?</p>
+
+<h1 id="enables-strict-refs">Enables strict refs</h1>
+
+<p>Strict refs generates runtime errors when you use symbolic references.</p>
+
+<pre><code>use strict 'refs';
+$ref = "yarrr matey";
+print $$ref;        # runtime error but without strict refs this is ok
+</code></pre>
+
+<h1 id="enables-strict-vars">Enables strict vars</h1>
+
+<p>Strict vars generates a compile time error if you access a variable that was
+not declared or is not fully qualified.</p>
+
+<pre><code>use strict 'vars';
+$X::foo = 1;         # ok because its fully qualified
+my $foo = 10;        # ok because my() was used.
+$baz = 9;            # compile time error because $baz not declared before
+</code></pre>
+
+<h1 id="enables-strict-subs">Enables strict subs</h1>
+
+<p>Strict subs generates a compile time error if you use a bareword identifier
+that’s not a subroutine.</p>
+
+<pre><code>no strict 'subs';
+my $a = boop;
+print $a; 
+sub boop { return "dinosaurs smell good" }
+</code></pre>
+
+<p>The above prints “boop” instead of “dinosaurs smell good”.</p>
+
+<pre><code>use strict 'subs';
+my $b = splarf;      # &lt;--- compile time error here
+sub splarf { return "dinosaurs smell good" }
+</code></pre>
+
+<p>The above generates a compile time error on line 2.</p>
+
+<pre><code>use strict 'subs';
+my $b = splarf(); 
+sub splarf { return "dinosaurs smell good" }
+</code></pre>
+
+<p>The above prints “dinosaurs smell good” which is probably the desired output.</p>
+
+<p>Sources:</p>
+
+<ul>
+  <li>https://metacpan.org/pod/strict</li>
+  <li>http://www.perl.com/pub/2001/01/begperl6.html#use strict</li>
+</ul>
+
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2014/03/19/use-strict/';
+        var disqus_url = 'http://blog.kablamo.org/2014/03/19/use-strict/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

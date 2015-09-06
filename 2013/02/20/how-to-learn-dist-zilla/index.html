@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome</title>
+  <meta name="description" content="I&#8217;ve been using Dist::Zilla for acouple years.  It&#8217;s a powerful way to automate CPAN releases.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">blog.<span class="site-title-bold">kablamo</span>.org</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2013-02-20
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>I’ve been using <a href="https://metacpan.org/module/Dist::Zilla">Dist::Zilla</a> for a
+couple years.  It’s a powerful way to automate CPAN releases.</p>
+
+<p>But learning how to use it was not as easy as I hoped.</p>
+
+<p>I remember when <code>Dist::Zilla</code> first debuted.  It was very exciting.  But I think
+I may have drank too much of the cool aid becuase my expectations were very
+high when I finally sat down to learn it.  I expected my experience to be
+composed entirely of rainbows and puppy dog tails.</p>
+
+<h2 id="writing-your-own-distini-or-pluginbundle-is-hard">Writing your own dist.ini or PluginBundle is hard</h2>
+
+<p>Instead I found that creating a dist.ini or PluginBundle is fairly hard.  There
+are a huge number of plugins and it’s difficult for a newcomer to know which
+are old, which are new, and how they work together.  If you look, for example,
+at <code>Dist::Zilla::PluginBundle::DAGOLDEN</code> it uses 23 different plugins and the
+<em>synopsis</em> is 132 lines long.</p>
+
+<p>In retrospect, it was not reasonable to expect I could build something
+comparable after a few minutes of perusing the docs.  It’s more complex than
+that.  So if you are looking to quickly add <code>Dist::Zilla</code> to your toolchain, you
+need to use a PluginBundle and not write your own.</p>
+
+<h2 id="how-to-quickly-add-distzilla-to-your-toolchain">How to quickly add Dist::Zilla to your toolchain</h2>
+
+<p>One way is to just use <code>Dist::Zilla::PluginBundle::Basic</code>.  But this was not like
+the promised land I had been dreaming of.  I wanted more.  So I kept looking.</p>
+
+<p>Happily, there is a PluginBundle which I think works well as a reusable
+component suitable for public consumption thats also very configurable.  I
+doubt it’s well known because the name sounds very personal.  That module is,
+of course,
+<a href="https://metacpan.org/module/Dist::Zilla::PluginBundle::DAGOLDEN">Dist::Zilla::PluginBundle::DAGOLDEN</a>.</p>
+
+<p>I think the workflow it uses will work for many people.  Even if it
+doesn’t, reading the code is a great way to learn how to write your own
+PluginBundle.  And because it’s so comprehensive it’s like having a up-to-date
+map of the state of the art in <code>Dist::Zilla</code> plugins and how they work
+together.</p>
+
+<p>Here’s what my dist.ini looks like:</p>
+
+<pre><code>name    = App-Git-Ribbon
+author  = Eric Johnson &lt;cpan at iijo dot nospamthanks dot org&gt;
+license = Perl_5
+copyright_holder = Eric Johnson
+main_module = lib/App/Git/Ribbon.pm
+
+[@DAGOLDEN]
+no_spellcheck = 1
+AutoMetaResources.bugtracker.rt = 0
+AutoMetaResources.repository.github = user:kablamo
+AutoMetaResources.bugtracker.github = user:kablamo
+weaver_config = @FLORA
+</code></pre>
+
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/';
+        var disqus_url = 'http://blog.kablamo.org/2013/02/20/how-to-learn-dist-zilla/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

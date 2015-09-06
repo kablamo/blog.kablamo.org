@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>git-spark plots your commit history</title>
+  <meta name="description" content="I recently rediscovered spark, Zach Holman&#8217;scool little sparklines graphing tool for the command line.  I used a littlePerl to mash it up with &#8216;g...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">blog.<span class="site-title-bold">kablamo</span>.org</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">git-spark plots your commit history</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2013-01-23
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>I recently rediscovered <a href="https://github.com/holman/spark">spark</a>, Zach Holman’s
+cool little sparklines graphing tool for the command line.  I used a little
+Perl to mash it up with ‘git log’ and came up with
+<a href="https://gist.github.com/4598480">git-spark</a> which works like this:</p>
+
+<pre><code>⚡ git spark --hours 8
+Commits by Godzilla over the last 8 hours
+▃▃▁▆▅▁▁▃█
+⚡ git spark -d 14 HulkHogan
+Commits by HulkHogan over the last 14 days
+▇▅▄▁▁▄▅▂█▂▁▁▁▅
+⚡ git spark -w 52 Tarzan
+Commits by Tarzan over the last 52 weeks
+▃▁▂▃▃▃▂▁█▆▁▄▄▃▂▂▁▁▂▃▃▄▃▃▂▃▁▁▁▁▁▂▂▃▆▅▂▁▄▃▂▄▄▄▁▂▁▁▂▂▂▃
+</code></pre>
+
+<p>And heres the usage/help:</p>
+
+<pre><code>⚡ git spark -h
+usage: git spark [-dhmowy] [long options...] [AUTHOR]
+        -o --hours      commits from the last x hours
+        -d --days       commits from the last x days
+        -w --weeks      commits from the last x weeks
+        -m --months     commits from the last x months
+        -y --years      commits from the last x years
+        -h --help       show this message
+</code></pre>
+
+<p>It was fun to build, but afterward I realized its totally useless.  Clearly
+‘commits’ are a problematic metric.  But its much worse than that.  The peaks
+on the graph are relative to the lows on the same graph.  So a peak on one
+graph has no relation to a peak on another.  That means I can’t compare one
+sparkline with another.</p>
+
+<p>Back to the drawing board.  I’ll have to come up with something else.</p>
+
+<p><strong>UPDATE:</strong> I solved this problem in <a href="http://blog.kablamo.org/git-spark-revisited/">git-spark revisted</a>.</p>
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits/';
+        var disqus_url = 'http://blog.kablamo.org/2013/01/23/git-spark-plots-your-commits/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

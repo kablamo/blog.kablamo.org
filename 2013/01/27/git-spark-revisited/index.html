@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>git-spark revisited</title>
+  <meta name="description" content="A few days agoI wrote about my git-spark Perl script.  Itcounts how many commits a user has in a git project and makes a little graphand displays it on the c...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2013/01/27/git-spark-revisited/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">blog.<span class="site-title-bold">kablamo</span>.org</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">git-spark revisited</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2013-01-27
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>A <a href="http://blog.kablamo.org/git-spark-plots-your-commit-history/">few days ago</a>
+I wrote about my <a href="https://gist.github.com/4598480">git-spark</a> Perl script.  It
+counts how many commits a user has in a git project and makes a little graph
+and displays it on the command line.</p>
+
+<p>However I also said it wasn’t very useful becuase you can’t compare one graph
+with another because the scale changes when different graphs have different min
+and max values.  For example these two data series produce identical graphs
+despite have very different data.</p>
+
+<pre><code>⚡ spark 1 2 3 4 5
+▁▂▄▆█
+⚡ spark 10 20 30 40 50
+▁▂▄▆█
+</code></pre>
+
+<p>So I put on my thinking cap and came up with the following solution:</p>
+
+<pre><code>⚡ spark 50 1 1 2 3 4 5
+█▁▁▁▁▁▁
+⚡ spark 50 1 10 20 30 40 50
+█▁▂▃▅▆█
+</code></pre>
+
+<p>I just need to prepend a max and a min to the data to get consistent scaling
+and now I can compare graphs.</p>
+
+<p>For git-spark, I now assume the min is zero and you can pass in the max using
+the –scale option.  (Note that I chopped off the max/min characters from
+the spark output as they are distracting.)</p>
+
+<p>I also decided to print out the number of commits which helps with the
+scaling issue.  And while I was in there I got it to calculate the total,
+average, and maximum number of commits for that duration.</p>
+
+<p>Here is an example.  It doesn’t really need the –scale option because the data
+is so close anyway, but it shows how to use it:</p>
+
+<pre><code>⚡ git spark --days 14 --scale 23 Stegosaurus
+Commits by Stegosaurus over the last 14 days
+total: 95   avg: 7   max: 23
+10 15 6 23 5 0 0 1 15 0 17 3 0 0
+▄▅▂█▂▁▁▁▅▁▆▁▁▁
+⚡ git spark --days 14 --scale 23 Triceratops
+Commits by Triceratops over the last 14 days
+total: 90   avg: 7   max: 22
+1 12 3 11 3 0 0 6 16 3 13 22 0 0
+▁▄▁▄▁▁▁▂▅▁▄▇▁▁
+</code></pre>
+
+<p>Of course you still need to consider the quality of commits and not just how
+many there are.</p>
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2013/01/27/git-spark-revisited/';
+        var disqus_url = 'http://blog.kablamo.org/2013/01/27/git-spark-revisited/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

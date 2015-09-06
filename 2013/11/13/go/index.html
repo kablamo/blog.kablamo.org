@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Down a rabbit hole - Go-lang and its decentralized CPAN</title>
+  <meta name="description" content="I have been in a rabbit hole for the last week.  I started by looking at Docker(See my previous post).  It turnsout Docker is written in Go and so somehow I ...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2013/11/13/go/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">blog.<span class="site-title-bold">kablamo</span>.org</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Down a rabbit hole - Go-lang and its decentralized CPAN</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/go">go</a>&nbsp;
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2013-11-13
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>I have been in a rabbit hole for the last week.  I started by looking at Docker
+(<a href="http://blog.kablamo.org/2013/11/13/docker/">See my previous post</a>).  It turns
+out Docker is written in Go and so somehow I ended up learning
+<a href="http://golang.org/">Go</a>.  Well “learning” is an overstatement.  I’ve read
+about it for a few days and wrote a tiny bit of code.</p>
+
+<p>But anyway, the coolest thing about Go so far is its decentralized libraries.
+<em>Centralized</em> collections of libraries have been all the rage the last few years
+and it seems like all the languages have gotten hip to that – CPAN, rubygems,
+pypi, npm, etc.</p>
+
+<p>But one of the biggest problems with publishing Perl modules on CPAN is how
+difficult it is to do.  Sure its easy after you figure out the PAUSE website
+exists, create a PAUSE account, read all the Dist::Zilla docs and some of the
+source code, and write your own personalized plugin.  After that it just takes
+one little command.</p>
+
+<h1 id="how-it-works-in-go">How it works in Go</h1>
+
+<p>If you want to use some libraries in your Go code, it looks like this:</p>
+
+<pre><code>import (
+    "log" 
+    "time"
+    "errors"
+    "github.com/dotcloud/docker"
+    "github.com/fsouza/go-dockerclient"
+)
+</code></pre>
+
+<p>The first 3 are core libraries distributed as part of Go.  But the last two you
+have to download and install yourself.  Doing that is very simple:</p>
+
+<pre><code>export GOROOT=$HOME/go
+go get github.com/dotcloud/docker
+</code></pre>
+
+<p>This downloads all the dependencies too.  Of course.</p>
+
+<p>The next question you will ask me is how do people learn about new libraries in
+a decentralized world?  There are websites like
+<a href="http://gowalker.org/">http://gowalker.org/</a> which scrape GitHub’s recent updates
+page.  They also do this for BitBucket, Google Project Hosting, and a couple
+other sites.</p>
+
+<p>This new language has shiny modern features and is very easy to get up and
+running.</p>
+
+<pre style="font: 4px/2px monospace; color: #333; background: transparent; border: 0px; border-radius: 0; box-shadow: 0 0 0 0;">
+                              ,'#@@@@@@@#+';;;''#@@@@@#,                            
+                          ;@@@@#;.                    '@@@;                         
+                       ;@@@:                             ,@@@                       
+                     #@@.                                   +@@                     
+                   @@+                                        +@;   +@@@@@#         
+         ,,      +@+                               #@@@@+       @@@@#  @@       
+     .@@@@@@@@' @@      .+@@@+.                 :@        @,     @@         @@      
+    @@:      .@@;     ++       #+              @            @     #@         @@     
+   @@         @;               @            @              @     @@         @     
+  ;@         @#    ,:             '        @                @     @' :    #+    
+  @         +@     ;               '        ;                  ,     @@@@;    ,@    
+  @      '' @     @                 @       #                  @     '@@@@     @    
+ :@     @@@@:    :                   .     ,                          @@@@     @    
+ ;#     @@@@     @                   @     #  +@@@:             +     ,@@     ,@    
+ :@     @@@    : ,@@@@             +     @ #@@@@@:            @      @    @;    
+  @     .@@     @@@@@                  @ @@@@@@@            @      :@     @     
+  @      @,     . @@@@@@@                  @ @@@@@:@            @       @    @:     
+  ;@     @      . @@@@@.@.                 @ @@@@@            #       #' .@'      
+   @@   '#       @@@@ ,            :     ; ,@@@@@             :       @@.       
+    @@. @.       # @@@@@'            @      ;  #@#             :         @:         
+     ,@@@        @  '@#.             +      @                  @         @:         
+       .@         :                 '        @                '          :@         
+       '#         +                 ;         '              .,           @         
+       @:          @               @  @@@@@@,  @            ;,            @         
+       @          @             @  @@@@@@@@.  @:        .@              @,        
+       @             ;+         #,  #@@@@@@@@'    +@+::+@#                ++        
+       @               ;@;,.,'@:    @@@@@@@@@@:                           :@        
+       @                          #, ,@@@@@@   @                           @        
+      .@                         @              '                          @        
+      ;#                                       @                         @        
+      ++                        :                ;                         @        
+      +'                                         '                         @        
+      #:                         @    ;@;@'@     @                         @      
+      @,                          :+''   @  .@@@:                          @.       
+      @,                                 @   :                             @.       
+      @.                            ,    @   .                             @,       
+      @,                            ;    @                                 @,       
+      @,                            '    @                                 @:       
+      #:                            :    @                                 @:       
+      #;                             +  @ :  @                             @:       
+      ++                              +;   ;.                              @:       
+      ;#                                                                   @:       
+      ,@                                                                   @:       
+       @                                                                   @:       
+       @                                                                   @,       
+       @                                                                   @,       
+       @                                                                 @,       
+       @,                                                                  @,       
+       +'                                                                  @,       
+       :@                                                                  @:       
+       .@                                                                  @:       
+        @                                                                  @:       
+        @                                                                  #;       
+        @                                                                  #;       
+        @                                                                  +@@,     
+      '#@                                                                  '+  ;@.  
+   +@.  @                                                                  '#     @ 
+ ';     @                                                                  ;@      @
+.       @                                                                  :@      #
+@       @                                                                  ,@    @ @
++ @  ,@                                                                  .@@    # 
+ @    ':@                                                                   +; .+ 
+ ,.  @ .@                                                                   @     
+   ;   .@                                                                   @       
+       ,@                                                                   @       
+       :@                                                                   @       
+       ;#                                                                   @       
+       '#                                                                   @       
+       '+                                                                   @       
+       +'                                                                   @       
+       #;                                                                   @       
+       #;                                                                   @       
+       @:                                                                   @     
+       @:                                                                   @.      
+       @,                                                                   @,      
+       @,                                                                   @,      
+       @,                                                                   @,      
+       @,                                                                   @,      
+       @.                                                                   @.      
+       @.                                                                   @     
+       @.                                                                   @       
+       @.                                                                   @       
+       @,                                                                   @       
+       @,                                                                   @       
+       @,                                                                  .@       
+       @,                                                                  '#       
+       @:                                                                  @:       
+       @:                                                                  @        
+       #;                                                                  @        
+       +'                                                                 ,@        
+       '+                                                                 #'        
+       ,@                                                                 @         
+        @                                                                         
+        @.                                                               @'         
+        ;@                                                               @          
+         @                                                              +@          
+         '@                                                             @           
+          @,                                                           #@           
+          .@                                                           @            
+           #@                                                         @:            
+            @#                                                       @#             
+             @+                                                     @@              
+              @#                                                  .@@               
+               @@@#                                              @   .#             
+             ''    #                                            @      @            
+            @       @                                          @        '           
+           @         @                                       @@+        ;           
+          :   .       @+                                  :@@+  +.    @  +          
+          @  @      @, #@@;                            ;@@@,     ;    .  @          
+          ' @     ':     ,@@@#:                   :+@@@@:         #    @ @          
+          @ :    #           ;@@@@@@@#####@@@@@@@@@+.              @   ; .          
+           @    @                  ,:;''';;:,                     @  #,           
+            ;@##                                                     `             
+</pre>
+<p>(the golang mascot)</p>
+
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2013/11/13/go/';
+        var disqus_url = 'http://blog.kablamo.org/2013/11/13/go/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

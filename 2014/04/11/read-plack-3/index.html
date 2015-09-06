@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Reading code - PSGI Application Architecture</title>
+  <meta name="description" content="  Part 1 - An Overview  Part 2 - plackup Architecture  Part 3 - PSGI Application Architecture  Part 4 - Plack::Builder">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/04/11/read-plack-3/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">blog.<span class="site-title-bold">kablamo</span>.org</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Reading code - PSGI Application Architecture</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2014-04-11
+    </p>
+  </header>
+
+  <article class="post-content">
+    <ul>
+  <li><a href="/2014/04/08/read-plack-1">Part 1 - An Overview</a></li>
+  <li><a href="/2014/04/09/read-plack-2">Part 2 - plackup Architecture</a></li>
+  <li><a href="/2014/04/11/read-plack-3"><strong>Part 3 - PSGI Application Architecture</strong></a></li>
+  <li><a href="/2014/04/12/read-plack-4">Part 4 - Plack::Builder</a></li>
+</ul>
+
+<h1 id="psgi-applications">PSGI Applications</h1>
+
+<p>The <a href="https://metacpan.org/pod/distribution/PSGI/PSGI.pod">PSGI spec</a> defines
+a PSGI application.</p>
+
+<blockquote>
+  <p>A PSGI application is a Perl code reference. It takes exactly one argument,
+the environment, and returns an array reference containing exactly three
+values.</p>
+</blockquote>
+
+<p>The three values are a status, headers, and a body.  Here is an example:</p>
+
+<pre><code>my $app = sub {
+    my $env = shift;
+    return [
+        '200',
+        [ 'Content-Type' =&gt; 'text/plain' ],
+        [ "Hello World" ], # or IO::Handle-like object
+    ];
+};
+</code></pre>
+
+<h1 id="the-psgi-environment-hash">The PSGI environment hash</h1>
+
+<p>The PSGI environment hash is a hashref with many keys.  But mostly it is the
+data (headers, body, etc) from an HTTP::Request which has been parsed and put into
+a hash for convenient access.</p>
+
+<h1 id="middleware">Middleware</h1>
+
+<p>A middleware component takes a PSGI application and runs it, passing in the
+PSGI environment hash.  But before it runs the app, it gets to modify the
+environment if it wants to.  And after running the app, it can modify the
+response if it wants to.</p>
+
+<h1 id="plackmiddleware">Plack::Middleware</h1>
+
+<p>Middleware is a wrapper around a PSGI app.  More than one middleware can be
+wrapped around an app, creating a series of layers like an
+<a href="http://blogs.perl.org/users/jakob/2012/09/28/middleware-onion.png/500px-MiddlewareOnion.svg.png">onion</a>.
+What makes the middleware onion a somewhat unusual construct is the event
+driven / callback nature of it.  Lets look at how its implemented.</p>
+
+<p>All middleware inherits from Plack::Middleware which is an itsy bitsy (teeny
+weeny) module.  The middleware onion is created with just 2 short subroutines
+(notice the <code>call()</code> and <code>prepare_app()</code> subs are written by middleware authors):</p>
+
+<pre><code>sub wrap {
+    my($self, $app, @args) = @_;
+    if (ref $self) {
+        $self-&gt;{app} = $app;
+    } else {
+        $self = $self-&gt;new({ app =&gt; $app, @args });
+    }
+    return $self-&gt;to_app;
+}
+
+sub to_app {
+    my $self = shift;
+    $self-&gt;prepare_app;
+    return sub { $self-&gt;call(@_) };
+}
+</code></pre>
+
+<p>How do these subs work together?  The middleware onion is sometimes constructed as follows:</p>
+
+<pre><code>my $app = MyWebApp-&gt;new-&gt;to_app;
+$app = Plack::Middleware::A-&gt;wrap($app);
+$app = Plack::Middleware::B-&gt;wrap($app);
+$app = Plack::Middleware::C-&gt;wrap($app);
+</code></pre>
+
+<p>But it might be more clear to write it this way</p>
+
+<pre><code>my $app0 = MyWebApp-&gt;new-&gt;to_app;           # $app0-&gt;($env) runs the web app
+$app1 = Plack::Middleware::A-&gt;wrap($app0);  # $app1-&gt;($env) calls P::M::A-&gt;call() which calls $app0-&gt;($env)
+$app2 = Plack::Middleware::B-&gt;wrap($app1);  # $app2-&gt;($env) calls P::M::B-&gt;call() which calls $app1-&gt;($env)
+$app3 = Plack::Middleware::C-&gt;wrap($app2);  # $app3-&gt;($env) calls P::M::C-&gt;call() which calls $app2-&gt;($env)
+                                            # When the server receives a request it calls $app3-&gt;($env)
+</code></pre>
+
+<p>So when an event occurs – for example the PSGI server sees a new request – it
+passes the event to the app.  The app is a chain of callbacks which run each
+other.  This is clearly an example of event driven programming.</p>
+
+<h1 id="plackcomponent-and-plackapp">Plack::Component and Plack::App</h1>
+
+<p>Plack::Middleware inherits from Plack::Component.  So the most common use of
+Plack::Component is in middleware.</p>
+
+<p>Plack::Component can also be used as a tool for creating PSGI applications.  It
+has a light dusting of code, but mostly its an interface which is implemented
+by modules in the Plack::App namespace.  For example Plack::App::File is a web
+app which serves static files from a root directory, and Plack::App::URLMap is
+a web app which maps multiple web apps to multiple urls.</p>
+
+<p>But notice that I am not required to use Plack::Component to create a PSGI
+application. A PSGI application is just a code reference.  The PSGI spec does
+not say that a PSGI application is a reference to code that inherits from
+Plack::Component.</p>
+
+<p>The nice thing about using Plack::Component to build my app is that it
+provides a common interface for all PSGI apps.  Whenever I see <code>$app</code>, I
+can rely on that behavior.  This is clearly important for middleware.  And it
+feels good from a design point of view.</p>
+
+<p>But its not required and it adds some complexity.</p>
+
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2014/04/11/read-plack-3/';
+        var disqus_url = 'http://blog.kablamo.org/2014/04/11/read-plack-3/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Reading code - Plack</title>
+  <meta name="description" content="I write lots of code.  But I want to be better and faster at reading code.When I had the privilege of working with @ranguard I discovered he is a codereading...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/04/08/read-plack-1/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">blog.<span class="site-title-bold">kablamo</span>.org</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Reading code - Plack</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2014-04-08
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>I write lots of code.  But I want to be better and faster at reading code.
+When I had the privilege of working with @ranguard I discovered he is a code
+reading <em>cheetah</em> and I always envied that.  So I’ve decided to practice
+by reading the source code of various CPAN modules.  I’m starting with Plack.</p>
+
+<ul>
+  <li><a href="/2014/04/08/read-plack-1"><strong>Part 1 - An Overview</strong></a></li>
+  <li><a href="/2014/04/09/read-plack-2">Part 2 - plackup Architecture</a></li>
+  <li><a href="/2014/04/11/read-plack-3">Part 3 - PSGI Application Architecture</a></li>
+  <li><a href="/2014/04/12/read-plack-4">Part 4 - Plack::Builder</a></li>
+</ul>
+
+<h1 id="plack">Plack</h1>
+
+<p>Plack describes itself as a set of tools for using
+<a href="https://metacpan.org/pod/PSGI">PSGI</a> (the Perl Server Gateway Interface).</p>
+
+<p>The earliest release of Plack on CPAN is version 0.9000 from 2009-10-13.  There
+were releases several times a week for the first <strong>two years</strong>.  Impressively, in
+2012 releases were still happening roughly once a week.  In 2013 things seem to
+have cooled and now releases happen about once a month.</p>
+
+<p>The code itself is written tersely and with attention to detail.  There are
+almost no comments.  In fact 43 out of 71 files have fewer than 3 comments.
+Of course the code is very well written which makes comments less necessary and
+nowadays there is quite a bit of excellent POD as well.</p>
+
+<p>The code also makes heavy use of callbacks (code references).  That is to say
+its heavily event driven. Which makes sense given the event driven nature of web
+servers.  For me this gave the code a JavaScript flavor.  Take for example
+<code>Plack::Util::foreach</code> which works just like
+<a href="http://api.jquery.com/jQuery.each/">jQuery.each()</a> by iterating over an array
+calling a code reference on each item.</p>
+
+<pre><code>Plack::Util::foreach([1,2,3], sub { print shift }); # prints "123"
+</code></pre>
+
+<h2 id="background-reading">Background reading</h2>
+
+<p>The most important thing to read is the <a href="https://metacpan.org/pod/distribution/PSGI/PSGI.pod">PSGI spec</a>. 
+This is the problem Plack was built to solve.  Its clear and well
+written but perhaps also a little boring and lacking in context. Still I found
+it very helpful to refer back to while reading the code.</p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<pre><code>~/code ⚡ git clone git@github.com:plack/Plack.git
+~/code ⚡ cd Plack
+</code></pre>
+
+<p>The first thing I noticed is a <code>cpanfile</code> containing a list of the project
+dependencies.  Because understanding and running the tests is often useful
+when reading new code I installed the dependencies using
+<a href="https://metacpan.org/pod/Carton">Carton</a> and ran the tests.</p>
+
+<pre><code>~/code/Plack ⚡ carton
+~/code/Plack ⚡ prove -rl t
+</code></pre>
+
+<h2 id="who-works-on-plack">Who works on Plack?</h2>
+
+<p>Lets get a feel for who is involved in the project.</p>
+
+<pre><code>~/code/Plack ⚡ git shortlog --summary --numbered | head
+1567  Tatsuhiko Miyagawa
+    70  Kazuho Oku
+    68  Tokuhiro Matsuno
+    20  Daisuke Murase
+    20  Jesse Luehrs
+    19  yappo
+    16  Karen Etheridge
+    16  Mark Stosberg
+    12  hiratara
+    11  Stevan Little
+</code></pre>
+
+<h2 id="how-big-is-it">How big is it?</h2>
+
+<pre><code>~/code/Plack ⚡ tree lib | tail -1
+17 directories, 70 files
+
+~/code/Plack ⚡ cloc . 2&gt;/dev/null | tail -13
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+Perl                            82           2889           3341           5309
+Bourne Shell                     8             55            138            251
+YAML                             1              0              0             19
+HTML                             3              2              0             14
+Python                           1              2              1              6
+Javascript                       1              0              0              1
+CSS                              1              0              0              1
+-------------------------------------------------------------------------------
+SUM:                            97           2948           3480           5601
+-------------------------------------------------------------------------------
+</code></pre>
+
+<h2 id="what-is-the-lib-directory-structure-like">What is the lib directory structure like?</h2>
+
+<p>Unfortunately with 71 files in the lib directory its hard to grok whats
+happening in a single glance so maybe thats not a great question.  Instead I
+found it helpful to group the code by functionality.  I came up
+with 3 major categories which look like this:</p>
+
+<ul>
+  <li><em>Category 1</em> - Modules for loading and running PSGI servers
+    <ul>
+      <li>plackup</li>
+      <li>Plack::Handler</li>
+      <li>Plack::Handler::*</li>
+      <li>Plack::Loader</li>
+      <li>Plack::Loader::*</li>
+      <li>Plack::Runner</li>
+    </ul>
+  </li>
+  <li><em>Category 2</em> - Modules for building PSGI apps
+    <ul>
+      <li>Plack::App::*</li>
+      <li>Plack::Builder</li>
+      <li>Plack::Component</li>
+      <li>Plack::Middleware</li>
+      <li>Plack::Middleware::*</li>
+    </ul>
+  </li>
+  <li><em>Category 3</em> - Modules for testing
+    <ul>
+      <li>Plack::Test</li>
+      <li>Plack::Test::*</li>
+      <li>Plack::HTTP::Message::PSGI</li>
+      <li>Plack::LWPish</li>
+    </ul>
+  </li>
+</ul>
+
+<p>However I also got crazy and went ahead and listed <em>everything</em> in the lib
+directory along with a brief description.  I guess it might be handy for
+reference purposes.  The numbers (1), (2), (3) below correspond to the three
+categories I listed above.</p>
+
+<pre><code>~/code/Plack ⚡ tree lib
+lib
+├── HTTP
+│   ├── Message
+│   │   └── PSGI.pm               # (3) Converts an HTTP::Request to a PSGI env hash
+│   └── Server                    
+│       └── PSGI.pm               # (1) Reference PSGI web server; no deps; not usually for prod
+├── Plack                         
+│   ├── App                       # (2) These libs inherit from Plack::Component; they are PSGI web apps
+│   │   ├── Cascade.pm               # Foreach request, tries a number of PSGI apps until one is successful
+│   │   ├── CGIBin.pm                # Creates many PSGI apps for a directory with many CGI scripts (uses WrapCGI.pm)
+│   │   ├── Directory.pm             # Serves a directory of files
+│   │   ├── File.pm                  # Serves a file
+│   │   ├── PSGIBin.pm               # Create PSGI apps from a directory of .psgi files
+│   │   ├── URLMap.pm                # Maps a url to a PSGI app
+│   │   └── WrapCGI.pm               # Creates a single PSGI app from a single CGI script
+│   ├── Builder.pm                # (2) A DSL for building Plack Middleware
+│   ├── Component.pm              # (2) A (optional) tool for building PSGI web apps
+│   ├── Handler
+│   │   ├── Apache1.pm
+│   │   ├── Apache2
+│   │   │   └── Registry.pm
+│   │   ├── Apache2.pm
+│   │   ├── CGI.pm
+│   │   ├── FCGI.pm
+│   │   ├── HTTP
+│   │   │   └── Server
+│   │   │       └── PSGI.pm                 # A Plack::Handler for HTTP::Server::PSGI
+│   │   └── Standalone.pm            # Alias for Plack::Handler::HTTP::Server::PSGI
+│   ├── Handler.pm                # (1) Instantiate and run PSGI compatible servers
+│   ├── HTTPParser
+│   │   └── PP.pm                    # Parse HTTP headers with XS
+│   ├── HTTPParser.pm             # (1) Parse HTTP headers; used by HTTP::Server::PSGI
+│   ├── Loader
+│   │   ├── Delayed.pm               # Delay compilation of the PSGI app until the first request
+│   │   ├── Restarter.pm             # Restart the server when a watched file changes
+│   │   └── Shotgun.pm               # Recompile the PSGI app for every request
+│   ├── Loader.pm                 # (1) Load PSGI compatible web servers
+│   ├── LWPish.pm                 # (3) Light version of LWP for testing
+│   ├── Middleware                
+│   │   ├── AccessLog
+│   │   │   └── Timed.pm                # Write access logs but can handle a fake File::IO body
+│   │   ├── AccessLog.pm             # Write access logs
+│   │   ├── Auth
+│   │   │   └── Basic.pm                # Basic authentication
+│   │   ├── BufferedStreaming.pm     # Enable streaming for servers that don't
+│   │   ├── Chunked.pm               # Implements part of HTTP/1.1 - chunked HTTP transfer encoding
+│   │   ├── ConditionalGET.pm        # Implements part of HTTP/1.1 - Conditional GET
+│   │   ├── Conditional.pm           # Runs the specified middleware if a specified condition is met
+│   │   ├── ContentLength.pm         # Adds a Content-Length header if possible
+│   │   ├── ContentMD5.pm            # Sets the Content-MD5 header when the body is an arrayref
+│   │   ├── ErrorDocument.pm         # Show different error documents for different HTTP errors
+│   │   ├── Head.pm                  # Delete any response body from HEAD requests
+│   │   ├── HTTPExceptions.pm        # Redirect to an error page when HTTP::Exceptions are caught
+│   │   ├── IIS6ScriptNameFix.pm     # Fix for IIS
+│   │   ├── IIS7KeepAliveFix.pm      # Fix for IIS
+│   │   ├── JSONP.pm                 # Change JSON responses to JSONP if a callback param is specified
+│   │   ├── LighttpdScriptNameFix.pm # Fix for Lighttpd
+│   │   ├── Lint.pm                  # Checks input/output for compliance w/PSGI spec
+│   │   ├── Log4perl.pm              # Log with Log::Log4Perl
+│   │   ├── LogDispatch.pm           # Log with Log::Dispatch
+│   │   ├── NullLogger.pm            # Don't log anything
+│   │   ├── RearrangeHeaders.pm      # Fix for very old MSIE and broken HTTP proxy servers
+│   │   ├── Recursive.pm             # Allows the app to forward the request to a different (url) path
+│   │   ├── Refresh.pm               # Similar to Plack::Loader::Restarter but less effective
+│   │   ├── Runtime.pm               # Sets the 'X-Runtime' HTTP response header = app's response time
+│   │   ├── SimpleContentFilter.pm   # Filter response content
+│   │   ├── SimpleLogger.pm          # Logs messages
+│   │   ├── StackTrace.pm            # Displays a stacktrace when a PSGI app dies
+│   │   ├── Static.pm                # Serve static files
+│   │   ├── XFramework.pm            # Adds an X-Framework HTTP response header
+│   │   └── XSendfile.pm             # Adds an X-Sendfile HTTP response header
+│   ├── Middleware.pm             # (2) Wraps PSGI apps; can modify incoming requests / outgoing responses
+│   ├── MIME.pm                   # A list of MIME types (mostly)
+│   ├── Request
+│   │   └── Upload.pm                # A subclass of Plack::Request for file uploads
+│   ├── Request.pm                # (2) Low level request obj for middleware and web apps
+│   ├── Response.pm               # (2) Low level response obj for middleware and web apps
+│   ├── Runner.pm                 # (1) The guts of plackup -- uses Plack::Loader and Plack::Handler
+│   ├── TempBuffer.pm             # For backward compat. Saves data in memory or to a file if its big;
+│   ├── Test
+│   │   ├── MockHTTP.pm              # Test a PSGI app without using a server (faster)
+│   │   ├── Server.pm                # Test a PSGI app using a very small server (fast)
+│   │   └── Suite.pm                 # Ensure the web server complies with the PSGI spec
+│   ├── Test.pm                   # (3) A factory for generating test objects
+│   ├── Util
+│   │   └── Accessor.pm              # Light version of Class::Accessor for backward compat
+│   └── Util.pm                   # Misc but important utilities used throughout the code base
+└── Plack.pm                   # No code here -- just pod and a version number
+</code></pre>
+
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2014/04/08/read-plack-1/';
+        var disqus_url = 'http://blog.kablamo.org/2014/04/08/read-plack-1/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

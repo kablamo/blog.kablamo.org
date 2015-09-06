@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kablamo</title>
+    <description>Eric is a Chicago based developer who has been building stuff with Perl since 1998.  Currently he is building stuff at DuckDuckGo.  Eric has lived and worked in Beijing, Singapore, and London.  He enjoys peanut butter and ice cream and peanut butter ice cream.
+</description>
+    <link>http://blog.kablamo.org/</link>
+    <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 06 Sep 2015 16:39:26 -0500</pubDate>
+    <lastBuildDate>Sun, 06 Sep 2015 16:39:26 -0500</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>HTTP::Request::AsCurl</title>
+        <description>&lt;p&gt;Today, on a whim, I released a module called
+&lt;a href=&quot;https://metacpan.org/pod/HTTP::Request::AsCurl&quot;&gt;HTTP::Request::AsCurl&lt;/a&gt; to
+CPAN.  It converts an HTTP::Request object to a curl command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use HTTP::Request::Common;
+use HTTP::Request::AsCurl;
+
+my $request = POST('api.earth.defense/weapon1', { 
+    target =&amp;gt; 'mothership', 
+    when   =&amp;gt; 'now' 
+});
+
+say join &quot;\n&quot;, $request-&amp;gt;as_curl;
+# curl --dump-header - -XPOST &quot;api.earth.defense/weapon1&quot; \
+# --data 'target=mothership' \
+# --data 'when=now'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It works by injecting the &lt;code&gt;as_curl()&lt;/code&gt; method into the HTTP::Request namespace.
+This must be a bad idea and probably not a great bit of code to rely on in a
+production environment.  But it is pretty convenient syntax for debugging a
+REST API and I couldn’t resist.  Thoughts, suggestions, criticism?&lt;/p&gt;
+
+&lt;h1 id=&quot;update-2014-06-01---&quot;&gt;– UPDATE (2014-06-01) –&lt;/h1&gt;
+
+&lt;p&gt;I released a new version which has a totally different user interface.  Here is
+the new synopsis:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use HTTP::Request::Common;
+use HTTP::Request::AsCurl qw/as_curl/;
+
+my $request = POST('api.earth.defense/weapon1', { 
+    target =&amp;gt; 'mothership', 
+    when   =&amp;gt; 'now' 
+});
+
+system as_curl($request);
+
+print as_curl($request, pretty =&amp;gt; 1, newline =&amp;gt; &quot;\n&quot;, shell =&amp;gt; 'bourne');
+# curl \
+# --request POST api.earth.defense/weapon1 \
+# --dump-header - \
+# --data target=mothership \
+# --data when=now
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are 2 major changes.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;I’m no longer doing namespace injection.  I really liked the syntax, but it
+was problematic and unnecessary.&lt;/li&gt;
+  &lt;li&gt;The old version returned a formatted array of strings which was 
+not very useful.  The problem with a formatted string (as was helpfully
+pointed out to me) is you have worry about stuff like newlines which
+depends on the system you are targeting and shell escaping which depends on
+the shell you are targeting.  This is a can of worms.  Hopefully this new
+interface is an improvement.&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Tue, 27 May 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/05/27/http-request-ascurl/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/05/27/http-request-ascurl/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>code</category>
+        
+      </item>
+    
+      <item>
+        <title>Reading code - Camel-Snake-Kebab</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://github.com/qerub/camel-snake-kebab&quot;&gt;Camel-Snake-Kebab&lt;/a&gt; is a Clojure
+library for word case conversions.  I have wanted to see this on CPAN for a
+while so last week I finally ported it to Perl.  I even ported the test suite.
+Here is a synopsis of my 
+&lt;a href=&quot;https://metacpan.org/pod/String::CamelSnakeKebab&quot;&gt;String::CamelSnakeKebab&lt;/a&gt; Perl module:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use String::CamelSnakeKebab qw/:all/;
+
+lower_camel_case('flux-capacitor')
+       # Returns 'fluxCapacitor'
+
+upper_camel_case('flux-capacitor')
+       # Returns 'FluxCapacitor'
+
+lower_snake_case 'ASnakeSlithersSlyly'    
+       # Returns 'a_snake_slithers_slyly'
+
+upper_snake_case('ASnakeSlithersSlyly')
+       # Returns 'A_Snake_Slithers_Slyly'
+
+constant_case(&quot;I am constant&quot;)
+    # Returns &quot;I_AM_CONSTANT&quot;
+
+kebab_case('Peppers_Meat_Pineapple')
+ # Returns 'peppers-meat-pineapple'
+
+http_header_case(&quot;x-ssl-cipher&quot;)
+       # Returns &quot;X-SSL-Cipher&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;clojure&quot;&gt;Clojure&lt;/h1&gt;
+
+&lt;p&gt;This was my first contact with Clojure and I found the code I was reading to be
+bite sized, concise, elegant code.  It reads a bit like math equations to
+me.  Or sort of vaguely BNF-like as you will see.  I suspect I would have had a
+hard time choosing a better library as my introduction to the language.&lt;/p&gt;
+
+&lt;h1 id=&quot;functional-programming&quot;&gt;Functional programming&lt;/h1&gt;
+
+&lt;p&gt;Clojure is a functional language – as contrasted with more common imperative
+languages.  I will admit I didn’t really know what that means.  But hey I
+looked it up so I can now present to you 3 central concepts of functional
+programming.  (Btw Perl is usually imperative but it can be written
+functionally as well.  Although its a little easier and more natural in
+Clojure).&lt;/p&gt;
+
+&lt;h2 id=&quot;first-class-and-higher-order-functions&quot;&gt;1. First class and higher order functions&lt;/h2&gt;
+
+&lt;p&gt;These are functions which accept other functions as arguments.  So functional
+programmers enjoy passing around code refs.  Thats not radical for Perl
+developers.  Perl has always had excellent support for that.&lt;/p&gt;
+
+&lt;p&gt;This flavor of code is often shorter, more general, and less repetitive.
+But its harder to read and requires me to use my brains causes me some
+discomfort.&lt;/p&gt;
+
+&lt;h3 id=&quot;example&quot;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;The most important function in Camel-Snake-Kebab is &lt;code&gt;convert-case&lt;/code&gt;.  It is
+called by every case conversion function in the library.  It splits a string
+into words, applies a case rule to the first word and then a second possibly
+different case rule to the remaining words.  Then all the words are joined back
+together using the given separator.  Here it is written in Clojure:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defn convert-case [first-fn rest-fn sep s]
+&quot;Converts the case of a string according to the rule for the first
+word, remaining words, and the separator.&quot;
+(let [[first &amp;amp; rest] (split s word-separator-pattern)]
+    (join sep (cons (first-fn first) (map rest-fn rest)))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Using this I could implement lower snake case like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defn lower-snake-case [s]
+    (convert-case lower-case lower-case &quot;_&quot; s))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is the translation in Perl I came up with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sub convert_case {
+    my ($first_coderef, $rest_coderef, $separator, $string) = @_; 
+
+    my ($first, @rest) = split $WORD_SEPARATOR_PATTERN, $string;
+
+    my @words = $first_coderef-&amp;gt;($first);
+    push @words, $rest_coderef-&amp;gt;($_) for @rest;
+
+    return join $separator, @words;
+}
+
+sub my_lc { lc $_ }
+
+sub lower_snake_case {
+    convert_case( \&amp;amp;my_lc, \&amp;amp;my_lc, &quot;_&quot;, shift );
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The cool thing about this is the different case methods (lower_camel_case,
+kebab_case, etc) are not actually implemented this way.  They are dynamically
+created when the module loads using a set of conversion rules that looks like
+this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;our %CONVERSION_RULES = (
+    'lower_camel_case' =&amp;gt; [ \&amp;amp;lc,               \&amp;amp;ucfirst,          &quot;&quot;  ],
+    'upper_camel_case' =&amp;gt; [ \&amp;amp;ucfirst,          \&amp;amp;ucfirst,          &quot;&quot;  ],
+    'lower_snake_case' =&amp;gt; [ \&amp;amp;lc,               \&amp;amp;lc,               &quot;_&quot; ],
+    'upper_snake_case' =&amp;gt; [ \&amp;amp;ucfirst,          \&amp;amp;ucfirst,          &quot;_&quot; ],
+    'constant_case'    =&amp;gt; [ \&amp;amp;uc,               \&amp;amp;uc,               &quot;_&quot; ],
+    'kebab_case'       =&amp;gt; [ \&amp;amp;lc,               \&amp;amp;lc,               &quot;-&quot; ],
+    'http_header_case' =&amp;gt; [ \&amp;amp;http_header_caps, \&amp;amp;http_header_caps, &quot;-&quot; ],
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;purely-functional-functions&quot;&gt;2. Purely functional functions&lt;/h2&gt;
+
+&lt;p&gt;These are functions with no state and no side effects.  In functional
+programming I can’t do assignments because that alters state (and that is a
+side effect).  Which sounds rediculous.  How can I program without doing
+assignments?  I’m not sure, but the advantage of no side effects is
+performance.  I can run functions in parallel without affecting each other.
+Also the function’s output will depend entirely on the input which makes purely
+functional functions great for &lt;a href=&quot;https://metacpan.org/pod/Memoize&quot;&gt;memoization&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;example-1&quot;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;This concept was also evident in the code I ported.  Functions did not modify
+state.  There were very few if any assignments.  And the output of functions
+depended entirely on the input.&lt;/p&gt;
+
+&lt;p&gt;I did try memoizing String::CamelSnakeKebab but it did not make it faster.  I’m
+not sure why.  Perhaps case conversion is just not computationally intensive
+enough to make a difference?  So unfortunately I have no example for you.  Any
+help in the comments would be awesome.&lt;/p&gt;
+
+&lt;h2 id=&quot;no-for-loops&quot;&gt;3. No &lt;code&gt;for&lt;/code&gt; loops&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;for&lt;/code&gt; loops require state and assignments.  To implement loops in functional
+programming I’m supposed to use recursion.  I didn’t see any examples of this
+in this library and my brain is grateful to the author for sparing me the
+exertion.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-end&quot;&gt;The End&lt;/h1&gt;
+
+&lt;p&gt;Thats the end of my story today.  If you are interested, compare the
+&lt;a href=&quot;https://github.com/kablamo/perl-string-camelsnakekebab/blob/master/lib/String/CamelSnakeKebab.pm&quot;&gt;Perl source code&lt;/a&gt;
+with the
+&lt;a href=&quot;https://github.com/qerub/camel-snake-kebab/blob/stable/src/camel_snake_kebab.clj&quot;&gt;Clojure source code&lt;/a&gt;.
+Each version is about 70 lines of code.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 26 May 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/05/26/perl-camel-snake-kebab/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/05/26/perl-camel-snake-kebab/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>readingcode</category>
+        
+        <category>writingcode</category>
+        
+      </item>
+    
+      <item>
+        <title>Test::Pretty - because TAP is unnattractive</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://metacpan.org/pod/Test::Pretty&quot;&gt;Test::Pretty&lt;/a&gt; (artfully written by
+the inimitable &lt;a href=&quot;http://tokuhirom.github.io/&quot;&gt;@tokuhirom&lt;/a&gt;) makes my tests look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/for-posts/2014-05-08-test-pretty.png&quot; alt=&quot;x&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is especially nice when I have subtests.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/for-posts/2014-05-08-test-pretty-subtest2.png&quot; alt=&quot;x&quot; /&gt;
+&lt;img src=&quot;/images/for-posts/2014-05-08-test-pretty-subtest.png&quot; alt=&quot;x&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;how-it-works&quot;&gt;How it works&lt;/h1&gt;
+
+&lt;p&gt;I can enable Test::Pretty like this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;prove -MTest::Pretty -vlr t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But typing extra characters is not fun.  Happily
+@tokuhirom also created a prove
+&lt;a href=&quot;https://metacpan.org/pod/App::Prove::Plugin::retty&quot;&gt;plugin&lt;/a&gt; (which is included
+with the Test::Pretty module) which allows me to do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;prove -Pretty -vlr t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Shorter but still too much typing so I created a &lt;code&gt;~/.proverc&lt;/code&gt; file which contains
+the following lines:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;--lib
+--verbose
+--comments
+--recurse
+-Pretty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now I can get pretty verbose recursive (etc) tests and I only need to type this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;prove t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can view my &lt;code&gt;~/.proverc&lt;/code&gt; and more goodies in my &lt;a href=&quot;https://github.com/kablamo/dotfiles&quot;&gt;dotfiles repo&lt;/a&gt;).&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 08 May 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/05/08/test-pretty/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/05/08/test-pretty/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
+    
+      <item>
+        <title>Why reading code is good for me</title>
+        <description>&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;So I can start kicking butt faster&lt;/strong&gt; - When I start a new job or a new
+contract. Or when I hack on a new feature.  Or every day of my life as a
+programmer that involves legacy code.  Yeah pretty much all the time.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;So I can learn new tricks&lt;/strong&gt; - Healthy languages evolve.  Idioms and slang
+are tools for more efficiently expressing ideas.  I want to be on top of
+that.  Also its best way to peak inside the mind of a talented developer and
+steal and copy their skills.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;So I can work better with others&lt;/strong&gt; - I understand their idioms because I have
+seen them before.  And I can probably articulate why their idioms are awesome
+or feeble.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I must remember that attitude matters.  If I think of reading code as a painful
+chore it will be.  But if I look for opportunity I find it.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 23 Apr 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/04/23/reading-code/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/23/reading-code/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>experiments</category>
+        
+      </item>
+    
+      <item>
+        <title>An experiment - Write code every day</title>
+        <description>&lt;p&gt;If you missed John Resig’s recent post about &lt;a href=&quot;http://ejohn.org/blog/write-code-every-day/&quot;&gt;writing code everyday&lt;/a&gt; I highly recommend it.&lt;/p&gt;
+
+&lt;p&gt;He is a busy guy with a full time job (at Khan Academy), a few open source side
+projects (the author of jQuery), a wife, and a few hobbies.  How to sustainably
+get stuff done on his open source side projects without his wife leaving him?
+He decided to start writing (non work) code for 30 minutes every day.  This by
+itself is not a revolutionary idea.  What blew my mind out of my nose and on to
+the table are the benefits he encountered:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Minimum viable code&lt;/strong&gt; - No time for more than that.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Small but continuous progress&lt;/strong&gt; - No anxiety about not getting stuff done.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Free time on the weekends&lt;/strong&gt; - Instead of working all
+weekend to catch up from doing nothing during the week.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Lowered cost of context switching&lt;/strong&gt; - Compared to resuming work on a side project just on the weekends.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Brain solves side project issues in the background&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Wow, I need to do this too.  So this is
+&lt;a href=&quot;http://blog.kablamo.org/2014/03/24/experiments/&quot;&gt;another&lt;/a&gt;
+&lt;a href=&quot;http://blog.kablamo.org/2014/01/01/no-dessert-forever/&quot;&gt;experiment&lt;/a&gt; and here
+are the rules.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;I will write code for a minimum of 30 minutes each day.&lt;/li&gt;
+  &lt;li&gt;I must push working code every day.&lt;/li&gt;
+  &lt;li&gt;I will write for a minimum of 10 minutes each day.&lt;/li&gt;
+  &lt;li&gt;I must publish a blog post at least once a week.&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Sun, 20 Apr 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/04/20/write-code-every-day/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/20/write-code-every-day/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>experiments</category>
+        
+      </item>
+    
+      <item>
+        <title>Codecube.io now supports Perl</title>
+        <description>&lt;p&gt;&lt;a href=&quot;http://codecube.io&quot;&gt;Codecube.io&lt;/a&gt; is a jsfiddle type service which runs Perl
+code (and other languages) and shows the results in your browser.&lt;/p&gt;
+
+&lt;p&gt;The website is written in Go and runs your code inside a Docker container.  It
+originally had support for C, Go, Python, and Ruby.  I was looking for an
+excuse to play with Docker and Go so I submitted a pull request which added
+support for Perl.&lt;/p&gt;
+
+&lt;p&gt;See also:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The original Codecube &lt;a href=&quot;http://hmarr.com/2013/oct/16/codecube-runnable-gists/&quot;&gt;blog post&lt;/a&gt; which is a good introduction to Docker.&lt;/li&gt;
+  &lt;li&gt;The &lt;a href=&quot;https://github.com/hmarr/codecube&quot;&gt;Codecube github repo&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;My previous post on &lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;My previous post on &lt;a href=&quot;http://www.docker.io/&quot;&gt;Docker&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sat, 19 Apr 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/04/19/codecube/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/19/codecube/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
+    
+      <item>
+        <title>Reading code - Plack::Builder</title>
+        <description>&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/08/read-plack-1&quot;&gt;Part 1 - An Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/09/read-plack-2&quot;&gt;Part 2 - plackup Architecture&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/11/read-plack-3&quot;&gt;Part 3 - PSGI Application Architecture&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/12/read-plack-4&quot;&gt;&lt;strong&gt;Part 4 - Plack::Builder&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Plack::Builder provides a domain specific language (DSL) for middleware
+developers.  It looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use Plack::Builder;
+
+my $app1 = sub { ... };
+my $app2 = sub { ... };
+
+builder {
+    enable &quot;Deflater&quot;;
+    enable &quot;Session&quot;, store =&amp;gt; &quot;File&quot;;
+    enable &quot;Debug&quot;, panels =&amp;gt; [ qw(DBITrace Memory Timer) ];
+
+    mount &quot;/narwhale&quot; =&amp;gt; $app1;
+    mount &quot;/unicorn&quot;  =&amp;gt; $app2;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;How does it work?  With three artful tricks.&lt;/p&gt;
+
+&lt;h1 id=&quot;artful-trick-1&quot;&gt;Artful trick #1&lt;/h1&gt;
+
+&lt;p&gt;The first artful trick is the &lt;code&gt;builder&lt;/code&gt; block.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sub builder(&amp;amp;) {
+    my $block = shift;
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;&amp;amp;&lt;/code&gt; is a function prototype.  Perl offers some limited compile time checking
+for parameters passed to subs.  Here is what &lt;code&gt;perldoc perlsub&lt;/code&gt; says about &lt;code&gt;&amp;amp;&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;An “&amp;amp;” requires an anonymous subroutine, which, if passed as the first
+argument, does not require the “sub” keyword or a subsequent comma.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So if I try to pass &lt;code&gt;builder()&lt;/code&gt; a scalar or an array or anything thats not an
+anonymous subroutine, I will get a compile time error.  But if I pass it an
+anonymous subroutine, the compiler will allow things to continue.&lt;/p&gt;
+
+&lt;h1 id=&quot;artful-trick-2&quot;&gt;Artful trick #2&lt;/h1&gt;
+
+&lt;p&gt;The next artful trick is that Plack::Builder implements the DSL keywords as
+subs and then exports those subs.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package Plack::Builder;
+use strict;
+use parent qw( Exporter );
+our @EXPORT = qw( builder enable enable_if mount );
+...
+sub enable    {...}
+sub enable_if {...}
+sub mount     {...}
+# etc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Actually thats 90% of the whole thing isn’t it?  Now its starting to look
+obvious.  But lets continue.&lt;/p&gt;
+
+&lt;h1 id=&quot;artful-trick-3&quot;&gt;Artful trick #3&lt;/h1&gt;
+
+&lt;p&gt;There is one more interesting idea here.  Notice that if I use &lt;code&gt;enable&lt;/code&gt;,
+&lt;code&gt;enable_if&lt;/code&gt;, or &lt;code&gt;mount&lt;/code&gt; outside of a &lt;code&gt;builder&lt;/code&gt; block I will get an
+error.  This works because the DSL keywords are subs which run code references.
+By default those code references refer to code which croaks an error.  But when
+&lt;code&gt;builder&lt;/code&gt; runs, those references are temporarily replaced with real working
+code.&lt;/p&gt;
+
+&lt;p&gt;Here’s some simplified code to illustrate how it works.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;our $_enable = sub { Carp::croak(...) }; # &amp;lt;&amp;lt; default code reference
+
+sub enable { $_enable-&amp;gt;(@_) }
+
+sub builder(&amp;amp;) {
+    my $block = shift;
+    ...
+    local $_enable = sub {...}; # &amp;lt;&amp;lt; temporarily assign real working code
+    ...
+    my $app = $block-&amp;gt;();
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Sat, 12 Apr 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/04/12/read-plack-4/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/12/read-plack-4/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
+    
+      <item>
+        <title>Reading code - PSGI Application Architecture</title>
+        <description>&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/08/read-plack-1&quot;&gt;Part 1 - An Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/09/read-plack-2&quot;&gt;Part 2 - plackup Architecture&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/11/read-plack-3&quot;&gt;&lt;strong&gt;Part 3 - PSGI Application Architecture&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/12/read-plack-4&quot;&gt;Part 4 - Plack::Builder&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;psgi-applications&quot;&gt;PSGI Applications&lt;/h1&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://metacpan.org/pod/distribution/PSGI/PSGI.pod&quot;&gt;PSGI spec&lt;/a&gt; defines
+a PSGI application.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A PSGI application is a Perl code reference. It takes exactly one argument,
+the environment, and returns an array reference containing exactly three
+values.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The three values are a status, headers, and a body.  Here is an example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;my $app = sub {
+    my $env = shift;
+    return [
+        '200',
+        [ 'Content-Type' =&amp;gt; 'text/plain' ],
+        [ &quot;Hello World&quot; ], # or IO::Handle-like object
+    ];
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;the-psgi-environment-hash&quot;&gt;The PSGI environment hash&lt;/h1&gt;
+
+&lt;p&gt;The PSGI environment hash is a hashref with many keys.  But mostly it is the
+data (headers, body, etc) from an HTTP::Request which has been parsed and put into
+a hash for convenient access.&lt;/p&gt;
+
+&lt;h1 id=&quot;middleware&quot;&gt;Middleware&lt;/h1&gt;
+
+&lt;p&gt;A middleware component takes a PSGI application and runs it, passing in the
+PSGI environment hash.  But before it runs the app, it gets to modify the
+environment if it wants to.  And after running the app, it can modify the
+response if it wants to.&lt;/p&gt;
+
+&lt;h1 id=&quot;plackmiddleware&quot;&gt;Plack::Middleware&lt;/h1&gt;
+
+&lt;p&gt;Middleware is a wrapper around a PSGI app.  More than one middleware can be
+wrapped around an app, creating a series of layers like an
+&lt;a href=&quot;http://blogs.perl.org/users/jakob/2012/09/28/middleware-onion.png/500px-MiddlewareOnion.svg.png&quot;&gt;onion&lt;/a&gt;.
+What makes the middleware onion a somewhat unusual construct is the event
+driven / callback nature of it.  Lets look at how its implemented.&lt;/p&gt;
+
+&lt;p&gt;All middleware inherits from Plack::Middleware which is an itsy bitsy (teeny
+weeny) module.  The middleware onion is created with just 2 short subroutines
+(notice the &lt;code&gt;call()&lt;/code&gt; and &lt;code&gt;prepare_app()&lt;/code&gt; subs are written by middleware authors):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sub wrap {
+    my($self, $app, @args) = @_;
+    if (ref $self) {
+        $self-&amp;gt;{app} = $app;
+    } else {
+        $self = $self-&amp;gt;new({ app =&amp;gt; $app, @args });
+    }
+    return $self-&amp;gt;to_app;
+}
+
+sub to_app {
+    my $self = shift;
+    $self-&amp;gt;prepare_app;
+    return sub { $self-&amp;gt;call(@_) };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;How do these subs work together?  The middleware onion is sometimes constructed as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;my $app = MyWebApp-&amp;gt;new-&amp;gt;to_app;
+$app = Plack::Middleware::A-&amp;gt;wrap($app);
+$app = Plack::Middleware::B-&amp;gt;wrap($app);
+$app = Plack::Middleware::C-&amp;gt;wrap($app);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But it might be more clear to write it this way&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;my $app0 = MyWebApp-&amp;gt;new-&amp;gt;to_app;           # $app0-&amp;gt;($env) runs the web app
+$app1 = Plack::Middleware::A-&amp;gt;wrap($app0);  # $app1-&amp;gt;($env) calls P::M::A-&amp;gt;call() which calls $app0-&amp;gt;($env)
+$app2 = Plack::Middleware::B-&amp;gt;wrap($app1);  # $app2-&amp;gt;($env) calls P::M::B-&amp;gt;call() which calls $app1-&amp;gt;($env)
+$app3 = Plack::Middleware::C-&amp;gt;wrap($app2);  # $app3-&amp;gt;($env) calls P::M::C-&amp;gt;call() which calls $app2-&amp;gt;($env)
+                                            # When the server receives a request it calls $app3-&amp;gt;($env)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So when an event occurs – for example the PSGI server sees a new request – it
+passes the event to the app.  The app is a chain of callbacks which run each
+other.  This is clearly an example of event driven programming.&lt;/p&gt;
+
+&lt;h1 id=&quot;plackcomponent-and-plackapp&quot;&gt;Plack::Component and Plack::App&lt;/h1&gt;
+
+&lt;p&gt;Plack::Middleware inherits from Plack::Component.  So the most common use of
+Plack::Component is in middleware.&lt;/p&gt;
+
+&lt;p&gt;Plack::Component can also be used as a tool for creating PSGI applications.  It
+has a light dusting of code, but mostly its an interface which is implemented
+by modules in the Plack::App namespace.  For example Plack::App::File is a web
+app which serves static files from a root directory, and Plack::App::URLMap is
+a web app which maps multiple web apps to multiple urls.&lt;/p&gt;
+
+&lt;p&gt;But notice that I am not required to use Plack::Component to create a PSGI
+application. A PSGI application is just a code reference.  The PSGI spec does
+not say that a PSGI application is a reference to code that inherits from
+Plack::Component.&lt;/p&gt;
+
+&lt;p&gt;The nice thing about using Plack::Component to build my app is that it
+provides a common interface for all PSGI apps.  Whenever I see &lt;code&gt;$app&lt;/code&gt;, I
+can rely on that behavior.  This is clearly important for middleware.  And it
+feels good from a design point of view.&lt;/p&gt;
+
+&lt;p&gt;But its not required and it adds some complexity.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 11 Apr 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/04/11/read-plack-3/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/11/read-plack-3/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
+    
+      <item>
+        <title>Reading code - plackup Architecture</title>
+        <description>&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/08/read-plack-1&quot;&gt;Part 1 - An Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/09/read-plack-2&quot;&gt;&lt;strong&gt;Part 2 - plackup Architecture&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/11/read-plack-3&quot;&gt;Part 3 - PSGI Application Architecture&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/12/read-plack-4&quot;&gt;Part 4 - Plack::Builder&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;plackrunner-and-plackup&quot;&gt;Plack::Runner and plackup&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;plackup&lt;/code&gt; starts a PSGI server which executes a PSGI application.  However
+the script itself is just a very small wrapper around Plack::Runner which does
+all the heavy lifting.  Plack::Runner&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;parses the command line options.&lt;/li&gt;
+  &lt;li&gt;instantiates the chosen loader class (which is in the Plack::Loader namespace).&lt;/li&gt;
+  &lt;li&gt;instatiates the chosen server library (which is in the Plack::Handler namespace).&lt;/li&gt;
+  &lt;li&gt;starts the PSGI server and passes it a PSGI application&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;plackloader&quot;&gt;Plack::Loader&lt;/h1&gt;
+
+&lt;p&gt;Loaders are responsible for instantiating and running the PSGI server.  Here are
+the more interesting capabilities a &lt;code&gt;$loader&lt;/code&gt; object has:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;$loader-&amp;gt;guess()&lt;/code&gt; guesses which server library should be loaded by looking at command line opts, $ENV, and %INC.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;$loader-&amp;gt;load()&lt;/code&gt; instantiates the server library and returns the object.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;$loader-&amp;gt;run()&lt;/code&gt; starts the server.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Plack::Loader namespace contains 3 kinds of loaders:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Plack::Loader::Delayed - delays compilation of the web app until the first request occurs&lt;/li&gt;
+  &lt;li&gt;Plack::Loader::Restarter - reloads the server if any files are changed&lt;/li&gt;
+  &lt;li&gt;Plack::Loader::Shotgun - foreach request, forks a child which compiles the web app and runs it&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I can choose which loader I want using &lt;code&gt;plack --loader&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;plackhandler&quot;&gt;Plack::Handler&lt;/h1&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://metacpan.org/pod/distribution/PSGI/PSGI.pod&quot;&gt;PSGI spec&lt;/a&gt;
+tells me that PSGI defines the interface between an application and a server.
+Because the PSGI spec is (intentionally) very minimal, there is a good deal of
+wiggle room to interpret how an application and a server might want to play
+together.&lt;/p&gt;
+
+&lt;p&gt;A library in the Plack::Handler namespace is the place where the application
+meets the server.  This layer contains all the wiggling.&lt;/p&gt;
+
+&lt;p&gt;Lets say I wrote a new server called AngryBrontosaurus and I want to be able to
+use it with &lt;code&gt;plackup --server AngryBrontosaurus&lt;/code&gt;.  I could implement a small
+class like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package Plack::Handler::AngryBrontosaurus
+use strict;
+use AngryBrontosaurus;
+
+sub new {
+    my $class = shift;
+    bless { @_ }, $class;
+}
+
+sub run {
+    my ($self, $app) = @_; 
+    AngryBrontosaurus-&amp;gt;new-&amp;gt;run($app, $self);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, to make sure AngryBrontosaurus and Plack::Handler::AngryBrontosaurus
+correctly implement the PSGI spec, I should also test my code with
+Plack::Test::Suite.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use Test::More;
+use Plack::Test::Suite;
+Plack::Test::Suite-&amp;gt;run_server_tests('AngryBrontosaurus');
+done_testing;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice that while the Plack::Handler namespace contains classes for several
+PSGI servers like Plack::Handler::Starman or Plack::Handler::Twiggy, it also
+includes some classes like Plack::Handler::Apache2 and Plack::Handler::FCGI.
+Clearly Apache2 was not written with PSGI compliance in mind, but there is glue
+in the Plack::Handler::Apache2 layer to enable it to speak with PSGI compliant
+applications.&lt;/p&gt;
+
+&lt;h1 id=&quot;sequence-diagram&quot;&gt;Sequence diagram&lt;/h1&gt;
+
+&lt;p&gt;This diagram describes how Plack::Runner, Plack::Handler, and Plack::Loader
+interact.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/for-posts/2014-04-01-plack.png&quot; alt=&quot;x&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 09 Apr 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/04/09/read-plack-2/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/09/read-plack-2/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
+    
+      <item>
+        <title>Reading code - Plack</title>
+        <description>&lt;p&gt;I write lots of code.  But I want to be better and faster at reading code.
+When I had the privilege of working with @ranguard I discovered he is a code
+reading &lt;em&gt;cheetah&lt;/em&gt; and I always envied that.  So I’ve decided to practice
+by reading the source code of various CPAN modules.  I’m starting with Plack.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/08/read-plack-1&quot;&gt;&lt;strong&gt;Part 1 - An Overview&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/09/read-plack-2&quot;&gt;Part 2 - plackup Architecture&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/11/read-plack-3&quot;&gt;Part 3 - PSGI Application Architecture&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/2014/04/12/read-plack-4&quot;&gt;Part 4 - Plack::Builder&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;plack&quot;&gt;Plack&lt;/h1&gt;
+
+&lt;p&gt;Plack describes itself as a set of tools for using
+&lt;a href=&quot;https://metacpan.org/pod/PSGI&quot;&gt;PSGI&lt;/a&gt; (the Perl Server Gateway Interface).&lt;/p&gt;
+
+&lt;p&gt;The earliest release of Plack on CPAN is version 0.9000 from 2009-10-13.  There
+were releases several times a week for the first &lt;strong&gt;two years&lt;/strong&gt;.  Impressively, in
+2012 releases were still happening roughly once a week.  In 2013 things seem to
+have cooled and now releases happen about once a month.&lt;/p&gt;
+
+&lt;p&gt;The code itself is written tersely and with attention to detail.  There are
+almost no comments.  In fact 43 out of 71 files have fewer than 3 comments.
+Of course the code is very well written which makes comments less necessary and
+nowadays there is quite a bit of excellent POD as well.&lt;/p&gt;
+
+&lt;p&gt;The code also makes heavy use of callbacks (code references).  That is to say
+its heavily event driven. Which makes sense given the event driven nature of web
+servers.  For me this gave the code a JavaScript flavor.  Take for example
+&lt;code&gt;Plack::Util::foreach&lt;/code&gt; which works just like
+&lt;a href=&quot;http://api.jquery.com/jQuery.each/&quot;&gt;jQuery.each()&lt;/a&gt; by iterating over an array
+calling a code reference on each item.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Plack::Util::foreach([1,2,3], sub { print shift }); # prints &quot;123&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;background-reading&quot;&gt;Background reading&lt;/h2&gt;
+
+&lt;p&gt;The most important thing to read is the &lt;a href=&quot;https://metacpan.org/pod/distribution/PSGI/PSGI.pod&quot;&gt;PSGI spec&lt;/a&gt;. 
+This is the problem Plack was built to solve.  Its clear and well
+written but perhaps also a little boring and lacking in context. Still I found
+it very helpful to refer back to while reading the code.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-started&quot;&gt;Getting started&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;~/code ⚡ git clone git@github.com:plack/Plack.git
+~/code ⚡ cd Plack
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first thing I noticed is a &lt;code&gt;cpanfile&lt;/code&gt; containing a list of the project
+dependencies.  Because understanding and running the tests is often useful
+when reading new code I installed the dependencies using
+&lt;a href=&quot;https://metacpan.org/pod/Carton&quot;&gt;Carton&lt;/a&gt; and ran the tests.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~/code/Plack ⚡ carton
+~/code/Plack ⚡ prove -rl t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;who-works-on-plack&quot;&gt;Who works on Plack?&lt;/h2&gt;
+
+&lt;p&gt;Lets get a feel for who is involved in the project.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~/code/Plack ⚡ git shortlog --summary --numbered | head
+1567  Tatsuhiko Miyagawa
+    70  Kazuho Oku
+    68  Tokuhiro Matsuno
+    20  Daisuke Murase
+    20  Jesse Luehrs
+    19  yappo
+    16  Karen Etheridge
+    16  Mark Stosberg
+    12  hiratara
+    11  Stevan Little
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;how-big-is-it&quot;&gt;How big is it?&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;~/code/Plack ⚡ tree lib | tail -1
+17 directories, 70 files
+
+~/code/Plack ⚡ cloc . 2&amp;gt;/dev/null | tail -13
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+Perl                            82           2889           3341           5309
+Bourne Shell                     8             55            138            251
+YAML                             1              0              0             19
+HTML                             3              2              0             14
+Python                           1              2              1              6
+Javascript                       1              0              0              1
+CSS                              1              0              0              1
+-------------------------------------------------------------------------------
+SUM:                            97           2948           3480           5601
+-------------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;what-is-the-lib-directory-structure-like&quot;&gt;What is the lib directory structure like?&lt;/h2&gt;
+
+&lt;p&gt;Unfortunately with 71 files in the lib directory its hard to grok whats
+happening in a single glance so maybe thats not a great question.  Instead I
+found it helpful to group the code by functionality.  I came up
+with 3 major categories which look like this:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Category 1&lt;/em&gt; - Modules for loading and running PSGI servers
+    &lt;ul&gt;
+      &lt;li&gt;plackup&lt;/li&gt;
+      &lt;li&gt;Plack::Handler&lt;/li&gt;
+      &lt;li&gt;Plack::Handler::*&lt;/li&gt;
+      &lt;li&gt;Plack::Loader&lt;/li&gt;
+      &lt;li&gt;Plack::Loader::*&lt;/li&gt;
+      &lt;li&gt;Plack::Runner&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Category 2&lt;/em&gt; - Modules for building PSGI apps
+    &lt;ul&gt;
+      &lt;li&gt;Plack::App::*&lt;/li&gt;
+      &lt;li&gt;Plack::Builder&lt;/li&gt;
+      &lt;li&gt;Plack::Component&lt;/li&gt;
+      &lt;li&gt;Plack::Middleware&lt;/li&gt;
+      &lt;li&gt;Plack::Middleware::*&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Category 3&lt;/em&gt; - Modules for testing
+    &lt;ul&gt;
+      &lt;li&gt;Plack::Test&lt;/li&gt;
+      &lt;li&gt;Plack::Test::*&lt;/li&gt;
+      &lt;li&gt;Plack::HTTP::Message::PSGI&lt;/li&gt;
+      &lt;li&gt;Plack::LWPish&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;However I also got crazy and went ahead and listed &lt;em&gt;everything&lt;/em&gt; in the lib
+directory along with a brief description.  I guess it might be handy for
+reference purposes.  The numbers (1), (2), (3) below correspond to the three
+categories I listed above.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~/code/Plack ⚡ tree lib
+lib
+├── HTTP
+│   ├── Message
+│   │   └── PSGI.pm               # (3) Converts an HTTP::Request to a PSGI env hash
+│   └── Server                    
+│       └── PSGI.pm               # (1) Reference PSGI web server; no deps; not usually for prod
+├── Plack                         
+│   ├── App                       # (2) These libs inherit from Plack::Component; they are PSGI web apps
+│   │   ├── Cascade.pm               # Foreach request, tries a number of PSGI apps until one is successful
+│   │   ├── CGIBin.pm                # Creates many PSGI apps for a directory with many CGI scripts (uses WrapCGI.pm)
+│   │   ├── Directory.pm             # Serves a directory of files
+│   │   ├── File.pm                  # Serves a file
+│   │   ├── PSGIBin.pm               # Create PSGI apps from a directory of .psgi files
+│   │   ├── URLMap.pm                # Maps a url to a PSGI app
+│   │   └── WrapCGI.pm               # Creates a single PSGI app from a single CGI script
+│   ├── Builder.pm                # (2) A DSL for building Plack Middleware
+│   ├── Component.pm              # (2) A (optional) tool for building PSGI web apps
+│   ├── Handler
+│   │   ├── Apache1.pm
+│   │   ├── Apache2
+│   │   │   └── Registry.pm
+│   │   ├── Apache2.pm
+│   │   ├── CGI.pm
+│   │   ├── FCGI.pm
+│   │   ├── HTTP
+│   │   │   └── Server
+│   │   │       └── PSGI.pm                 # A Plack::Handler for HTTP::Server::PSGI
+│   │   └── Standalone.pm            # Alias for Plack::Handler::HTTP::Server::PSGI
+│   ├── Handler.pm                # (1) Instantiate and run PSGI compatible servers
+│   ├── HTTPParser
+│   │   └── PP.pm                    # Parse HTTP headers with XS
+│   ├── HTTPParser.pm             # (1) Parse HTTP headers; used by HTTP::Server::PSGI
+│   ├── Loader
+│   │   ├── Delayed.pm               # Delay compilation of the PSGI app until the first request
+│   │   ├── Restarter.pm             # Restart the server when a watched file changes
+│   │   └── Shotgun.pm               # Recompile the PSGI app for every request
+│   ├── Loader.pm                 # (1) Load PSGI compatible web servers
+│   ├── LWPish.pm                 # (3) Light version of LWP for testing
+│   ├── Middleware                
+│   │   ├── AccessLog
+│   │   │   └── Timed.pm                # Write access logs but can handle a fake File::IO body
+│   │   ├── AccessLog.pm             # Write access logs
+│   │   ├── Auth
+│   │   │   └── Basic.pm                # Basic authentication
+│   │   ├── BufferedStreaming.pm     # Enable streaming for servers that don't
+│   │   ├── Chunked.pm               # Implements part of HTTP/1.1 - chunked HTTP transfer encoding
+│   │   ├── ConditionalGET.pm        # Implements part of HTTP/1.1 - Conditional GET
+│   │   ├── Conditional.pm           # Runs the specified middleware if a specified condition is met
+│   │   ├── ContentLength.pm         # Adds a Content-Length header if possible
+│   │   ├── ContentMD5.pm            # Sets the Content-MD5 header when the body is an arrayref
+│   │   ├── ErrorDocument.pm         # Show different error documents for different HTTP errors
+│   │   ├── Head.pm                  # Delete any response body from HEAD requests
+│   │   ├── HTTPExceptions.pm        # Redirect to an error page when HTTP::Exceptions are caught
+│   │   ├── IIS6ScriptNameFix.pm     # Fix for IIS
+│   │   ├── IIS7KeepAliveFix.pm      # Fix for IIS
+│   │   ├── JSONP.pm                 # Change JSON responses to JSONP if a callback param is specified
+│   │   ├── LighttpdScriptNameFix.pm # Fix for Lighttpd
+│   │   ├── Lint.pm                  # Checks input/output for compliance w/PSGI spec
+│   │   ├── Log4perl.pm              # Log with Log::Log4Perl
+│   │   ├── LogDispatch.pm           # Log with Log::Dispatch
+│   │   ├── NullLogger.pm            # Don't log anything
+│   │   ├── RearrangeHeaders.pm      # Fix for very old MSIE and broken HTTP proxy servers
+│   │   ├── Recursive.pm             # Allows the app to forward the request to a different (url) path
+│   │   ├── Refresh.pm               # Similar to Plack::Loader::Restarter but less effective
+│   │   ├── Runtime.pm               # Sets the 'X-Runtime' HTTP response header = app's response time
+│   │   ├── SimpleContentFilter.pm   # Filter response content
+│   │   ├── SimpleLogger.pm          # Logs messages
+│   │   ├── StackTrace.pm            # Displays a stacktrace when a PSGI app dies
+│   │   ├── Static.pm                # Serve static files
+│   │   ├── XFramework.pm            # Adds an X-Framework HTTP response header
+│   │   └── XSendfile.pm             # Adds an X-Sendfile HTTP response header
+│   ├── Middleware.pm             # (2) Wraps PSGI apps; can modify incoming requests / outgoing responses
+│   ├── MIME.pm                   # A list of MIME types (mostly)
+│   ├── Request
+│   │   └── Upload.pm                # A subclass of Plack::Request for file uploads
+│   ├── Request.pm                # (2) Low level request obj for middleware and web apps
+│   ├── Response.pm               # (2) Low level response obj for middleware and web apps
+│   ├── Runner.pm                 # (1) The guts of plackup -- uses Plack::Loader and Plack::Handler
+│   ├── TempBuffer.pm             # For backward compat. Saves data in memory or to a file if its big;
+│   ├── Test
+│   │   ├── MockHTTP.pm              # Test a PSGI app without using a server (faster)
+│   │   ├── Server.pm                # Test a PSGI app using a very small server (fast)
+│   │   └── Suite.pm                 # Ensure the web server complies with the PSGI spec
+│   ├── Test.pm                   # (3) A factory for generating test objects
+│   ├── Util
+│   │   └── Accessor.pm              # Light version of Class::Accessor for backward compat
+│   └── Util.pm                   # Misc but important utilities used throughout the code base
+└── Plack.pm                   # No code here -- just pod and a version number
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Tue, 08 Apr 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/04/08/read-plack-1/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/08/read-plack-1/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
+    
+  </channel>
+</rss>
