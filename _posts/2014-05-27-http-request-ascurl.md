@@ -3,7 +3,7 @@ layout: post
 title: HTTP::Request::AsCurl
 date: '2014-05-27'
 comments: true
-categories: perl code
+tags: [perl, code]
 
 ---
 
@@ -13,12 +13,12 @@ CPAN.  It converts an HTTP::Request object to a curl command.
 
     use HTTP::Request::Common;
     use HTTP::Request::AsCurl;
-  
+
     my $request = POST('api.earth.defense/weapon1', { 
         target => 'mothership', 
         when   => 'now' 
     });
-    
+
     say join "\n", $request->as_curl;
     # curl --dump-header - -XPOST "api.earth.defense/weapon1" \
     # --data 'target=mothership' \

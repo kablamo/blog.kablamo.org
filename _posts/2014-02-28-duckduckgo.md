@@ -3,7 +3,7 @@ layout: post
 title: How to build a Duck Duck Go instant answer
 date: '2014-02-28'
 comments: true
-categories: perl duckduckgo
+tags: [perl, duckduckgo]
 
 ---
 

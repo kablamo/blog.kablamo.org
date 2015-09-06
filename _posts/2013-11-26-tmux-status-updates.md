@@ -3,7 +3,7 @@ layout: post
 title: Configure tmux to give you status updates about anything
 date: '2013-11-26'
 comments: true
-categories: tools
+tags: tools
 
 ---
 

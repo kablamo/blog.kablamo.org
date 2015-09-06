@@ -3,7 +3,7 @@ layout: post
 title: Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome
 date: '2013-02-20'
 comments: true
-categories: perl
+tags: perl
 
 ---
 

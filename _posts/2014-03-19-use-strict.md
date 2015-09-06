@@ -3,7 +3,7 @@ layout: post
 title: What does 'use strict' do?
 date: '2014-03-19'
 comments: true
-categories: perl
+tags: perl
 
 ---
 

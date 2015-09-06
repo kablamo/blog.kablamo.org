@@ -3,7 +3,7 @@ layout: post
 title: Test::WWW::Selenium::More
 date: '2012-05-17'
 comments: true
-categories: perl
+tags: perl
 
 ---
 

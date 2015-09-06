@@ -3,7 +3,7 @@ layout: post
 title: my vs our vs local
 date: '2014-03-17'
 comments: true
-categories: perl
+tags: perl
 
 ---
 

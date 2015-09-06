@@ -3,7 +3,7 @@ layout: post
 title: Reading code - Camel-Snake-Kebab
 date: '2014-05-26'
 comments: true
-categories: perl readingcode writingcode
+tags: [perl, readingcode, writingcode]
 
 ---
 
@@ -85,17 +85,17 @@ Here is the translation in Perl I came up with:
 
     sub convert_case {
         my ($first_coderef, $rest_coderef, $separator, $string) = @_; 
-    
+
         my ($first, @rest) = split $WORD_SEPARATOR_PATTERN, $string;
-    
+
         my @words = $first_coderef->($first);
         push @words, $rest_coderef->($_) for @rest;
-    
+
         return join $separator, @words;
     }
 
     sub my_lc { lc $_ }
-    
+
     sub lower_snake_case {
         convert_case( \&my_lc, \&my_lc, "_", shift );
     }

@@ -3,7 +3,7 @@ layout: post
 title: Test::Pretty - because TAP is unnattractive
 date: '2014-05-08'
 comments: true
-categories: perl
+tags: perl
 
 ---
   

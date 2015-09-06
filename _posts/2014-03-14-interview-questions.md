@@ -3,7 +3,7 @@ layout: post
 title: Questions I ask in interviews
 date: '2014-03-14'
 comments: true
-categories: perl career
+tags: [perl, career]
 
 ---
 

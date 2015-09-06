@@ -3,7 +3,7 @@ layout: post
 title: git-vspark plots your commits vertically with Term::Vspark
 date: '2013-03-17'
 comments: true
-categories: perl
+tags: perl
 
 ---
 

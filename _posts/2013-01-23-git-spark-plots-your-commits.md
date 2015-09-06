@@ -3,7 +3,7 @@ layout: post
 title: git-spark plots your commit history
 date: '2013-01-23'
 comments: true
-categories: perl
+tags: perl
 
 ---
 

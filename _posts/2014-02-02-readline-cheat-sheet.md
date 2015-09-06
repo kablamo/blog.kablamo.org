@@ -3,7 +3,7 @@ layout: post
 title: I made a Readline cheat sheet
 date: '2014-01-01'
 comments: true
-categories: perl
+tags: perl
 
 ---
 

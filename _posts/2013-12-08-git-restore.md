@@ -3,7 +3,7 @@ layout: post
 title: How to find and restore deleted files with git
 date: '2013-12-08'
 comments: true
-categories: tools
+tags: tools
 
 ---
 

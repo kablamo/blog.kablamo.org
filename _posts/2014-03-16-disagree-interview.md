@@ -3,7 +3,7 @@ layout: post
 title: Why you should disagree in an interview
 date: '2014-03-16'
 comments: true
-categories: perl career
+tags: [perl, career]
 
 ---
 

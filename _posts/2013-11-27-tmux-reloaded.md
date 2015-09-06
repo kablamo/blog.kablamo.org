@@ -3,7 +3,7 @@ layout: post
 title: Tmux reloaded
 date: '2013-11-27'
 comments: true
-categories: tools
+tags: tools
 
 ---
 

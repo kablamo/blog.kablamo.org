@@ -3,7 +3,7 @@ layout: post
 title: Introduction to online credit card processing - part 2
 date: '2014-03-21'
 comments: true
-categories: payments
+tags: payments
 
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: Salt and pepper - How to encrypt database passwords
 date: '2013-12-18'
 comments: true
-categories: perl
+tags: perl
 
 ---
 
@@ -60,9 +60,9 @@ see an example.
 To encrypt the plaintext string 'pie' use the following Perl code
 
     my $blowfish = Authen::Passphrase::BlowfishCrypt->new(
-       passphrase  => 'pie',
-       salt_random => 1,
-       cost        => 16,
+        passphrase  => 'pie',
+        salt_random => 1,
+        cost        => 16,
     );
 
     say $blowfish->as_rfc2307; 

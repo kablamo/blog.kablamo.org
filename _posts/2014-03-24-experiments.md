@@ -3,7 +3,7 @@ layout: post
 title: An experiment - Living with less than 200 things
 date: '2014-03-24'
 comments: true
-categories: experiments
+tags: experiments
 
 ---
 

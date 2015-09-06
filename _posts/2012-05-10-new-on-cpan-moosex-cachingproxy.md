@@ -3,7 +3,7 @@ layout: post
 title: New on CPAN - MooseX::CachingProxy
 date: '2012-05-10'
 comments: true
-categories: perl
+tags: perl
 
 ---
 
