@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
 ul, ol, dl, figure,
 %vertical-rhythm {
-    margin-bottom: $spacing-unit / 2;
+    margin-bottom: $spacing-unit;
 }
 
 
@@ -108,12 +108,13 @@ a {
  * Blockquotes
  */
 blockquote {
-    color: $grey-color;
-    border-left: 4px solid $grey-color-light;
-    padding-left: $spacing-unit / 2;
-    font-size: 18px;
-    letter-spacing: -1px;
-    font-style: italic;
+    background-color : #eee;
+    padding          : 1rem;
+    color            : #666;
+    border-left      : 8px solid #666;
+    font-size        : 1rem;
+    font-weight      : normal;
+    font-style       : italic;
 
     > :last-child {
         margin-bottom: 0;
@@ -127,25 +128,27 @@ blockquote {
  */
 pre,
 code {
-    font-size: .8rem;
-    line-height: 1.2rem;
-    background-color: #eee;
-    color: #333;
+    line-height      : 1.2rem;
+    background-color : #eee;
+    color            : #333;
+    padding          : .3rem;
 }
 
 code {
-    padding: 1px 5px;
+    font-size: 1rem;
 }
 
 pre {
-    padding: 8px 12px;
-    overflow-x: scroll;
-    border: 1px solid #ccc;
+    padding      : 8px 12px;
+    overflow-x   : scroll;
 
     > code {
-        border: 0;
-        padding-right: 0;
-        padding-left: 0;
+        padding       : .2rem;
+        padding-left  : 0;
+        font-size     : .8rem;
+        border        : 0;
+        padding-right : 0;
+        padding-left  : 0;
     }
 }
 
