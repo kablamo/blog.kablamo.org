@@ -8,7 +8,7 @@ cp -r _site/* .
 git add -A
 git status
 git commit -a -m 'More'
-#git push
+git push
 git co master
-#git push
+git push
 git branch
