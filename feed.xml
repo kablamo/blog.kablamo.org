@@ -6,8 +6,8 @@
 </description>
     <link>http://blog.kablamo.org/</link>
     <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 08 Sep 2015 14:22:11 -0500</pubDate>
-    <lastBuildDate>Tue, 08 Sep 2015 14:22:11 -0500</lastBuildDate>
+    <pubDate>Thu, 10 Sep 2015 15:07:23 -0500</pubDate>
+    <lastBuildDate>Thu, 10 Sep 2015 15:07:23 -0500</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -61,10 +61,10 @@ to use the module.  You won’t want to miss that.&lt;/p&gt;
   &lt;li&gt;&lt;strong&gt;mod_perl&lt;/strong&gt; - Run away&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;CGI (the protocol)&lt;/strong&gt; - Ok for some trivial things&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;FastCGI + unix sockets for zero downtime deploys&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Apache + FastCgiExternalServer&lt;/strong&gt;J: Good&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Apache + FastCgiExternalServer&lt;/strong&gt; - Good&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Nginx + Starman + Unix sockets&lt;/strong&gt; - Good&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Mojolicious + Hypnotoad&lt;/strong&gt; - Good&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;PSGI Asnyc&lt;/strong&gt;
+  &lt;li&gt;&lt;strong&gt;PSGI Async&lt;/strong&gt;
     &lt;ul&gt;
       &lt;li&gt;&lt;strong&gt;Net::Async::HTTP::Server::PSGI&lt;/strong&gt; if you like IO::Async&lt;/li&gt;
       &lt;li&gt;&lt;strong&gt;Twiggy&lt;/strong&gt; if you like AnyEvent&lt;/li&gt;
