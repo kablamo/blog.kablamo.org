@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>my vs our vs local</title>
-  <meta name="description" content="The short version for the impatient">
+  <title>Publish your first CPAN module in < 5 minutes (slides)</title>
+  <meta name="description" content="I originally gave this talk at Chicago.pm as part of a “Distribution ManagementShootout” – a 3 way duel between:">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://blog.kablamo.org/2014/03/17/our-my-local/">
+  <link rel="canonical" href="http://blog.kablamo.org/2015/09/15/slides-first-cpan-module/">
   <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
 </head>
 
@@ -104,77 +104,33 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">my vs our vs local</h1>
+    <h1 class="post-title">Publish your first CPAN module in < 5 minutes (slides)</h1>
     <p class="post-meta">
     
       <a href="/categories/perl">perl</a>&nbsp;
     
+      <a href="/categories/slides">slides</a>&nbsp;
+    
     &nbsp;&nbsp;
-    2014-03-17
+    2015-09-15
     </p>
   </header>
 
   <article class="post-content">
-    <h1 id="the-short-version-for-the-impatient">The short version for the impatient</h1>
+    <p>I originally gave this talk at Chicago.pm as part of a “Distribution Management
+Shootout” – a 3 way duel between:</p>
 
 <ul>
-  <li><code>my()</code> creates a local variable</li>
-  <li><code>our()</code> creates a package variable</li>
-  <li><code>local()</code> temporarily changes the local value of a global variable</li>
-  <li>The above is mostly true.</li>
+  <li>jberger’s <a href="http://jberger.github.io/ModuleBuildPresentation">talk</a> about Module::Build and and the “Classic” build systems</li>
+  <li>preaction’s <a href="http://preaction.github.io/Introduction-to-Dist-Zilla">talk</a> about Dist::Zilla, and</li>
+  <li>my <a href="http://kablamo.org/slides-first-cpan-module">talk</a> about Minilla and Carton.</li>
 </ul>
 
-<h1 id="the-long-version-for-the-irrepressibly-quixotic">The long version for the irrepressibly quixotic</h1>
+<p>It was a great overview of the most popular tools and I think all the talks
+are worth checking out.</p>
 
-<h2 id="my">my()</h2>
-
-<p><code>my</code> declares the listed variable to be local to the enclosing block, file,
-or <code>eval</code>.  That is to say its <em>scope</em> is local.  This kind of variable is
-known as a <em>lexical variable</em>.  Note that lexical variables are hidden from
-subroutines which are called from within the enclosing block.  This is known as
-<em>lexical scoping</em>.</p>
-
-<h2 id="our">our()</h2>
-
-<p><code>our</code> creates an alias to a <em>package variable</em>.  The alias is local to the
-enclosing block, file, or <code>eval</code>.  That is to say the alias is lexically scoped
-just like any lexical variable.  However a package variable belongs to a
-package.  It can be accessed from anywhere if you use its fully qualified name.
-Here are two examples of fully qualified package variables:</p>
-
-<pre><code>$main::a
-%MyPackage::boop
-</code></pre>
-
-<p>Note that package variables are also global variables.</p>
-
-<h2 id="local">local()</h2>
-
-<p><code>local</code> gives temporary values to global variables.  It does not create a local
-variable.  It is most commonly used when you want to locally modify a global
-variable such as one of the punctuation variables.  For example:</p>
-
-<pre><code>{ 
-    local $| = 1; # enable autoflush for STDOUT
-    say "hi mom";
-}
-</code></pre>
-
-<p><code>local</code> modifies the listed variable to be local to the enclosing block,
-file, or <code>eval</code> – AND to any subroutine called from within that block.  This
-is known as <em>dynamic scoping</em>.</p>
-
-<h1 id="sources">Sources</h1>
-
-<p>For a more complete understanding I recommend <code>perldoc perlfunc</code> and especially
-<code>perldoc perlsub</code>.  Also the following links may be helpful:</p>
-
-<ul>
-  <li>https://metacpan.org/pod/perlfunc</li>
-  <li>https://metacpan.org/pod/perlsub</li>
-  <li>http://perlmaven.com/package-variables-and-lexical-variables-in-perl</li>
-  <li>http://www.perlmonks.org/?node_id=95813</li>
-</ul>
+<p><a href="http://kablamo.org/slides-first-cpan-module">Slides</a> |
+<a href="http://github.com/kablamo/slides-first-cpan-module">GitHub repo</a></p>
 
 
   </article>
@@ -197,8 +153,8 @@ is known as <em>dynamic scoping</em>.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2014/03/17/our-my-local/';
-        var disqus_url = 'http://blog.kablamo.org/2014/03/17/our-my-local/';
+        var disqus_identifier = 'http://blog.kablamo.org/2015/09/15/slides-first-cpan-module/';
+        var disqus_url = 'http://blog.kablamo.org/2015/09/15/slides-first-cpan-module/';
         var disqus_script = 'embed.js';
       
     (function () {
