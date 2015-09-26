@@ -148,6 +148,12 @@ pre {
     fill: #828282; }
 
 /**
+ * MISC
+ */
+hr {
+  margin-bottom: 1rem; }
+
+/**
  * Site header
  */
 .site-header {

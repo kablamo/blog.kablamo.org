@@ -6,9 +6,43 @@
 </description>
     <link>http://blog.kablamo.org/</link>
     <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Sep 2015 19:45:27 -0500</pubDate>
-    <lastBuildDate>Tue, 15 Sep 2015 19:45:27 -0500</lastBuildDate>
+    <pubDate>Sat, 26 Sep 2015 12:32:19 -0500</pubDate>
+    <lastBuildDate>Sat, 26 Sep 2015 12:32:19 -0500</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>The Perl test ecosystem (slides)</title>
+        <description>&lt;p&gt;I gave this talk last Thursday at
+&lt;a href=&quot;http://chicago.pm.org/blog/2015/09/19/the-perl-test-ecosystem/&quot;&gt;Chicago.pm&lt;/a&gt;.
+This talk assumes the listener knows very little about testing in Perl but
+likely has something for more advanced users as well.&lt;/p&gt;
+
+&lt;p&gt;It begins with &lt;code&gt;prove&lt;/code&gt; and &lt;code&gt;Test::More&lt;/code&gt;, but then moves on to explore the &lt;code&gt;Test::&lt;/code&gt;
+namespace on CPAN and talk about 20 other test modules.  CPAN has a large
+number of modules to help with testing – its a pretty healthy ecosystem.&lt;/p&gt;
+
+&lt;p&gt;My goal was to create talk which not only gives new people an introduction to
+testing in Perl, but also provides up to date advice about which modules are
+useful and recommended.  Feedback and corrections welcome.&lt;/p&gt;
+
+&lt;p&gt;As usual, this talk is both a living document and reference material. I keep my
+talks updated and relevant so I can refer people to them. If I’ve missed
+anything feel free to contribute to the github repo or leave a comment.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://kablamo.org/slides-perl-testing&quot;&gt;Slides&lt;/a&gt; |
+&lt;a href=&quot;http://github.com/kablamo/slides-perl-testing&quot;&gt;GitHub repo&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 26 Sep 2015 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2015/09/26/slides-perl-testing/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2015/09/26/slides-perl-testing/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>slides</category>
+        
+      </item>
     
       <item>
         <title>Publish your first CPAN module in &lt; 5 minutes (slides)</title>
@@ -23,6 +57,10 @@ Shootout” – a 3 way duel between:&lt;/p&gt;
 
 &lt;p&gt;It was a great overview of the most popular tools and I think all the talks
 are worth checking out.&lt;/p&gt;
+
+&lt;p&gt;As usual, this talk is both a living document and reference material. I keep my
+talks updated and relevant so I can refer people to them. If I’ve missed
+anything feel free to contribute to the github repo or leave a comment.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://kablamo.org/slides-first-cpan-module&quot;&gt;Slides&lt;/a&gt; |
 &lt;a href=&quot;http://github.com/kablamo/slides-first-cpan-module&quot;&gt;GitHub repo&lt;/a&gt;&lt;/p&gt;
@@ -799,134 +837,6 @@ sub builder(&amp;amp;) {
         <pubDate>Sat, 12 Apr 2014 00:00:00 -0500</pubDate>
         <link>http://blog.kablamo.org/2014/04/12/read-plack-4/</link>
         <guid isPermaLink="true">http://blog.kablamo.org/2014/04/12/read-plack-4/</guid>
-        
-        
-        <category>perl</category>
-        
-      </item>
-    
-      <item>
-        <title>Reading code - PSGI Application Architecture</title>
-        <description>&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/2014/04/08/read-plack-1&quot;&gt;Part 1 - An Overview&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2014/04/09/read-plack-2&quot;&gt;Part 2 - plackup Architecture&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2014/04/11/read-plack-3&quot;&gt;&lt;strong&gt;Part 3 - PSGI Application Architecture&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2014/04/12/read-plack-4&quot;&gt;Part 4 - Plack::Builder&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;psgi-applications&quot;&gt;PSGI Applications&lt;/h1&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://metacpan.org/pod/distribution/PSGI/PSGI.pod&quot;&gt;PSGI spec&lt;/a&gt; defines
-a PSGI application.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A PSGI application is a Perl code reference. It takes exactly one argument,
-the environment, and returns an array reference containing exactly three
-values.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The three values are a status, headers, and a body.  Here is an example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;my $app = sub {
-    my $env = shift;
-    return [
-        '200',
-        [ 'Content-Type' =&amp;gt; 'text/plain' ],
-        [ &quot;Hello World&quot; ], # or IO::Handle-like object
-    ];
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&quot;the-psgi-environment-hash&quot;&gt;The PSGI environment hash&lt;/h1&gt;
-
-&lt;p&gt;The PSGI environment hash is a hashref with many keys.  But mostly it is the
-data (headers, body, etc) from an HTTP::Request which has been parsed and put into
-a hash for convenient access.&lt;/p&gt;
-
-&lt;h1 id=&quot;middleware&quot;&gt;Middleware&lt;/h1&gt;
-
-&lt;p&gt;A middleware component takes a PSGI application and runs it, passing in the
-PSGI environment hash.  But before it runs the app, it gets to modify the
-environment if it wants to.  And after running the app, it can modify the
-response if it wants to.&lt;/p&gt;
-
-&lt;h1 id=&quot;plackmiddleware&quot;&gt;Plack::Middleware&lt;/h1&gt;
-
-&lt;p&gt;Middleware is a wrapper around a PSGI app.  More than one middleware can be
-wrapped around an app, creating a series of layers like an
-&lt;a href=&quot;http://blogs.perl.org/users/jakob/2012/09/28/middleware-onion.png/500px-MiddlewareOnion.svg.png&quot;&gt;onion&lt;/a&gt;.
-What makes the middleware onion a somewhat unusual construct is the event
-driven / callback nature of it.  Lets look at how its implemented.&lt;/p&gt;
-
-&lt;p&gt;All middleware inherits from Plack::Middleware which is an itsy bitsy (teeny
-weeny) module.  The middleware onion is created with just 2 short subroutines
-(notice the &lt;code&gt;call()&lt;/code&gt; and &lt;code&gt;prepare_app()&lt;/code&gt; subs are written by middleware authors):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sub wrap {
-    my($self, $app, @args) = @_;
-    if (ref $self) {
-        $self-&amp;gt;{app} = $app;
-    } else {
-        $self = $self-&amp;gt;new({ app =&amp;gt; $app, @args });
-    }
-    return $self-&amp;gt;to_app;
-}
-
-sub to_app {
-    my $self = shift;
-    $self-&amp;gt;prepare_app;
-    return sub { $self-&amp;gt;call(@_) };
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;How do these subs work together?  The middleware onion is sometimes constructed as follows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;my $app = MyWebApp-&amp;gt;new-&amp;gt;to_app;
-$app = Plack::Middleware::A-&amp;gt;wrap($app);
-$app = Plack::Middleware::B-&amp;gt;wrap($app);
-$app = Plack::Middleware::C-&amp;gt;wrap($app);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;But it might be more clear to write it this way&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;my $app0 = MyWebApp-&amp;gt;new-&amp;gt;to_app;           # $app0-&amp;gt;($env) runs the web app
-$app1 = Plack::Middleware::A-&amp;gt;wrap($app0);  # $app1-&amp;gt;($env) calls P::M::A-&amp;gt;call() which calls $app0-&amp;gt;($env)
-$app2 = Plack::Middleware::B-&amp;gt;wrap($app1);  # $app2-&amp;gt;($env) calls P::M::B-&amp;gt;call() which calls $app1-&amp;gt;($env)
-$app3 = Plack::Middleware::C-&amp;gt;wrap($app2);  # $app3-&amp;gt;($env) calls P::M::C-&amp;gt;call() which calls $app2-&amp;gt;($env)
-                                            # When the server receives a request it calls $app3-&amp;gt;($env)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So when an event occurs – for example the PSGI server sees a new request – it
-passes the event to the app.  The app is a chain of callbacks which run each
-other.  This is clearly an example of event driven programming.&lt;/p&gt;
-
-&lt;h1 id=&quot;plackcomponent-and-plackapp&quot;&gt;Plack::Component and Plack::App&lt;/h1&gt;
-
-&lt;p&gt;Plack::Middleware inherits from Plack::Component.  So the most common use of
-Plack::Component is in middleware.&lt;/p&gt;
-
-&lt;p&gt;Plack::Component can also be used as a tool for creating PSGI applications.  It
-has a light dusting of code, but mostly its an interface which is implemented
-by modules in the Plack::App namespace.  For example Plack::App::File is a web
-app which serves static files from a root directory, and Plack::App::URLMap is
-a web app which maps multiple web apps to multiple urls.&lt;/p&gt;
-
-&lt;p&gt;But notice that I am not required to use Plack::Component to create a PSGI
-application. A PSGI application is just a code reference.  The PSGI spec does
-not say that a PSGI application is a reference to code that inherits from
-Plack::Component.&lt;/p&gt;
-
-&lt;p&gt;The nice thing about using Plack::Component to build my app is that it
-provides a common interface for all PSGI apps.  Whenever I see &lt;code&gt;$app&lt;/code&gt;, I
-can rely on that behavior.  This is clearly important for middleware.  And it
-feels good from a design point of view.&lt;/p&gt;
-
-&lt;p&gt;But its not required and it adds some complexity.&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 11 Apr 2014 00:00:00 -0500</pubDate>
-        <link>http://blog.kablamo.org/2014/04/11/read-plack-3/</link>
-        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/11/read-plack-3/</guid>
         
         
         <category>perl</category>

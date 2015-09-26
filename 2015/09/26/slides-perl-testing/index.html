@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Publish your first CPAN module in < 5 minutes (slides)</title>
-  <meta name="description" content="I originally gave this talk at Chicago.pm as part of a “Distribution ManagementShootout” – a 3 way duel between:">
+  <title>The Perl test ecosystem (slides)</title>
+  <meta name="description" content="I gave this talk last Thursday atChicago.pm.This talk assumes the listener knows very little about testing in Perl butlikely has something for more advanced ...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://blog.kablamo.org/2015/09/15/slides-first-cpan-module/">
+  <link rel="canonical" href="http://blog.kablamo.org/2015/09/26/slides-perl-testing/">
   <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
 </head>
 
@@ -104,7 +104,7 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Publish your first CPAN module in < 5 minutes (slides)</h1>
+    <h1 class="post-title">The Perl test ecosystem (slides)</h1>
     <p class="post-meta">
     
       <a href="/categories/perl">perl</a>&nbsp;
@@ -112,29 +112,30 @@
       <a href="/categories/slides">slides</a>&nbsp;
     
     &nbsp;&nbsp;
-    2015-09-15
+    2015-09-26
     </p>
   </header>
 
   <article class="post-content">
-    <p>I originally gave this talk at Chicago.pm as part of a “Distribution Management
-Shootout” – a 3 way duel between:</p>
+    <p>I gave this talk last Thursday at
+<a href="http://chicago.pm.org/blog/2015/09/19/the-perl-test-ecosystem/">Chicago.pm</a>.
+This talk assumes the listener knows very little about testing in Perl but
+likely has something for more advanced users as well.</p>
 
-<ul>
-  <li>jberger’s <a href="http://jberger.github.io/ModuleBuildPresentation">talk</a> about Module::Build and and the “Classic” build systems</li>
-  <li>preaction’s <a href="http://preaction.github.io/Introduction-to-Dist-Zilla">talk</a> about Dist::Zilla, and</li>
-  <li>my <a href="http://kablamo.org/slides-first-cpan-module">talk</a> about Minilla and Carton.</li>
-</ul>
+<p>It begins with <code>prove</code> and <code>Test::More</code>, but then moves on to explore the <code>Test::</code>
+namespace on CPAN and talk about 20 other test modules.  CPAN has a large
+number of modules to help with testing – its a pretty healthy ecosystem.</p>
 
-<p>It was a great overview of the most popular tools and I think all the talks
-are worth checking out.</p>
+<p>My goal was to create talk which not only gives new people an introduction to
+testing in Perl, but also provides up to date advice about which modules are
+useful and recommended.  Feedback and corrections welcome.</p>
 
 <p>As usual, this talk is both a living document and reference material. I keep my
 talks updated and relevant so I can refer people to them. If I’ve missed
 anything feel free to contribute to the github repo or leave a comment.</p>
 
-<p><a href="http://kablamo.org/slides-first-cpan-module">Slides</a> |
-<a href="http://github.com/kablamo/slides-first-cpan-module">GitHub repo</a></p>
+<p><a href="http://kablamo.org/slides-perl-testing">Slides</a> |
+<a href="http://github.com/kablamo/slides-perl-testing">GitHub repo</a></p>
 
 
   </article>
@@ -157,8 +158,8 @@ anything feel free to contribute to the github repo or leave a comment.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2015/09/15/slides-first-cpan-module/';
-        var disqus_url = 'http://blog.kablamo.org/2015/09/15/slides-first-cpan-module/';
+        var disqus_identifier = 'http://blog.kablamo.org/2015/09/26/slides-perl-testing/';
+        var disqus_url = 'http://blog.kablamo.org/2015/09/26/slides-perl-testing/';
         var disqus_script = 'embed.js';
       
     (function () {
