@@ -6,9 +6,77 @@
 </description>
     <link>http://blog.kablamo.org/</link>
     <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 26 Sep 2015 12:32:19 -0500</pubDate>
-    <lastBuildDate>Sat, 26 Sep 2015 12:32:19 -0500</lastBuildDate>
+    <pubDate>Sun, 08 Nov 2015 14:05:58 -0600</pubDate>
+    <lastBuildDate>Sun, 08 Nov 2015 14:05:58 -0600</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Bash tricks: set -eux</title>
+        <description>&lt;p&gt;&lt;code&gt;set -eux&lt;/code&gt; is a super useful bash trick I’ve been using in Chef and
+&lt;a href=&quot;https://metacpan.org/pod/Rex&quot;&gt;Rex&lt;/a&gt; tasks.  I’m going to break it down and
+explain it one option at a time:&lt;/p&gt;
+
+&lt;h1 id=&quot;set--e&quot;&gt;set -e&lt;/h1&gt;
+&lt;p&gt;This&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cmd1 &amp;amp;&amp;amp; cmd2 &amp;amp;&amp;amp; cmd3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;is equivalent to this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set -e
+cmd1
+cmd2
+cmd3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Also pipelines fail on the first command which fails instead of dying later on
+down the pipeline.  This is especially good when cmd3 is a command that always
+succeeds (like echo):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cmd1 | cmd2 | cmd3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;set--u&quot;&gt;set -u&lt;/h1&gt;
+&lt;p&gt;The shell prints a message to stderr when it tries to expand a variable that is
+not set.  Also it immediately exits. An interactive shell will not exit.  I
+think this is similar to Perl’s 
+&lt;a href=&quot;https://metacpan.org/pod/strictures&quot;&gt;use strictures&lt;/a&gt; which is something Moo
+enables.&lt;/p&gt;
+
+&lt;h1 id=&quot;set--x&quot;&gt;set -x&lt;/h1&gt;
+&lt;p&gt;The shell prints each command in a script to stderr before running it.  I think
+this would be particularly useful in Rex.  And Chef.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set -x
+echo hey
+echo woah
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;+ echo hey
+hey
++ echo woah
+woah
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;see-also&quot;&gt;See also&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.peterbe.com/plog/set-ex&quot;&gt;The most useful bash trick of the year&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;explainshell.com/explain?cmd=set+-eux&quot;&gt;explainshell: set -eux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 08 Nov 2015 00:00:00 -0600</pubDate>
+        <link>http://blog.kablamo.org/2015/11/08/bash-tricks-eux/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2015/11/08/bash-tricks-eux/</guid>
+        
+        
+        <category>bash</category>
+        
+        <category>rex</category>
+        
+      </item>
     
       <item>
         <title>The Perl test ecosystem (slides)</title>
@@ -732,111 +800,6 @@ support for Perl.&lt;/p&gt;
         <pubDate>Sat, 19 Apr 2014 00:00:00 -0500</pubDate>
         <link>http://blog.kablamo.org/2014/04/19/codecube/</link>
         <guid isPermaLink="true">http://blog.kablamo.org/2014/04/19/codecube/</guid>
-        
-        
-        <category>perl</category>
-        
-      </item>
-    
-      <item>
-        <title>Reading code - Plack::Builder</title>
-        <description>&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/2014/04/08/read-plack-1&quot;&gt;Part 1 - An Overview&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2014/04/09/read-plack-2&quot;&gt;Part 2 - plackup Architecture&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2014/04/11/read-plack-3&quot;&gt;Part 3 - PSGI Application Architecture&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/2014/04/12/read-plack-4&quot;&gt;&lt;strong&gt;Part 4 - Plack::Builder&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Plack::Builder provides a domain specific language (DSL) for middleware
-developers.  It looks like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;use Plack::Builder;
-
-my $app1 = sub { ... };
-my $app2 = sub { ... };
-
-builder {
-    enable &quot;Deflater&quot;;
-    enable &quot;Session&quot;, store =&amp;gt; &quot;File&quot;;
-    enable &quot;Debug&quot;, panels =&amp;gt; [ qw(DBITrace Memory Timer) ];
-
-    mount &quot;/narwhale&quot; =&amp;gt; $app1;
-    mount &quot;/unicorn&quot;  =&amp;gt; $app2;
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;How does it work?  With three artful tricks.&lt;/p&gt;
-
-&lt;h1 id=&quot;artful-trick-1&quot;&gt;Artful trick #1&lt;/h1&gt;
-
-&lt;p&gt;The first artful trick is the &lt;code&gt;builder&lt;/code&gt; block.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sub builder(&amp;amp;) {
-    my $block = shift;
-    ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;&amp;amp;&lt;/code&gt; is a function prototype.  Perl offers some limited compile time checking
-for parameters passed to subs.  Here is what &lt;code&gt;perldoc perlsub&lt;/code&gt; says about &lt;code&gt;&amp;amp;&lt;/code&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;An “&amp;amp;” requires an anonymous subroutine, which, if passed as the first
-argument, does not require the “sub” keyword or a subsequent comma.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So if I try to pass &lt;code&gt;builder()&lt;/code&gt; a scalar or an array or anything thats not an
-anonymous subroutine, I will get a compile time error.  But if I pass it an
-anonymous subroutine, the compiler will allow things to continue.&lt;/p&gt;
-
-&lt;h1 id=&quot;artful-trick-2&quot;&gt;Artful trick #2&lt;/h1&gt;
-
-&lt;p&gt;The next artful trick is that Plack::Builder implements the DSL keywords as
-subs and then exports those subs.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package Plack::Builder;
-use strict;
-use parent qw( Exporter );
-our @EXPORT = qw( builder enable enable_if mount );
-...
-sub enable    {...}
-sub enable_if {...}
-sub mount     {...}
-# etc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Actually thats 90% of the whole thing isn’t it?  Now its starting to look
-obvious.  But lets continue.&lt;/p&gt;
-
-&lt;h1 id=&quot;artful-trick-3&quot;&gt;Artful trick #3&lt;/h1&gt;
-
-&lt;p&gt;There is one more interesting idea here.  Notice that if I use &lt;code&gt;enable&lt;/code&gt;,
-&lt;code&gt;enable_if&lt;/code&gt;, or &lt;code&gt;mount&lt;/code&gt; outside of a &lt;code&gt;builder&lt;/code&gt; block I will get an
-error.  This works because the DSL keywords are subs which run code references.
-By default those code references refer to code which croaks an error.  But when
-&lt;code&gt;builder&lt;/code&gt; runs, those references are temporarily replaced with real working
-code.&lt;/p&gt;
-
-&lt;p&gt;Here’s some simplified code to illustrate how it works.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;our $_enable = sub { Carp::croak(...) }; # &amp;lt;&amp;lt; default code reference
-
-sub enable { $_enable-&amp;gt;(@_) }
-
-sub builder(&amp;amp;) {
-    my $block = shift;
-    ...
-    local $_enable = sub {...}; # &amp;lt;&amp;lt; temporarily assign real working code
-    ...
-    my $app = $block-&amp;gt;();
-    ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-        <pubDate>Sat, 12 Apr 2014 00:00:00 -0500</pubDate>
-        <link>http://blog.kablamo.org/2014/04/12/read-plack-4/</link>
-        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/12/read-plack-4/</guid>
         
         
         <category>perl</category>
