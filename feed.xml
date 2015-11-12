@@ -6,12 +6,12 @@
 </description>
     <link>http://blog.kablamo.org/</link>
     <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 08 Nov 2015 14:07:03 -0600</pubDate>
-    <lastBuildDate>Sun, 08 Nov 2015 14:07:03 -0600</lastBuildDate>
+    <pubDate>Wed, 11 Nov 2015 18:44:17 -0600</pubDate>
+    <lastBuildDate>Wed, 11 Nov 2015 18:44:17 -0600</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>Bash tricks: set -eux</title>
+        <title>Bash tricks: set -euxo pipefail</title>
         <description>&lt;p&gt;&lt;code&gt;set -eux&lt;/code&gt; is a super useful bash trick I’ve been using in Chef and
 &lt;a href=&quot;https://metacpan.org/pod/Rex&quot;&gt;Rex&lt;/a&gt; tasks.  I’m going to break it down and
 explain it one option at a time:&lt;/p&gt;
@@ -28,13 +28,6 @@ explain it one option at a time:&lt;/p&gt;
 cmd1
 cmd2
 cmd3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Also pipelines fail on the first command which fails instead of dying later on
-down the pipeline.  This is especially good when cmd3 is a command that always
-succeeds (like echo):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cmd1 | cmd2 | cmd3
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&quot;set--u&quot;&gt;set -u&lt;/h1&gt;
@@ -61,10 +54,19 @@ hey
 woah
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h1 id=&quot;set--o-pipefail&quot;&gt;set -o pipefail&lt;/h1&gt;
+
+&lt;p&gt;Pipelines fail on the first command which fails instead of dying later on
+down the pipeline.  This is especially good when cmd3 is a command that always
+succeeds (like echo):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cmd1 | cmd2 | cmd3
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h1 id=&quot;see-also&quot;&gt;See also&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.peterbe.com/plog/set-ex&quot;&gt;The most useful bash trick of the year&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;explainshell.com/explain?cmd=set+-eux&quot;&gt;explainshell: set -eux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://explainshell.com/explain?cmd=set+-euxo pipefail&quot;&gt;explainshell: set -euxo pipefail&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 08 Nov 2015 00:00:00 -0600</pubDate>

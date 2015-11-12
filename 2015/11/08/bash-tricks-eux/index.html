@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Bash tricks: set -eux</title>
+  <title>Bash tricks: set -euxo pipefail</title>
   <meta name="description" content="set -eux is a super useful bash trick I&#8217;ve been using in Chef andRex tasks.  I&#8217;m going to break it down andexplain it one option at a time:">
 
   <link rel="stylesheet" href="/css/main.css">
@@ -106,7 +106,7 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Bash tricks: set -eux</h1>
+    <h1 class="post-title">Bash tricks: set -euxo pipefail</h1>
     <p class="post-meta">
     
       <a href="/categories/bash">bash</a>&nbsp;
@@ -137,13 +137,6 @@ cmd2
 cmd3
 </code></pre>
 
-<p>Also pipelines fail on the first command which fails instead of dying later on
-down the pipeline.  This is especially good when cmd3 is a command that always
-succeeds (like echo):</p>
-
-<pre><code>cmd1 | cmd2 | cmd3
-</code></pre>
-
 <h1 id="set--u">set -u</h1>
 <p>The shell prints a message to stderr when it tries to expand a variable that is
 not set.  Also it immediately exits. An interactive shell will not exit.  I
@@ -168,10 +161,19 @@ hey
 woah
 </code></pre>
 
+<h1 id="set--o-pipefail">set -o pipefail</h1>
+
+<p>Pipelines fail on the first command which fails instead of dying later on
+down the pipeline.  This is especially good when cmd3 is a command that always
+succeeds (like echo):</p>
+
+<pre><code>cmd1 | cmd2 | cmd3
+</code></pre>
+
 <h1 id="see-also">See also</h1>
 <ul>
   <li><a href="http://www.peterbe.com/plog/set-ex">The most useful bash trick of the year</a></li>
-  <li><a href="explainshell.com/explain?cmd=set+-eux">explainshell: set -eux</a></li>
+  <li><a href="http://explainshell.com/explain?cmd=set+-euxo pipefail">explainshell: set -euxo pipefail</a></li>
 </ul>
 
   </article>
