@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kablamo</title>
+    <description>Eric is a Chicago based developer who has been building stuff with Perl since 1998.  Currently he is building stuff at DuckDuckGo.  Eric has lived and worked in Beijing, Singapore, and London.  He enjoys peanut butter and ice cream and peanut butter ice cream.
+</description>
+    <link>http://blog.kablamo.org/</link>
+    <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 10 Jan 2016 20:13:38 -0600</pubDate>
+    <lastBuildDate>Sun, 10 Jan 2016 20:13:38 -0600</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Bash tricks: set -euxo pipefail</title>
+        <description>&lt;p&gt;&lt;code&gt;set -eux&lt;/code&gt; is a super useful bash trick I’ve been using in Chef and
+&lt;a href=&quot;https://metacpan.org/pod/Rex&quot;&gt;Rex&lt;/a&gt; tasks.  I’m going to break it down and
+explain it one option at a time:&lt;/p&gt;
+
+&lt;h1 id=&quot;set--e&quot;&gt;set -e&lt;/h1&gt;
+&lt;p&gt;This&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cmd1 &amp;amp;&amp;amp; cmd2 &amp;amp;&amp;amp; cmd3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;is equivalent to this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set -e
+cmd1
+cmd2
+cmd3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;set--u&quot;&gt;set -u&lt;/h1&gt;
+&lt;p&gt;The shell prints a message to stderr when it tries to expand a variable that is
+not set.  Also it immediately exits. An interactive shell will not exit.  I
+think this is similar to Perl’s 
+&lt;a href=&quot;https://metacpan.org/pod/strictures&quot;&gt;use strictures&lt;/a&gt; which is something Moo
+enables.&lt;/p&gt;
+
+&lt;h1 id=&quot;set--x&quot;&gt;set -x&lt;/h1&gt;
+&lt;p&gt;The shell prints each command in a script to stderr before running it.  I think
+this would be particularly useful in Rex.  And Chef.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set -x
+echo hey
+echo woah
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;+ echo hey
+hey
++ echo woah
+woah
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;set--o-pipefail&quot;&gt;set -o pipefail&lt;/h1&gt;
+
+&lt;p&gt;Pipelines fail on the first command which fails instead of dying later on
+down the pipeline.  This is especially good when cmd3 is a command that always
+succeeds (like echo):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cmd1 | cmd2 | cmd3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;see-also&quot;&gt;See also&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.peterbe.com/plog/set-ex&quot;&gt;The most useful bash trick of the year&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://explainshell.com/explain?cmd=set+-euxo pipefail&quot;&gt;explainshell: set -euxo pipefail&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 08 Nov 2015 00:00:00 -0600</pubDate>
+        <link>http://blog.kablamo.org/2015/11/08/bash-tricks-eux/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2015/11/08/bash-tricks-eux/</guid>
+        
+        
+        <category>bash</category>
+        
+        <category>rex</category>
+        
+      </item>
+    
+      <item>
+        <title>The Perl test ecosystem (slides)</title>
+        <description>&lt;p&gt;I gave this talk last Thursday at
+&lt;a href=&quot;http://chicago.pm.org/blog/2015/09/19/the-perl-test-ecosystem/&quot;&gt;Chicago.pm&lt;/a&gt;.
+This talk assumes the listener knows very little about testing in Perl but
+likely has something for more advanced users as well.&lt;/p&gt;
+
+&lt;p&gt;It begins with &lt;code&gt;prove&lt;/code&gt; and &lt;code&gt;Test::More&lt;/code&gt;, but then moves on to explore the &lt;code&gt;Test::&lt;/code&gt;
+namespace on CPAN and talk about 20 other test modules.  CPAN has a large
+number of modules to help with testing – its a pretty healthy ecosystem.&lt;/p&gt;
+
+&lt;p&gt;My goal was to create talk which not only gives new people an introduction to
+testing in Perl, but also provides up to date advice about which modules are
+useful and recommended.  Feedback and corrections welcome.&lt;/p&gt;
+
+&lt;p&gt;As usual, this talk is both a living document and reference material. I keep my
+talks updated and relevant so I can refer people to them. If I’ve missed
+anything feel free to contribute to the github repo or leave a comment.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://kablamo.org/slides-perl-testing&quot;&gt;Slides&lt;/a&gt; |
+&lt;a href=&quot;http://github.com/kablamo/slides-perl-testing&quot;&gt;GitHub repo&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 26 Sep 2015 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2015/09/26/slides-perl-testing/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2015/09/26/slides-perl-testing/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>slides</category>
+        
+      </item>
+    
+      <item>
+        <title>Publish your first CPAN module in &lt; 5 minutes (slides)</title>
+        <description>&lt;p&gt;I originally gave this talk at Chicago.pm as part of a “Distribution Management
+Shootout” – a 3 way duel between:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jberger’s &lt;a href=&quot;http://jberger.github.io/ModuleBuildPresentation&quot;&gt;talk&lt;/a&gt; about Module::Build and and the “Classic” build systems&lt;/li&gt;
+  &lt;li&gt;preaction’s &lt;a href=&quot;http://preaction.github.io/Introduction-to-Dist-Zilla&quot;&gt;talk&lt;/a&gt; about Dist::Zilla, and&lt;/li&gt;
+  &lt;li&gt;my &lt;a href=&quot;http://kablamo.org/slides-first-cpan-module&quot;&gt;talk&lt;/a&gt; about Minilla and Carton.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It was a great overview of the most popular tools and I think all the talks
+are worth checking out.&lt;/p&gt;
+
+&lt;p&gt;As usual, this talk is both a living document and reference material. I keep my
+talks updated and relevant so I can refer people to them. If I’ve missed
+anything feel free to contribute to the github repo or leave a comment.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://kablamo.org/slides-first-cpan-module&quot;&gt;Slides&lt;/a&gt; |
+&lt;a href=&quot;http://github.com/kablamo/slides-first-cpan-module&quot;&gt;GitHub repo&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 15 Sep 2015 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2015/09/15/slides-first-cpan-module/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2015/09/15/slides-first-cpan-module/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>slides</category>
+        
+      </item>
+    
+      <item>
+        <title>mstpan quick reference</title>
+        <description>&lt;p&gt;Last Christmas, the inimitable Matt Trout (mst) created an opinionated tour of
+CPAN where he recommended modules for some common problems.  I think its
+brilliant, useful, and entertaining and I’ve decided to compile a high level
+overview all on one page in order to create a quick reference.&lt;/p&gt;
+
+&lt;p&gt;I’ve tried to distill his wisdom and wit down to a few words.  But I recommend
+clicking the section headers and following the links to Matt’s original posts
+to see his actual real opinions in their full complexity.  This single page
+can’t replace 16 great posts and he usually includes advice on the best way
+to use the module.  You won’t want to miss that.&lt;/p&gt;
+
+&lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#webframeworks&quot;&gt;Web Frameworks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#webdeployment&quot;&gt;Web Deployment&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#xml&quot;&gt;XML&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#html&quot;&gt;HTML&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#files&quot;&gt;Files&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#databases&quot;&gt;Databases&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#json&quot;&gt;JSON&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#async&quot;&gt;Async&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#librarydeployment&quot;&gt;Library Deployment&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#perlvmdeployment&quot;&gt;Perl VM Deployment&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#distributionbuilding&quot;&gt;Distribution building&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#objectorientation&quot;&gt;Object orientation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#soap&quot;&gt;SOAP&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#exporting&quot;&gt;Exporting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#email&quot;&gt;Email&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#logging&quot;&gt;Logging&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;webframeworks&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-1&quot;&gt;Web Frameworks&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;CGI.pm (the CPAN module)&lt;/strong&gt; - Run away&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Catalyst&lt;/strong&gt; - Venerable&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Dancer&lt;/strong&gt; - Solid and lightweight&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mojolicious&lt;/strong&gt; - Shiny&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Web::Simple&lt;/strong&gt; - Low level&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Plack&lt;/strong&gt; - Awesome (but not a web framework)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;webdeployment&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-2&quot;&gt;Web Deployment&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;mod_perl&lt;/strong&gt; - Run away&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CGI (the protocol)&lt;/strong&gt; - Ok for some trivial things&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;FastCGI + unix sockets for zero downtime deploys&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Apache + FastCgiExternalServer&lt;/strong&gt; - Good&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Nginx + Starman + Unix sockets&lt;/strong&gt; - Good&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mojolicious + Hypnotoad&lt;/strong&gt; - Good&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;PSGI Async&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Net::Async::HTTP::Server::PSGI&lt;/strong&gt; if you like IO::Async&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Twiggy&lt;/strong&gt; if you like AnyEvent&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;xml&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-3&quot;&gt;XML&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;XML::Simple&lt;/strong&gt; - No&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;XML::Twig&lt;/strong&gt; - Excellent whipuptitude&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;XPath&lt;/strong&gt; - Not a CPAN module but you should learn it&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;XML::LibXML&lt;/strong&gt; - Good&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Template::Semantic&lt;/strong&gt; - Good&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;XML::Toolkit&lt;/strong&gt; - Good&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;XML::Rabbit&lt;/strong&gt; - Nice&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;xmllint&lt;/strong&gt; - Not a Perl module. But useful if you’re XML file is made of “old man wee and fail”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;html&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-4&quot;&gt;HTML&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Parsing HTML
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Regular expressions&lt;/strong&gt; - Don’t&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;HTML::TreeBuilder&lt;/strong&gt; - Venerable&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Mojo::DOM&lt;/strong&gt; - Pleasant&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;XML::LibXML&lt;/strong&gt; or &lt;strong&gt;XML::Twig&lt;/strong&gt; - Ok but why&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Generating HTML
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;CGI.pm&lt;/strong&gt; - Please don’t&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Template Toolkit&lt;/strong&gt; - Venerable&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Text::Xslate&lt;/strong&gt; - Brilliant&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;HTML::Mason&lt;/strong&gt; - Yes but no because embedded Perl&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Mojo::Template&lt;/strong&gt; - Yes but no because embedded Perl&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;HTML::Zoom&lt;/strong&gt; - mst wrote it, mst doesn’t hate it&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;files&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-5&quot;&gt;Files&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Files::Spec&lt;/strong&gt; - Core, standard&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Files::Spec::Functions&lt;/strong&gt; - Use this instead of File::Spec&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;File::stat&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;autodie&lt;/strong&gt; - Core, but “a giant bag of crack balanced precariously atop .. an even bigger bag of tainted crack”&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;File::Open&lt;/strong&gt; - Better than autodie&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;File::Slurp&lt;/strong&gt; - Avoid&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Path::Tiny&lt;/strong&gt; - Excellent&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;IO::All&lt;/strong&gt; - Good if you want to be procedural and don’t want OO&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;databases&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-6&quot;&gt;Databases&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;DBI&lt;/strong&gt; - 99% of the time, just use these 2 methods and nothing else&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+    $dbh-&amp;gt;do($sql, {}, @args);
+    my @array_of_hashrefs = @{$dbh-&amp;gt;selectall_arrayref($self, { Slice =&amp;gt; {} }, @args)};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;DBIx::Connector&lt;/strong&gt; - You want it&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mojo::PG&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DBIx::Class&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DBIx::Class::Candy&lt;/strong&gt; - Shiny&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DBIx::Class::DeploymentHandler&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DBIx::Class::Fixtures&lt;/strong&gt; - Useful for testing&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DBIx::Class::PassphraseColum&lt;/strong&gt; - Yes please&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;json&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-7&quot;&gt;JSON&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;JSON&lt;/strong&gt; - Yes but there are alternatives&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;JSON::PP&lt;/strong&gt; - Pure perl, core, fatpacks&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;JSON::XS&lt;/strong&gt; - Fast&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cpanel::JSON::XS&lt;/strong&gt; - Faster&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;JSON::MaybeXS&lt;/strong&gt; - Recommended&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;JSON::Diffable&lt;/strong&gt; - Useful&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mojo::JSON&lt;/strong&gt; - Really nice&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;async&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-8&quot;&gt;Async&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Don’t&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;threads.pm&lt;/strong&gt; - Don’t.  Its slow.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;POE&lt;/strong&gt; - Good but weird UI.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;MooseX::POE&lt;/strong&gt; - Better&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reflex&lt;/strong&gt; - Interesting&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;AnyEvent&lt;/strong&gt; - Ok, but maintainer is difficult&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;IO::Async&lt;/strong&gt; - Nice&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mojo::IOLoop&lt;/strong&gt; - Nice&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Promises&lt;/strong&gt; - Neat but mst likes Future&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;curry&lt;/strong&gt; - Useful&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;librarydeployment&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-9&quot;&gt;Library deployment&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;cpan as root&lt;/strong&gt; - No&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Vendor Packages&lt;/strong&gt; - Ok&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CPANPLUS&lt;/strong&gt; - Out of favor&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CPAN&lt;/strong&gt; - Standard&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;cpanminus&lt;/strong&gt; - Use this&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;FindBin&lt;/strong&gt; - Good for git deploys, bad for dist deploys&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;local::lib&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Carton&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;App::FatPacker&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CPAN::Mini&lt;/strong&gt; - Maximum underkill&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Pinto&lt;/strong&gt; - Maximum overkill&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;perlvmdeployment&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-10&quot;&gt;Perl VM deployment&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;System perl&lt;/strong&gt; - Ok with local::lib&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Manual compilation&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;perlbrew&lt;/strong&gt; - Yes usually all the shims are more annoying than necessary&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Perl::Build&lt;/strong&gt; - Nice&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;plenv&lt;/strong&gt; - Nice&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Windows&lt;/strong&gt; - Active State or Strawberry Perl&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;distributionbuilding&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-11&quot;&gt;Distribution building&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ExtUtils::MakeMaker&lt;/strong&gt; - Hated by everyone except people who like Makefiles.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Module::Build&lt;/strong&gt; - No&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Module::Install&lt;/strong&gt; - “a giant tower of crack”&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Module::Build::Tiny&lt;/strong&gt; - Nice.  See also App::ModuleBuildTiny.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Dist::Zilla&lt;/strong&gt; - Power.  Maximum overkill.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Dist::Milla&lt;/strong&gt; - Sensible&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Minilla&lt;/strong&gt; - Great.  Maximum underkill.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;objectorientation&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-12&quot;&gt;Object orientation&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Moose&lt;/strong&gt; - Awesome&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Moo&lt;/strong&gt; - Shiny&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mouse&lt;/strong&gt; - Niche&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Type::Tiny&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Moops&lt;/strong&gt; - Good&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Throwable&lt;/strong&gt; - Sensible&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Safe::Isa&lt;/strong&gt; - Might be useful&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;soap&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-13&quot;&gt;SOAP&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;SOAP::WSDL&lt;/strong&gt; - Avoid&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;XML::Compile::SOAP&lt;/strong&gt; - Insane and brilliant&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Catalyst::Controller::SOAP&lt;/strong&gt; - Least worst option&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SOAP::Lite&lt;/strong&gt; - Ancient and insane&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;exporting&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-14&quot;&gt;Exporting&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Exporter&lt;/strong&gt; - Sufficient&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sub::Exporter&lt;/strong&gt; - Worth a look&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sub::Exporter::Progressive&lt;/strong&gt; - Light&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Moose::Exporter&lt;/strong&gt; - Yes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Exporter::Tiny&lt;/strong&gt; - Recommended&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Exporter::Declare&lt;/strong&gt; - Maximum overkill&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;namespace::(auto)clean&lt;/strong&gt; - Useful&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Import::Into&lt;/strong&gt; - or Import::Base&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;email&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-15&quot;&gt;Email&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Net::SMTP&lt;/strong&gt; - Too low level&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Email::Send&lt;/strong&gt; - Usable&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Email::Sender&lt;/strong&gt; - Recommended&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Email::Stuffer&lt;/strong&gt; - mst favorite&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Emailesque&lt;/strong&gt; - mst favorite with sugar on top&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Email::Mime&lt;/strong&gt; - Standard&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Email::Mime::Kit&lt;/strong&gt; - Best answer for templating&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mail::Box&lt;/strong&gt; - Brilliant and insane&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Courriel&lt;/strong&gt; - Elegant&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;&lt;a name=&quot;logging&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-16&quot;&gt;Logging&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;warn()&lt;/strong&gt; - Perfectly fine&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Log::Dispatch&lt;/strong&gt; - Nice&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Log::Log4Pperl&lt;/strong&gt; - Maximum overkill&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Log::Any&lt;/strong&gt; - Good&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Log::Contextual&lt;/strong&gt; - Nice&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Message::Passing&lt;/strong&gt; - Worth a look. Not quite logging.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Tue, 08 Sep 2015 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2015/09/08/mstpan/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2015/09/08/mstpan/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
+    
+      <item>
+        <title>HTTP::Request::AsCurl</title>
+        <description>&lt;p&gt;Today, on a whim, I released a module called
+&lt;a href=&quot;https://metacpan.org/pod/HTTP::Request::AsCurl&quot;&gt;HTTP::Request::AsCurl&lt;/a&gt; to
+CPAN.  It converts an HTTP::Request object to a curl command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use HTTP::Request::Common;
+use HTTP::Request::AsCurl;
+
+my $request = POST('api.earth.defense/weapon1', { 
+    target =&amp;gt; 'mothership', 
+    when   =&amp;gt; 'now' 
+});
+
+say join &quot;\n&quot;, $request-&amp;gt;as_curl;
+# curl --dump-header - -XPOST &quot;api.earth.defense/weapon1&quot; \
+# --data 'target=mothership' \
+# --data 'when=now'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It works by injecting the &lt;code&gt;as_curl()&lt;/code&gt; method into the HTTP::Request namespace.
+This must be a bad idea and probably not a great bit of code to rely on in a
+production environment.  But it is pretty convenient syntax for debugging a
+REST API and I couldn’t resist.  Thoughts, suggestions, criticism?&lt;/p&gt;
+
+&lt;h1 id=&quot;update-2014-06-01---&quot;&gt;– UPDATE (2014-06-01) –&lt;/h1&gt;
+
+&lt;p&gt;I released a new version which has a totally different user interface.  Here is
+the new synopsis:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use HTTP::Request::Common;
+use HTTP::Request::AsCurl qw/as_curl/;
+
+my $request = POST('api.earth.defense/weapon1', { 
+    target =&amp;gt; 'mothership', 
+    when   =&amp;gt; 'now' 
+});
+
+system as_curl($request);
+
+print as_curl($request, pretty =&amp;gt; 1, newline =&amp;gt; &quot;\n&quot;, shell =&amp;gt; 'bourne');
+# curl \
+# --request POST api.earth.defense/weapon1 \
+# --dump-header - \
+# --data target=mothership \
+# --data when=now
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are 2 major changes.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;I’m no longer doing namespace injection.  I really liked the syntax, but it
+was problematic and unnecessary.&lt;/li&gt;
+  &lt;li&gt;The old version returned a formatted array of strings which was 
+not very useful.  The problem with a formatted string (as was helpfully
+pointed out to me) is you have worry about stuff like newlines which
+depends on the system you are targeting and shell escaping which depends on
+the shell you are targeting.  This is a can of worms.  Hopefully this new
+interface is an improvement.&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Tue, 27 May 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/05/27/http-request-ascurl/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/05/27/http-request-ascurl/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>code</category>
+        
+      </item>
+    
+      <item>
+        <title>Reading code - Camel-Snake-Kebab</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://github.com/qerub/camel-snake-kebab&quot;&gt;Camel-Snake-Kebab&lt;/a&gt; is a Clojure
+library for word case conversions.  I have wanted to see this on CPAN for a
+while so last week I finally ported it to Perl.  I even ported the test suite.
+Here is a synopsis of my 
+&lt;a href=&quot;https://metacpan.org/pod/String::CamelSnakeKebab&quot;&gt;String::CamelSnakeKebab&lt;/a&gt; Perl module:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use String::CamelSnakeKebab qw/:all/;
+
+lower_camel_case('flux-capacitor')
+       # Returns 'fluxCapacitor'
+
+upper_camel_case('flux-capacitor')
+       # Returns 'FluxCapacitor'
+
+lower_snake_case 'ASnakeSlithersSlyly'    
+       # Returns 'a_snake_slithers_slyly'
+
+upper_snake_case('ASnakeSlithersSlyly')
+       # Returns 'A_Snake_Slithers_Slyly'
+
+constant_case(&quot;I am constant&quot;)
+    # Returns &quot;I_AM_CONSTANT&quot;
+
+kebab_case('Peppers_Meat_Pineapple')
+ # Returns 'peppers-meat-pineapple'
+
+http_header_case(&quot;x-ssl-cipher&quot;)
+       # Returns &quot;X-SSL-Cipher&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;clojure&quot;&gt;Clojure&lt;/h1&gt;
+
+&lt;p&gt;This was my first contact with Clojure and I found the code I was reading to be
+bite sized, concise, elegant code.  It reads a bit like math equations to
+me.  Or sort of vaguely BNF-like as you will see.  I suspect I would have had a
+hard time choosing a better library as my introduction to the language.&lt;/p&gt;
+
+&lt;h1 id=&quot;functional-programming&quot;&gt;Functional programming&lt;/h1&gt;
+
+&lt;p&gt;Clojure is a functional language – as contrasted with more common imperative
+languages.  I will admit I didn’t really know what that means.  But hey I
+looked it up so I can now present to you 3 central concepts of functional
+programming.  (Btw Perl is usually imperative but it can be written
+functionally as well.  Although its a little easier and more natural in
+Clojure).&lt;/p&gt;
+
+&lt;h2 id=&quot;first-class-and-higher-order-functions&quot;&gt;1. First class and higher order functions&lt;/h2&gt;
+
+&lt;p&gt;These are functions which accept other functions as arguments.  So functional
+programmers enjoy passing around code refs.  Thats not radical for Perl
+developers.  Perl has always had excellent support for that.&lt;/p&gt;
+
+&lt;p&gt;This flavor of code is often shorter, more general, and less repetitive.
+But its harder to read and requires me to use my brains causes me some
+discomfort.&lt;/p&gt;
+
+&lt;h3 id=&quot;example&quot;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;The most important function in Camel-Snake-Kebab is &lt;code&gt;convert-case&lt;/code&gt;.  It is
+called by every case conversion function in the library.  It splits a string
+into words, applies a case rule to the first word and then a second possibly
+different case rule to the remaining words.  Then all the words are joined back
+together using the given separator.  Here it is written in Clojure:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defn convert-case [first-fn rest-fn sep s]
+&quot;Converts the case of a string according to the rule for the first
+word, remaining words, and the separator.&quot;
+(let [[first &amp;amp; rest] (split s word-separator-pattern)]
+    (join sep (cons (first-fn first) (map rest-fn rest)))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Using this I could implement lower snake case like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defn lower-snake-case [s]
+    (convert-case lower-case lower-case &quot;_&quot; s))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is the translation in Perl I came up with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sub convert_case {
+    my ($first_coderef, $rest_coderef, $separator, $string) = @_; 
+
+    my ($first, @rest) = split $WORD_SEPARATOR_PATTERN, $string;
+
+    my @words = $first_coderef-&amp;gt;($first);
+    push @words, $rest_coderef-&amp;gt;($_) for @rest;
+
+    return join $separator, @words;
+}
+
+sub my_lc { lc $_ }
+
+sub lower_snake_case {
+    convert_case( \&amp;amp;my_lc, \&amp;amp;my_lc, &quot;_&quot;, shift );
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The cool thing about this is the different case methods (lower_camel_case,
+kebab_case, etc) are not actually implemented this way.  They are dynamically
+created when the module loads using a set of conversion rules that looks like
+this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;our %CONVERSION_RULES = (
+    'lower_camel_case' =&amp;gt; [ \&amp;amp;lc,               \&amp;amp;ucfirst,          &quot;&quot;  ],
+    'upper_camel_case' =&amp;gt; [ \&amp;amp;ucfirst,          \&amp;amp;ucfirst,          &quot;&quot;  ],
+    'lower_snake_case' =&amp;gt; [ \&amp;amp;lc,               \&amp;amp;lc,               &quot;_&quot; ],
+    'upper_snake_case' =&amp;gt; [ \&amp;amp;ucfirst,          \&amp;amp;ucfirst,          &quot;_&quot; ],
+    'constant_case'    =&amp;gt; [ \&amp;amp;uc,               \&amp;amp;uc,               &quot;_&quot; ],
+    'kebab_case'       =&amp;gt; [ \&amp;amp;lc,               \&amp;amp;lc,               &quot;-&quot; ],
+    'http_header_case' =&amp;gt; [ \&amp;amp;http_header_caps, \&amp;amp;http_header_caps, &quot;-&quot; ],
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;purely-functional-functions&quot;&gt;2. Purely functional functions&lt;/h2&gt;
+
+&lt;p&gt;These are functions with no state and no side effects.  In functional
+programming I can’t do assignments because that alters state (and that is a
+side effect).  Which sounds rediculous.  How can I program without doing
+assignments?  I’m not sure, but the advantage of no side effects is
+performance.  I can run functions in parallel without affecting each other.
+Also the function’s output will depend entirely on the input which makes purely
+functional functions great for &lt;a href=&quot;https://metacpan.org/pod/Memoize&quot;&gt;memoization&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;example-1&quot;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;This concept was also evident in the code I ported.  Functions did not modify
+state.  There were very few if any assignments.  And the output of functions
+depended entirely on the input.&lt;/p&gt;
+
+&lt;p&gt;I did try memoizing String::CamelSnakeKebab but it did not make it faster.  I’m
+not sure why.  Perhaps case conversion is just not computationally intensive
+enough to make a difference?  So unfortunately I have no example for you.  Any
+help in the comments would be awesome.&lt;/p&gt;
+
+&lt;h2 id=&quot;no-for-loops&quot;&gt;3. No &lt;code&gt;for&lt;/code&gt; loops&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;for&lt;/code&gt; loops require state and assignments.  To implement loops in functional
+programming I’m supposed to use recursion.  I didn’t see any examples of this
+in this library and my brain is grateful to the author for sparing me the
+exertion.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-end&quot;&gt;The End&lt;/h1&gt;
+
+&lt;p&gt;Thats the end of my story today.  If you are interested, compare the
+&lt;a href=&quot;https://github.com/kablamo/perl-string-camelsnakekebab/blob/master/lib/String/CamelSnakeKebab.pm&quot;&gt;Perl source code&lt;/a&gt;
+with the
+&lt;a href=&quot;https://github.com/qerub/camel-snake-kebab/blob/stable/src/camel_snake_kebab.clj&quot;&gt;Clojure source code&lt;/a&gt;.
+Each version is about 70 lines of code.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 26 May 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/05/26/perl-camel-snake-kebab/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/05/26/perl-camel-snake-kebab/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>readingcode</category>
+        
+        <category>writingcode</category>
+        
+      </item>
+    
+      <item>
+        <title>Test::Pretty - because TAP is unnattractive</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://metacpan.org/pod/Test::Pretty&quot;&gt;Test::Pretty&lt;/a&gt; (artfully written by
+the inimitable &lt;a href=&quot;http://tokuhirom.github.io/&quot;&gt;@tokuhirom&lt;/a&gt;) makes my tests look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/for-posts/2014-05-08-test-pretty.png&quot; alt=&quot;x&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is especially nice when I have subtests.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/for-posts/2014-05-08-test-pretty-subtest2.png&quot; alt=&quot;x&quot; /&gt;
+&lt;img src=&quot;/images/for-posts/2014-05-08-test-pretty-subtest.png&quot; alt=&quot;x&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;how-it-works&quot;&gt;How it works&lt;/h1&gt;
+
+&lt;p&gt;I can enable Test::Pretty like this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;prove -MTest::Pretty -vlr t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But typing extra characters is not fun.  Happily
+@tokuhirom also created a prove
+&lt;a href=&quot;https://metacpan.org/pod/App::Prove::Plugin::retty&quot;&gt;plugin&lt;/a&gt; (which is included
+with the Test::Pretty module) which allows me to do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;prove -Pretty -vlr t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Shorter but still too much typing so I created a &lt;code&gt;~/.proverc&lt;/code&gt; file which contains
+the following lines:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;--lib
+--verbose
+--comments
+--recurse
+-Pretty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now I can get pretty verbose recursive (etc) tests and I only need to type this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;prove t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can view my &lt;code&gt;~/.proverc&lt;/code&gt; and more goodies in my &lt;a href=&quot;https://github.com/kablamo/dotfiles&quot;&gt;dotfiles repo&lt;/a&gt;).&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 08 May 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/05/08/test-pretty/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/05/08/test-pretty/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
+    
+      <item>
+        <title>Why reading code is good for me</title>
+        <description>&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;So I can start kicking butt faster&lt;/strong&gt; - When I start a new job or a new
+contract. Or when I hack on a new feature.  Or every day of my life as a
+programmer that involves legacy code.  Yeah pretty much all the time.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;So I can learn new tricks&lt;/strong&gt; - Healthy languages evolve.  Idioms and slang
+are tools for more efficiently expressing ideas.  I want to be on top of
+that.  Also its best way to peak inside the mind of a talented developer and
+steal and copy their skills.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;So I can work better with others&lt;/strong&gt; - I understand their idioms because I have
+seen them before.  And I can probably articulate why their idioms are awesome
+or feeble.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I must remember that attitude matters.  If I think of reading code as a painful
+chore it will be.  But if I look for opportunity I find it.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 23 Apr 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/04/23/reading-code/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/23/reading-code/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>experiments</category>
+        
+      </item>
+    
+      <item>
+        <title>An experiment - Write code every day</title>
+        <description>&lt;p&gt;If you missed John Resig’s recent post about &lt;a href=&quot;http://ejohn.org/blog/write-code-every-day/&quot;&gt;writing code everyday&lt;/a&gt; I highly recommend it.&lt;/p&gt;
+
+&lt;p&gt;He is a busy guy with a full time job (at Khan Academy), a few open source side
+projects (the author of jQuery), a wife, and a few hobbies.  How to sustainably
+get stuff done on his open source side projects without his wife leaving him?
+He decided to start writing (non work) code for 30 minutes every day.  This by
+itself is not a revolutionary idea.  What blew my mind out of my nose and on to
+the table are the benefits he encountered:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Minimum viable code&lt;/strong&gt; - No time for more than that.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Small but continuous progress&lt;/strong&gt; - No anxiety about not getting stuff done.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Free time on the weekends&lt;/strong&gt; - Instead of working all
+weekend to catch up from doing nothing during the week.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Lowered cost of context switching&lt;/strong&gt; - Compared to resuming work on a side project just on the weekends.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Brain solves side project issues in the background&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Wow, I need to do this too.  So this is
+&lt;a href=&quot;http://blog.kablamo.org/2014/03/24/experiments/&quot;&gt;another&lt;/a&gt;
+&lt;a href=&quot;http://blog.kablamo.org/2014/01/01/no-dessert-forever/&quot;&gt;experiment&lt;/a&gt; and here
+are the rules.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;I will write code for a minimum of 30 minutes each day.&lt;/li&gt;
+  &lt;li&gt;I must push working code every day.&lt;/li&gt;
+  &lt;li&gt;I will write for a minimum of 10 minutes each day.&lt;/li&gt;
+  &lt;li&gt;I must publish a blog post at least once a week.&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Sun, 20 Apr 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/04/20/write-code-every-day/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/20/write-code-every-day/</guid>
+        
+        
+        <category>perl</category>
+        
+        <category>experiments</category>
+        
+      </item>
+    
+      <item>
+        <title>Codecube.io now supports Perl</title>
+        <description>&lt;p&gt;&lt;a href=&quot;http://codecube.io&quot;&gt;Codecube.io&lt;/a&gt; is a jsfiddle type service which runs Perl
+code (and other languages) and shows the results in your browser.&lt;/p&gt;
+
+&lt;p&gt;The website is written in Go and runs your code inside a Docker container.  It
+originally had support for C, Go, Python, and Ruby.  I was looking for an
+excuse to play with Docker and Go so I submitted a pull request which added
+support for Perl.&lt;/p&gt;
+
+&lt;p&gt;See also:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The original Codecube &lt;a href=&quot;http://hmarr.com/2013/oct/16/codecube-runnable-gists/&quot;&gt;blog post&lt;/a&gt; which is a good introduction to Docker.&lt;/li&gt;
+  &lt;li&gt;The &lt;a href=&quot;https://github.com/hmarr/codecube&quot;&gt;Codecube github repo&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;My previous post on &lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;My previous post on &lt;a href=&quot;http://www.docker.io/&quot;&gt;Docker&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sat, 19 Apr 2014 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2014/04/19/codecube/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2014/04/19/codecube/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
+    
+  </channel>
+</rss>

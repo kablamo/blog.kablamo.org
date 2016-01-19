@@ -1,0 +1,14 @@
+#!/bin/bash 
+
+set -e
+
+jekyll build
+git co gh-pages
+cp -r _site/* .
+git add -A
+git status
+git commit -a -m 'More'
+git push
+git co master
+git push
+git branch

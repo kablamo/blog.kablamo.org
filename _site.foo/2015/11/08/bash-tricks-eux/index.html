@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Bash tricks: set -euxo pipefail</title>
+  <meta name="description" content="set -eux is a super useful bash trick I&#8217;ve been using in Chef andRex tasks.  I&#8217;m going to break it down andexplain it one option at a time:">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2015/11/08/bash-tricks-eux/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/"><span class="site-title-bold">kablamo</span></a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Bash tricks: set -euxo pipefail</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/bash">bash</a>&nbsp;
+    
+      <a href="/categories/rex">rex</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2015-11-08
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p><code>set -eux</code> is a super useful bash trick I’ve been using in Chef and
+<a href="https://metacpan.org/pod/Rex">Rex</a> tasks.  I’m going to break it down and
+explain it one option at a time:</p>
+
+<h1 id="set--e">set -e</h1>
+<p>This</p>
+
+<pre><code>cmd1 &amp;&amp; cmd2 &amp;&amp; cmd3
+</code></pre>
+
+<p>is equivalent to this</p>
+
+<pre><code>set -e
+cmd1
+cmd2
+cmd3
+</code></pre>
+
+<h1 id="set--u">set -u</h1>
+<p>The shell prints a message to stderr when it tries to expand a variable that is
+not set.  Also it immediately exits. An interactive shell will not exit.  I
+think this is similar to Perl’s 
+<a href="https://metacpan.org/pod/strictures">use strictures</a> which is something Moo
+enables.</p>
+
+<h1 id="set--x">set -x</h1>
+<p>The shell prints each command in a script to stderr before running it.  I think
+this would be particularly useful in Rex.  And Chef.</p>
+
+<pre><code>set -x
+echo hey
+echo woah
+</code></pre>
+
+<p>output:</p>
+
+<pre><code>+ echo hey
+hey
++ echo woah
+woah
+</code></pre>
+
+<h1 id="set--o-pipefail">set -o pipefail</h1>
+
+<p>Pipelines fail on the first command which fails instead of dying later on
+down the pipeline.  This is especially good when cmd3 is a command that always
+succeeds (like echo):</p>
+
+<pre><code>cmd1 | cmd2 | cmd3
+</code></pre>
+
+<h1 id="see-also">See also</h1>
+<ul>
+  <li><a href="http://www.peterbe.com/plog/set-ex">The most useful bash trick of the year</a></li>
+  <li><a href="http://explainshell.com/explain?cmd=set+-euxo pipefail">explainshell: set -euxo pipefail</a></li>
+</ul>
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2015/11/08/bash-tricks-eux/';
+        var disqus_url = 'http://blog.kablamo.org/2015/11/08/bash-tricks-eux/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

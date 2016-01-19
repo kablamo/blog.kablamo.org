@@ -22,7 +22,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/">blog.<span class="site-title-bold">kablamo</span>.org</a>
+    <a class="site-title" href="/"><span class="site-title-bold">kablamo</span></a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -103,17 +103,36 @@
 
 
     <div class="page-content">
-      <div class="wrapper">
-        <div class="post">
+      <div class="post">
 
-  <header class="post-header">
-    <h1 class="post-title">What I'm reading</h1>
+  <style>
+    .page-header {
+        background          : url(/images/reading-cat.gif);
+        background-position : center;
+        background-repeat   : no-repeat;
+        background-size     : cover;
+    }
+    .page-title {
+        
+        font-size   : 4rem;
+        line-height : 4rem;
+        top         : 36.5rem;
+        text-shadow :
+           -1px -1px 0 #000,  
+            1px -1px 0 #000,
+           -1px  1px 0 #000,
+            1px  1px 0 #000;
+        
+    }
+  </style>
+  <header class="page-header">
+    <h1 class="page-title">What I'm reading</h1>
   </header>
 
   <article class="post-content">
-    <div class="img-wrapper">
-    <img class="title-img" src="/images/reading-cat.gif" />
-</div>
+    <div class="wrapper">
+     <div class="wrapper">
+
 
 <section>
   <ul id="pinboard-linkroll">Please wait for the internet fairies to finish cavorting...</ul>
@@ -124,6 +143,8 @@
     subscribe <a href="https://feeds.pinboard.in/rss/u:kablamo/">via RSS</a>
   </p>
 </section>
+</div>
+
 <script type="text/javascript">
   var linkroll = 'pinboard-linkroll'; //id target for pinboard list
   var pinboard_user = "kablamo"; //id target for pinboard list
@@ -138,11 +159,11 @@
 </script>
 
 
+    </div>
   </article>
 
 </div>
 
-      </div>
     </div>
 
     

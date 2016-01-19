@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Devops with Rex</title>
+  <meta name="description" content="I have recently been playing with Rex and wanted towrite down some of my initial thoughts.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2013/11/22/rex/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/"><span class="site-title-bold">kablamo</span></a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Devops with Rex</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+      <a href="/categories/devops">devops</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2013-11-22
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>I have recently been playing with <a href="http://www.rexify.org/">Rex</a> and wanted to
+write down some of my initial thoughts.</p>
+
+<p>Rex is a devops tool that helps you manage your servers.  Its similar to
+Puppet Lab’s <a href="http://puppetlabs.com/mcollective">mcollective</a> tool or
+<a href="http://www.ansibleworks.com/docs/">ansible</a>.  You can easily run commands on
+your entire fleet of boxen or just on certain subgroups.  And you can run
+them in parallel which saves you giant baskets of time.</p>
+
+<p>The big advantage for People Who Prefer Perl (PWPP) is that Rex is written and
+configured with Perl. So for the most part you don’t need to spend a lot of time
+learning yet another DSL.</p>
+
+<p>Another happy positive is that you don’t need to install any software on your
+servers. Installation is simple:</p>
+
+<pre><code>$ apt-get install libssh2-1-dev
+$ cpanm Rex
+</code></pre>
+
+<p>Configuration is also simple – at least if you know Perl.  The
+Rex configuration file is named ‘Rexfile’ and its syntax is Perl with some
+extra Rexy sugar methods thrown in. And I feel the sugar and general API for
+Rex is fairly well done.  Here is an example Rexfile:</p>
+
+<pre><code># Configure the default user and your ssh keys.  The default user can be
+# overridden on the command line with the -u option.
+user "joe";
+private_key "/home/joe/.ssh/id_rsa";
+public_key "/home/joe/.ssh/id_rsa.pub";
+key_auth;
+
+# Cofigure server groups
+group prod =&gt; "webserver", "mailserver", "dbserver";
+group dev  =&gt; "pancake[1-3]", "narwhale[1-3]", "honeybadger[1-3]";
+
+# Run commands in parallel on up to 100 servers at one time.  This can be
+# overridden on the command line with the -t option.
+parallelism 100;
+
+# Create tasks.  This task runs against all servers by default.  This can
+# be overridden on the command line with the -G or -H options.
+task 'uptime', group =&gt; 'all', sub {
+    my $output = run "uptime";
+    say $output;
+};
+</code></pre>
+
+<p>You can see that Perl’s ‘say’ command is available by default.  ‘run’ is a Rex
+sugar method which accepts a shell command and returns the output – similar
+to Capture::Tiny.</p>
+
+<p>Here is a command line example which runs the ‘uptime’ task as the ‘root’ user
+on each server in the ‘dev’ group:</p>
+
+<pre><code>$ rex -G dev -u root uptime
+    pancake1:  16:42:05 up 221 days,  9:49,  1 user,  load average: 0.00, 0.00, 0.00
+   narwhale2:  16:42:05 up 8 days,  3:28,  4 users,  load average: 0.00, 0.00, 0.00
+   narwhale3:  16:42:05 up 17 days,  3:57,  2 users,  load average: 0.01, 0.01, 0.00
+honeybadger1:  16:42:05 up 80 days,  3:29,  1 user,  load average: 0.09, 0.06, 0.01
+    pancake3:  16:42:05 up 137 days,  7:49,  1 user,  load average: 0.00, 0.00, 0.00
+   narwhale1:  16:42:05 up 65 days,  5:30,  2 users,  load average: 0.46, 0.41, 0.37
+honeybadger3:  16:42:04 up 15 days,  4:49,  1 user,  load average: 2.00, 2.00, 2.00
+    pancake2:  16:42:04 up 1 day,  2:23,  3 users,  load average: 1.38, 1.35, 1.30
+honeybadger2:  16:42:05 up 39 days,  1:24,  1 user,  load average: 0.08, 0.06, 0.01
+</code></pre>
+
+<p>Rex is fantastic for ad-hoc commands.  But it also has a great set of libraries
+for doing much more like installing debian packages, user management,
+virtualization, and managing EC2 boxes.  I have to say I’m deeply attracted to
+its simplicity – especially after dealing with Puppet’s complicated and weird
+DSL.</p>
+
+<p>If anyone uses Rex to manage more than 50 servers, I would love to get in touch
+with you and ask a few questions.</p>
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2013/11/22/rex/';
+        var disqus_url = 'http://blog.kablamo.org/2013/11/22/rex/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

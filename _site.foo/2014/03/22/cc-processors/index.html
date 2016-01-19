@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Introduction to online credit card processing - part 3</title>
+  <meta name="description" content="I am learning about online credit card processing. Part 1 introduced a number of basic definitions.Part 2 discussed the difference between traditional gatewa...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2014/03/22/cc-processors/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/"><span class="site-title-bold">kablamo</span></a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Introduction to online credit card processing - part 3</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/payments">payments</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2014-03-22
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>I am learning about online credit card processing. 
+<a href="/2014/03/18/cc-processors/">Part 1</a> introduced a number of basic definitions.
+<a href="/2014/03/21/cc-processors/">Part 2</a> discussed the difference between traditional gateways and the newer full stack gateways.</p>
+
+<p>In Part 3, I am exploring some of the new “full stack” gateways which are a bit
+more developer friendly and listing some key facts about each one.  All of
+these provide a merchant account, gateway, payment processor etc and handle all
+that complexity for you.</p>
+
+<ul>
+  <li><a href="https://www.braintreepayments.com/">Braintree</a>
+    <ul>
+      <li>Tools for recurring billing</li>
+      <li>Tools to build a marketplace</li>
+      <li>Free for the first $50,000 in transactions</li>
+      <li>2.9% + $0.30 per transaction</li>
+      <li>$15 fee for each chargeback</li>
+      <li>Client side encryption of cc numbers with Braintree.js</li>
+    </ul>
+  </li>
+  <li><a href="https://stripe.com/">Stripe</a>
+    <ul>
+      <li>Tools for recurring billing</li>
+      <li>2.9% + $0.30 per transaction</li>
+      <li>$15 fee for each chargeback</li>
+      <li>Client side encryption of cc numbers with Stripe.js</li>
+    </ul>
+  </li>
+  <li><a href="https://www.balancedpayments.com/">Balanced</a>
+    <ul>
+      <li>Tools for recurring billing</li>
+      <li>Tools to build a marketplace</li>
+      <li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
+      <li>Payouts to the business are $.25 each</li>
+      <li>No fees for chargebacks?</li>
+      <li>Client side encryption of cc numbers with Balanced.js</li>
+    </ul>
+  </li>
+  <li><a href="https://www.wepay.com/">WePay</a>
+    <ul>
+      <li>Tools for recurring billing</li>
+      <li>Tools to build a marketplace</li>
+      <li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
+      <li>No client side encryption of cc numbers?</li>
+    </ul>
+  </li>
+  <li><a href="https://www.dwolla.com">Dwolla</a>
+    <ul>
+      <li>Tools for recurring billing</li>
+      <li>Tools to build a marketplace</li>
+      <li>Transactions under $10 are free, everything else is $0.25 per transaction</li>
+      <li>Does not accept credit or debit cards only ACH (so no gateway/merchant account are required)</li>
+      <li>Requires customers to create a Dwolla account</li>
+      <li>No client side encryption of cc numbers?</li>
+    </ul>
+  </li>
+  <li><a href="https://payments.amazon.com/home">Amazon FPS Payments</a>
+    <ul>
+      <li>Tools for recurring billing</li>
+      <li>Tools to build a marketplace</li>
+      <li>2.9% + $0.30 per transaction for credit/debit, volume discounts</li>
+      <li>2.9% + $0.30 per transaction, volume discounts</li>
+      <li>Can keep the customer on your site and customize the form for free</li>
+      <li>To contest a chargeback costs $10.</li>
+      <li>Merchants are not liable for chargebacks for physical goods (not services)</li>
+      <li>No client side encryption of cc numbers?</li>
+    </ul>
+  </li>
+  <li><a href="https://www.paypal.com/">Paypal</a>
+    <ul>
+      <li>Turn your computer into a credit card terminal</li>
+      <li>Swipe cards with a device that plugs into your phone or iPad.</li>
+      <li>2.9% + $0.30 per transaction, volume discounts</li>
+      <li>No monthly fee to send a customer to the Paypal site for payment</li>
+      <li>$30 monthly fee if you want to keep the customer on your site or customize the
+form</li>
+      <li>No client side encryption of cc numbers?</li>
+    </ul>
+  </li>
+  <li><a href="http://square.com">Square</a> is in a similar space and positions themselves as being very simple.
+    <ul>
+      <li>Swipe cards with a device that plugs into your phone or iPad.</li>
+      <li>No developer api – you must use their web marketplace to sell online</li>
+      <li>2.75% per transaction</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Please let me know if I’ve made any errors and I will correct them.</p>
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2014/03/22/cc-processors/';
+        var disqus_url = 'http://blog.kablamo.org/2014/03/22/cc-processors/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Salt and pepper - How to encrypt database passwords</title>
+  <meta name="description" content="To explain how salt and pepper work in encryption, I will walk through a fewscenarios.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2013/12/18/authen-passphrase/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/"><span class="site-title-bold">kablamo</span></a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Salt and pepper - How to encrypt database passwords</h1>
+    <p class="post-meta">
+    
+      <a href="/categories/perl">perl</a>&nbsp;
+    
+    &nbsp;&nbsp;
+    2013-12-18
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>To explain how salt and pepper work in encryption, I will walk through a few
+scenarios.</p>
+
+<h1 id="no-salt">No salt</h1>
+
+<p><strong>Summary for the impatient:</strong>  <em>Using no salt means an attacker doesn’t need
+to generate a rainbow table because they can reuse an existing one.</em></p>
+
+<p>If an attacker obtains my database of encrypted passwords it will be very time
+consuming to brute force them.  However there exist pre-computed tables of
+encrypted values of thousands of commonly used passwords.  These tables are called
+rainbow tables.  It is computationally inexpensive to match the encrypted
+values in a rainbow table with the encrypted values in my database.</p>
+
+<h1 id="one-salt">One salt</h1>
+
+<p><strong>Summary for the impatient:</strong>  <em>Using the same salt for all your passwords
+means an attacker must generate 1 rainbow table.</em></p>
+
+<p>Salt is data used as an additional input to the algorthim that encrypts a
+password.  If I use a salt when I encrypt a password the resulting output will
+be different from someone who did not use the same salt.  That means my
+attacker cannot reuse an existing rainbow table.  They must generate a new one
+using the same salt I used.</p>
+
+<p>Note that salt is usually stored as plain text in the database with the
+encrypted passwords.  So the attacker usually has access to the salt.  Even so,
+I have successfully made the attack more expensive.</p>
+
+<h1 id="a-random-salt-per-password">A random salt per password</h1>
+
+<p><strong>Summary for the impatient:</strong>  <em>Using a random salt for each password means an
+attacker must generate 1 rainbow table per password.</em></p>
+
+<p>Instead of using a single salt for the entire database I can use a different
+(random) salt for each user’s password.  This means the attacker must generate
+a set of rainbow tables for each password which is even more expensive.</p>
+
+<p>Note that I also need to store the salt for each password I have generated.
+This is a pain to do manually.  Happily some clever person came up with RFC
+2307 which suggests a much simpler solution.</p>
+
+<p>Instead of storing the just the encrypted password in the password column, store
+a string which concatenates the salt and the encrypted password.  This may not
+sound easier.  It implies the need to parse and concatenate strings.  However
+this is handled for me by the encryption libraries so its 100% pain free.  Lets
+see an example.</p>
+
+<p>To encrypt the plaintext string ‘pie’ use the following Perl code</p>
+
+<pre><code>my $blowfish = Authen::Passphrase::BlowfishCrypt-&gt;new(
+    passphrase  =&gt; 'pie',
+    salt_random =&gt; 1,
+    cost        =&gt; 16,
+);
+
+say $blowfish-&gt;as_rfc2307; 
+# the output will look like this:
+# {CRYPT}$2a$14$sS80d1JlF3oR6Q4UHT.9w.DIXnV0/dLQMoVBsOp2gMRT65bWvP0P2
+</code></pre>
+
+<p>That crazy <em>{CRYPT}$2a$blarblar</em> mumbo jumbo is what we will save to the db in the password
+column.  However if I know what to look for, I can see the mumbo jumbo is actually
+several things smushed together:</p>
+
+<pre><code>{CRYPT} $ 2a $ 16 $ sS80d1JlF3oR6Q4UHT.9w.DIXnV0/dLQMoVBsOp2gMRT65bWvP0P2
+</code></pre>
+
+<ul>
+  <li><strong>{CRYPT}</strong> - This is the scheme identifier.  It indicates which scheme is being used
+so I know how to parse the rest of the string.</li>
+  <li><strong>$</strong> - These are field separators</li>
+  <li><strong>2a</strong> - A version number for this scheme</li>
+  <li><strong>16</strong> - The cost</li>
+  <li>Then there is the <strong>salt</strong> (22 base 64 digits – plain text)</li>
+  <li>Followed by the <strong>encrypted password</strong> (31 base 64 digits)</li>
+</ul>
+
+<p>To check if a user has submitted a valid <code>$password</code>  use the following code</p>
+
+<pre><code>my $secret   = ''{CRYPT}$2a$16$sS80d1JlF3oR6Q4UHT.9w.DIXnV0/dLQMoVBsOp2gMRT65bWvP0P2';
+my $blowfish = Authen::Passphrase-&gt;from_rfc2307($secret);
+
+if ($blowfish-&gt;match($password)) {
+    say "You may enter";
+}
+else {
+    say "You did not say the magic word";
+}
+</code></pre>
+
+<p>Of course we want to build this into our ORM so the Authen::Passphrase objects
+are inflated and deflated for us.  Here is what that looks like in a DBIx
+Result class:</p>
+
+<pre><code>__PACKAGE__-&gt;load_components(qw/FilterColumn/);
+__PACKAGE__-&gt;filter_column( password =&gt; {
+    filter_to_storage   =&gt; sub { $_[1]-&gt;as_rfc2307() },                      # deflate
+    filter_from_storage =&gt; sub { Authen::Passphrase-&gt;from_rfc2307($_[1]) },  # inflate
+});
+</code></pre>
+
+<p>But I only showed you that so you would understand what
+DBIx::Class::InflateColumn::Authen::Passphrase does under the covers.  I use
+that because it makes my code simpler:</p>
+
+<pre><code>__PACKAGE__-&gt;load_components(qw/InflateColumn::Authen::Passphrase/);
+__PACKAGE__-&gt;add_columns(
+    ...,
+    password =&gt; {
+        data_type          =&gt; 'text',
+        inflate_passphrase =&gt; 'rfc2307',
+    },
+    ...,
+);
+</code></pre>
+
+<p>This is how I encrypt passwords on <a href="https://networthify.com">networthify.com</a>
+and <a href="http://iijo.org">iijo.org</a>.</p>
+
+<h1 id="adding-pepper">Adding pepper</h1>
+
+<p><strong>Summary for the impatient:</strong>  <em>Using pepper means an attacker must generate
+many rainbow tables per password. But few people use pepper and its
+controversial.</em></p>
+
+<p>Pepper is the same as salt except that I don’t save the value anywhere.  Lets
+say I choose an 8 bit value for my pepper.  That means there are 256
+possible values.  If I don’t save that value anywhere then when a user logs
+in I will need to try up to 256 values to see if the user has the right
+password.  However it means my attacker will need to generate up to 256
+rainbow tables for each password.</p>
+
+<p>One big problem is that trying 256 possible values is going to take me about 4
+minutes on average hardware.</p>
+
+<p>Even if I ignore that issue, this option is controversial and my understanding
+is that few people do it.  It is generally accepted that messing about with
+salt and pepper should be left to the professionals who are writing the
+encryption libraries.  Pepper is not supported by Authen::Passphrase.</p>
+
+<h1 id="caveats">Caveats</h1>
+
+<p>Salting is done to make rainbow tables inneffective.  For various reasons
+crackers rarely use rainbow tables anymore.  Instead they use sophisticated
+brute force algorithms which combine dictionary attacks with databases of known
+or commonly used passwords.  These kinds of brute force attacks can often crack
+battery-horse-staple <a href="http://xkcd.com/936/">XKCD</a> style passwords even if they
+are very long.  Password are not secure unless they are very long <em>and</em>
+very random.</p>
+
+<p>And there is more bad news.  While salting makes it harder to crack all the
+passwords in the database, cracking a single targeted password is often not
+computationally hard.  A single completely random 8 character password can be
+cracked with brute force in 10 days.</p>
+
+<p>The only way to protect your users is to require very long and very random
+passwords.  Make sure your website requires a minimum password length of 8
+characters or more.</p>
+
+<h4 id="sources">Sources</h4>
+
+<ul>
+  <li><a href="http://www.wired.co.uk/news/archive/2013-05/28/password-cracking/viewall">Anatomy of a hack: even your ‘complicated’ password is easy to crack</a> (Wired magazine)</li>
+  <li><a href="https://metacpan.org/pod/Authen::Passphrase">Authen::Passphrase</a></li>
+  <li><a href="https://metacpan.org/pod/Authen::Passphrase::BlowfishCrypt">Authen::Passphrase::BlowfishCrypt</a></li>
+  <li><a href="https://metacpan.org/pod/DBIx::Class::InflateColumn::Authen::Passphrase">DBIx::Class::InflateColumn::Authen::Passphrase</a></li>
+  <li><a href="http://blog.afoolishmanifesto.com/archives/1910">frew</a></li>
+  <li><a href="http://crypto.stackexchange.com/questions/1776/can-you-help-me-understand-what-a-cryptographic-salt-is">crypto.stackexchange.com</a></li>
+  <li><a href="http://security.stackexchange.com/questions/3272/password-hashing-add-salt-pepper-or-is-salt-enough">security.stackexchange.com</a></li>
+</ul>
+
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2013/12/18/authen-passphrase/';
+        var disqus_url = 'http://blog.kablamo.org/2013/12/18/authen-passphrase/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+      </div>
+    </div>
+
+    
+
+  </body>
+
+</html>
