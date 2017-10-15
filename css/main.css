@@ -159,11 +159,14 @@ hr {
 .site-header {
   margin-top: 0rem;
   margin-bottom: 0rem;
-  padding-top: 1.2rem;
-  padding-bottom: 1.2rem;
+  padding: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   border-top: 0rem solid #333;
   border-bottom: 0px solid #cecece;
-  background: #fff; }
+  background: #fff;
+  background: #444;
+  text-align: left; }
 
 .site-title {
   font-family: Exo, sans-serif;
@@ -171,29 +174,31 @@ hr {
   line-height: 2rem;
   letter-spacing: -1px;
   margin-bottom: 0;
-  display: block;
-  text-align: center;
+  margin-right: 1.2rem;
   font-weight: normal;
   text-transform: uppercase; }
   .site-title .site-title-bold {
     font-weight: bold;
-    font-style: italic; }
+    font-style: italic;
+    color: #fff; }
   .site-title, .site-title:visited {
-    color: #333; }
+    color: #333;
+    color: #fff; }
   .site-title:hover {
     text-decoration: none; }
 
 .site-nav {
-  display: block;
-  text-align: center;
+  display: inline-block;
+  padding-left: 2rem;
   line-height: 2rem;
-  z-index: 1; }
+  z-index: 1;
+  vertical-align: text-bottom; }
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
     color: #333;
+    color: #ccc;
     line-height: 1.5rem;
-    text-transform: lowercase;
     font-size: .8rem; }
     .site-nav .page-link:not(:first-child) {
       margin-left: 20px; }
@@ -359,13 +364,13 @@ hr {
   padding: 2rem;
   padding-bottom: 2rem;
   padding-top: 2rem;
-  text-align: center;
   position: relative;
-  background: #333; }
+  background: #333;
+  text-align: left; }
   .post-header .post-meta {
     color: #999;
-    text-align: center;
-    width: 100%; }
+    width: 100%;
+    text-align: left; }
     .post-header .post-meta a {
       color: #999; }
 
@@ -521,6 +526,101 @@ hr {
   background: #eee;
   padding: 2rem;
   margin-top: 3rem; }
+
+#giant {
+  float: left;
+  display: inline-block;
+  font-size: 11rem;
+  line-height: 11rem;
+  color: #ccc;
+  height: 11rem;
+  width: 24rem;
+  padding: 0;
+  letter-spacing: -0.5rem; }
+
+.home-intro-wrapper {
+  text-align: center;
+  position: relative;
+  background: #fff; }
+  .home-intro-wrapper .post-meta {
+    color: #999;
+    text-align: center;
+    width: 100%; }
+    .home-intro-wrapper .post-meta a {
+      color: #999; }
+
+.home-intro {
+  padding: 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin: 2rem;
+  color: #333;
+  max-width: -webkit-calc(800px - (1rem * 2));
+  max-width: calc(800px - (1rem * 2));
+  margin: auto; }
+
+.home-intro-content {
+  padding: 2rem;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: left; }
+
+.home-panel-wrapper {
+  width: 100%;
+  margin-bottom: 0rem;
+  padding: 0px;
+  padding-bottom: 1px;
+  position: relative;
+  background: #fff; }
+
+.home-panel {
+  padding: 2rem;
+  box-sizing: border-box;
+  background: #333;
+  opacity: 0.8;
+  color: #bbb;
+  width: 30rem;
+  text-align: left;
+  position: relative;
+  top: -35rem;
+  float: left; }
+
+#home-panel-fi {
+  background: url(/images/financial-independence.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 35rem; }
+
+#home-panel-get-stuff-done {
+  background: url(/images/engine.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-position-y: -05rem;
+  height: 35rem; }
+
+#home-panel-code {
+  background: url(/images/perl.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-position-y: -02rem;
+  height: 35rem; }
+
+.home-panel:nth-child(odd) {
+  background: #333; }
+
+.home-panel a {
+  font-weight: bold;
+  color: #fff; }
+
+.post-subtitle {
+  font-size: 1rem;
+  color: #fff;
+  max-width: -webkit-calc(800px - (1rem * 2));
+  max-width: calc(800px - (1rem * 2));
+  margin: auto; }
 
 /**
  * Syntax highlighting styles
