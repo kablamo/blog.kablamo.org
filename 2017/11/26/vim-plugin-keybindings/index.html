@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Vim plugin keybindings</title>
+  <meta name="description" content="I pick up all kinds of vim tricks and plugins but I can never remember all theshortcuts.  I wrote up this quick reference to help myself memorize how to uset...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.kablamo.org/2017/11/26/vim-plugin-keybindings/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    
+  <div class="wrapper">
+<header class="site-header">
+    <a class="site-title" href="/"><span class="site-title-bold">kablamo</span></a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/financial-independence">Financial independence</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+</header>
+  </div>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+<header class="post-header">
+  <h1 class="post-title">Vim plugin keybindings</h1>
+  <p class="post-meta">
+  
+    <a href="/categories/quick-reference">quick-reference</a>&nbsp;
+  
+  &nbsp;&nbsp;
+  2017-11-26
+  </p>
+</header>
+<div class="post">
+  <article class="post-content">
+    <p>I pick up all kinds of vim tricks and plugins but I can never remember all the
+shortcuts.  I wrote up this quick reference to help myself memorize how to use
+these tools.</p>
+
+<p>Caveat: some of these keybindings are unique to my <a href="https://github.com/kablamo/yadm/blob/master/.vimrc">.vimrc</a>.</p>
+
+<style>
+table {
+  margin-top: 0rem;
+}
+td {
+  vertical-align : top;
+  padding-left   : .5em;
+  padding-right  : .5em;
+  background     : #ddd;
+}
+th {
+  text-align:left;
+  background    : #eee;
+  white-space   : nowrap;
+  font-weight   : normal;
+  padding-left  : .5em;
+  padding-right : .5em;
+}
+a.plugin, a.plugin:visited {
+  color     : #333;
+  font-size : 2rem;
+}
+kbd {
+  background  : #fff;
+  background  : transparent;
+  border      : 0px;
+  box-shadow  : none;
+  color       : #333;
+  font-weight : bold;
+  font-weight : normal;
+}
+code {
+  background : #5a5e63;
+  color      : #fff;
+}
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+</style>
+
+<h3><a class="plugin" href="https://vimawesome.com/plugin/fzf">fzf</a></h3>
+<p>Fuzzy Finder</p>
+<table>
+  <tr>
+    <th><kbd>&lt;leader&gt;f</kbd></th>
+    <td>Find files with rg by filename</td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;*</kbd></th>
+    <td>Search file contents with rg (<kbd>alt-a</kbd> to select all). Results go in a QuickFix window.</td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;* -t perl</kbd></th>
+    <td>Same as above but only search perl files</td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;&lt;tab&gt;</kbd></th>
+    <td>Search all vim mappings</td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;c-x&gt;&lt;c-f&gt;</kbd></th>
+    <td>Complete file names</td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;c-x&gt;&lt;c-l&gt;</kbd></th>
+    <td>Complete line</td>
+  </tr>
+</table>
+<p><br />
+QuickFix keybindings: Search and replace across multiple files</p>
+<table>
+  <tr>
+    <th><kbd>fn</kbd></th>
+    <td>next</td>
+  </tr>
+  <tr>
+    <th><kbd>fp</kbd></th>
+    <td>prev</td>
+  </tr>
+  <tr>
+    <th><kbd>:cdo &lt;cmd&gt;</kbd></th>
+    <td>For each entry run <kbd>&lt;cmd&gt;</kbd></td>
+  </tr>
+  <tr>
+    <th><kbd>:cdo s/&lt;c-r&gt;"//c</kbd></th>
+    <td>Same as above but don't need to retype the search regexp that was used by fzf</td>
+  </tr>
+  <tr>
+    <th><kbd>:cfdo &lt;cmd&gt;</kbd></th>
+    <td>For each file run <kbd>&lt;cmd&gt;</kbd></td>
+  </tr>
+</table>
+<p><br /></p>
+
+<h3><a class="plugin" href="https://vimawesome.com/plugin/tagbar">Tagbar</a></h3>
+<p>Browse the tags (packages, labels, subroutines, etc) of the current file and get an overview of its structure.</p>
+<table>
+  <tr>
+    <th><kbd>&lt;leader&gt;m</kbd></th>
+    <td>Show tags</td>
+  </tr>
+</table>
+
+<h3><a class="plugin" href="https://vimawesome.com/plugin/buffergator">Buffergator</a></h3>
+<p>List, navigate between, and select buffers to edit.</p>
+<table>
+  <tr>
+    <th><kbd>&lt;leader&gt;b</kbd></th>
+    <td>Open a window listing all buffers</td>
+  </tr>
+</table>
+
+<h3><a class="plugin" href="https://vimawesome.com/plugin/vim-easy-align">EasyAlign</a></h3>
+<p>Vertically align stuff</p>
+<table>
+  <tr>
+    <th><kbd>&lt;leader&gt;a</kbd></th>
+    <td>Align something</td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;a&lt;ctrl-p&gt;</kbd></th>
+    <td>Align something in interactive mode</td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;a=</kbd></th>
+    <td>Align around first occurance of <kbd>=</kbd></td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;a2=</kbd></th>
+    <td>Align around 2nd <kbd>=</kbd></td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;a*=</kbd></th>
+    <td>Align around all <kbd>=</kbd></td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;a-=</kbd></th>
+    <td>Align around last <kbd>=</kbd></td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;a&lt;ctrl-x&gt;</kbd></th>
+    <td>Align around a regular expression</td>
+  </tr>
+</table>
+
+<h3><a class="plugin" href="https://vimawesome.com/plugin/vim-gurl">gurl</a></h3>
+<p>Provides links to the current line/selection on the github website so you easily talk about code with others.</p>
+<table>
+  <tr>
+    <th><kbd>&lt;leader&gt;t</kbd></th>
+    <td>Get a link to the current line/selection</td>
+  </tr>
+</table>
+
+<h3><a class="plugin" href="https://vimawesome.com/plugin/perlhelp-vim">PerlHelp</a></h3>
+<p>Quick access to perldoc</p>
+<table>
+  <tr>
+    <th><kbd>&lt;leader&gt;pd</kbd></th>
+    <td>perldoc on the package name under cursor</td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;ph</kbd></th>
+    <td>perldoc on the package name under cursor</td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;pf</kbd></th>
+    <td>perldoc on the function name under cursor</td>
+  </tr>
+  <tr>
+    <th><kbd>&lt;leader&gt;pv</kbd></th>
+    <td>perldoc on the special Perl variable under cursor</td>
+  </tr>
+</table>
+
+<h3><a class="plugin" href="https://vimawesome.com/plugin/perl-nextmethod">perl-nextmethod</a></h3>
+<p>Jump to the next/prev Perl method</p>
+<table>
+  <tr>
+    <th><kbd>]m</kbd></th>
+    <td>Jump to the next Perl subroutine start</td>
+  </tr>
+  <tr>
+    <th><kbd>]M</kbd></th>
+    <td>Jump to the next Perl subroutine end</td>
+  </tr>
+  <tr>
+    <th><kbd>[m</kbd></th>
+    <td>Jump to the previous Perl subroutine start</td>
+  </tr>
+  <tr>
+    <th><kbd>[M</kbd></th>
+    <td>Jump to the previous Perl subroutine end</td>
+  </tr>
+</table>
+
+
+  </article>
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2017/11/26/vim-plugin-keybindings/';
+        var disqus_url = 'http://blog.kablamo.org/2017/11/26/vim-plugin-keybindings/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+</div>
+
+    </div>
+
+    
+
+  </body>
+
+</html>

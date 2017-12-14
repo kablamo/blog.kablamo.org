@@ -18,9 +18,9 @@
 
   <body>
 
-    <header class="site-header">
-
+    
   <div class="wrapper">
+<header class="site-header">
     <a class="site-title" href="/"><span class="site-title-bold">kablamo</span></a>
 
     <nav class="site-nav">
@@ -96,11 +96,13 @@
         
           
         
+          
+        
       </div>
     </nav>
-  </div>
 
 </header>
+  </div>
 
 
     <div class="page-content">
@@ -112,9 +114,20 @@
         background-position : center;
         background-repeat   : no-repeat;
         background-size     : cover;
+        margin-bottom       : 0;
     }
     .page-title {
         
+    }
+    .post {
+        padding: 0;
+    }
+    .post-content {
+        background: #eee;
+    }
+    .post-content .wrapper {
+        background: #fff;
+        padding: 2rem;
     }
   </style>
   <header class="page-header">
@@ -126,6 +139,12 @@
      <p>I consider these talks reference material.  I keep them updated and relevant so
 I can refer people to them.  If I’ve missed anything feel free to create an
 issue on the github repo or contribute a pull request.</p>
+
+<h1 id="mooxcommander">MooX::Commander</h1>
+
+<p>How to build command line apps with sub commands and option parsing and OO.<br />
+<a href="http://kablamo.org/slides-moox-commander/#/">Slides</a> |
+<a href="https://github.com/kablamo/slides-moox-commander">GitHub repo</a></p>
 
 <h1 id="the-perl-test-ecosystem">The Perl test ecosystem</h1>
 <p>How to write tests in Perl.  An exploration of CPAN test libraries.<br />

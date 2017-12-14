@@ -189,7 +189,7 @@ hr {
 
 .site-nav {
   display: inline-block;
-  padding-left: 2rem;
+  padding-left: 0rem;
   line-height: 2rem;
   z-index: 1;
   vertical-align: text-bottom; }
@@ -294,7 +294,8 @@ hr {
 .page-content {
   padding: 1rem 0;
   padding-bottom: 0;
-  padding-top: 0; }
+  padding-top: 0;
+  background: #eee; }
 
 .page-heading {
   font-size: 20px; }
@@ -308,7 +309,7 @@ hr {
       margin-bottom: .5rem; }
 
 .page-header {
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
   padding: 2rem;
   padding-bottom: 2rem;
   padding-top: 3rem;
@@ -360,7 +361,7 @@ hr {
  * Posts
  */
 .post-header {
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
   padding: 2rem;
   padding-bottom: 2rem;
   padding-top: 2rem;
@@ -386,6 +387,10 @@ hr {
   @media screen and (max-width: 800px) {
     .post-title {
       font-size: 36px; } }
+
+.post {
+  background: #fff;
+  padding: 2rem; }
 
 .post-content {
   margin-bottom: 1rem; }
@@ -470,8 +475,12 @@ hr {
 /*
  * Category Archive
  */
+.category-archive .wrapper {
+  background: #fff;
+  padding: 2rem; }
+
 .category-header {
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
   background: #333;
   padding: 2rem;
   text-align: center; }
@@ -538,10 +547,14 @@ hr {
   padding: 0;
   letter-spacing: -0.5rem; }
 
+.home {
+  background: #fff;
+  padding: 2rem; }
+
 .home-intro-wrapper {
   text-align: center;
   position: relative;
-  background: #fff; }
+  background: #ddd; }
   .home-intro-wrapper .post-meta {
     color: #999;
     text-align: center;
@@ -621,6 +634,9 @@ hr {
   max-width: -webkit-calc(800px - (1rem * 2));
   max-width: calc(800px - (1rem * 2));
   margin: auto; }
+
+#disqus-thread {
+  background: #dddddd; }
 
 /**
  * Syntax highlighting styles
