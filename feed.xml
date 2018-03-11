@@ -6,9 +6,77 @@
 </description>
     <link>http://blog.kablamo.org/</link>
     <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 22 Dec 2017 14:32:01 -0500</pubDate>
-    <lastBuildDate>Fri, 22 Dec 2017 14:32:01 -0500</lastBuildDate>
+    <pubDate>Sun, 11 Mar 2018 15:27:37 -0400</pubDate>
+    <lastBuildDate>Sun, 11 Mar 2018 15:27:37 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>What's the best Perl module for X</title>
+        <description>&lt;p&gt;Its hard for beginners and experts alike in any language to keep up with the
+flood of new libraries being written all the time.  MetaCPAN has thousands of
+modules. Its hard to know which module is the best one. For example there are
+at least 7 modules for parsing JSON in Perl. New modules appear all the time
+which make the old best solution obsolete.&lt;/p&gt;
+
+&lt;h1 id=&quot;how-to-choose-a-module&quot;&gt;How to choose a module&lt;/h1&gt;
+
+&lt;p&gt;There are a couple good sources of advice:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.kablamo.org/2015/09/08/mstpan/&quot;&gt;mstpan&lt;/a&gt; is a great
+set of blog posts from 2015 written by
+&lt;a href=&quot;https://shadow.cat/blog/matt-s-trout/&quot;&gt;mst&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://metacpan.org/pod/Task::Kensho&quot;&gt;Task::Kensho&lt;/a&gt; is a list of approved
+modules maintained by The Enlighted Perl Organization.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://neilb.org/&quot;&gt;Neil Bowers&lt;/a&gt; wrote some &lt;a href=&quot;http://neilb.org/reviews/&quot;&gt;great module reviews&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://metacpan.org/pod/Perl::Critic::Policy::Freenode::DiscouragedModules&quot;&gt;DiscuragedModules&lt;/a&gt;
+is a perlcritic policy which lists modules you probably shouldn’t use.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;some-problems&quot;&gt;Some problems&lt;/h1&gt;
+
+&lt;p&gt;These are great sources of advice that insiders are familiar with.  There are few
+issues though.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;This advice is hard to find for new people – or
+even for people who are busy solving problems instead of navel gazing about
+their language of choice (like I do).&lt;/li&gt;
+  &lt;li&gt;There isn’t always a sustained effort to keep these current.&lt;/li&gt;
+  &lt;li&gt;Some sources don’t discuss alternatives or provide reasons for the
+recommendations.  A discussion helps developers make up their own mind about
+whether the advice fits their situation or is outdated or is just silly.&lt;/li&gt;
+  &lt;li&gt;Some topics aren’t covered.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;recomended-modules&quot;&gt;Recomended Modules&lt;/h1&gt;
+
+&lt;p&gt;I’m hoping I can solve some of these issues.  Its still new and experimental,
+but I started writing a new chapter for my book Minimum Viable Perl called
+“Recommended Modules”.&lt;/p&gt;
+
+&lt;p&gt;The first article is out and its about choosing &lt;a href=&quot;http://mvp.kablamo.org/cpan/exceptions/&quot;&gt;the best module for handling
+exceptions&lt;/a&gt;.  I reviewed 6 different
+ways of handling exceptions and benchmarked them.  Its the 1st of 3
+articles on handling exceptions.&lt;/p&gt;
+
+&lt;p&gt;The goal is to make the “Recommended Modules” chapter everyone’s destination
+for quickly discovering what the best Perl module is for solving a given
+problem.&lt;/p&gt;
+
+&lt;p&gt;Its on github – like the rest of the book.  So feedback is welcome via &lt;a href=&quot;https://github.com/kablamo/mvp.kablamo.org/issues&quot;&gt;github
+issues&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;font-size: 20rem&quot; class=&quot;emojidex-emoji&quot; src=&quot;https://cdn.emojidex.com/emoji/seal/thumbsup(ye).png&quot; emoji-code=&quot;thumbsup(ye)&quot; emoji-moji=&quot;👍🏽&quot; alt=&quot;thumbsup(ye)&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 10 Mar 2018 00:00:00 -0500</pubDate>
+        <link>http://blog.kablamo.org/2018/03/10/recommended-modules/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2018/03/10/recommended-modules/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
     
       <item>
         <title>I wrote a Perl book</title>
@@ -900,79 +968,6 @@ to use the module.  You won’t want to miss that.&lt;/p&gt;
         
         
         <category>perl</category>
-        
-      </item>
-    
-      <item>
-        <title>HTTP::Request::AsCurl</title>
-        <description>&lt;p&gt;Today, on a whim, I released a module called
-&lt;a href=&quot;https://metacpan.org/pod/HTTP::Request::AsCurl&quot;&gt;HTTP::Request::AsCurl&lt;/a&gt; to
-CPAN.  It converts an HTTP::Request object to a curl command.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;use HTTP::Request::Common;
-use HTTP::Request::AsCurl;
-
-my $request = POST('api.earth.defense/weapon1', { 
-    target =&amp;gt; 'mothership', 
-    when   =&amp;gt; 'now' 
-});
-
-say join &quot;\n&quot;, $request-&amp;gt;as_curl;
-# curl --dump-header - -XPOST &quot;api.earth.defense/weapon1&quot; \
-# --data 'target=mothership' \
-# --data 'when=now'
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It works by injecting the &lt;code&gt;as_curl()&lt;/code&gt; method into the HTTP::Request namespace.
-This must be a bad idea and probably not a great bit of code to rely on in a
-production environment.  But it is pretty convenient syntax for debugging a
-REST API and I couldn’t resist.  Thoughts, suggestions, criticism?&lt;/p&gt;
-
-&lt;h1 id=&quot;update-2014-06-01---&quot;&gt;– UPDATE (2014-06-01) –&lt;/h1&gt;
-
-&lt;p&gt;I released a new version which has a totally different user interface.  Here is
-the new synopsis:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;use HTTP::Request::Common;
-use HTTP::Request::AsCurl qw/as_curl/;
-
-my $request = POST('api.earth.defense/weapon1', { 
-    target =&amp;gt; 'mothership', 
-    when   =&amp;gt; 'now' 
-});
-
-system as_curl($request);
-
-print as_curl($request, pretty =&amp;gt; 1, newline =&amp;gt; &quot;\n&quot;, shell =&amp;gt; 'bourne');
-# curl \
-# --request POST api.earth.defense/weapon1 \
-# --dump-header - \
-# --data target=mothership \
-# --data when=now
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;There are 2 major changes.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;I’m no longer doing namespace injection.  I really liked the syntax, but it
-was problematic and unnecessary.&lt;/li&gt;
-  &lt;li&gt;The old version returned a formatted array of strings which was 
-not very useful.  The problem with a formatted string (as was helpfully
-pointed out to me) is you have worry about stuff like newlines which
-depends on the system you are targeting and shell escaping which depends on
-the shell you are targeting.  This is a can of worms.  Hopefully this new
-interface is an improvement.&lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Tue, 27 May 2014 00:00:00 -0400</pubDate>
-        <link>http://blog.kablamo.org/2014/05/27/http-request-ascurl/</link>
-        <guid isPermaLink="true">http://blog.kablamo.org/2014/05/27/http-request-ascurl/</guid>
-        
-        
-        <category>perl</category>
-        
-        <category>code</category>
         
       </item>
     

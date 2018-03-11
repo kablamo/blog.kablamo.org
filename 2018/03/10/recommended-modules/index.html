@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Look around assertions in Perl regular expressions</title>
-  <meta name="description" content="When Perl&#8217;s regex engine evaluates a string, it moves from left to right, oneletter at a time checking the match at each position.  That position is ca...">
+  <title>What's the best Perl module for X</title>
+  <meta name="description" content="Its hard for beginners and experts alike in any language to keep up with theflood of new libraries being written all the time.  MetaCPAN has thousands ofmodu...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://blog.kablamo.org/2014/03/31/regex/">
+  <link rel="canonical" href="http://blog.kablamo.org/2018/03/10/recommended-modules/">
   <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
 </head>
 
@@ -107,78 +107,73 @@
     <div class="page-content">
       <div class="wrapper">
 <header class="post-header">
-  <h1 class="post-title">Look around assertions in Perl regular expressions</h1>
+  <h1 class="post-title">What's the best Perl module for X</h1>
   <p class="post-meta">
   
     <a href="/categories/perl">perl</a>&nbsp;
   
   &nbsp;&nbsp;
-  2014-03-31
+  2018-03-10
   </p>
 </header>
 <div class="post">
   <article class="post-content">
-    <p>When Perl’s regex engine evaluates a string, it moves from left to right, one
-letter at a time checking the match at each position.  That position is called
-the <em>current match position</em>.</p>
+    <p>Its hard for beginners and experts alike in any language to keep up with the
+flood of new libraries being written all the time.  MetaCPAN has thousands of
+modules. Its hard to know which module is the best one. For example there are
+at least 7 modules for parsing JSON in Perl. New modules appear all the time
+which make the old best solution obsolete.</p>
 
-<p>Look around assertions allow you to match a specific pattern before or after
-the current match position without moving the match position.</p>
+<h1 id="how-to-choose-a-module">How to choose a module</h1>
 
-<h1 id="look-ahead-assertions">Look ahead assertions</h1>
+<p>There are a couple good sources of advice:</p>
 
-<p>Look ahead assertions match the text after the current match position
-(without moving the match position).  They look like <code>(?=pattern)</code>.</p>
+<ul>
+  <li><a href="http://blog.kablamo.org/2015/09/08/mstpan/">mstpan</a> is a great
+set of blog posts from 2015 written by
+<a href="https://shadow.cat/blog/matt-s-trout/">mst</a>.</li>
+  <li><a href="https://metacpan.org/pod/Task::Kensho">Task::Kensho</a> is a list of approved
+modules maintained by The Enlighted Perl Organization.</li>
+  <li><a href="http://neilb.org/">Neil Bowers</a> wrote some <a href="http://neilb.org/reviews/">great module reviews</a>.</li>
+  <li><a href="https://metacpan.org/pod/Perl::Critic::Policy::Freenode::DiscouragedModules">DiscuragedModules</a>
+is a perlcritic policy which lists modules you probably shouldn’t use.</li>
+</ul>
 
-<pre><code>my $job = "space cowboy";
-$job =~ /space (?=cow)/;    # matches
-$job =~ /space (?=cow)cow/; # also matches
-</code></pre>
+<h1 id="some-problems">Some problems</h1>
 
-<h1 id="look-behind-assertions">Look behind assertions</h1>
+<p>These are great sources of advice that insiders are familiar with.  There are few
+issues though.</p>
 
-<p>Look behind assertions match the text before the current match position
-(without moving the match position).  They look like <code>(?&lt;=pattern)</code>.</p>
+<ul>
+  <li>This advice is hard to find for new people – or
+even for people who are busy solving problems instead of navel gazing about
+their language of choice (like I do).</li>
+  <li>There isn’t always a sustained effort to keep these current.</li>
+  <li>Some sources don’t discuss alternatives or provide reasons for the
+recommendations.  A discussion helps developers make up their own mind about
+whether the advice fits their situation or is outdated or is just silly.</li>
+  <li>Some topics aren’t covered.</li>
+</ul>
 
-<pre><code>my $job = "space cowboy";
-$job =~ /(?&lt;=space) cowboy/;      # matches
-$job =~ /space(?&lt;=space) cowboy/; # also matches
-</code></pre>
+<h1 id="recomended-modules">Recomended Modules</h1>
 
-<h1 id="positive-and-negative-look-ahead-assertions">Positive and negative look ahead assertions</h1>
+<p>I’m hoping I can solve some of these issues.  Its still new and experimental,
+but I started writing a new chapter for my book Minimum Viable Perl called
+“Recommended Modules”.</p>
 
-<p><em>Positive</em> look ahead assertions are look ahead assertions which match when their
-subpattern matches. They look like <code>(?=pattern)</code>.</p>
+<p>The first article is out and its about choosing <a href="http://mvp.kablamo.org/cpan/exceptions/">the best module for handling
+exceptions</a>.  I reviewed 6 different
+ways of handling exceptions and benchmarked them.  Its the 1st of 3
+articles on handling exceptions.</p>
 
-<pre><code>my $job = "space cowboy";
-$job =~ /space (?=cowboy)/;   # matches
-</code></pre>
+<p>The goal is to make the “Recommended Modules” chapter everyone’s destination
+for quickly discovering what the best Perl module is for solving a given
+problem.</p>
 
-<p><em>Negative</em> look ahead assertions are look ahead assertions which match when their
-subpattern fails. They look like <code>(?!pattern)</code>.</p>
+<p>Its on github – like the rest of the book.  So feedback is welcome via <a href="https://github.com/kablamo/mvp.kablamo.org/issues">github
+issues</a>.</p>
 
-<pre><code>my $job = "space cowboy";
-$job =~ /space (?!mooseboy)/;   # matches
-</code></pre>
-
-<h1 id="positive-and-negative-look-behind-assertions">Positive and negative look behind assertions</h1>
-
-<p>Positive look behind assertions are look behind assertions which match when their
-subpattern matches. They look like <code>(?&lt;=pattern)</code>.</p>
-
-<pre><code>my $job = "space cowboy";
-$job =~ /(?&lt;=space) cowboy/;   # matches
-</code></pre>
-
-<p>Negative look behind assertions are look behind assertions which match when
-their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
-
-<pre><code>my $job = "space cowboy";
-$job =~ /(?&lt;!earth) cowboy/;   # matches
-</code></pre>
-
-<p>For more details see <code>perldoc perlre</code>.  I also recommend the DuckDuckGo
-<a href="https://duckduckgo.com/?q=regex+cheat+sheet">regex cheat sheet</a>.</p>
+<p><img style="font-size: 20rem" class="emojidex-emoji" src="https://cdn.emojidex.com/emoji/seal/thumbsup(ye).png" emoji-code="thumbsup(ye)" emoji-moji="👍🏽" alt="thumbsup(ye)" /></p>
 
   </article>
 
@@ -211,8 +206,8 @@ $job =~ /(?&lt;!earth) cowboy/;   # matches
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2014/03/31/regex/';
-        var disqus_url = 'http://blog.kablamo.org/2014/03/31/regex/';
+        var disqus_identifier = 'http://blog.kablamo.org/2018/03/10/recommended-modules/';
+        var disqus_url = 'http://blog.kablamo.org/2018/03/10/recommended-modules/';
         var disqus_script = 'embed.js';
       
     (function () {
