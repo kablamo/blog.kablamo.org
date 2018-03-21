@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Handling exceptions with die/eval</title>
+  <meta name="description" content="The standard Perl syntax for handling exceptions (die/eval) is quirky and hassome pitfalls that are easy to tumble into.  However its pretty common so you wi...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://mvp.kablamo.org/essentials/die-eval/">
+  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
+</head>
+
+
+  <body>
+
+    
+  <div class="wrapper">
+<header class="site-header">
+    <a class="site-title" href="/"><span class="site-title-bold">kablamo</span></a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/categories/financial-independence">Financial independence</a>
+          <a class="page-link" href="/categories/perl">Perl</a>
+          <a class="page-link" href="/categories/experiments">Experiments</a>
+          <a class="page-link" href="/talks">Talks</a>
+          <a class="page-link" href="/reading-list">What I'm reading</a>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+</header>
+  </div>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+<header class="post-header">
+  <h1 class="post-title">Handling exceptions with die/eval</h1>
+  <p class="post-meta">
+  
+    <a href="/categories/perl">perl</a>&nbsp;
+  
+  &nbsp;&nbsp;
+  2018-03-20
+  </p>
+</header>
+<div class="post">
+  <article class="post-content">
+    <p>The standard Perl syntax for handling exceptions (die/eval) is quirky and has
+some pitfalls that are easy to tumble into.  However its pretty common so 
+you will need to understand it.</p>
+
+<div class="tip">
+    <div class="tip-title">Alternate<br />Solution</div>
+    <div class="tip-content" style="margin-left:6rem">
+        Syntax::Keyword::Try adds try/catch keywords to Perl and is probably a better
+        way to handle exceptions.  As always there are trade offs.  See <a href="/essentials/syntax-keyword-try/"> Handling
+exceptions with try/catch</a> (article available next week).
+    </div>
+</div>
+
+<h1 id="throwing-exceptions">Throwing exceptions</h1>
+
+<p>To throw an exception call <code>die()</code>.  Other languages call it <code>throw()</code>, but in
+Perl its called <code>die()</code>.  If the exception is not caught, an error message is
+displayed to STDERR and the process exits with a non-zero value.</p>
+
+<pre><code>die "Something bad happened";
+# prints "Something bad happened at line 123." 
+# and then the process exits;
+</code></pre>
+
+<h1 id="catching-exceptions">Catching exceptions</h1>
+
+<p>To catch an exception, use <code>eval()</code>. Other languages call it <code>try()</code> but in
+Perl its called <code>eval()</code> and its a little different.  <code>eval()</code> parses,
+compiles, and evaluates a block of code at compile time and catches any
+exceptions that are raised at runtime.  The exception is placed in the global
+variable <code>$@</code>.</p>
+
+<pre><code>eval { die "Something bad happened" }; # try (and catch)
+warn $@ if $@;                         # handle exception
+</code></pre>
+
+<h1 id="exceptions-as-objects">Exceptions as objects</h1>
+
+<p>Exceptions are usually strings, but you can throw objects too.</p>
+
+<pre><code>eval {
+    die My::Exception-&gt;new(
+        error    =&gt; 'Something bad happened',
+        request  =&gt; $request,
+        response =&gt; $response,
+    );
+};
+warn $@-&gt;error if $@;
+</code></pre>
+
+<h1 id="pitfalls">Pitfalls</h1>
+
+<p><em>1. <code>$@</code> is a global variable</em></p>
+
+<p>If your exception handling code calls <code>eval()</code>, <code>$@</code> will get clobbered.  This
+is easy to forget.  Here is one way to avoid it:</p>
+
+<pre><code>eval { die "something bad" };
+if ($@) {
+    my $error = $@;
+    disconnect_from_the_database(); # calls eval()
+    warn $error;
+}
+</code></pre>
+
+<p>If you are a module author and want to be polite and not modify <code>$@</code> globally
+you need to jump through hoops like this:</p>
+
+<pre><code>my ($error1, $error2);
+{
+    local $@;
+    unless (eval { ...; return 1 }) {
+        $error1 = 1;
+        $error2 = $@;
+    }
+}
+if ($error1) {
+    # handle exception
+}
+</code></pre>
+
+<p><em>2. Exception objects that evaluate as false</em></p>
+
+<p>You can <a href="https://metacpan.org/pod/overload">overload</a> Perl operators.  For
+example, you could have an exception object evaluate to “error” in string
+context.  You could also have an exception object evaluate to -1 in string
+context.</p>
+
+<p>This would cause mysterious problems for most people because the common
+idiom <code>handle_exception() if $@</code> will silently fail and the exception won’t be
+handled.</p>
+
+<p>One solution is to use a safer but more verbose idiom everywhere:</p>
+
+<pre><code>unless ( eval { try_something_risky(); return 1 } ) {
+    handle_exception();
+}
+</code></pre>
+
+<p><em>3. <code>eval</code> blocks behave more like anonymous subroutines than if blocks.</em></p>
+
+<p>For example:</p>
+
+<ul>
+  <li>A <code>return</code> statement will exit the <code>eval</code> block – not the containing function.</li>
+  <li>Loop control statements like <code>redo</code>, <code>next</code>, and <code>last</code> only work in the context of whats inside the <code>eval</code> block.</li>
+</ul>
+
+<h1 id="see-also">See also</h1>
+<p>For more info read the documentation for 
+<a href="http://perldoc.perl.org/functions/die.html">die()</a> and
+<a href="http://perldoc.perl.org/functions/eval.html">eval()</a></p>
+
+
+  </article>
+
+  
+  <div class="subscribe">
+  
+    This article is from my book <i>Minimum Viable Perl</i> which contains concise
+    tutorials for experienced developers.  Its free, open source, and a work in
+    progress.  <a href="http://mvp.kablamo.org/subscribe/">Subscribe</a> to get
+    new chapters in your inbox.
+  
+  </div>
+  
+
+
+  <section>
+    <div id="disqus_thread" aria-live="polite">
+        <noscript>Please enable JavaScript to view the 
+            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+    </div>
+  </section>
+
+
+</div>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'kablamo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.kablamo.org/2018/03/20/die-eval/';
+        var disqus_url = 'http://blog.kablamo.org/2018/03/20/die-eval/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+</div>
+
+    </div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110455056-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110455056-2');
+</script>
+
+
+  </body>
+
+</html>

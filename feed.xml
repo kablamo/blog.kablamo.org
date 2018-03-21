@@ -6,9 +6,134 @@
 </description>
     <link>http://blog.kablamo.org/</link>
     <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 11 Mar 2018 15:27:37 -0400</pubDate>
-    <lastBuildDate>Sun, 11 Mar 2018 15:27:37 -0400</lastBuildDate>
+    <pubDate>Tue, 20 Mar 2018 20:01:55 -0400</pubDate>
+    <lastBuildDate>Tue, 20 Mar 2018 20:01:55 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Handling exceptions with die/eval</title>
+        <description>&lt;p&gt;The standard Perl syntax for handling exceptions (die/eval) is quirky and has
+some pitfalls that are easy to tumble into.  However its pretty common so 
+you will need to understand it.&lt;/p&gt;
+
+&lt;div class=&quot;tip&quot;&gt;
+    &lt;div class=&quot;tip-title&quot;&gt;Alternate&lt;br /&gt;Solution&lt;/div&gt;
+    &lt;div class=&quot;tip-content&quot; style=&quot;margin-left:6rem&quot;&gt;
+        Syntax::Keyword::Try adds try/catch keywords to Perl and is probably a better
+        way to handle exceptions.  As always there are trade offs.  See &lt;a href=&quot;/essentials/syntax-keyword-try/&quot;&gt; Handling
+exceptions with try/catch&lt;/a&gt; (article available next week).
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;throwing-exceptions&quot;&gt;Throwing exceptions&lt;/h1&gt;
+
+&lt;p&gt;To throw an exception call &lt;code&gt;die()&lt;/code&gt;.  Other languages call it &lt;code&gt;throw()&lt;/code&gt;, but in
+Perl its called &lt;code&gt;die()&lt;/code&gt;.  If the exception is not caught, an error message is
+displayed to STDERR and the process exits with a non-zero value.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;die &quot;Something bad happened&quot;;
+# prints &quot;Something bad happened at line 123.&quot; 
+# and then the process exits;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;catching-exceptions&quot;&gt;Catching exceptions&lt;/h1&gt;
+
+&lt;p&gt;To catch an exception, use &lt;code&gt;eval()&lt;/code&gt;. Other languages call it &lt;code&gt;try()&lt;/code&gt; but in
+Perl its called &lt;code&gt;eval()&lt;/code&gt; and its a little different.  &lt;code&gt;eval()&lt;/code&gt; parses,
+compiles, and evaluates a block of code at compile time and catches any
+exceptions that are raised at runtime.  The exception is placed in the global
+variable &lt;code&gt;$@&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;eval { die &quot;Something bad happened&quot; }; # try (and catch)
+warn $@ if $@;                         # handle exception
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;exceptions-as-objects&quot;&gt;Exceptions as objects&lt;/h1&gt;
+
+&lt;p&gt;Exceptions are usually strings, but you can throw objects too.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;eval {
+    die My::Exception-&amp;gt;new(
+        error    =&amp;gt; 'Something bad happened',
+        request  =&amp;gt; $request,
+        response =&amp;gt; $response,
+    );
+};
+warn $@-&amp;gt;error if $@;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;pitfalls&quot;&gt;Pitfalls&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;1. &lt;code&gt;$@&lt;/code&gt; is a global variable&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;If your exception handling code calls &lt;code&gt;eval()&lt;/code&gt;, &lt;code&gt;$@&lt;/code&gt; will get clobbered.  This
+is easy to forget.  Here is one way to avoid it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;eval { die &quot;something bad&quot; };
+if ($@) {
+    my $error = $@;
+    disconnect_from_the_database(); # calls eval()
+    warn $error;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are a module author and want to be polite and not modify &lt;code&gt;$@&lt;/code&gt; globally
+you need to jump through hoops like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;my ($error1, $error2);
+{
+    local $@;
+    unless (eval { ...; return 1 }) {
+        $error1 = 1;
+        $error2 = $@;
+    }
+}
+if ($error1) {
+    # handle exception
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;2. Exception objects that evaluate as false&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;You can &lt;a href=&quot;https://metacpan.org/pod/overload&quot;&gt;overload&lt;/a&gt; Perl operators.  For
+example, you could have an exception object evaluate to “error” in string
+context.  You could also have an exception object evaluate to -1 in string
+context.&lt;/p&gt;
+
+&lt;p&gt;This would cause mysterious problems for most people because the common
+idiom &lt;code&gt;handle_exception() if $@&lt;/code&gt; will silently fail and the exception won’t be
+handled.&lt;/p&gt;
+
+&lt;p&gt;One solution is to use a safer but more verbose idiom everywhere:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;unless ( eval { try_something_risky(); return 1 } ) {
+    handle_exception();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;3. &lt;code&gt;eval&lt;/code&gt; blocks behave more like anonymous subroutines than if blocks.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A &lt;code&gt;return&lt;/code&gt; statement will exit the &lt;code&gt;eval&lt;/code&gt; block – not the containing function.&lt;/li&gt;
+  &lt;li&gt;Loop control statements like &lt;code&gt;redo&lt;/code&gt;, &lt;code&gt;next&lt;/code&gt;, and &lt;code&gt;last&lt;/code&gt; only work in the context of whats inside the &lt;code&gt;eval&lt;/code&gt; block.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;see-also&quot;&gt;See also&lt;/h1&gt;
+&lt;p&gt;For more info read the documentation for 
+&lt;a href=&quot;http://perldoc.perl.org/functions/die.html&quot;&gt;die()&lt;/a&gt; and
+&lt;a href=&quot;http://perldoc.perl.org/functions/eval.html&quot;&gt;eval()&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 20 Mar 2018 00:00:00 -0400</pubDate>
+        <link>http://blog.kablamo.org/2018/03/20/die-eval/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2018/03/20/die-eval/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
     
       <item>
         <title>What's the best Perl module for X</title>
@@ -701,273 +826,6 @@ anything feel free to contribute to the github repo or leave a comment.&lt;/p&gt
         <category>perl</category>
         
         <category>slides</category>
-        
-      </item>
-    
-      <item>
-        <title>mstpan quick reference</title>
-        <description>&lt;p&gt;Last Christmas, the inimitable Matt Trout (mst) created an opinionated tour of
-CPAN where he recommended modules for some common problems.  I think its
-brilliant, useful, and entertaining and I’ve decided to compile a high level
-overview all on one page in order to create a quick reference.&lt;/p&gt;
-
-&lt;p&gt;I’ve tried to distill his wisdom and wit down to a few words.  But I recommend
-clicking the section headers and following the links to Matt’s original posts
-to see his actual real opinions in their full complexity.  This single page
-can’t replace 16 great posts and he usually includes advice on the best way
-to use the module.  You won’t want to miss that.&lt;/p&gt;
-
-&lt;h1 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;#webframeworks&quot;&gt;Web Frameworks&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#webdeployment&quot;&gt;Web Deployment&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#xml&quot;&gt;XML&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#html&quot;&gt;HTML&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#files&quot;&gt;Files&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#databases&quot;&gt;Databases&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#json&quot;&gt;JSON&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#async&quot;&gt;Async&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#librarydeployment&quot;&gt;Library Deployment&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#perlvmdeployment&quot;&gt;Perl VM Deployment&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#distributionbuilding&quot;&gt;Distribution building&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#objectorientation&quot;&gt;Object orientation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#soap&quot;&gt;SOAP&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#exporting&quot;&gt;Exporting&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#email&quot;&gt;Email&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#logging&quot;&gt;Logging&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;webframeworks&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-1&quot;&gt;Web Frameworks&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;CGI.pm (the CPAN module)&lt;/strong&gt; - Run away&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Catalyst&lt;/strong&gt; - Venerable&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Dancer&lt;/strong&gt; - Solid and lightweight&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mojolicious&lt;/strong&gt; - Shiny&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Web::Simple&lt;/strong&gt; - Low level&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Plack&lt;/strong&gt; - Awesome (but not a web framework)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;webdeployment&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-2&quot;&gt;Web Deployment&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;mod_perl&lt;/strong&gt; - Run away&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;CGI (the protocol)&lt;/strong&gt; - Ok for some trivial things&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;FastCGI + unix sockets for zero downtime deploys&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Apache + FastCgiExternalServer&lt;/strong&gt; - Good&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Nginx + Starman + Unix sockets&lt;/strong&gt; - Good&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mojolicious + Hypnotoad&lt;/strong&gt; - Good&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;PSGI Async&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Net::Async::HTTP::Server::PSGI&lt;/strong&gt; if you like IO::Async&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Twiggy&lt;/strong&gt; if you like AnyEvent&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;xml&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-3&quot;&gt;XML&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;XML::Simple&lt;/strong&gt; - No&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;XML::Twig&lt;/strong&gt; - Excellent whipuptitude&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;XPath&lt;/strong&gt; - Not a CPAN module but you should learn it&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;XML::LibXML&lt;/strong&gt; - Good&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Template::Semantic&lt;/strong&gt; - Good&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;XML::Toolkit&lt;/strong&gt; - Good&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;XML::Rabbit&lt;/strong&gt; - Nice&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;xmllint&lt;/strong&gt; - Not a Perl module. But useful if you’re XML file is made of “old man wee and fail”&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;html&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-4&quot;&gt;HTML&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Parsing HTML
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Regular expressions&lt;/strong&gt; - Don’t&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;HTML::TreeBuilder&lt;/strong&gt; - Venerable&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Mojo::DOM&lt;/strong&gt; - Pleasant&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;XML::LibXML&lt;/strong&gt; or &lt;strong&gt;XML::Twig&lt;/strong&gt; - Ok but why&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Generating HTML
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;CGI.pm&lt;/strong&gt; - Please don’t&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Template Toolkit&lt;/strong&gt; - Venerable&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Text::Xslate&lt;/strong&gt; - Brilliant&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;HTML::Mason&lt;/strong&gt; - Yes but no because embedded Perl&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Mojo::Template&lt;/strong&gt; - Yes but no because embedded Perl&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;HTML::Zoom&lt;/strong&gt; - mst wrote it, mst doesn’t hate it&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;files&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-5&quot;&gt;Files&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Files::Spec&lt;/strong&gt; - Core, standard&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Files::Spec::Functions&lt;/strong&gt; - Use this instead of File::Spec&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;File::stat&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;autodie&lt;/strong&gt; - Core, but “a giant bag of crack balanced precariously atop .. an even bigger bag of tainted crack”&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;File::Open&lt;/strong&gt; - Better than autodie&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;File::Slurp&lt;/strong&gt; - Avoid&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Path::Tiny&lt;/strong&gt; - Excellent&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;IO::All&lt;/strong&gt; - Good if you want to be procedural and don’t want OO&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;databases&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-6&quot;&gt;Databases&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;DBI&lt;/strong&gt; - 99% of the time, just use these 2 methods and nothing else&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-    $dbh-&amp;gt;do($sql, {}, @args);
-    my @array_of_hashrefs = @{$dbh-&amp;gt;selectall_arrayref($self, { Slice =&amp;gt; {} }, @args)};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;DBIx::Connector&lt;/strong&gt; - You want it&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mojo::PG&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;DBIx::Class&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;DBIx::Class::Candy&lt;/strong&gt; - Shiny&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;DBIx::Class::DeploymentHandler&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;DBIx::Class::Fixtures&lt;/strong&gt; - Useful for testing&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;DBIx::Class::PassphraseColum&lt;/strong&gt; - Yes please&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;json&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-7&quot;&gt;JSON&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;JSON&lt;/strong&gt; - Yes but there are alternatives&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;JSON::PP&lt;/strong&gt; - Pure perl, core, fatpacks&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;JSON::XS&lt;/strong&gt; - Fast&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cpanel::JSON::XS&lt;/strong&gt; - Faster&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;JSON::MaybeXS&lt;/strong&gt; - Recommended&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;JSON::Diffable&lt;/strong&gt; - Useful&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mojo::JSON&lt;/strong&gt; - Really nice&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;async&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-8&quot;&gt;Async&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Don’t&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;threads.pm&lt;/strong&gt; - Don’t.  Its slow.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;POE&lt;/strong&gt; - Good but weird UI.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;MooseX::POE&lt;/strong&gt; - Better&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Reflex&lt;/strong&gt; - Interesting&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;AnyEvent&lt;/strong&gt; - Ok, but maintainer is difficult&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;IO::Async&lt;/strong&gt; - Nice&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mojo::IOLoop&lt;/strong&gt; - Nice&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Promises&lt;/strong&gt; - Neat but mst likes Future&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;curry&lt;/strong&gt; - Useful&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;librarydeployment&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-9&quot;&gt;Library deployment&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;cpan as root&lt;/strong&gt; - No&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Vendor Packages&lt;/strong&gt; - Ok&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;CPANPLUS&lt;/strong&gt; - Out of favor&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;CPAN&lt;/strong&gt; - Standard&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;cpanminus&lt;/strong&gt; - Use this&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;FindBin&lt;/strong&gt; - Good for git deploys, bad for dist deploys&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;local::lib&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Carton&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;App::FatPacker&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;CPAN::Mini&lt;/strong&gt; - Maximum underkill&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Pinto&lt;/strong&gt; - Maximum overkill&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;perlvmdeployment&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-10&quot;&gt;Perl VM deployment&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;System perl&lt;/strong&gt; - Ok with local::lib&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Manual compilation&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;perlbrew&lt;/strong&gt; - Yes usually all the shims are more annoying than necessary&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Perl::Build&lt;/strong&gt; - Nice&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;plenv&lt;/strong&gt; - Nice&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Windows&lt;/strong&gt; - Active State or Strawberry Perl&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;distributionbuilding&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-11&quot;&gt;Distribution building&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;ExtUtils::MakeMaker&lt;/strong&gt; - Hated by everyone except people who like Makefiles.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Module::Build&lt;/strong&gt; - No&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Module::Install&lt;/strong&gt; - “a giant tower of crack”&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Module::Build::Tiny&lt;/strong&gt; - Nice.  See also App::ModuleBuildTiny.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Dist::Zilla&lt;/strong&gt; - Power.  Maximum overkill.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Dist::Milla&lt;/strong&gt; - Sensible&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Minilla&lt;/strong&gt; - Great.  Maximum underkill.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;objectorientation&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-12&quot;&gt;Object orientation&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Moose&lt;/strong&gt; - Awesome&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Moo&lt;/strong&gt; - Shiny&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mouse&lt;/strong&gt; - Niche&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Type::Tiny&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Moops&lt;/strong&gt; - Good&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Throwable&lt;/strong&gt; - Sensible&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Safe::Isa&lt;/strong&gt; - Might be useful&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;soap&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-13&quot;&gt;SOAP&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;SOAP::WSDL&lt;/strong&gt; - Avoid&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;XML::Compile::SOAP&lt;/strong&gt; - Insane and brilliant&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Catalyst::Controller::SOAP&lt;/strong&gt; - Least worst option&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SOAP::Lite&lt;/strong&gt; - Ancient and insane&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;exporting&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-14&quot;&gt;Exporting&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Exporter&lt;/strong&gt; - Sufficient&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Sub::Exporter&lt;/strong&gt; - Worth a look&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Sub::Exporter::Progressive&lt;/strong&gt; - Light&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Moose::Exporter&lt;/strong&gt; - Yes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Exporter::Tiny&lt;/strong&gt; - Recommended&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Exporter::Declare&lt;/strong&gt; - Maximum overkill&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;namespace::(auto)clean&lt;/strong&gt; - Useful&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Import::Into&lt;/strong&gt; - or Import::Base&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;email&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-15&quot;&gt;Email&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Net::SMTP&lt;/strong&gt; - Too low level&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Email::Send&lt;/strong&gt; - Usable&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Email::Sender&lt;/strong&gt; - Recommended&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Email::Stuffer&lt;/strong&gt; - mst favorite&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Emailesque&lt;/strong&gt; - mst favorite with sugar on top&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Email::Mime&lt;/strong&gt; - Standard&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Email::Mime::Kit&lt;/strong&gt; - Best answer for templating&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mail::Box&lt;/strong&gt; - Brilliant and insane&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Courriel&lt;/strong&gt; - Elegant&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;a name=&quot;logging&quot; href=&quot;http://shadow.cat/blog/matt-s-trout/mstpan-16&quot;&gt;Logging&lt;/a&gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;warn()&lt;/strong&gt; - Perfectly fine&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Log::Dispatch&lt;/strong&gt; - Nice&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Log::Log4Pperl&lt;/strong&gt; - Maximum overkill&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Log::Any&lt;/strong&gt; - Good&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Log::Contextual&lt;/strong&gt; - Nice&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Message::Passing&lt;/strong&gt; - Worth a look. Not quite logging.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Tue, 08 Sep 2015 00:00:00 -0400</pubDate>
-        <link>http://blog.kablamo.org/2015/09/08/mstpan/</link>
-        <guid isPermaLink="true">http://blog.kablamo.org/2015/09/08/mstpan/</guid>
-        
-        
-        <category>perl</category>
         
       </item>
     
