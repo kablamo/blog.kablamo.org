@@ -648,6 +648,35 @@ hr {
   padding-left: 1rem;
   padding-right: 1rem; }
 
+.tip-title {
+  display: block;
+  font-weight: bold;
+  box-sizing: border-box;
+  padding: 1rem 1.5rem;
+  padding-left: 0;
+  height: 100%;
+  float: left; }
+
+.tip-content {
+  display: block;
+  background: #fff;
+  box-sizing: border-box;
+  border-left: solid 1px #777;
+  border-radius: 0px 4px 4px 0px;
+  margin-left: 8rem;
+  padding: 1rem 1.5rem; }
+
+.tip-content::after {
+  clear: both;
+  display: table;
+  content: ""; }
+
+.tip {
+  background: #fff;
+  display: block;
+  box-sizing: border-box;
+  overflow: hidden; }
+
 /**
  * Syntax highlighting styles
  */
