@@ -6,9 +6,104 @@
 </description>
     <link>http://blog.kablamo.org/</link>
     <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 22 Mar 2018 09:06:23 -0400</pubDate>
-    <lastBuildDate>Thu, 22 Mar 2018 09:06:23 -0400</lastBuildDate>
+    <pubDate>Wed, 28 Mar 2018 06:54:24 -0400</pubDate>
+    <lastBuildDate>Wed, 28 Mar 2018 06:54:24 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Handling exceptions with try/catch</title>
+        <description>&lt;p&gt;One way to handle exceptions in Perl is with
+&lt;a href=&quot;https://metacpan.org/pod/Syntax::Keyword::Try&quot;&gt;Syntax::Keyword::Try&lt;/a&gt; which
+adds &lt;code&gt;try&lt;/code&gt; and &lt;code&gt;catch&lt;/code&gt; keywords to Perl. As always there are trade offs and it
+depends on your goals and preferences.&lt;/p&gt;
+
+&lt;p&gt;It has no dependencies and plays nicely with perltidy and perlcritic.  However,
+it is 2.6 times slower than &lt;code&gt;eval()&lt;/code&gt; and it’s not included in the Perl core so
+you will need to install it.&lt;/p&gt;
+
+&lt;div class=&quot;tip&quot;&gt;
+    &lt;div class=&quot;tip-title&quot;&gt;Alternate&lt;br /&gt;Solutions&lt;/div&gt;
+    &lt;div class=&quot;tip-content&quot; style=&quot;margin-left:6rem&quot;&gt;
+        There is more than one way to handle exceptions in Perl and several modules
+on MetaCPAN which add try/catch keywords to Perl.  To find out which solution
+is best for you, see &lt;a href=&quot;https://mvp.duckduckgo.com/cpan/exceptions/&quot;&gt;Whats the best way to handle
+exceptions?&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;throwing-exceptions&quot;&gt;Throwing exceptions&lt;/h1&gt;
+&lt;p&gt;To throw an exception call &lt;code&gt;die()&lt;/code&gt;.  If the exception is not caught, an error
+message is displayed to STDERR and the process exits with a non-zero value.
+Syntax::Keyword::Try doesn’t change how exceptions are thrown.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;die &quot;Something bad happened&quot;;
+# prints &quot;Something bad happened at line 123.&quot; 
+# and then the process exits;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;catching-exceptions&quot;&gt;Catching exceptions&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;use Syntax::Keyword::Try
+
+try {
+    die &quot;its only a flesh wound&quot;;
+}
+catch {
+    warn &quot;something bad happened: $@&quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The catch block can inspect the exception by looking at &lt;code&gt;$@&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;exceptions-as-objects&quot;&gt;Exceptions as objects&lt;/h1&gt;
+
+&lt;p&gt;Exceptions are usually strings, but you can throw objects too.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;try {
+    die My::Exception-&amp;gt;new(
+        error    =&amp;gt; 'Something bad happened',
+        request  =&amp;gt; $request,
+        response =&amp;gt; $response,
+    );
+}
+catch {
+    warn &quot;something bad happened: &quot; . $@-&amp;gt;error();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;pitfalls-for-perl-programmers&quot;&gt;Pitfalls for Perl programmers&lt;/h1&gt;
+&lt;p&gt;These are not really pitfalls.  Syntax::Keyword::Try works the same as
+try/catch works in other languages.  However if you are used to handling
+exceptions with die/eval or Try::Tiny here are a few things that you may have
+forgotten about try/catch:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;1. A &lt;code&gt;try&lt;/code&gt; block must be followed by &lt;code&gt;catch&lt;/code&gt; or &lt;code&gt;finally&lt;/code&gt; or both.&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;try { do_something_risk() } # syntax error
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;2. A &lt;code&gt;try&lt;/code&gt; block does not catch exceptions.&lt;/em&gt;  The &lt;code&gt;catch&lt;/code&gt; block catches exceptions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;try     { die &quot;its just a flesh wound&quot; }
+finally { say &quot;hello&quot; }
+# no exception is caught
+# prints &quot;its just a flesh wound&quot; to STDERR
+# process exits
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;3. A &lt;code&gt;return&lt;/code&gt; statement will exit the containing function – not the &lt;code&gt;try&lt;/code&gt; block.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;4. Loop control statements like &lt;code&gt;redo&lt;/code&gt;, &lt;code&gt;next&lt;/code&gt;, and &lt;code&gt;last&lt;/code&gt; act on any containing loops.&lt;/em&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 28 Mar 2018 00:00:00 -0400</pubDate>
+        <link>http://blog.kablamo.org/2018/03/28/try-catch/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2018/03/28/try-catch/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
     
       <item>
         <title>Handling exceptions with die/eval</title>
@@ -19,10 +114,9 @@ you will need to understand it.&lt;/p&gt;
 &lt;div class=&quot;tip&quot;&gt;
     &lt;div class=&quot;tip-title&quot;&gt;Alternate&lt;br /&gt;Solution&lt;/div&gt;
     &lt;div class=&quot;tip-content&quot; style=&quot;margin-left:6rem&quot;&gt;
-        A number of modules exist which add try/catch keywords to Perl. &lt;a href=&quot;/cpan/exceptions&quot;&gt;Recommended Libraries&lt;/a&gt; can help you choose the module
-        thats right for you.  For most people Syntax::Keyword::Try is the best
-        way to handle exceptions.  As always there are trade offs.  See &lt;a href=&quot;/essentials/try-catch/&quot;&gt; Handling
-exceptions with Syntax::Keyword::Try&lt;/a&gt; (article available next week).
+        Several modules exist that add try/catch syntax to Perl. 
+        As always there are some trade offs.  See &lt;a href=&quot;https://mvp.duckduckgo.com/essentials/try-catch/&quot;&gt; Handling
+exceptions with try/catch&lt;/a&gt; for details.
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -789,39 +883,6 @@ anything feel free to contribute to the github repo or leave a comment.&lt;/p&gt
         <pubDate>Sat, 26 Sep 2015 00:00:00 -0400</pubDate>
         <link>http://blog.kablamo.org/2015/09/26/slides-perl-testing/</link>
         <guid isPermaLink="true">http://blog.kablamo.org/2015/09/26/slides-perl-testing/</guid>
-        
-        
-        <category>perl</category>
-        
-        <category>slides</category>
-        
-      </item>
-    
-      <item>
-        <title>Publish your first CPAN module in &lt; 5 minutes (slides)</title>
-        <description>&lt;p&gt;I originally gave this talk at Chicago.pm as part of a “Distribution Management
-Shootout” – a 3 way duel between:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;jberger’s &lt;a href=&quot;http://jberger.github.io/ModuleBuildPresentation&quot;&gt;talk&lt;/a&gt; about Module::Build and and the “Classic” build systems&lt;/li&gt;
-  &lt;li&gt;preaction’s &lt;a href=&quot;http://preaction.github.io/Introduction-to-Dist-Zilla&quot;&gt;talk&lt;/a&gt; about Dist::Zilla, and&lt;/li&gt;
-  &lt;li&gt;my &lt;a href=&quot;http://kablamo.org/slides-first-cpan-module&quot;&gt;talk&lt;/a&gt; about Minilla and Carton.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It was a great overview of the most popular tools and I think all the talks
-are worth checking out.&lt;/p&gt;
-
-&lt;p&gt;As usual, this talk is both a living document and reference material. I keep my
-talks updated and relevant so I can refer people to them. If I’ve missed
-anything feel free to contribute to the github repo or leave a comment.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://kablamo.org/slides-first-cpan-module&quot;&gt;Slides&lt;/a&gt; |
-&lt;a href=&quot;http://github.com/kablamo/slides-first-cpan-module&quot;&gt;GitHub repo&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 15 Sep 2015 00:00:00 -0400</pubDate>
-        <link>http://blog.kablamo.org/2015/09/15/slides-first-cpan-module/</link>
-        <guid isPermaLink="true">http://blog.kablamo.org/2015/09/15/slides-first-cpan-module/</guid>
         
         
         <category>perl</category>

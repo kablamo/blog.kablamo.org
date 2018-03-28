@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Handling exceptions with die/eval</title>
-  <meta name="description" content="The standard Perl syntax for handling exceptions (die/eval) is quirky and hassome pitfalls that are easy to tumble into.  However its pretty common so you wi...">
+  <title>Handling exceptions with try/catch</title>
+  <meta name="description" content="One way to handle exceptions in Perl is withSyntax::Keyword::Try whichadds try and catch keywords to Perl. As always there are trade offs and itdepends on yo...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://mvp.kablamo.org/essentials/die-eval/">
+  <link rel="canonical" href="https://mvp.kablamo.org/essentials/try-catch/">
   <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
 </head>
 
@@ -107,35 +107,40 @@
     <div class="page-content">
       <div class="wrapper">
 <header class="post-header">
-  <h1 class="post-title">Handling exceptions with die/eval</h1>
+  <h1 class="post-title">Handling exceptions with try/catch</h1>
   <p class="post-meta">
   
     <a href="/categories/perl">perl</a>&nbsp;
   
   &nbsp;&nbsp;
-  2018-03-20
+  2018-03-28
   </p>
 </header>
 <div class="post">
   <article class="post-content">
-    <p>The standard Perl syntax for handling exceptions (die/eval) is quirky and has
-some pitfalls that are easy to tumble into.  However its pretty common so 
-you will need to understand it.</p>
+    <p>One way to handle exceptions in Perl is with
+<a href="https://metacpan.org/pod/Syntax::Keyword::Try">Syntax::Keyword::Try</a> which
+adds <code>try</code> and <code>catch</code> keywords to Perl. As always there are trade offs and it
+depends on your goals and preferences.</p>
+
+<p>It has no dependencies and plays nicely with perltidy and perlcritic.  However,
+it is 2.6 times slower than <code>eval()</code> and it’s not included in the Perl core so
+you will need to install it.</p>
 
 <div class="tip">
-    <div class="tip-title">Alternate<br />Solution</div>
+    <div class="tip-title">Alternate<br />Solutions</div>
     <div class="tip-content" style="margin-left:6rem">
-        Several modules exist that add try/catch syntax to Perl. 
-        As always there are some trade offs.  See <a href="https://mvp.duckduckgo.com/essentials/try-catch/"> Handling
-exceptions with try/catch</a> for details.
+        There is more than one way to handle exceptions in Perl and several modules
+on MetaCPAN which add try/catch keywords to Perl.  To find out which solution
+is best for you, see <a href="https://mvp.duckduckgo.com/cpan/exceptions/">Whats the best way to handle
+exceptions?</a>
     </div>
 </div>
 
 <h1 id="throwing-exceptions">Throwing exceptions</h1>
-
-<p>To throw an exception call <code>die()</code>.  Other languages call it <code>throw()</code>, but in
-Perl its called <code>die()</code>.  If the exception is not caught, an error message is
-displayed to STDERR and the process exits with a non-zero value.</p>
+<p>To throw an exception call <code>die()</code>.  If the exception is not caught, an error
+message is displayed to STDERR and the process exits with a non-zero value.
+Syntax::Keyword::Try doesn’t change how exceptions are thrown.</p>
 
 <pre><code>die "Something bad happened";
 # prints "Something bad happened at line 123." 
@@ -144,92 +149,57 @@ displayed to STDERR and the process exits with a non-zero value.</p>
 
 <h1 id="catching-exceptions">Catching exceptions</h1>
 
-<p>To catch an exception, use <code>eval()</code>. Other languages call it <code>try()</code> but in
-Perl its called <code>eval()</code> and its a little different.  <code>eval()</code> parses,
-compiles, and evaluates a block of code at compile time and catches any
-exceptions that are raised at runtime.  The exception is placed in the global
-variable <code>$@</code>.</p>
+<pre><code>use Syntax::Keyword::Try
 
-<pre><code>eval { die "Something bad happened" }; # try (and catch)
-warn $@ if $@;                         # handle exception
+try {
+    die "its only a flesh wound";
+}
+catch {
+    warn "something bad happened: $@";
+}
 </code></pre>
+
+<p>The catch block can inspect the exception by looking at <code>$@</code>.</p>
 
 <h1 id="exceptions-as-objects">Exceptions as objects</h1>
 
 <p>Exceptions are usually strings, but you can throw objects too.</p>
 
-<pre><code>eval {
+<pre><code>try {
     die My::Exception-&gt;new(
         error    =&gt; 'Something bad happened',
         request  =&gt; $request,
         response =&gt; $response,
     );
-};
-warn $@-&gt;error if $@;
-</code></pre>
-
-<h1 id="pitfalls">Pitfalls</h1>
-
-<p><em>1. <code>$@</code> is a global variable</em></p>
-
-<p>If your exception handling code calls <code>eval()</code>, <code>$@</code> will get clobbered.  This
-is easy to forget.  Here is one way to avoid it:</p>
-
-<pre><code>eval { die "something bad" };
-if ($@) {
-    my $error = $@;
-    disconnect_from_the_database(); # calls eval()
-    warn $error;
+}
+catch {
+    warn "something bad happened: " . $@-&gt;error();
 }
 </code></pre>
 
-<p>If you are a module author and want to be polite and not modify <code>$@</code> globally
-you need to jump through hoops like this:</p>
+<h1 id="pitfalls-for-perl-programmers">Pitfalls for Perl programmers</h1>
+<p>These are not really pitfalls.  Syntax::Keyword::Try works the same as
+try/catch works in other languages.  However if you are used to handling
+exceptions with die/eval or Try::Tiny here are a few things that you may have
+forgotten about try/catch:</p>
 
-<pre><code>my ($error1, $error2);
-{
-    local $@;
-    unless (eval { ...; return 1 }) {
-        $error1 = 1;
-        $error2 = $@;
-    }
-}
-if ($error1) {
-    # handle exception
-}
+<p><em>1. A <code>try</code> block must be followed by <code>catch</code> or <code>finally</code> or both.</em></p>
+
+<pre><code>try { do_something_risk() } # syntax error
 </code></pre>
 
-<p><em>2. Exception objects that evaluate as false</em></p>
+<p><em>2. A <code>try</code> block does not catch exceptions.</em>  The <code>catch</code> block catches exceptions.</p>
 
-<p>You can <a href="https://metacpan.org/pod/overload">overload</a> Perl operators.  For
-example, you could have an exception object evaluate to “error” in string
-context.  You could also have an exception object evaluate to -1 in string
-context.</p>
-
-<p>This would cause mysterious problems for most people because the common
-idiom <code>handle_exception() if $@</code> will silently fail and the exception won’t be
-handled.</p>
-
-<p>One solution is to use a safer but more verbose idiom everywhere:</p>
-
-<pre><code>unless ( eval { try_something_risky(); return 1 } ) {
-    handle_exception();
-}
+<pre><code>try     { die "its just a flesh wound" }
+finally { say "hello" }
+# no exception is caught
+# prints "its just a flesh wound" to STDERR
+# process exits
 </code></pre>
 
-<p><em>3. <code>eval</code> blocks behave more like anonymous subroutines than if blocks.</em></p>
+<p><em>3. A <code>return</code> statement will exit the containing function – not the <code>try</code> block.</em></p>
 
-<p>For example:</p>
-
-<ul>
-  <li>A <code>return</code> statement will exit the <code>eval</code> block – not the containing function.</li>
-  <li>Loop control statements like <code>redo</code>, <code>next</code>, and <code>last</code> only work in the context of whats inside the <code>eval</code> block.</li>
-</ul>
-
-<h1 id="see-also">See also</h1>
-<p>For more info read the documentation for 
-<a href="http://perldoc.perl.org/functions/die.html">die()</a> and
-<a href="http://perldoc.perl.org/functions/eval.html">eval()</a></p>
+<p><em>4. Loop control statements like <code>redo</code>, <code>next</code>, and <code>last</code> act on any containing loops.</em></p>
 
 
   </article>
@@ -263,8 +233,8 @@ handled.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.kablamo.org/2018/03/20/die-eval/';
-        var disqus_url = 'http://blog.kablamo.org/2018/03/20/die-eval/';
+        var disqus_identifier = 'http://blog.kablamo.org/2018/03/28/try-catch/';
+        var disqus_url = 'http://blog.kablamo.org/2018/03/28/try-catch/';
         var disqus_script = 'embed.js';
       
     (function () {
