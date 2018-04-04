@@ -6,9 +6,301 @@
 </description>
     <link>http://blog.kablamo.org/</link>
     <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 03 Apr 2018 04:41:05 -0400</pubDate>
-    <lastBuildDate>Tue, 03 Apr 2018 04:41:05 -0400</lastBuildDate>
+    <pubDate>Tue, 03 Apr 2018 23:37:26 -0400</pubDate>
+    <lastBuildDate>Tue, 03 Apr 2018 23:37:26 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Recommended Modules: Working With Files</title>
+        <description>&lt;p&gt;If you are working with files in Perl, be sure to consider these fine CPAN
+modules.&lt;/p&gt;
+
+&lt;h2 id=&quot;table-of-contents&quot;&gt;Table Of Contents&lt;/h2&gt;
+
+&lt;p class=&quot;toc_section&quot;&gt;High Level Modules&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Path::Tiny&lt;/li&gt;
+  &lt;li&gt;IO::All&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;toc_section&quot;&gt;Misc Useful Modules&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Path::Iterator::Rule&lt;/li&gt;
+  &lt;li&gt;File::chmod&lt;/li&gt;
+  &lt;li&gt;File::pushd&lt;/li&gt;
+  &lt;li&gt;File::ReadBackwards&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;toc_section&quot;&gt;Lower Level Modules&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cwd&lt;/li&gt;
+  &lt;li&gt;File::Basename&lt;/li&gt;
+  &lt;li&gt;File::Copy&lt;/li&gt;
+  &lt;li&gt;File::Copy::Recursive&lt;/li&gt;
+  &lt;li&gt;File::MimeInfo&lt;/li&gt;
+  &lt;li&gt;File::Path&lt;/li&gt;
+  &lt;li&gt;File::Slurp&lt;/li&gt;
+  &lt;li&gt;File::Spec&lt;/li&gt;
+  &lt;li&gt;File::stat&lt;/li&gt;
+  &lt;li&gt;File::Temp&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;high-level-modules&quot;&gt;High Level Modules&lt;/h1&gt;
+
+&lt;p&gt;These high level modules making working with files and directories easier by
+providing convenience and safety in a single unified object oriented interface.
+For most situations choosing one of these is probably the best way to go.&lt;/p&gt;
+
+&lt;h2 id=&quot;pathtiny&quot;&gt;Path::Tiny&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/Path::Tiny&quot;&gt;Path::Tiny&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 126&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2017&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: DAGOLDEN&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Path::Tiny is a small fast library with a fairly traditional object oriented
+interface for dealing with files and directories.  Its probably the most
+popular high level module.&lt;/p&gt;
+
+&lt;p&gt;Path::Tiny began life as a minimalist rewrite of the venerable Path::Class
+module with a improved user interface.  Over the years its grown in popularity
+and has become a mature, full featured library and one of the most common
+choices for dealing with files.  These days anyone interested in Path::Class is
+probably better served using Path::Tiny.&lt;/p&gt;
+
+&lt;h2 id=&quot;ioall&quot;&gt;IO::All&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/IO::All&quot;&gt;IO::All&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 58&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2017&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: FREW&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;IO::All is the other library for dealing with files and directories.  It is
+also a good solution and nearly as popular as Path::Tiny.&lt;/p&gt;
+
+&lt;p&gt;While Path::Tiny aims to be somewhat minimalist and focused, IO::All does
+everything.  It does file and directory IO but it also has functionality from
+IO::Socket and MLDBM and LWP.  You can use it to create a web server, get files
+from ftp sites, or send email.&lt;/p&gt;
+
+&lt;p&gt;The user interface is somewhat contraversial.  Depending on your point of view
+its powerful, concise, and convenient or makes for hard to read code at times.&lt;/p&gt;
+
+&lt;p&gt;Developers visiting Perl from another language are probably going to be more
+comfortable with Path::Tiny.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;misc-useful-modules&quot;&gt;Misc Useful Modules&lt;/h1&gt;
+
+&lt;h2 id=&quot;pathiteratorrule&quot;&gt;Path::Iterator::Rule&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/Path::Iterator::Rule&quot;&gt;Path::Iterator::Rule&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 64&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2018&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: DAGOLDEN&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;There are many libraries for iterating over files.  But the bottom line is if
+you need to walk a directory tree, select some files, and do stuff you should
+almost certainly be using Path::Iterator::Rule.  The user interface is fabulous
+and the performance is good.&lt;/p&gt;
+
+&lt;p&gt;Alternatives include File::Find which is part of core (distributed with Perl).
+File::Find has similarly good performance but is a lot less fun to work with
+due to its user interface.  For benchmarks and a good description of
+some alternatives see this &lt;a href=&quot;https://rjbs.manxome.org/rubric/entry/1981&quot;&gt;rjbs
+article&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;filechmod&quot;&gt;File::chmod&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::chmod&quot;&gt;File::chmod&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 3&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2015&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: XENO&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The Perl builtin function &lt;code&gt;chmod()&lt;/code&gt; only accepts octal permissons.  File::chmod
+replaces &lt;code&gt;chmod()&lt;/code&gt; with its own version that accepts octal, symbolic,
+or “ls” permissions.&lt;/p&gt;
+
+&lt;h2 id=&quot;filechdir&quot;&gt;File::chdir&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::chdir&quot;&gt;File::chdir&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 9&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2016&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: DAGOLDEN&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The Perl builtin function &lt;code&gt;chdir()&lt;/code&gt; changes the current working directory
+globally.  If any part of your application or and library calls &lt;code&gt;chdir()&lt;/code&gt;, the
+cwd for the entire application changes.  File::chdir provides a mechanism for
+changing directory locally.&lt;/p&gt;
+
+&lt;h2 id=&quot;filepushd&quot;&gt;File::pushd&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::pushd&quot;&gt;File::pushd&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 9&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2016&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: DAGOLDEN&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::pushd provides a way to change directory temporarily for a limited scope.&lt;/p&gt;
+
+&lt;h2 id=&quot;filereadbackwards&quot;&gt;File::ReadBackwards&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::ReadBackwards&quot;&gt;File::ReadBackwards&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 6&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2011&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: URI&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::ReadBackwards can read in file contents backwards line by line.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;lower-level-modules&quot;&gt;Lower Level Modules&lt;/h1&gt;
+
+&lt;p&gt;Modules like Path::Tiny and IO::All are built on top of lower level modules
+such as these.  None of these provide an object oriented user interface unless
+otherwise noted.&lt;/p&gt;
+
+&lt;h2 id=&quot;cwd&quot;&gt;Cwd&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/Cwd&quot;&gt;Cwd&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 64&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2018&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: XSAWYERX&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Cwd is a core module (distributed with Perl) which gets the pathname of the
+current working directory.&lt;/p&gt;
+
+&lt;h2 id=&quot;filebasename&quot;&gt;File::Basename&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::Basename&quot;&gt;File::Basename&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::Basename is a core module (distributed with Perl) for parsing paths into
+directory, filename, and suffix.&lt;/p&gt;
+
+&lt;h2 id=&quot;filecopy&quot;&gt;File::Copy&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::Copy&quot;&gt;File::Copy&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::Copy is a core module (distributed with Perl) which provides &lt;code&gt;copy()&lt;/code&gt; and &lt;code&gt;move()&lt;/code&gt; functions.&lt;/p&gt;
+
+&lt;h2 id=&quot;filecopyrecursive&quot;&gt;File::Copy::Recursive&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::Copy::Recursive&quot;&gt;File::Copy::Recursive&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 13&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2018&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: DMUEY&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::Copy::Recursive provides methods for copying directories recursively.&lt;/p&gt;
+
+&lt;h2 id=&quot;filemimeinfo&quot;&gt;File::MimeInfo&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::MimeInfo&quot;&gt;File::MimeInfo&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 7&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2017&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: FREW&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::MimeInfo can determine the mimetype from a given filename.&lt;/p&gt;
+
+&lt;h2 id=&quot;filepath&quot;&gt;File::Path&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::Path&quot;&gt;File::Path&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 38&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2017&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: JKEENAN&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::Path can create or remove directory trees.&lt;/p&gt;
+
+&lt;h2 id=&quot;fileslurp&quot;&gt;File::Slurp&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::Slurp&quot;&gt;File::Slurp&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 62&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2011&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: URI&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::Slurp is not recommended.  This was a popular module for a while so
+you may see this in older code.  It’s abandoned and has critical flaws which
+are not fixed – including issues with unicode.&lt;/p&gt;
+
+&lt;h2 id=&quot;filespec&quot;&gt;File::Spec&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::Spec&quot;&gt;File::Spec&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 64&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2018&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: XSAWYERX&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::Spec is a core module (distributed with Perl) for portably manipulating
+filenames.  It’s not OO.&lt;/p&gt;
+
+&lt;h2 id=&quot;filestat&quot;&gt;File::stat&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::stat&quot;&gt;File::stat&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 58&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2017&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: FREW&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Perl’s builtin &lt;code&gt;stat()&lt;/code&gt; function returns a list of 13 file attributes: size,
+mode, uid, gid, etc.  All you need to do is remember the order of all those
+elements.  File::stat adds sanity by providing an object oriented user
+interface to &lt;code&gt;stat()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;filetemp&quot;&gt;File::Temp&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::Temp&quot;&gt;File::Temp&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 50&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2013&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: DAGOLDEN&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::Temp provides an interface for returning the name and handle of a
+temporary file safely.  The best part is it automatically cleans up the
+temporary file once the variable has gone out of scope.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 03 Apr 2018 00:00:00 -0400</pubDate>
+        <link>http://blog.kablamo.org/2018/04/03/files/</link>
+        <guid isPermaLink="true">http://blog.kablamo.org/2018/04/03/files/</guid>
+        
+        
+        <category>perl</category>
+        
+      </item>
     
       <item>
         <title>Handling exceptions with try/catch</title>
@@ -855,40 +1147,6 @@ succeeds (like echo):&lt;/p&gt;
         <category>bash</category>
         
         <category>rex</category>
-        
-      </item>
-    
-      <item>
-        <title>The Perl test ecosystem (slides)</title>
-        <description>&lt;p&gt;I gave this talk last Thursday at
-&lt;a href=&quot;http://chicago.pm.org/blog/2015/09/19/the-perl-test-ecosystem/&quot;&gt;Chicago.pm&lt;/a&gt;.
-This talk assumes the listener knows very little about testing in Perl but
-likely has something for more advanced users as well.&lt;/p&gt;
-
-&lt;p&gt;It begins with &lt;code&gt;prove&lt;/code&gt; and &lt;code&gt;Test::More&lt;/code&gt;, but then moves on to explore the &lt;code&gt;Test::&lt;/code&gt;
-namespace on CPAN and talk about 20 other test modules.  CPAN has a large
-number of modules to help with testing – its a pretty healthy ecosystem.&lt;/p&gt;
-
-&lt;p&gt;My goal was to create talk which not only gives new people an introduction to
-testing in Perl, but also provides up to date advice about which modules are
-useful and recommended.  Feedback and corrections welcome.&lt;/p&gt;
-
-&lt;p&gt;As usual, this talk is both a living document and reference material. I keep my
-talks updated and relevant so I can refer people to them. If I’ve missed
-anything feel free to contribute to the github repo or leave a comment.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://kablamo.org/slides-perl-testing&quot;&gt;Slides&lt;/a&gt; |
-&lt;a href=&quot;http://github.com/kablamo/slides-perl-testing&quot;&gt;GitHub repo&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 26 Sep 2015 00:00:00 -0400</pubDate>
-        <link>http://blog.kablamo.org/2015/09/26/slides-perl-testing/</link>
-        <guid isPermaLink="true">http://blog.kablamo.org/2015/09/26/slides-perl-testing/</guid>
-        
-        
-        <category>perl</category>
-        
-        <category>slides</category>
         
       </item>
     
