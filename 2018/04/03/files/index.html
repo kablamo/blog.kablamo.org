@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Recommended Modules: Working With Files</title>
-  <meta name="description" content="If you are working with files in Perl, be sure to consider these fine CPANmodules.">
+  <meta name="description" content="This week I updated the Recommended Libraries chapter of Minimum Viable Perl.">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="https://mvp.kablamo.org/cpan/files/">
@@ -118,7 +118,20 @@
 </header>
 <div class="post">
   <article class="post-content">
-    <p>If you are working with files in Perl, be sure to consider these fine CPAN
+    <p>This week I updated the <strong>Recommended Libraries</strong> chapter of Minimum Viable Perl.</p>
+
+<p>There are thousands of modules on MetaCPAN.  Some are abandoned, some were an
+experiment that never took off, some are discouraged, and sometimes its just
+not obvious which module solves your problem best.  In the <strong>Recommended
+Libraries</strong> chapter I’m creating a curated guide to MetaCPAN.</p>
+
+<p>I’ve included the latest article below but the canonical (and most up to date
+version) is available here: <a href="http://mvp.kablamo.org/cpan/files/">Working with
+files</a>.</p>
+
+<hr />
+
+<p>If you are working with files in Perl, be sure to consider these fine CPAN
 modules.</p>
 
 <h2 id="table-of-contents">Table Of Contents</h2>
@@ -149,6 +162,7 @@ modules.</p>
   <li>File::MimeInfo</li>
   <li>File::Path</li>
   <li>File::Slurp</li>
+  <li>File::Slurper</li>
   <li>File::Spec</li>
   <li>File::stat</li>
   <li>File::Temp</li>
@@ -358,7 +372,20 @@ directory, filename, and suffix.</p>
 
 <p>File::Slurp is not recommended.  This was a popular module for a while so
 you may see this in older code.  It’s abandoned and has critical flaws which
-are not fixed – including issues with unicode.</p>
+are not fixed including issues with unicode.  If you like this functionality
+try File::Slurper (or better yet Path::Tiny or IO::All).</p>
+
+<h2 id="fileslurper">File::Slurper</h2>
+
+<div class="module">
+    <div class="column">MetaCPAN: <a href="https://metacpan.org/pod/File::Slurper">File::Slurper</a></div>
+    <div class="column">++ rating: 35</div>
+    <div class="column">Last update: 2018</div>
+    <div class="column">Maintainer: LEONT</div>
+</div>
+
+<p>File::Slurper provides a way to do fast and correct slurping (reading) and
+spewing (writing).  All functions throw exceptions on errors.</p>
 
 <h2 id="filespec">File::Spec</h2>
 

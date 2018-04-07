@@ -6,13 +6,26 @@
 </description>
     <link>http://blog.kablamo.org/</link>
     <atom:link href="http://blog.kablamo.org/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 03 Apr 2018 23:37:26 -0400</pubDate>
-    <lastBuildDate>Tue, 03 Apr 2018 23:37:26 -0400</lastBuildDate>
+    <pubDate>Sat, 07 Apr 2018 03:50:25 -0400</pubDate>
+    <lastBuildDate>Sat, 07 Apr 2018 03:50:25 -0400</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
         <title>Recommended Modules: Working With Files</title>
-        <description>&lt;p&gt;If you are working with files in Perl, be sure to consider these fine CPAN
+        <description>&lt;p&gt;This week I updated the &lt;strong&gt;Recommended Libraries&lt;/strong&gt; chapter of Minimum Viable Perl.&lt;/p&gt;
+
+&lt;p&gt;There are thousands of modules on MetaCPAN.  Some are abandoned, some were an
+experiment that never took off, some are discouraged, and sometimes its just
+not obvious which module solves your problem best.  In the &lt;strong&gt;Recommended
+Libraries&lt;/strong&gt; chapter I’m creating a curated guide to MetaCPAN.&lt;/p&gt;
+
+&lt;p&gt;I’ve included the latest article below but the canonical (and most up to date
+version) is available here: &lt;a href=&quot;http://mvp.kablamo.org/cpan/files/&quot;&gt;Working with
+files&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you are working with files in Perl, be sure to consider these fine CPAN
 modules.&lt;/p&gt;
 
 &lt;h2 id=&quot;table-of-contents&quot;&gt;Table Of Contents&lt;/h2&gt;
@@ -43,6 +56,7 @@ modules.&lt;/p&gt;
   &lt;li&gt;File::MimeInfo&lt;/li&gt;
   &lt;li&gt;File::Path&lt;/li&gt;
   &lt;li&gt;File::Slurp&lt;/li&gt;
+  &lt;li&gt;File::Slurper&lt;/li&gt;
   &lt;li&gt;File::Spec&lt;/li&gt;
   &lt;li&gt;File::stat&lt;/li&gt;
   &lt;li&gt;File::Temp&lt;/li&gt;
@@ -252,7 +266,20 @@ directory, filename, and suffix.&lt;/p&gt;
 
 &lt;p&gt;File::Slurp is not recommended.  This was a popular module for a while so
 you may see this in older code.  It’s abandoned and has critical flaws which
-are not fixed – including issues with unicode.&lt;/p&gt;
+are not fixed including issues with unicode.  If you like this functionality
+try File::Slurper (or better yet Path::Tiny or IO::All).&lt;/p&gt;
+
+&lt;h2 id=&quot;fileslurper&quot;&gt;File::Slurper&lt;/h2&gt;
+
+&lt;div class=&quot;module&quot;&gt;
+    &lt;div class=&quot;column&quot;&gt;MetaCPAN: &lt;a href=&quot;https://metacpan.org/pod/File::Slurper&quot;&gt;File::Slurper&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;++ rating: 35&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Last update: 2018&lt;/div&gt;
+    &lt;div class=&quot;column&quot;&gt;Maintainer: LEONT&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;File::Slurper provides a way to do fast and correct slurping (reading) and
+spewing (writing).  All functions throw exceptions on errors.&lt;/p&gt;
 
 &lt;h2 id=&quot;filespec&quot;&gt;File::Spec&lt;/h2&gt;
 
