@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="I want to understand credit card processing. So I will probably write a few articles about it. This article has some fundamental definitions.
+acquiring bank An acquiring bank is a bank which processes card payments on behalf of a merchant. The term &amp;lsquo;acquirer&amp;rsquo; indicates the bank accepts (or acquires) credit card payments from card issuing banks within a credit card association. Acquirers take all the risk and bear the burdern of most of the regulation." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/cc-processors-1/" />
+
+
+    <title>
+        
+            Introduction to online credit card processing - part 1 :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Introduction to online credit card processing - part 1">
+<meta itemprop="description" content="I want to understand credit card processing. So I will probably write a few articles about it. This article has some fundamental definitions.
+acquiring bank An acquiring bank is a bank which processes card payments on behalf of a merchant. The term &lsquo;acquirer&rsquo; indicates the bank accepts (or acquires) credit card payments from card issuing banks within a credit card association. Acquirers take all the risk and bear the burdern of most of the regulation.">
+<meta itemprop="datePublished" content="2014-03-18T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2014-03-18T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="612">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Introduction to online credit card processing - part 1"/>
+<meta name="twitter:description" content="I want to understand credit card processing. So I will probably write a few articles about it. This article has some fundamental definitions.
+acquiring bank An acquiring bank is a bank which processes card payments on behalf of a merchant. The term &lsquo;acquirer&rsquo; indicates the bank accepts (or acquires) credit card payments from card issuing banks within a credit card association. Acquirers take all the risk and bear the burdern of most of the regulation."/>
+
+
+
+    <meta property="og:title" content="Introduction to online credit card processing - part 1" />
+<meta property="og:description" content="I want to understand credit card processing. So I will probably write a few articles about it. This article has some fundamental definitions.
+acquiring bank An acquiring bank is a bank which processes card payments on behalf of a merchant. The term &lsquo;acquirer&rsquo; indicates the bank accepts (or acquires) credit card payments from card issuing banks within a credit card association. Acquirers take all the risk and bear the burdern of most of the regulation." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/cc-processors-1/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2014-03-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2014-03-18T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="uncategorized" />
+
+
+
+    <meta property="article:published_time" content="2014-03-18 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/cc-processors-1/">Introduction to online credit card processing - part 1</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>I want to understand credit card processing.  So I will probably write a few
+articles about it.  This article has some fundamental definitions.</p>
+<h2 id="acquiring-bank">acquiring bank</h2>
+<p>An <a href="https://en.wikipedia.org/wiki/Acquiring_bank">acquiring bank</a> is a bank
+which processes card payments on behalf of a merchant.  The term &lsquo;acquirer&rsquo;
+indicates the bank accepts (or acquires) credit card payments from card
+issuing banks within a credit card association.  Acquirers take all the risk
+and bear the burdern of most of the regulation.  Examples of acquirers are
+Bank of America, FirstData, and Chase.</p>
+<h2 id="credit-card-association">credit card association</h2>
+<p>Examples of credit card associations include Visa, MasterCard, Discover,
+American Express, etc.</p>
+<h2 id="issuing-bank">issuing bank</h2>
+<p>An <a href="https://en.wikipedia.org/wiki/Issuing_bank">issuing bank</a> is a bank which
+provides credit cards to consumers.  The term &lsquo;issue&rsquo; indicates the bank issues
+payments to the acquiring bank on behalf of the consumer.  The top issuers in
+the US are American Express and Chase.</p>
+<h2 id="payment-processor">payment processor</h2>
+<p>A <a href="http://storecoach.com/blog/whats-difference-between-payment-processor-gateway/">payment processor</a>
+is a company which peforms the actual funds transfer.  Its the technical
+underpinning of a transaction.  Processors do authorization, funds transfer,
+statements, calculate the interchange fee, and handle dispute management.
+Processors take no risk on a transaction.  Examples of companies who are
+processors are FirstData, Chase, and RBS WorldPay.</p>
+<h2 id="gateway">gateway</h2>
+<p>A <a href="https://en.wikipedia.org/wiki/Payment_gateway">payment gateway</a> is a service
+which ties all the various groups together and provides a nice simple interface for
+the merchant to build a shopping cart or marketplace without needing to
+understand all the gory details.  The gateway authorizes credit card payments
+by facillitating the transfer of information between a merchant&rsquo;s bank (the
+acquiring bank) and a customer&rsquo;s bank (the issuing bank).</p>
+<h2 id="merchant-account">merchant account</h2>
+<p>A <a href="https://en.wikipedia.org/wiki/Merchant_account">merchant account</a> is a type
+of bank account provided by an acquiring bank which allows merchants to accept
+payments via credit card.</p>
+<h2 id="interchange-fee">interchange fee</h2>
+<p>The <a href="https://en.wikipedia.org/wiki/Interchange_fee">interchange fee</a> is
+the fee paid to the issuing bank by the acquiring bank.  The amount varies by
+card type, card brand, transaction amount, and other factors and is set by the
+card associations like Visa, Mastercard, or Discover.</p>
+<h2 id="discount-rate">discount rate</h2>
+<p>The <a href="http://merchantwarehouse.com/understanding-merchant-account-discount-rates">discount rate</a>
+is made up of several different fees which are charged to the merchant.  This
+usually includes the interchange fee.  The discount rate is a fixed
+percentage-based fee charged for each transaction.  A portion of the fee is
+passed to the acquiring bank who likely passes a portion to the issuing bank
+who in turn passes a portion to the credit card association.</p>
+<p>Rates are influenced by many things including the level of risk. Brick and
+mortar stores where a card is physically present are considered the lowest
+risk.  There are three categories of transaction types based on risk and each
+have a different discount rate: qualified, mid-qualified and non-qualified.
+Internet transactions are non-qualified which is the most expensive category.</p>
+<h2 id="basis-point">basis point</h2>
+<p>1 <a href="https://en.wikipedia.org/wiki/Merchant_account#Terms_to_know">basis point</a>
+is 1%.  A term sometimes used when discussing the discount rate.</p>
+<h2 id="average-ticket-size-avt">Average Ticket Size (AVT)</h2>
+<p>The might make more sense to outsiders if they had called it Average
+Transaction Size.  Its the total monthly sales amount divided by the total
+number of transactions for that month.  Merchant account rates and fees are
+often based on a merchant&rsquo;s monthly AVT.</p>
+<h2 id="pci-dss">PCI DSS</h2>
+<p>PCI stands for Payment Card Industry.  DSS stands for Data Security Standard.
+It is a set of security standards for organizations who handle cardholder
+information.  It is defined by the PCI Security Standards Council (PCI SSC)
+which was formed in 2006 by the major card associations.  Note that there is a
+difference between being compliant being validated as compliant.  Validation is
+done annually by a Qualified Security Accessor (QSA) who creates a Report on
+Compliance (ROC) for organizations handle lots of transactions or a
+Self-Assessment Questionaire (SAQ) for companies handling less transactions.</p>
+<h1 id="see-also">See also</h1>
+<p><a href="http://merchantwarehouse.com/glossary">http://merchantwarehouse.com/glossary</a></p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

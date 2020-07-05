@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>experiments on Kablamo</title>
+    <link>http://blog.kablamo.org/categories/experiments/</link>
+    <description>Recent content in experiments on Kablamo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 24 Mar 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.kablamo.org/categories/experiments/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>An experiment - Living with less than 200 things</title>
+      <link>http://blog.kablamo.org/articles/experiments/</link>
+      <pubDate>Mon, 24 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/experiments/</guid>
+      <description>Stuff is expensive to buy. Especially when I end up only using things once or twice like books, dvds, dress shoes, and ties. Stuff is expensive to store. One time I had to rent a storage locker because I couldn&amp;rsquo;t take my things when I moved to China. Some people get big houses with walk in closets and a three car garage. Stuff is expensive to maintain. Broken stuff needs to be fixed.</description>
+    </item>
+    
+    <item>
+      <title>An experiment - No dessert forever</title>
+      <link>http://blog.kablamo.org/articles/no-dessert-forever/</link>
+      <pubDate>Wed, 01 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/no-dessert-forever/</guid>
+      <description>For years I have been hearing people say sugar is the new bad thing. So I finally got around to reading up on this claim. Here is what I learned.
+Nutrition Food is composed of carbohydrates, fats, proteins, water, vitamins, and minerals. Of course, I sometimes swallow stuff that is not on that list but the list is comprehensive in the sense that it covers everything my body needs. Notice that sugar is not in the list.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Last Christmas, the inimitable Matt Trout (mst) created an opinionated tour of CPAN where he recommended modules for some common problems. I think its brilliant, useful, and entertaining and I&amp;rsquo;ve decided to compile a high level overview all on one page in order to create a quick reference.
+I&amp;rsquo;ve tried to distill his wisdom and wit down to a few words. But I recommend clicking the section headers and following the links to Matt&amp;rsquo;s original posts to see his actual real opinions in their full complexity." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/mstpan/" />
+
+
+    <title>
+        
+            mstpan quick reference :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="mstpan quick reference">
+<meta itemprop="description" content="Last Christmas, the inimitable Matt Trout (mst) created an opinionated tour of CPAN where he recommended modules for some common problems. I think its brilliant, useful, and entertaining and I&rsquo;ve decided to compile a high level overview all on one page in order to create a quick reference.
+I&rsquo;ve tried to distill his wisdom and wit down to a few words. But I recommend clicking the section headers and following the links to Matt&rsquo;s original posts to see his actual real opinions in their full complexity.">
+<meta itemprop="datePublished" content="2015-09-08T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2015-09-08T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="789">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="mstpan quick reference"/>
+<meta name="twitter:description" content="Last Christmas, the inimitable Matt Trout (mst) created an opinionated tour of CPAN where he recommended modules for some common problems. I think its brilliant, useful, and entertaining and I&rsquo;ve decided to compile a high level overview all on one page in order to create a quick reference.
+I&rsquo;ve tried to distill his wisdom and wit down to a few words. But I recommend clicking the section headers and following the links to Matt&rsquo;s original posts to see his actual real opinions in their full complexity."/>
+
+
+
+    <meta property="og:title" content="mstpan quick reference" />
+<meta property="og:description" content="Last Christmas, the inimitable Matt Trout (mst) created an opinionated tour of CPAN where he recommended modules for some common problems. I think its brilliant, useful, and entertaining and I&rsquo;ve decided to compile a high level overview all on one page in order to create a quick reference.
+I&rsquo;ve tried to distill his wisdom and wit down to a few words. But I recommend clicking the section headers and following the links to Matt&rsquo;s original posts to see his actual real opinions in their full complexity." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/mstpan/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2015-09-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-09-08T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2015-09-08 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/mstpan/">mstpan quick reference</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>Last Christmas, the inimitable Matt Trout (mst) created an opinionated tour of
+CPAN where he recommended modules for some common problems.  I think its
+brilliant, useful, and entertaining and I&rsquo;ve decided to compile a high level
+overview all on one page in order to create a quick reference.</p>
+<p>I&rsquo;ve tried to distill his wisdom and wit down to a few words.  But I recommend
+clicking the section headers and following the links to Matt&rsquo;s original posts
+to see his actual real opinions in their full complexity.  This single page
+can&rsquo;t replace 16 great posts and he usually includes advice on the best way
+to use the module.  You won&rsquo;t want to miss that.</p>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="#webframeworks">Web Frameworks</a></li>
+<li><a href="#webdeployment">Web Deployment</a></li>
+<li><a href="#xml">XML</a></li>
+<li><a href="#html">HTML</a></li>
+<li><a href="#files">Files</a></li>
+<li><a href="#databases">Databases</a></li>
+<li><a href="#json">JSON</a></li>
+<li><a href="#async">Async</a></li>
+<li><a href="#librarydeployment">Library Deployment</a></li>
+<li><a href="#perlvmdeployment">Perl VM Deployment</a></li>
+<li><a href="#distributionbuilding">Distribution building</a></li>
+<li><a href="#objectorientation">Object orientation</a></li>
+<li><a href="#soap">SOAP</a></li>
+<li><a href="#exporting">Exporting</a></li>
+<li><a href="#email">Email</a></li>
+<li><a href="#logging">Logging</a></li>
+</ul>
+<h2><a name="webframeworks" href="http://shadow.cat/blog/matt-s-trout/mstpan-1">Web Frameworks</a></h2>
+<ul>
+<li><strong>CGI.pm (the CPAN module)</strong> - Run away</li>
+<li><strong>Catalyst</strong> - Venerable</li>
+<li><strong>Dancer</strong> - Solid and lightweight</li>
+<li><strong>Mojolicious</strong> - Shiny</li>
+<li><strong>Web::Simple</strong> - Low level</li>
+<li><strong>Plack</strong> - Awesome (but not a web framework)</li>
+</ul>
+<h2><a name="webdeployment" href="http://shadow.cat/blog/matt-s-trout/mstpan-2">Web Deployment</a></h2>
+<ul>
+<li><strong>mod_perl</strong> - Run away</li>
+<li><strong>CGI (the protocol)</strong> - Ok for some trivial things</li>
+<li><strong>FastCGI + unix sockets for zero downtime deploys</strong> - Yes</li>
+<li><strong>Apache + FastCgiExternalServer</strong> - Good</li>
+<li><strong>Nginx + Starman + Unix sockets</strong> - Good</li>
+<li><strong>Mojolicious + Hypnotoad</strong> - Good</li>
+<li><strong>PSGI Async</strong>
+<ul>
+<li><strong>Net::Async::HTTP::Server::PSGI</strong> if you like IO::Async</li>
+<li><strong>Twiggy</strong> if you like AnyEvent</li>
+</ul>
+</li>
+</ul>
+<h2><a name="xml" href="http://shadow.cat/blog/matt-s-trout/mstpan-3">XML</a></h2>
+<ul>
+<li><strong>XML::Simple</strong> - No</li>
+<li><strong>XML::Twig</strong> - Excellent whipuptitude</li>
+<li><strong>XPath</strong> - Not a CPAN module but you should learn it</li>
+<li><strong>XML::LibXML</strong> - Good</li>
+<li><strong>Template::Semantic</strong> - Good</li>
+<li><strong>XML::Toolkit</strong> - Good</li>
+<li><strong>XML::Rabbit</strong> - Nice</li>
+<li><strong>xmllint</strong> - Not a Perl module. But useful if you&rsquo;re XML file is made of &ldquo;old man wee and fail&rdquo;</li>
+</ul>
+<h2><a name="html" href="http://shadow.cat/blog/matt-s-trout/mstpan-4">HTML</a></h2>
+<ul>
+<li>Parsing HTML
+<ul>
+<li><strong>Regular expressions</strong> - Don&rsquo;t</li>
+<li><strong>HTML::TreeBuilder</strong> - Venerable</li>
+<li><strong>Mojo::DOM</strong> - Pleasant</li>
+<li><strong>XML::LibXML</strong> or <strong>XML::Twig</strong> - Ok but why</li>
+</ul>
+</li>
+<li>Generating HTML
+<ul>
+<li><strong>CGI.pm</strong> - Please don&rsquo;t</li>
+<li><strong>Template Toolkit</strong> - Venerable</li>
+<li><strong>Text::Xslate</strong> - Brilliant</li>
+<li><strong>HTML::Mason</strong> - Yes but no because embedded Perl</li>
+<li><strong>Mojo::Template</strong> - Yes but no because embedded Perl</li>
+<li><strong>HTML::Zoom</strong> - mst wrote it, mst doesn&rsquo;t hate it</li>
+</ul>
+</li>
+</ul>
+<h2><a name="files" href="http://shadow.cat/blog/matt-s-trout/mstpan-5">Files</a></h2>
+<ul>
+<li><strong>Files::Spec</strong> - Core, standard</li>
+<li><strong>Files::Spec::Functions</strong> - Use this instead of File::Spec</li>
+<li><strong>File::stat</strong> - Yes</li>
+<li><strong>autodie</strong> - Core, but &ldquo;a giant bag of crack balanced precariously atop .. an even bigger bag of tainted crack&rdquo;</li>
+<li><strong>File::Open</strong> - Better than autodie</li>
+<li><strong>File::Slurp</strong> - Avoid</li>
+<li><strong>Path::Tiny</strong> - Excellent</li>
+<li><strong>IO::All</strong> - Good if you want to be procedural and don&rsquo;t want OO</li>
+</ul>
+<h2><a name="databases" href="http://shadow.cat/blog/matt-s-trout/mstpan-6">Databases</a></h2>
+<ul>
+<li><strong>DBI</strong> - 99% of the time, just use these 2 methods and nothing else</li>
+</ul>
+<pre><code>
+    $dbh->do($sql, {}, @args);
+    my @array_of_hashrefs = @{$dbh->selectall_arrayref($self, { Slice => {} }, @args)};
+</code></pre>
+<ul>
+<li><strong>DBIx::Connector</strong> - You want it</li>
+<li><strong>Mojo::PG</strong> - Yes</li>
+<li><strong>DBIx::Class</strong> - Yes</li>
+<li><strong>DBIx::Class::Candy</strong> - Shiny</li>
+<li><strong>DBIx::Class::DeploymentHandler</strong> - Yes</li>
+<li><strong>DBIx::Class::Fixtures</strong> - Useful for testing</li>
+<li><strong>DBIx::Class::PassphraseColum</strong> - Yes please</li>
+</ul>
+<h2><a name="json" href="http://shadow.cat/blog/matt-s-trout/mstpan-7">JSON</a></h2>
+<ul>
+<li><strong>JSON</strong> - Yes but there are alternatives</li>
+<li><strong>JSON::PP</strong> - Pure perl, core, fatpacks</li>
+<li><strong>JSON::XS</strong> - Fast</li>
+<li><strong>Cpanel::JSON::XS</strong> - Faster</li>
+<li><strong>JSON::MaybeXS</strong> - Recommended</li>
+<li><strong>JSON::Diffable</strong> - Useful</li>
+<li><strong>Mojo::JSON</strong> - Really nice</li>
+</ul>
+<h2><a name="async" href="http://shadow.cat/blog/matt-s-trout/mstpan-8">Async</a></h2>
+<ul>
+<li>Don&rsquo;t</li>
+<li><strong>threads.pm</strong> - Don&rsquo;t.  Its slow.</li>
+<li><strong>POE</strong> - Good but weird UI.</li>
+<li><strong>MooseX::POE</strong> - Better</li>
+<li><strong>Reflex</strong> - Interesting</li>
+<li><strong>AnyEvent</strong> - Ok, but maintainer is difficult</li>
+<li><strong>IO::Async</strong> - Nice</li>
+<li><strong>Mojo::IOLoop</strong> - Nice</li>
+<li><strong>Promises</strong> - Neat but mst likes Future</li>
+<li><strong>curry</strong> - Useful</li>
+</ul>
+<h2><a name="librarydeployment" href="http://shadow.cat/blog/matt-s-trout/mstpan-9">Library deployment</a></h2>
+<ul>
+<li><strong>cpan as root</strong> - No</li>
+<li><strong>Vendor Packages</strong> - Ok</li>
+<li><strong>CPANPLUS</strong> - Out of favor</li>
+<li><strong>CPAN</strong> - Standard</li>
+<li><strong>cpanminus</strong> - Use this</li>
+<li><strong>FindBin</strong> - Good for git deploys, bad for dist deploys</li>
+<li><strong>local::lib</strong> - Yes</li>
+<li><strong>Carton</strong> - Yes</li>
+<li><strong>App::FatPacker</strong> - Yes</li>
+<li><strong>CPAN::Mini</strong> - Maximum underkill</li>
+<li><strong>Pinto</strong> - Maximum overkill</li>
+</ul>
+<h2><a name="perlvmdeployment" href="http://shadow.cat/blog/matt-s-trout/mstpan-10">Perl VM deployment</a></h2>
+<ul>
+<li><strong>System perl</strong> - Ok with local::lib</li>
+<li><strong>Manual compilation</strong> - Yes</li>
+<li><strong>perlbrew</strong> - Yes usually all the shims are more annoying than necessary</li>
+<li><strong>Perl::Build</strong> - Nice</li>
+<li><strong>plenv</strong> - Nice</li>
+<li><strong>Windows</strong> - Active State or Strawberry Perl</li>
+</ul>
+<h2><a name="distributionbuilding" href="http://shadow.cat/blog/matt-s-trout/mstpan-11">Distribution building</a></h2>
+<ul>
+<li><strong>ExtUtils::MakeMaker</strong> - Hated by everyone except people who like Makefiles.</li>
+<li><strong>Module::Build</strong> - No</li>
+<li><strong>Module::Install</strong> - &ldquo;a giant tower of crack&rdquo;</li>
+<li><strong>Module::Build::Tiny</strong> - Nice.  See also App::ModuleBuildTiny.</li>
+<li><strong>Dist::Zilla</strong> - Power.  Maximum overkill.</li>
+<li><strong>Dist::Milla</strong> - Sensible</li>
+<li><strong>Minilla</strong> - Great.  Maximum underkill.</li>
+</ul>
+<h2><a name="objectorientation" href="http://shadow.cat/blog/matt-s-trout/mstpan-12">Object orientation</a></h2>
+<ul>
+<li><strong>Moose</strong> - Awesome</li>
+<li><strong>Moo</strong> - Shiny</li>
+<li><strong>Mouse</strong> - Niche</li>
+<li><strong>Type::Tiny</strong> - Yes</li>
+<li><strong>Moops</strong> - Good</li>
+<li><strong>Throwable</strong> - Sensible</li>
+<li><strong>Safe::Isa</strong> - Might be useful</li>
+</ul>
+<h2><a name="soap" href="http://shadow.cat/blog/matt-s-trout/mstpan-13">SOAP</a></h2>
+<ul>
+<li><strong>SOAP::WSDL</strong> - Avoid</li>
+<li><strong>XML::Compile::SOAP</strong> - Insane and brilliant</li>
+<li><strong>Catalyst::Controller::SOAP</strong> - Least worst option</li>
+<li><strong>SOAP::Lite</strong> - Ancient and insane</li>
+</ul>
+<h2><a name="exporting" href="http://shadow.cat/blog/matt-s-trout/mstpan-14">Exporting</a></h2>
+<ul>
+<li><strong>Exporter</strong> - Sufficient</li>
+<li><strong>Sub::Exporter</strong> - Worth a look</li>
+<li><strong>Sub::Exporter::Progressive</strong> - Light</li>
+<li><strong>Moose::Exporter</strong> - Yes</li>
+<li><strong>Exporter::Tiny</strong> - Recommended</li>
+<li><strong>Exporter::Declare</strong> - Maximum overkill</li>
+<li><strong>namespace::(auto)clean</strong> - Useful</li>
+<li><strong>Import::Into</strong> - or Import::Base</li>
+</ul>
+<h2><a name="email" href="http://shadow.cat/blog/matt-s-trout/mstpan-15">Email</a></h2>
+<ul>
+<li><strong>Net::SMTP</strong> - Too low level</li>
+<li><strong>Email::Send</strong> - Usable</li>
+<li><strong>Email::Sender</strong> - Recommended</li>
+<li><strong>Email::Stuffer</strong> - mst favorite</li>
+<li><strong>Emailesque</strong> - mst favorite with sugar on top</li>
+<li><strong>Email::Mime</strong> - Standard</li>
+<li><strong>Email::Mime::Kit</strong> - Best answer for templating</li>
+<li><strong>Mail::Box</strong> - Brilliant and insane</li>
+<li><strong>Courriel</strong> - Elegant</li>
+</ul>
+<h2><a name="logging" href="http://shadow.cat/blog/matt-s-trout/mstpan-16">Logging</a></h2>
+<ul>
+<li><strong>warn()</strong> - Perfectly fine</li>
+<li><strong>Log::Dispatch</strong> - Nice</li>
+<li><strong>Log::Log4Pperl</strong> - Maximum overkill</li>
+<li><strong>Log::Any</strong> - Good</li>
+<li><strong>Log::Contextual</strong> - Nice</li>
+<li><strong>Message::Passing</strong> - Worth a look. Not quite logging.</li>
+</ul>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

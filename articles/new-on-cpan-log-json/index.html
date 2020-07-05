@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="I released Log::JSON v0.001 to CPAN today. Its a very simple JSON logger.
+The advantage of a JSON logger is that a human can open a mysterious new log file and quickly decipher the content because each piece of information is labeled. Using JSON also means that parsing the log file and reviving the data structures is trivial.
+Here is some example usage for you:
+use Log::JSON; my $logger = Log::JSON-&amp;gt;new( file =&amp;gt; &#39;/path/errorlog." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/new-on-cpan-log-json/" />
+
+
+    <title>
+        
+            New on CPAN - Log::JSON :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="New on CPAN - Log::JSON">
+<meta itemprop="description" content="I released Log::JSON v0.001 to CPAN today. Its a very simple JSON logger.
+The advantage of a JSON logger is that a human can open a mysterious new log file and quickly decipher the content because each piece of information is labeled. Using JSON also means that parsing the log file and reviving the data structures is trivial.
+Here is some example usage for you:
+use Log::JSON; my $logger = Log::JSON-&gt;new( file =&gt; &#39;/path/errorlog.">
+<meta itemprop="datePublished" content="2012-04-29T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2012-04-29T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="200">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="New on CPAN - Log::JSON"/>
+<meta name="twitter:description" content="I released Log::JSON v0.001 to CPAN today. Its a very simple JSON logger.
+The advantage of a JSON logger is that a human can open a mysterious new log file and quickly decipher the content because each piece of information is labeled. Using JSON also means that parsing the log file and reviving the data structures is trivial.
+Here is some example usage for you:
+use Log::JSON; my $logger = Log::JSON-&gt;new( file =&gt; &#39;/path/errorlog."/>
+
+
+
+    <meta property="og:title" content="New on CPAN - Log::JSON" />
+<meta property="og:description" content="I released Log::JSON v0.001 to CPAN today. Its a very simple JSON logger.
+The advantage of a JSON logger is that a human can open a mysterious new log file and quickly decipher the content because each piece of information is labeled. Using JSON also means that parsing the log file and reviving the data structures is trivial.
+Here is some example usage for you:
+use Log::JSON; my $logger = Log::JSON-&gt;new( file =&gt; &#39;/path/errorlog." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/new-on-cpan-log-json/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2012-04-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2012-04-29T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2012-04-29 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/new-on-cpan-log-json/">New on CPAN - Log::JSON</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>I released Log::JSON v0.001 to CPAN today.  Its a very simple JSON logger.</p>
+<p>The advantage of a JSON logger is that a human can open a mysterious new log
+file and quickly decipher the content because each piece of information is
+labeled.  Using JSON also means that parsing the log file and reviving the data
+structures is trivial.</p>
+<p>Here is some example usage for you:</p>
+<pre><code>use Log::JSON;
+my $logger = Log::JSON-&gt;new(
+    file            =&gt; '/path/errorlog.json', # required
+    date            =&gt; 1, # optional
+    remove_newlines =&gt; 1, # optional
+);
+$logger-&gt;log(a =&gt; 1, b =&gt; 2);
+# '/path/errorlog.json' now contains:
+# {&quot;__date&quot;:&quot;2010-03-28T23:15:52Z&quot;,&quot;a&quot;:1,&quot;b&quot;:1}
+</code></pre>
+<p>I wish I had written it as a Log::Dispatch plugin, and perhaps I&rsquo;ll get around
+to that sometime.</p>
+<p>One problem with using JSON is that there is a lot repetition and if your log
+file is a bajillion lines long, then that&rsquo;s going to be a big file.  Happily,
+file compression solves this problem very well.  And Vim and less handle
+compressed files on the fly so viewing the file is not inconvenient.  And now
+that I write this, I think some kind of compression feature may be nice for
+Log::JSON and pretty great for Log::Dispatch too.</p>
+<p>Log::JSON on github: <a href="https://github.com/kablamo/Log-JSON">https://github.com/kablamo/Log-JSON</a></p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

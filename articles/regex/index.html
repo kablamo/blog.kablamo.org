@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="When Perl&amp;rsquo;s regex engine evaluates a string, it moves from left to right, one letter at a time checking the match at each position. That position is called the current match position.
+Look around assertions allow you to match a specific pattern before or after the current match position without moving the match position.
+Look ahead assertions Look ahead assertions match the text after the current match position (without moving the match position)." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/regex/" />
+
+
+    <title>
+        
+            Look around assertions in Perl regular expressions :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Look around assertions in Perl regular expressions">
+<meta itemprop="description" content="When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one letter at a time checking the match at each position. That position is called the current match position.
+Look around assertions allow you to match a specific pattern before or after the current match position without moving the match position.
+Look ahead assertions Look ahead assertions match the text after the current match position (without moving the match position).">
+<meta itemprop="datePublished" content="2014-03-31T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2014-03-31T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="278">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Look around assertions in Perl regular expressions"/>
+<meta name="twitter:description" content="When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one letter at a time checking the match at each position. That position is called the current match position.
+Look around assertions allow you to match a specific pattern before or after the current match position without moving the match position.
+Look ahead assertions Look ahead assertions match the text after the current match position (without moving the match position)."/>
+
+
+
+    <meta property="og:title" content="Look around assertions in Perl regular expressions" />
+<meta property="og:description" content="When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one letter at a time checking the match at each position. That position is called the current match position.
+Look around assertions allow you to match a specific pattern before or after the current match position without moving the match position.
+Look ahead assertions Look ahead assertions match the text after the current match position (without moving the match position)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/regex/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2014-03-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2014-03-31T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2014-03-31 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/regex/">Look around assertions in Perl regular expressions</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>When Perl&rsquo;s regex engine evaluates a string, it moves from left to right, one
+letter at a time checking the match at each position.  That position is called
+the <em>current match position</em>.</p>
+<p>Look around assertions allow you to match a specific pattern before or after
+the current match position without moving the match position.</p>
+<h1 id="look-ahead-assertions">Look ahead assertions</h1>
+<p>Look ahead assertions match the text after the current match position
+(without moving the match position).  They look like <code>(?=pattern)</code>.</p>
+<pre><code>my $job = &quot;space cowboy&quot;;
+$job =~ /space (?=cow)/;    # matches
+$job =~ /space (?=cow)cow/; # also matches
+</code></pre>
+<h1 id="look-behind-assertions">Look behind assertions</h1>
+<p>Look behind assertions match the text before the current match position
+(without moving the match position).  They look like <code>(?&lt;=pattern)</code>.</p>
+<pre><code>my $job = &quot;space cowboy&quot;;
+$job =~ /(?&lt;=space) cowboy/;      # matches
+$job =~ /space(?&lt;=space) cowboy/; # also matches
+</code></pre>
+<h1 id="positive-and-negative-look-ahead-assertions">Positive and negative look ahead assertions</h1>
+<p><em>Positive</em> look ahead assertions are look ahead assertions which match when their
+subpattern matches. They look like <code>(?=pattern)</code>.</p>
+<pre><code>my $job = &quot;space cowboy&quot;;
+$job =~ /space (?=cowboy)/;   # matches
+</code></pre>
+<p><em>Negative</em> look ahead assertions are look ahead assertions which match when their
+subpattern fails. They look like <code>(?!pattern)</code>.</p>
+<pre><code>my $job = &quot;space cowboy&quot;;
+$job =~ /space (?!mooseboy)/;   # matches
+</code></pre>
+<h1 id="positive-and-negative-look-behind-assertions">Positive and negative look behind assertions</h1>
+<p>Positive look behind assertions are look behind assertions which match when their
+subpattern matches. They look like <code>(?&lt;=pattern)</code>.</p>
+<pre><code>my $job = &quot;space cowboy&quot;;
+$job =~ /(?&lt;=space) cowboy/;   # matches
+</code></pre>
+<p>Negative look behind assertions are look behind assertions which match when
+their subpattern fails. They look like <code>(?&lt;!pattern)</code>.</p>
+<pre><code>my $job = &quot;space cowboy&quot;;
+$job =~ /(?&lt;!earth) cowboy/;   # matches
+</code></pre>
+<p>For more details see <code>perldoc perlre</code>.  I also recommend the DuckDuckGo
+<a href="https://duckduckgo.com/?q=regex+cheat+sheet">regex cheat sheet</a>.</p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

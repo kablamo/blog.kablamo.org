@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>uncategorized on Kablamo</title>
+    <link>http://blog.kablamo.org/categories/uncategorized/</link>
+    <description>Recent content in uncategorized on Kablamo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Nov 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.kablamo.org/categories/uncategorized/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Vim plugin keybindings</title>
+      <link>http://blog.kablamo.org/articles/vim-plugin-keybindings/</link>
+      <pubDate>Sun, 26 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/vim-plugin-keybindings/</guid>
+      <description>I pick up all kinds of vim tricks and plugins but I can never remember all the shortcuts. I wrote up this quick reference to help myself memorize how to use these tools.
+Caveat: some of these keybindings are unique to my .vimrc.
+ table { margin-top: 0rem; } td { vertical-align : top; padding-left : .5em; padding-right : .5em; background : #999; color : #333; } th { text-align:left; background : #666; color : #ccc; white-space : nowrap; font-weight : normal; padding-left : .</description>
+    </item>
+    
+    <item>
+      <title>Introduction to online credit card processing - part 3</title>
+      <link>http://blog.kablamo.org/articles/cc-processors-3/</link>
+      <pubDate>Sat, 22 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/cc-processors-3/</guid>
+      <description>I am learning about online credit card processing. Part 1 introduced a number of basic definitions. Part 2 discussed the difference between traditional gateways and the newer full stack gateways.
+In Part 3, I am exploring some of the new &amp;ldquo;full stack&amp;rdquo; gateways which are a bit more developer friendly and listing some key facts about each one. All of these provide a merchant account, gateway, payment processor etc and handle all that complexity for you.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to online credit card processing - part 2</title>
+      <link>http://blog.kablamo.org/articles/cc-processors-2/</link>
+      <pubDate>Fri, 21 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/cc-processors-2/</guid>
+      <description>I am learning about online credit card processing. Part 1 introduced a number of basic definitions.
+The number of online payments is going to grow. Only 6% of credit card transactions are currently done online. With so much at stake, there are hundreds of payment gateways who provide a variety of services. But I have chosen to divide them into two categories.
+First there are traditional gateways who charge a monthly fee (in addition to a variety of other fees) and often you need to obtain a merchant account on your own which also has various fees associated with it.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to online credit card processing - part 1</title>
+      <link>http://blog.kablamo.org/articles/cc-processors-1/</link>
+      <pubDate>Tue, 18 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/cc-processors-1/</guid>
+      <description>I want to understand credit card processing. So I will probably write a few articles about it. This article has some fundamental definitions.
+acquiring bank An acquiring bank is a bank which processes card payments on behalf of a merchant. The term &amp;lsquo;acquirer&amp;rsquo; indicates the bank accepts (or acquires) credit card payments from card issuing banks within a credit card association. Acquirers take all the risk and bear the burdern of most of the regulation.</description>
+    </item>
+    
+    <item>
+      <title>How to find and restore deleted files with git</title>
+      <link>http://blog.kablamo.org/articles/git-restore/</link>
+      <pubDate>Sun, 08 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/git-restore/</guid>
+      <description>Don&amp;rsquo;t be afraid to delete files from your git repository. You can get restore them. You can even search for a string in a deleted file. Here is how to find a deleted file and its commit:
+git log --diff-filter=D --summary # all deleted files ever git log --diff-filter=D --summary . # all deleted files in cwd git log --diff-filter=D --author=Batman --summary # all files deleted by Batman  How to restore a deleted file:</description>
+    </item>
+    
+    <item>
+      <title>Tmux reloaded</title>
+      <link>http://blog.kablamo.org/articles/tmux-reloaded/</link>
+      <pubDate>Wed, 27 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/tmux-reloaded/</guid>
+      <description>To reload your tmux configuration without restarting the server, add this to your ~/.tmux.conf file:
+# reload the config file without restarting the tmux server bind R source-file ~/.tmux.conf \; display-message &amp;quot;Config reloaded&amp;quot;  Notice thats a capital R not a lowercase r. I keep forgetting that.</description>
+    </item>
+    
+    <item>
+      <title>Configure tmux to give you status updates about anything</title>
+      <link>http://blog.kablamo.org/articles/tmux-status-updates/</link>
+      <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/tmux-status-updates/</guid>
+      <description>I use and love OSX growl and Ubuntu notify style desktop notifications. They are gorgeous. But they are also distracting and after a few vibrant and whimsical but fleeting seconds they are gone forever and you have no way to get them back.
+A more useful (and less glorious) way to receive notifications is in your tmux status bar. tmux is the brilliant successor to the venerable screen which hasn&amp;rsquo;t been actively developed for quite a while.</description>
+    </item>
+    
+    <item>
+      <title>Learning Ruby with online university classes</title>
+      <link>http://blog.kablamo.org/articles/learning-ruby/</link>
+      <pubDate>Tue, 19 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/learning-ruby/</guid>
+      <description>I just completed UC Berkeley&amp;rsquo;s Software as a Service class (via edX.com). I had a great experience and highly recommend it.
+The class is a tour of all the tools Ruby developers use to create and deploy websites. It assumes you already know how to program at a fairly high level but not necessarily in Ruby. I have no plans to stop writing Perl code (which I love). I just wanted to broaden my horizons, have some fun, and increase my luck surface area.</description>
+    </item>
+    
+    <item>
+      <title>Down a rabbit hole - Docker</title>
+      <link>http://blog.kablamo.org/articles/docker/</link>
+      <pubDate>Wed, 13 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/docker/</guid>
+      <description>I have been in a rabbit hole for the last week. I started looking at Docker.
+Its a really interesting project that all the hosting providers seem to be moving towards. Its helpful at first to think of Docker as a really fast and small virtual machine. You can put an operating system in a virtual machine, setup all the dependencies and permissions, and then configure and install your app. Its encapsulates your web app and makes it easy to move around.</description>
+    </item>
+    
+    <item>
+      <title>My contribution to the Linux ate my RAM problem</title>
+      <link>http://blog.kablamo.org/articles/linux_ate_my_ram/</link>
+      <pubDate>Tue, 12 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/linux_ate_my_ram/</guid>
+      <description>I can never remember how to know how much free memory I have.
+The Linux kernel claims most of the operating system&amp;rsquo;s memory. That doesn&amp;rsquo;t mean the operating system is out of memory. It means the kernel has claimed it and is managing it. The problem is that the Linux kernel defines &amp;lsquo;free&amp;rsquo; memory differently than any reasonable user. There are excellent shiny reasons for that, but as a user I don&amp;rsquo;t really care.</description>
+    </item>
+    
+  </channel>
+</rss>

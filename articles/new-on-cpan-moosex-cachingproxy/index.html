@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Last week I released MooseX::CachingProxy to CPAN.
+Its a small module that intercepts requests from your LWP based application. Those requests are relayed on to the intended server unless they already exist in the cache.
+To toggle on and off the caching proxy, MooseX::CachingProxy provides the attribute &amp;lsquo;caching_proxy&amp;rsquo;. Here is a quick demo:
+package MyApp; use Moose; use WWW::Mechanize; # or any LWP based library with &#39;MooseX::CachingProxy&#39;; sub url { &#39;http://example." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/new-on-cpan-moosex-cachingproxy/" />
+
+
+    <title>
+        
+            New on CPAN - MooseX::CachingProxy :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="New on CPAN - MooseX::CachingProxy">
+<meta itemprop="description" content="Last week I released MooseX::CachingProxy to CPAN.
+Its a small module that intercepts requests from your LWP based application. Those requests are relayed on to the intended server unless they already exist in the cache.
+To toggle on and off the caching proxy, MooseX::CachingProxy provides the attribute &lsquo;caching_proxy&rsquo;. Here is a quick demo:
+package MyApp; use Moose; use WWW::Mechanize; # or any LWP based library with &#39;MooseX::CachingProxy&#39;; sub url { &#39;http://example.">
+<meta itemprop="datePublished" content="2012-05-10T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2012-05-10T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="103">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="New on CPAN - MooseX::CachingProxy"/>
+<meta name="twitter:description" content="Last week I released MooseX::CachingProxy to CPAN.
+Its a small module that intercepts requests from your LWP based application. Those requests are relayed on to the intended server unless they already exist in the cache.
+To toggle on and off the caching proxy, MooseX::CachingProxy provides the attribute &lsquo;caching_proxy&rsquo;. Here is a quick demo:
+package MyApp; use Moose; use WWW::Mechanize; # or any LWP based library with &#39;MooseX::CachingProxy&#39;; sub url { &#39;http://example."/>
+
+
+
+    <meta property="og:title" content="New on CPAN - MooseX::CachingProxy" />
+<meta property="og:description" content="Last week I released MooseX::CachingProxy to CPAN.
+Its a small module that intercepts requests from your LWP based application. Those requests are relayed on to the intended server unless they already exist in the cache.
+To toggle on and off the caching proxy, MooseX::CachingProxy provides the attribute &lsquo;caching_proxy&rsquo;. Here is a quick demo:
+package MyApp; use Moose; use WWW::Mechanize; # or any LWP based library with &#39;MooseX::CachingProxy&#39;; sub url { &#39;http://example." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/new-on-cpan-moosex-cachingproxy/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2012-05-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2012-05-10T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2012-05-10 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/new-on-cpan-moosex-cachingproxy/">New on CPAN - MooseX::CachingProxy</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>Last week I released <a href="https://metacpan.org/module/MooseX::CachingProxy">MooseX::CachingProxy</a> to CPAN.</p>
+<p>Its a small module that intercepts requests from your LWP based application.
+Those requests are relayed on to the intended server unless they already exist
+in the cache.</p>
+<p>To toggle on and off the caching proxy, MooseX::CachingProxy provides the
+attribute &lsquo;caching_proxy&rsquo;.  Here is a quick demo:</p>
+<pre><code>package MyApp;
+use Moose;
+use WWW::Mechanize; # or any LWP based library
+with 'MooseX::CachingProxy';
+
+sub url { 'http://example.com' } # required by MooseX::CachingProxy
+
+sub download { 
+    my $self = shift;
+    $self-&gt;start_caching_proxy;
+    return WWW::Mechanize-&gt;new()-&gt;get($self-&gt;url . '/foo'); 
+}
+</code></pre>
+<p>Under the covers, its a tiny Plack application that mashes up
+<a href="https://metacpan.org/module/Plack::Middleware::Cache">Plack::Middleware::Cache</a> and <a href="https://metacpan.org/module/Plack::App::Proxy">Plack::App::Proxy</a>.</p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

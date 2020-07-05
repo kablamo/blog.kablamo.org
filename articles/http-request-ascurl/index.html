@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Today, on a whim, I released a module called HTTP::Request::AsCurl to CPAN. It converts an HTTP::Request object to a curl command.
+use HTTP::Request::Common; use HTTP::Request::AsCurl; my $request = POST(&#39;api.earth.defense/weapon1&#39;, { target =&amp;gt; &#39;mothership&#39;, when =&amp;gt; &#39;now&#39; }); say join &amp;quot;\n&amp;quot;, $request-&amp;gt;as_curl; # curl --dump-header - -XPOST &amp;quot;api.earth.defense/weapon1&amp;quot; \ # --data &#39;target=mothership&#39; \ # --data &#39;when=now&#39;  It works by injecting the as_curl() method into the HTTP::Request namespace. This must be a bad idea and probably not a great bit of code to rely on in a production environment." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/http-request-ascurl/" />
+
+
+    <title>
+        
+            HTTP::Request::AsCurl :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="HTTP::Request::AsCurl">
+<meta itemprop="description" content="Today, on a whim, I released a module called HTTP::Request::AsCurl to CPAN. It converts an HTTP::Request object to a curl command.
+use HTTP::Request::Common; use HTTP::Request::AsCurl; my $request = POST(&#39;api.earth.defense/weapon1&#39;, { target =&gt; &#39;mothership&#39;, when =&gt; &#39;now&#39; }); say join &quot;\n&quot;, $request-&gt;as_curl; # curl --dump-header - -XPOST &quot;api.earth.defense/weapon1&quot; \ # --data &#39;target=mothership&#39; \ # --data &#39;when=now&#39;  It works by injecting the as_curl() method into the HTTP::Request namespace. This must be a bad idea and probably not a great bit of code to rely on in a production environment.">
+<meta itemprop="datePublished" content="2014-05-27T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2014-05-27T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="264">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="HTTP::Request::AsCurl"/>
+<meta name="twitter:description" content="Today, on a whim, I released a module called HTTP::Request::AsCurl to CPAN. It converts an HTTP::Request object to a curl command.
+use HTTP::Request::Common; use HTTP::Request::AsCurl; my $request = POST(&#39;api.earth.defense/weapon1&#39;, { target =&gt; &#39;mothership&#39;, when =&gt; &#39;now&#39; }); say join &quot;\n&quot;, $request-&gt;as_curl; # curl --dump-header - -XPOST &quot;api.earth.defense/weapon1&quot; \ # --data &#39;target=mothership&#39; \ # --data &#39;when=now&#39;  It works by injecting the as_curl() method into the HTTP::Request namespace. This must be a bad idea and probably not a great bit of code to rely on in a production environment."/>
+
+
+
+    <meta property="og:title" content="HTTP::Request::AsCurl" />
+<meta property="og:description" content="Today, on a whim, I released a module called HTTP::Request::AsCurl to CPAN. It converts an HTTP::Request object to a curl command.
+use HTTP::Request::Common; use HTTP::Request::AsCurl; my $request = POST(&#39;api.earth.defense/weapon1&#39;, { target =&gt; &#39;mothership&#39;, when =&gt; &#39;now&#39; }); say join &quot;\n&quot;, $request-&gt;as_curl; # curl --dump-header - -XPOST &quot;api.earth.defense/weapon1&quot; \ # --data &#39;target=mothership&#39; \ # --data &#39;when=now&#39;  It works by injecting the as_curl() method into the HTTP::Request namespace. This must be a bad idea and probably not a great bit of code to rely on in a production environment." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/http-request-ascurl/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2014-05-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2014-05-27T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="[perl code]" />
+
+
+
+    <meta property="article:published_time" content="2014-05-27 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/http-request-ascurl/">HTTP::Request::AsCurl</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>Today, on a whim, I released a module called
+<a href="https://metacpan.org/pod/HTTP::Request::AsCurl">HTTP::Request::AsCurl</a> to
+CPAN.  It converts an HTTP::Request object to a curl command.</p>
+<pre><code>use HTTP::Request::Common;
+use HTTP::Request::AsCurl;
+
+my $request = POST('api.earth.defense/weapon1', { 
+    target =&gt; 'mothership', 
+    when   =&gt; 'now' 
+});
+
+say join &quot;\n&quot;, $request-&gt;as_curl;
+# curl --dump-header - -XPOST &quot;api.earth.defense/weapon1&quot; \
+# --data 'target=mothership' \
+# --data 'when=now'
+</code></pre>
+<p>It works by injecting the <code>as_curl()</code> method into the HTTP::Request namespace.
+This must be a bad idea and probably not a great bit of code to rely on in a
+production environment.  But it is pretty convenient syntax for debugging a
+REST API and I couldn&rsquo;t resist.  Thoughts, suggestions, criticism?</p>
+<h1 id="---update-2014-06-01---">&ndash; UPDATE (2014-06-01) &ndash;</h1>
+<p>I released a new version which has a totally different user interface.  Here is
+the new synopsis:</p>
+<pre><code>use HTTP::Request::Common;
+use HTTP::Request::AsCurl qw/as_curl/;
+
+my $request = POST('api.earth.defense/weapon1', { 
+    target =&gt; 'mothership', 
+    when   =&gt; 'now' 
+});
+
+system as_curl($request);
+
+print as_curl($request, pretty =&gt; 1, newline =&gt; &quot;\n&quot;, shell =&gt; 'bourne');
+# curl \
+# --request POST api.earth.defense/weapon1 \
+# --dump-header - \
+# --data target=mothership \
+# --data when=now
+</code></pre>
+<p>There are 2 major changes.</p>
+<ol>
+<li>I&rsquo;m no longer doing namespace injection.  I really liked the syntax, but it
+was problematic and unnecessary.</li>
+<li>The old version returned a formatted array of strings which was
+not very useful.  The problem with a formatted string (as was helpfully
+pointed out to me) is you have worry about stuff like newlines which
+depends on the system you are targeting and shell escaping which depends on
+the shell you are targeting.  This is a can of worms.  Hopefully this new
+interface is an improvement.</li>
+</ol>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

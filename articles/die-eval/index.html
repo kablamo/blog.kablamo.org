@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="The standard Perl syntax for handling exceptions (die/eval) is quirky and has some pitfalls that are easy to tumble into. However its pretty common so you will need to understand it.
+Alternate
+Solution Several modules exist that add try/catch syntax to Perl. As always there are some trade offs. See Handling exceptions with try/catch for details.   Throwing exceptions To throw an exception call die(). Other languages call it throw(), but in Perl its called die()." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/die-eval/" />
+
+
+    <title>
+        
+            Handling exceptions with die/eval :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Handling exceptions with die/eval">
+<meta itemprop="description" content="The standard Perl syntax for handling exceptions (die/eval) is quirky and has some pitfalls that are easy to tumble into. However its pretty common so you will need to understand it.
+Alternate
+Solution Several modules exist that add try/catch syntax to Perl. As always there are some trade offs. See Handling exceptions with try/catch for details.   Throwing exceptions To throw an exception call die(). Other languages call it throw(), but in Perl its called die().">
+<meta itemprop="datePublished" content="2018-03-20T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-03-20T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="467">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Handling exceptions with die/eval"/>
+<meta name="twitter:description" content="The standard Perl syntax for handling exceptions (die/eval) is quirky and has some pitfalls that are easy to tumble into. However its pretty common so you will need to understand it.
+Alternate
+Solution Several modules exist that add try/catch syntax to Perl. As always there are some trade offs. See Handling exceptions with try/catch for details.   Throwing exceptions To throw an exception call die(). Other languages call it throw(), but in Perl its called die()."/>
+
+
+
+    <meta property="og:title" content="Handling exceptions with die/eval" />
+<meta property="og:description" content="The standard Perl syntax for handling exceptions (die/eval) is quirky and has some pitfalls that are easy to tumble into. However its pretty common so you will need to understand it.
+Alternate
+Solution Several modules exist that add try/catch syntax to Perl. As always there are some trade offs. See Handling exceptions with try/catch for details.   Throwing exceptions To throw an exception call die(). Other languages call it throw(), but in Perl its called die()." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/die-eval/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2018-03-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-03-20T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2018-03-20 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/die-eval/">Handling exceptions with die/eval</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>The standard Perl syntax for handling exceptions (die/eval) is quirky and has
+some pitfalls that are easy to tumble into.  However its pretty common so
+you will need to understand it.</p>
+<div class="tip">
+    <div class="tip-title">Alternate<br>Solution</div>
+    <div class="tip-content" style="margin-left:6rem">
+        Several modules exist that add try/catch syntax to Perl. 
+        As always there are some trade offs.  See <a
+href="https://mvp.kablamo.org/essentials/try-catch/"> Handling
+exceptions with try/catch</a> for details.
+    </div>
+</div>
+<h1 id="throwing-exceptions">Throwing exceptions</h1>
+<p>To throw an exception call <code>die()</code>.  Other languages call it <code>throw()</code>, but in
+Perl its called <code>die()</code>.  If the exception is not caught, an error message is
+displayed to STDERR and the process exits with a non-zero value.</p>
+<pre><code>die &quot;Something bad happened&quot;;
+# prints &quot;Something bad happened at line 123.&quot; 
+# and then the process exits;
+</code></pre>
+<h1 id="catching-exceptions">Catching exceptions</h1>
+<p>To catch an exception, use <code>eval()</code>. Other languages call it <code>try()</code> but in
+Perl its called <code>eval()</code> and its a little different.  <code>eval()</code> parses,
+compiles, and evaluates a block of code at compile time and catches any
+exceptions that are raised at runtime.  The exception is placed in the global
+variable <code>$@</code>.</p>
+<pre><code>eval { die &quot;Something bad happened&quot; }; # try (and catch)
+warn $@ if $@;                         # handle exception
+</code></pre>
+<h1 id="exceptions-as-objects">Exceptions as objects</h1>
+<p>Exceptions are usually strings, but you can throw objects too.</p>
+<pre><code>eval {
+    die My::Exception-&gt;new(
+        error    =&gt; 'Something bad happened',
+        request  =&gt; $request,
+        response =&gt; $response,
+    );
+};
+warn $@-&gt;error if $@;
+</code></pre>
+<h1 id="pitfalls">Pitfalls</h1>
+<p><em>1. <code>$@</code> is a global variable</em></p>
+<p>If your exception handling code calls <code>eval()</code>, <code>$@</code> will get clobbered.  This
+is easy to forget.  Here is one way to avoid it:</p>
+<pre><code>eval { die &quot;something bad&quot; };
+if ($@) {
+    my $error = $@;
+    disconnect_from_the_database(); # calls eval()
+    warn $error;
+}
+</code></pre>
+<p>If you are a module author and want to be polite and not modify <code>$@</code> globally
+you need to jump through hoops like this:</p>
+<pre><code>my ($error1, $error2);
+{
+    local $@;
+    unless (eval { ...; return 1 }) {
+        $error1 = 1;
+        $error2 = $@;
+    }
+}
+if ($error1) {
+    # handle exception
+}
+</code></pre>
+<p><em>2. Exception objects that evaluate as false</em></p>
+<p>You can <a href="https://metacpan.org/pod/overload">overload</a> Perl operators.  For
+example, you could have an exception object evaluate to &ldquo;error&rdquo; in string
+context.  You could also have an exception object evaluate to -1 in string
+context.</p>
+<p>This would cause mysterious problems for most people because the common
+idiom <code>handle_exception() if $@</code> will silently fail and the exception won&rsquo;t be
+handled.</p>
+<p>One solution is to use a safer but more verbose idiom everywhere:</p>
+<pre><code>unless ( eval { try_something_risky(); return 1 } ) {
+    handle_exception();
+}
+</code></pre>
+<p><em>3. <code>eval</code> blocks behave more like anonymous subroutines than if blocks.</em></p>
+<p>For example:</p>
+<ul>
+<li>A <code>return</code> statement will exit the <code>eval</code> block &ndash; not the containing function.</li>
+<li>Loop control statements like <code>redo</code>, <code>next</code>, and <code>last</code> only work in the context of whats inside the <code>eval</code> block.</li>
+</ul>
+<h1 id="see-also">See also</h1>
+<p>For more info read the documentation for
+<a href="http://perldoc.perl.org/functions/die.html">die()</a> and
+<a href="http://perldoc.perl.org/functions/eval.html">eval()</a></p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

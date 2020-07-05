@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="To explain how salt and pepper work in encryption, I will walk through a few scenarios.
+No salt Summary for the impatient: Using no salt means an attacker doesn&amp;rsquo;t need to generate a rainbow table because they can reuse an existing one.
+If an attacker obtains my database of encrypted passwords it will be very time consuming to brute force them. However there exist pre-computed tables of encrypted values of thousands of commonly used passwords." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/authen-passphrase/" />
+
+
+    <title>
+        
+            Salt and pepper - How to encrypt database passwords :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Salt and pepper - How to encrypt database passwords">
+<meta itemprop="description" content="To explain how salt and pepper work in encryption, I will walk through a few scenarios.
+No salt Summary for the impatient: Using no salt means an attacker doesn&rsquo;t need to generate a rainbow table because they can reuse an existing one.
+If an attacker obtains my database of encrypted passwords it will be very time consuming to brute force them. However there exist pre-computed tables of encrypted values of thousands of commonly used passwords.">
+<meta itemprop="datePublished" content="2013-12-18T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2013-12-18T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1005">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Salt and pepper - How to encrypt database passwords"/>
+<meta name="twitter:description" content="To explain how salt and pepper work in encryption, I will walk through a few scenarios.
+No salt Summary for the impatient: Using no salt means an attacker doesn&rsquo;t need to generate a rainbow table because they can reuse an existing one.
+If an attacker obtains my database of encrypted passwords it will be very time consuming to brute force them. However there exist pre-computed tables of encrypted values of thousands of commonly used passwords."/>
+
+
+
+    <meta property="og:title" content="Salt and pepper - How to encrypt database passwords" />
+<meta property="og:description" content="To explain how salt and pepper work in encryption, I will walk through a few scenarios.
+No salt Summary for the impatient: Using no salt means an attacker doesn&rsquo;t need to generate a rainbow table because they can reuse an existing one.
+If an attacker obtains my database of encrypted passwords it will be very time consuming to brute force them. However there exist pre-computed tables of encrypted values of thousands of commonly used passwords." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/authen-passphrase/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2013-12-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-12-18T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2013-12-18 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/authen-passphrase/">Salt and pepper - How to encrypt database passwords</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>To explain how salt and pepper work in encryption, I will walk through a few
+scenarios.</p>
+<h1 id="no-salt">No salt</h1>
+<p><strong>Summary for the impatient:</strong>  <em>Using no salt means an attacker doesn&rsquo;t need
+to generate a rainbow table because they can reuse an existing one.</em></p>
+<p>If an attacker obtains my database of encrypted passwords it will be very time
+consuming to brute force them.  However there exist pre-computed tables of
+encrypted values of thousands of commonly used passwords.  These tables are called
+rainbow tables.  It is computationally inexpensive to match the encrypted
+values in a rainbow table with the encrypted values in my database.</p>
+<h1 id="one-salt">One salt</h1>
+<p><strong>Summary for the impatient:</strong>  <em>Using the same salt for all your passwords
+means an attacker must generate 1 rainbow table.</em></p>
+<p>Salt is data used as an additional input to the algorthim that encrypts a
+password.  If I use a salt when I encrypt a password the resulting output will
+be different from someone who did not use the same salt.  That means my
+attacker cannot reuse an existing rainbow table.  They must generate a new one
+using the same salt I used.</p>
+<p>Note that salt is usually stored as plain text in the database with the
+encrypted passwords.  So the attacker usually has access to the salt.  Even so,
+I have successfully made the attack more expensive.</p>
+<h1 id="a-random-salt-per-password">A random salt per password</h1>
+<p><strong>Summary for the impatient:</strong>  <em>Using a random salt for each password means an
+attacker must generate 1 rainbow table per password.</em></p>
+<p>Instead of using a single salt for the entire database I can use a different
+(random) salt for each user&rsquo;s password.  This means the attacker must generate
+a set of rainbow tables for each password which is even more expensive.</p>
+<p>Note that I also need to store the salt for each password I have generated.
+This is a pain to do manually.  Happily some clever person came up with RFC
+2307 which suggests a much simpler solution.</p>
+<p>Instead of storing the just the encrypted password in the password column, store
+a string which concatenates the salt and the encrypted password.  This may not
+sound easier.  It implies the need to parse and concatenate strings.  However
+this is handled for me by the encryption libraries so its 100% pain free.  Lets
+see an example.</p>
+<p>To encrypt the plaintext string &lsquo;pie&rsquo; use the following Perl code</p>
+<pre><code>my $blowfish = Authen::Passphrase::BlowfishCrypt-&gt;new(
+    passphrase  =&gt; 'pie',
+    salt_random =&gt; 1,
+    cost        =&gt; 16,
+);
+
+say $blowfish-&gt;as_rfc2307; 
+# the output will look like this:
+# {CRYPT}$2a$14$sS80d1JlF3oR6Q4UHT.9w.DIXnV0/dLQMoVBsOp2gMRT65bWvP0P2
+</code></pre>
+<p>That crazy <em>{CRYPT}$2a$blarblar</em> mumbo jumbo is what we will save to the db in the password
+column.  However if I know what to look for, I can see the mumbo jumbo is actually
+several things smushed together:</p>
+<pre><code>{CRYPT} $ 2a $ 16 $ sS80d1JlF3oR6Q4UHT.9w.DIXnV0/dLQMoVBsOp2gMRT65bWvP0P2
+</code></pre>
+<ul>
+<li><strong>{CRYPT}</strong> - This is the scheme identifier.  It indicates which scheme is being used
+so I know how to parse the rest of the string.</li>
+<li><strong>$</strong> - These are field separators</li>
+<li><strong>2a</strong> - A version number for this scheme</li>
+<li><strong>16</strong> - The cost</li>
+<li>Then there is the <strong>salt</strong> (22 base 64 digits &ndash; plain text)</li>
+<li>Followed by the <strong>encrypted password</strong> (31 base 64 digits)</li>
+</ul>
+<p>To check if a user has submitted a valid <code>$password</code>  use the following code</p>
+<pre><code>my $secret   = ''{CRYPT}$2a$16$sS80d1JlF3oR6Q4UHT.9w.DIXnV0/dLQMoVBsOp2gMRT65bWvP0P2';
+my $blowfish = Authen::Passphrase-&gt;from_rfc2307($secret);
+
+if ($blowfish-&gt;match($password)) {
+    say &quot;You may enter&quot;;
+}
+else {
+    say &quot;You did not say the magic word&quot;;
+}
+</code></pre>
+<p>Of course we want to build this into our ORM so the Authen::Passphrase objects
+are inflated and deflated for us.  Here is what that looks like in a DBIx
+Result class:</p>
+<pre><code>__PACKAGE__-&gt;load_components(qw/FilterColumn/);
+__PACKAGE__-&gt;filter_column( password =&gt; {
+    filter_to_storage   =&gt; sub { $_[1]-&gt;as_rfc2307() },                      # deflate
+    filter_from_storage =&gt; sub { Authen::Passphrase-&gt;from_rfc2307($_[1]) },  # inflate
+});
+</code></pre>
+<p>But I only showed you that so you would understand what
+DBIx::Class::InflateColumn::Authen::Passphrase does under the covers.  I use
+that because it makes my code simpler:</p>
+<pre><code>__PACKAGE__-&gt;load_components(qw/InflateColumn::Authen::Passphrase/);
+__PACKAGE__-&gt;add_columns(
+    ...,
+    password =&gt; {
+        data_type          =&gt; 'text',
+        inflate_passphrase =&gt; 'rfc2307',
+    },
+    ...,
+);
+</code></pre>
+<p>This is how I encrypt passwords on <a href="https://networthify.com">networthify.com</a>
+and <a href="http://iijo.org">iijo.org</a>.</p>
+<h1 id="adding-pepper">Adding pepper</h1>
+<p><strong>Summary for the impatient:</strong>  <em>Using pepper means an attacker must generate
+many rainbow tables per password. But few people use pepper and its
+controversial.</em></p>
+<p>Pepper is the same as salt except that I don&rsquo;t save the value anywhere.  Lets
+say I choose an 8 bit value for my pepper.  That means there are 256
+possible values.  If I don&rsquo;t save that value anywhere then when a user logs
+in I will need to try up to 256 values to see if the user has the right
+password.  However it means my attacker will need to generate up to 256
+rainbow tables for each password.</p>
+<p>One big problem is that trying 256 possible values is going to take me about 4
+minutes on average hardware.</p>
+<p>Even if I ignore that issue, this option is controversial and my understanding
+is that few people do it.  It is generally accepted that messing about with
+salt and pepper should be left to the professionals who are writing the
+encryption libraries.  Pepper is not supported by Authen::Passphrase.</p>
+<h1 id="caveats">Caveats</h1>
+<p>Salting is done to make rainbow tables inneffective.  For various reasons
+crackers rarely use rainbow tables anymore.  Instead they use sophisticated
+brute force algorithms which combine dictionary attacks with databases of known
+or commonly used passwords.  These kinds of brute force attacks can often crack
+battery-horse-staple <a href="http://xkcd.com/936/">XKCD</a> style passwords even if they
+are very long.  Password are not secure unless they are very long <em>and</em>
+very random.</p>
+<p>And there is more bad news.  While salting makes it harder to crack all the
+passwords in the database, cracking a single targeted password is often not
+computationally hard.  A single completely random 8 character password can be
+cracked with brute force in 10 days.</p>
+<p>The only way to protect your users is to require very long and very random
+passwords.  Make sure your website requires a minimum password length of 8
+characters or more.</p>
+<h4 id="sources">Sources</h4>
+<ul>
+<li><a href="http://www.wired.co.uk/news/archive/2013-05/28/password-cracking/viewall">Anatomy of a hack: even your &lsquo;complicated&rsquo; password is easy to crack</a> (Wired magazine)</li>
+<li><a href="https://metacpan.org/pod/Authen::Passphrase">Authen::Passphrase</a></li>
+<li><a href="https://metacpan.org/pod/Authen::Passphrase::BlowfishCrypt">Authen::Passphrase::BlowfishCrypt</a></li>
+<li><a href="https://metacpan.org/pod/DBIx::Class::InflateColumn::Authen::Passphrase">DBIx::Class::InflateColumn::Authen::Passphrase</a></li>
+<li><a href="http://blog.afoolishmanifesto.com/archives/1910">frew</a></li>
+<li><a href="http://crypto.stackexchange.com/questions/1776/can-you-help-me-understand-what-a-cryptographic-salt-is">crypto.stackexchange.com</a></li>
+<li><a href="http://security.stackexchange.com/questions/3272/password-hashing-add-salt-pepper-or-is-salt-enough">security.stackexchange.com</a></li>
+</ul>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="There seem to be quite a few Perl people learning Chinese so maybe this will be relevant here.
+I created IIJO which is a Perl powered website that does 3 sided flashcards (Chinese, English, and Pinyin).
+The main advantage IIJO has over Anki and other flashcard sites is that you can pick your flashcards from a dictionary so you don&amp;rsquo;t have to type all that stuff in yourself. It allows you to share word lists with others and the built in dictionary means that you don&amp;rsquo;t need to worry about the accuracy and completeness of other people who share wordlists." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/chinese-flashcards/" />
+
+
+    <title>
+        
+            Chinese zombie flashcards on GitHub (Catalyst &amp; Perl) :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Chinese zombie flashcards on GitHub (Catalyst &amp; Perl)">
+<meta itemprop="description" content="There seem to be quite a few Perl people learning Chinese so maybe this will be relevant here.
+I created IIJO which is a Perl powered website that does 3 sided flashcards (Chinese, English, and Pinyin).
+The main advantage IIJO has over Anki and other flashcard sites is that you can pick your flashcards from a dictionary so you don&rsquo;t have to type all that stuff in yourself. It allows you to share word lists with others and the built in dictionary means that you don&rsquo;t need to worry about the accuracy and completeness of other people who share wordlists.">
+<meta itemprop="datePublished" content="2013-02-28T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2013-02-28T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="387">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Chinese zombie flashcards on GitHub (Catalyst &amp; Perl)"/>
+<meta name="twitter:description" content="There seem to be quite a few Perl people learning Chinese so maybe this will be relevant here.
+I created IIJO which is a Perl powered website that does 3 sided flashcards (Chinese, English, and Pinyin).
+The main advantage IIJO has over Anki and other flashcard sites is that you can pick your flashcards from a dictionary so you don&rsquo;t have to type all that stuff in yourself. It allows you to share word lists with others and the built in dictionary means that you don&rsquo;t need to worry about the accuracy and completeness of other people who share wordlists."/>
+
+
+
+    <meta property="og:title" content="Chinese zombie flashcards on GitHub (Catalyst &amp; Perl)" />
+<meta property="og:description" content="There seem to be quite a few Perl people learning Chinese so maybe this will be relevant here.
+I created IIJO which is a Perl powered website that does 3 sided flashcards (Chinese, English, and Pinyin).
+The main advantage IIJO has over Anki and other flashcard sites is that you can pick your flashcards from a dictionary so you don&rsquo;t have to type all that stuff in yourself. It allows you to share word lists with others and the built in dictionary means that you don&rsquo;t need to worry about the accuracy and completeness of other people who share wordlists." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/chinese-flashcards/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2013-02-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-02-28T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2013-02-28 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/chinese-flashcards/">Chinese zombie flashcards on GitHub (Catalyst &amp; Perl)</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>There seem to be quite a few Perl people learning Chinese so maybe this will be
+relevant here.</p>
+<p>I created <a href="http://iijo.org">IIJO</a> which is a Perl powered website that does 3
+sided flashcards (Chinese, English, and Pinyin).</p>
+<p>The main advantage IIJO has over Anki and other flashcard sites is that you can
+pick your flashcards from a dictionary so you don&rsquo;t have to type all that stuff
+in yourself.   It allows you to share word lists with others and the built in
+dictionary means that you don&rsquo;t need to worry about the accuracy and
+completeness of other people who share wordlists.</p>
+<p>The site does <a href="http://en.wikipedia.org/wiki/Spaced_repetition">spaced repetition</a>
+like Anki.  But it has a different simpler user interface because Anki&rsquo;s 4
+buttons after each flashcard <em>stresses me out.</em></p>
+<p>If you want, you can just play with the <a href="http://iijo.org/dictionary">Chinese/English dictionary</a>.<br>
+The goal here is to be able to look up a word then add it easily to one of your
+existing word lists.</p>
+<p>If you think there is something missing, check out the project on
+<a href="http://github.org/kablamo/iijo.org">GitHub</a> and send me a pull request.  I&rsquo;m
+using Perl, Catalyst, and SQLite.</p>
+<p>Here are some of the things on my todo list:</p>
+<ul>
+<li>More analytics/stats/data for measuring progress using D3</li>
+<li>Speech/pronunciation samples</li>
+<li>Export to Anki</li>
+<li>Some way to learn phrases instead of just characters</li>
+</ul>
+<h1 id="vampires-and-zombies">Vampires and zombies</h1>
+<p>Btw, here&rsquo;s an interesting thing I learned about the Chinese language: the word
+for <code>vampire</code> is the same word thats used for <code>zombie</code>.</p>
+<center><p style="margin-bottom: .5em; font-size: 4em; font-weight: bold;">僵尸</p></center>
+<p>This is because the Chinese merged the two concepts into a single vampire
+zombie monster.  So Chinese zombies are stiff and walk around with their hands
+straight out.  But they also bite their victim&rsquo;s necks and suck their blood
+passing on the zombie infection.</p>
+<p>They are also fast and angry and they often do kung fu.  You can&rsquo;t
+kill them of course, however you can put them to sleep if you write a spell on a
+yellow piece of paper and put it on their forehead.  But if it falls off, they
+wake up and get angry again.  Strangest of all is that they do little
+hops like bunnies instead of walking.</p>
+<p>I highly recommend Liao Yiwo&rsquo;s book, <a href="http://www.amazon.com/The-Corpse-Walker-Stories-Bottom/dp/0307388379/ref=sr_1_1?ie=UTF8&amp;qid=1362603639&amp;sr=8-1&amp;keywords=corpse+walker"><em>Corpse Walker,</em></a>
+which tells the fascinating history and origin of Chinese zombies.  You can read more
+about jiangshi on <a href="http://en.wikipedia.org/wiki/Jiangshi">Wikipedia</a>.  And of
+course there are YouTube videos:</p>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/56Zvquhww80" frameborder="0" allowfullscreen></iframe>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

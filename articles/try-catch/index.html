@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="One way to handle exceptions in Perl is with Syntax::Keyword::Try which adds try and catch keywords to Perl. As always there are trade offs and it depends on your goals and preferences.
+It has no dependencies and plays nicely with perltidy and perlcritic. However, it is 2.6 times slower than eval() and it&amp;rsquo;s not included in the Perl core so you will need to install it.
+Alternate
+Solutions There is more than one way to handle exceptions in Perl and several modules on MetaCPAN which add try/catch keywords to Perl." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/try-catch/" />
+
+
+    <title>
+        
+            Handling exceptions with try/catch :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Handling exceptions with try/catch">
+<meta itemprop="description" content="One way to handle exceptions in Perl is with Syntax::Keyword::Try which adds try and catch keywords to Perl. As always there are trade offs and it depends on your goals and preferences.
+It has no dependencies and plays nicely with perltidy and perlcritic. However, it is 2.6 times slower than eval() and it&rsquo;s not included in the Perl core so you will need to install it.
+Alternate
+Solutions There is more than one way to handle exceptions in Perl and several modules on MetaCPAN which add try/catch keywords to Perl.">
+<meta itemprop="datePublished" content="2018-03-28T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-03-28T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="368">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Handling exceptions with try/catch"/>
+<meta name="twitter:description" content="One way to handle exceptions in Perl is with Syntax::Keyword::Try which adds try and catch keywords to Perl. As always there are trade offs and it depends on your goals and preferences.
+It has no dependencies and plays nicely with perltidy and perlcritic. However, it is 2.6 times slower than eval() and it&rsquo;s not included in the Perl core so you will need to install it.
+Alternate
+Solutions There is more than one way to handle exceptions in Perl and several modules on MetaCPAN which add try/catch keywords to Perl."/>
+
+
+
+    <meta property="og:title" content="Handling exceptions with try/catch" />
+<meta property="og:description" content="One way to handle exceptions in Perl is with Syntax::Keyword::Try which adds try and catch keywords to Perl. As always there are trade offs and it depends on your goals and preferences.
+It has no dependencies and plays nicely with perltidy and perlcritic. However, it is 2.6 times slower than eval() and it&rsquo;s not included in the Perl core so you will need to install it.
+Alternate
+Solutions There is more than one way to handle exceptions in Perl and several modules on MetaCPAN which add try/catch keywords to Perl." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/try-catch/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2018-03-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-03-28T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2018-03-28 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/try-catch/">Handling exceptions with try/catch</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+                <img src="/images/mvp/exceptions.jpg" class="post-cover" />
+            
+
+            <div class="post-content">
+                <h1 id="heading"></h1>
+<p>One way to handle exceptions in Perl is with
+<a href="https://metacpan.org/pod/Syntax::Keyword::Try">Syntax::Keyword::Try</a> which
+adds <code>try</code> and <code>catch</code> keywords to Perl. As always there are trade offs and it
+depends on your goals and preferences.</p>
+<p>It has no dependencies and plays nicely with perltidy and perlcritic.  However,
+it is 2.6 times slower than <code>eval()</code> and it&rsquo;s not included in the Perl core so
+you will need to install it.</p>
+<div class="tip">
+    <div class="tip-title">Alternate<br>Solutions</div>
+    <div class="tip-content" style="margin-left:6rem">
+        There is more than one way to handle exceptions in Perl and several modules
+on MetaCPAN which add try/catch keywords to Perl.  To find out which solution
+is best for you, see <a href="https://mvp.kablamo.org/cpan/exceptions/">Whats the best way to handle
+exceptions?</a>
+    </div>
+</div>
+<h1 id="throwing-exceptions">Throwing exceptions</h1>
+<p>To throw an exception call <code>die()</code>.  If the exception is not caught, an error
+message is displayed to STDERR and the process exits with a non-zero value.
+Syntax::Keyword::Try doesn&rsquo;t change how exceptions are thrown.</p>
+<pre><code>die &quot;Something bad happened&quot;;
+# prints &quot;Something bad happened at line 123.&quot; 
+# and then the process exits;
+</code></pre>
+<h1 id="catching-exceptions">Catching exceptions</h1>
+<pre><code>use Syntax::Keyword::Try
+
+try {
+    die &quot;its only a flesh wound&quot;;
+}
+catch {
+    warn &quot;something bad happened: $@&quot;;
+}
+</code></pre>
+<p>The catch block can inspect the exception by looking at <code>$@</code>.</p>
+<h1 id="exceptions-as-objects">Exceptions as objects</h1>
+<p>Exceptions are usually strings, but you can throw objects too.</p>
+<pre><code>try {
+    die My::Exception-&gt;new(
+        error    =&gt; 'Something bad happened',
+        request  =&gt; $request,
+        response =&gt; $response,
+    );
+}
+catch {
+    warn &quot;something bad happened: &quot; . $@-&gt;error();
+}
+</code></pre>
+<h1 id="pitfalls-for-perl-programmers">Pitfalls for Perl programmers</h1>
+<p>These are not really pitfalls.  Syntax::Keyword::Try works the same as
+try/catch works in other languages.  However if you are used to handling
+exceptions with die/eval or Try::Tiny here are a few things that you may have
+forgotten about try/catch:</p>
+<p><em>1. A <code>try</code> block must be followed by <code>catch</code> or <code>finally</code> or both.</em></p>
+<pre><code>try { do_something_risk() } # syntax error
+</code></pre>
+<p><em>2. A <code>try</code> block does not catch exceptions.</em>  The <code>catch</code> block catches exceptions.</p>
+<pre><code>try     { die &quot;its just a flesh wound&quot; }
+finally { say &quot;hello&quot; }
+# no exception is caught
+# prints &quot;its just a flesh wound&quot; to STDERR
+# process exits
+</code></pre>
+<p><em>3. A <code>return</code> statement will exit the containing function &ndash; not the <code>try</code> block.</em></p>
+<p><em>4. Loop control statements like <code>redo</code>, <code>next</code>, and <code>last</code> act on any containing loops.</em></p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

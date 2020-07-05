@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="The short version for the impatient  my() creates a local variable our() creates a package variable local() temporarily changes the local value of a global variable The above is mostly true.  The long version for the irrepressibly quixotic my() my declares the listed variable to be local to the enclosing block, file, or eval. That is to say its scope is local. This kind of variable is known as a lexical variable." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/our-my-local/" />
+
+
+    <title>
+        
+            my vs our vs local :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="my vs our vs local">
+<meta itemprop="description" content="The short version for the impatient  my() creates a local variable our() creates a package variable local() temporarily changes the local value of a global variable The above is mostly true.  The long version for the irrepressibly quixotic my() my declares the listed variable to be local to the enclosing block, file, or eval. That is to say its scope is local. This kind of variable is known as a lexical variable.">
+<meta itemprop="datePublished" content="2014-03-17T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2014-03-17T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="276">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="my vs our vs local"/>
+<meta name="twitter:description" content="The short version for the impatient  my() creates a local variable our() creates a package variable local() temporarily changes the local value of a global variable The above is mostly true.  The long version for the irrepressibly quixotic my() my declares the listed variable to be local to the enclosing block, file, or eval. That is to say its scope is local. This kind of variable is known as a lexical variable."/>
+
+
+
+    <meta property="og:title" content="my vs our vs local" />
+<meta property="og:description" content="The short version for the impatient  my() creates a local variable our() creates a package variable local() temporarily changes the local value of a global variable The above is mostly true.  The long version for the irrepressibly quixotic my() my declares the listed variable to be local to the enclosing block, file, or eval. That is to say its scope is local. This kind of variable is known as a lexical variable." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/our-my-local/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2014-03-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2014-03-17T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2014-03-17 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/our-my-local/">my vs our vs local</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <h1 id="the-short-version-for-the-impatient">The short version for the impatient</h1>
+<ul>
+<li><code>my()</code> creates a local variable</li>
+<li><code>our()</code> creates a package variable</li>
+<li><code>local()</code> temporarily changes the local value of a global variable</li>
+<li>The above is mostly true.</li>
+</ul>
+<h1 id="the-long-version-for-the-irrepressibly-quixotic">The long version for the irrepressibly quixotic</h1>
+<h2 id="my">my()</h2>
+<p><code>my</code> declares the listed variable to be local to the enclosing block, file,
+or <code>eval</code>.  That is to say its <em>scope</em> is local.  This kind of variable is
+known as a <em>lexical variable</em>.  Note that lexical variables are hidden from
+subroutines which are called from within the enclosing block.  This is known as
+<em>lexical scoping</em>.</p>
+<h2 id="our">our()</h2>
+<p><code>our</code> creates an alias to a <em>package variable</em>.  The alias is local to the
+enclosing block, file, or <code>eval</code>.  That is to say the alias is lexically scoped
+just like any lexical variable.  However a package variable belongs to a
+package.  It can be accessed from anywhere if you use its fully qualified name.
+Here are two examples of fully qualified package variables:</p>
+<pre><code>$main::a
+%MyPackage::boop
+</code></pre>
+<p>Note that package variables are also global variables.</p>
+<h2 id="local">local()</h2>
+<p><code>local</code> gives temporary values to global variables.  It does not create a local
+variable.  It is most commonly used when you want to locally modify a global
+variable such as one of the punctuation variables.  For example:</p>
+<pre><code>{ 
+    local $| = 1; # enable autoflush for STDOUT
+    say &quot;hi mom&quot;;
+}
+</code></pre>
+<p><code>local</code> modifies the listed variable to be local to the enclosing block,
+file, or <code>eval</code> &ndash; AND to any subroutine called from within that block.  This
+is known as <em>dynamic scoping</em>.</p>
+<h1 id="sources">Sources</h1>
+<p>For a more complete understanding I recommend <code>perldoc perlfunc</code> and especially
+<code>perldoc perlsub</code>.  Also the following links may be helpful:</p>
+<ul>
+<li><a href="https://metacpan.org/pod/perlfunc">https://metacpan.org/pod/perlfunc</a></li>
+<li><a href="https://metacpan.org/pod/perlsub">https://metacpan.org/pod/perlsub</a></li>
+<li><a href="http://perlmaven.com/package-variables-and-lexical-variables-in-perl">http://perlmaven.com/package-variables-and-lexical-variables-in-perl</a></li>
+<li><a href="http://www.perlmonks.org/?node_id=95813">http://www.perlmonks.org/?node_id=95813</a></li>
+</ul>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

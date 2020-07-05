@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>perl on Kablamo</title>
+    <link>http://blog.kablamo.org/categories/perl/</link>
+    <description>Recent content in perl on Kablamo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.kablamo.org/categories/perl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Recommended Modules: Working With Files</title>
+      <link>http://blog.kablamo.org/articles/happy-families/</link>
+      <pubDate>Tue, 03 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/happy-families/</guid>
+      <description>This week I updated the Recommended Libraries chapter of Minimum Viable Perl.
+There are thousands of modules on MetaCPAN. Some are abandoned, some were an experiment that never took off, some are discouraged, and sometimes its just not obvious which module solves your problem best. In the Recommended Libraries chapter I&amp;rsquo;m creating a curated guide to MetaCPAN.
+I&amp;rsquo;ve included the latest article below but the canonical (and most up to date version) is available here: Working with files.</description>
+    </item>
+    
+    <item>
+      <title>Handling exceptions with try/catch</title>
+      <link>http://blog.kablamo.org/articles/try-catch/</link>
+      <pubDate>Wed, 28 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/try-catch/</guid>
+      <description>One way to handle exceptions in Perl is with Syntax::Keyword::Try which adds try and catch keywords to Perl. As always there are trade offs and it depends on your goals and preferences.
+It has no dependencies and plays nicely with perltidy and perlcritic. However, it is 2.6 times slower than eval() and it&amp;rsquo;s not included in the Perl core so you will need to install it.
+Alternate
+Solutions There is more than one way to handle exceptions in Perl and several modules on MetaCPAN which add try/catch keywords to Perl.</description>
+    </item>
+    
+    <item>
+      <title>Handling exceptions with die/eval</title>
+      <link>http://blog.kablamo.org/articles/die-eval/</link>
+      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/die-eval/</guid>
+      <description>The standard Perl syntax for handling exceptions (die/eval) is quirky and has some pitfalls that are easy to tumble into. However its pretty common so you will need to understand it.
+Alternate
+Solution Several modules exist that add try/catch syntax to Perl. As always there are some trade offs. See Handling exceptions with try/catch for details.   Throwing exceptions To throw an exception call die(). Other languages call it throw(), but in Perl its called die().</description>
+    </item>
+    
+    <item>
+      <title>What&#39;s the best Perl module for X</title>
+      <link>http://blog.kablamo.org/articles/recommended-modules/</link>
+      <pubDate>Sat, 10 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/recommended-modules/</guid>
+      <description>Its hard for beginners and experts alike in any language to keep up with the flood of new libraries being written all the time. MetaCPAN has thousands of modules. Its hard to know which module is the best one. For example there are at least 7 modules for parsing JSON in Perl. New modules appear all the time which make the old best solution obsolete.
+How to choose a module There are a couple good sources of advice:</description>
+    </item>
+    
+    <item>
+      <title>I wrote a Perl book</title>
+      <link>http://blog.kablamo.org/articles/mvp/</link>
+      <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/mvp/</guid>
+      <description>I wrote a Perl book accidentally during my vacation. I started typing and everything just fell out of my head over the next few days. Its still pretty rough but I think its a decent start.
+The book is called Minimum Viable Perl.
+Ok, its not a real published book. Maybe I&amp;rsquo;ll self publish it on Amazon some day. For now its just a website. I&amp;rsquo;m going to call it a book anyway.</description>
+    </item>
+    
+    <item>
+      <title>mstpan quick reference</title>
+      <link>http://blog.kablamo.org/articles/mstpan/</link>
+      <pubDate>Tue, 08 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/mstpan/</guid>
+      <description>Last Christmas, the inimitable Matt Trout (mst) created an opinionated tour of CPAN where he recommended modules for some common problems. I think its brilliant, useful, and entertaining and I&amp;rsquo;ve decided to compile a high level overview all on one page in order to create a quick reference.
+I&amp;rsquo;ve tried to distill his wisdom and wit down to a few words. But I recommend clicking the section headers and following the links to Matt&amp;rsquo;s original posts to see his actual real opinions in their full complexity.</description>
+    </item>
+    
+    <item>
+      <title>Test::Pretty - because TAP is unnattractive</title>
+      <link>http://blog.kablamo.org/articles/test-pretty/</link>
+      <pubDate>Thu, 08 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/test-pretty/</guid>
+      <description>Test::Pretty (artfully written by the inimitable @tokuhirom) makes my tests look like this:
+This is especially nice when I have subtests.
+How it works I can enable Test::Pretty like this
+prove -MTest::Pretty -vlr t  But typing extra characters is not fun. Happily @tokuhirom also created a prove plugin (which is included with the Test::Pretty module) which allows me to do this:
+prove -Pretty -vlr t  Shorter but still too much typing so I created a ~/.</description>
+    </item>
+    
+    <item>
+      <title>Codecube.io now supports Perl</title>
+      <link>http://blog.kablamo.org/articles/codecube/</link>
+      <pubDate>Sat, 19 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/codecube/</guid>
+      <description>Codecube.io is a jsfiddle type service which runs Perl code (and other languages) and shows the results in your browser.
+The website is written in Go and runs your code inside a Docker container. It originally had support for C, Go, Python, and Ruby. I was looking for an excuse to play with Docker and Go so I submitted a pull request which added support for Perl.
+See also:
+ The original Codecube blog post which is a good introduction to Docker.</description>
+    </item>
+    
+    <item>
+      <title>Reading code - Plack::Builder</title>
+      <link>http://blog.kablamo.org/articles/read-plack-4/</link>
+      <pubDate>Sat, 12 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/read-plack-4/</guid>
+      <description>Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  Plack::Builder provides a domain specific language (DSL) for middleware developers. It looks like this:
+use Plack::Builder; my $app1 = sub { ... }; my $app2 = sub { ... }; builder { enable &amp;quot;Deflater&amp;quot;; enable &amp;quot;Session&amp;quot;, store =&amp;gt; &amp;quot;File&amp;quot;; enable &amp;quot;Debug&amp;quot;, panels =&amp;gt; [ qw(DBITrace Memory Timer) ]; mount &amp;quot;/narwhale&amp;quot; =&amp;gt; $app1; mount &amp;quot;/unicorn&amp;quot; =&amp;gt; $app2; };  How does it work?</description>
+    </item>
+    
+    <item>
+      <title>Reading code - PSGI Application Architecture</title>
+      <link>http://blog.kablamo.org/articles/read-plack-3/</link>
+      <pubDate>Fri, 11 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/read-plack-3/</guid>
+      <description>Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  PSGI Applications The PSGI spec defines a PSGI application.
+ A PSGI application is a Perl code reference. It takes exactly one argument, the environment, and returns an array reference containing exactly three values.
+ The three values are a status, headers, and a body. Here is an example:</description>
+    </item>
+    
+    <item>
+      <title>Reading code - plackup Architecture</title>
+      <link>http://blog.kablamo.org/articles/read-plack-2/</link>
+      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/read-plack-2/</guid>
+      <description>Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  Plack::Runner and plackup plackup starts a PSGI server which executes a PSGI application. However the script itself is just a very small wrapper around Plack::Runner which does all the heavy lifting. Plack::Runner
+ parses the command line options. instantiates the chosen loader class (which is in the Plack::Loader namespace).</description>
+    </item>
+    
+    <item>
+      <title>Reading code - Plack</title>
+      <link>http://blog.kablamo.org/articles/read-plack-1/</link>
+      <pubDate>Tue, 08 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/read-plack-1/</guid>
+      <description>I write lots of code. But I want to be better and faster at reading code. When I had the privilege of working with @ranguard I discovered he is a code reading cheetah and I always envied that. So I&amp;rsquo;ve decided to practice by reading the source code of various CPAN modules. I&amp;rsquo;m starting with Plack.
+ Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  Plack Plack describes itself as a set of tools for using PSGI (the Perl Server Gateway Interface).</description>
+    </item>
+    
+    <item>
+      <title>Look around assertions in Perl regular expressions</title>
+      <link>http://blog.kablamo.org/articles/regex/</link>
+      <pubDate>Mon, 31 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/regex/</guid>
+      <description>When Perl&amp;rsquo;s regex engine evaluates a string, it moves from left to right, one letter at a time checking the match at each position. That position is called the current match position.
+Look around assertions allow you to match a specific pattern before or after the current match position without moving the match position.
+Look ahead assertions Look ahead assertions match the text after the current match position (without moving the match position).</description>
+    </item>
+    
+    <item>
+      <title>What does &#39;use strict&#39; do?</title>
+      <link>http://blog.kablamo.org/articles/use-strict/</link>
+      <pubDate>Wed, 19 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/use-strict/</guid>
+      <description>I always use strict in all my code. But what does that actually mean?
+Enables strict refs Strict refs generates runtime errors when you use symbolic references.
+use strict &#39;refs&#39;; $ref = &amp;quot;yarrr matey&amp;quot;; print $$ref; # runtime error but without strict refs this is ok  Enables strict vars Strict vars generates a compile time error if you access a variable that was not declared or is not fully qualified.</description>
+    </item>
+    
+    <item>
+      <title>my vs our vs local</title>
+      <link>http://blog.kablamo.org/articles/our-my-local/</link>
+      <pubDate>Mon, 17 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/our-my-local/</guid>
+      <description>The short version for the impatient  my() creates a local variable our() creates a package variable local() temporarily changes the local value of a global variable The above is mostly true.  The long version for the irrepressibly quixotic my() my declares the listed variable to be local to the enclosing block, file, or eval. That is to say its scope is local. This kind of variable is known as a lexical variable.</description>
+    </item>
+    
+    <item>
+      <title>I made a Readline cheat sheet</title>
+      <link>http://blog.kablamo.org/articles/readline-cheat-sheet/</link>
+      <pubDate>Wed, 01 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/readline-cheat-sheet/</guid>
+      <description>Recently Ovid pointed out large projects are much more likely to fail. I have a few large goals I&amp;rsquo;d like to accomplish. For example I want to improve my front end design skills. Rather than trying to tackle this problem all at once, I made up a small project for myself.
+I created a Readline cheat sheet and I was able to complete this project in about a day. Here are some of the things I learned:</description>
+    </item>
+    
+    <item>
+      <title>Salt and pepper - How to encrypt database passwords</title>
+      <link>http://blog.kablamo.org/articles/authen-passphrase/</link>
+      <pubDate>Wed, 18 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/authen-passphrase/</guid>
+      <description>To explain how salt and pepper work in encryption, I will walk through a few scenarios.
+No salt Summary for the impatient: Using no salt means an attacker doesn&amp;rsquo;t need to generate a rainbow table because they can reuse an existing one.
+If an attacker obtains my database of encrypted passwords it will be very time consuming to brute force them. However there exist pre-computed tables of encrypted values of thousands of commonly used passwords.</description>
+    </item>
+    
+    <item>
+      <title>git-vspark plots your commits vertically with Term::Vspark</title>
+      <link>http://blog.kablamo.org/articles/git-vspark/</link>
+      <pubDate>Sun, 17 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/git-vspark/</guid>
+      <description>I added a git-vspark script to my App::Git::Spark CPAN module. It does the same thing as git-spark but instead of normal horizontal sparklines, it uses &amp;ldquo;vertical&amp;rdquo; sparklines. Here&amp;rsquo;s what that looks like:
+$ git vspark --months 8 batman Commits by batman over the last 8 months total: 233 avg: 29 max: 69 12 ██▋ 18 ████ 69 ███████████████▏ 59 ████████████▉ 16 ███▌ 28 ██████▏ 12 ██▋ 19 ████▎  This effect is achieved using Term::Vspark.</description>
+    </item>
+    
+    <item>
+      <title>Chinese zombie flashcards on GitHub (Catalyst &amp; Perl)</title>
+      <link>http://blog.kablamo.org/articles/chinese-flashcards/</link>
+      <pubDate>Thu, 28 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/chinese-flashcards/</guid>
+      <description>There seem to be quite a few Perl people learning Chinese so maybe this will be relevant here.
+I created IIJO which is a Perl powered website that does 3 sided flashcards (Chinese, English, and Pinyin).
+The main advantage IIJO has over Anki and other flashcard sites is that you can pick your flashcards from a dictionary so you don&amp;rsquo;t have to type all that stuff in yourself. It allows you to share word lists with others and the built in dictionary means that you don&amp;rsquo;t need to worry about the accuracy and completeness of other people who share wordlists.</description>
+    </item>
+    
+    <item>
+      <title>Dist::Zilla::PluginBundle::DAGOLDEN is pretty awesome</title>
+      <link>http://blog.kablamo.org/articles/how-to-learn-dist-zilla/</link>
+      <pubDate>Wed, 20 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/how-to-learn-dist-zilla/</guid>
+      <description>I&amp;rsquo;ve been using Dist::Zilla for a couple years. It&amp;rsquo;s a powerful way to automate CPAN releases.
+But learning how to use it was not as easy as I hoped.
+I remember when Dist::Zilla first debuted. It was very exciting. But I think I may have drank too much of the cool aid becuase my expectations were very high when I finally sat down to learn it. I expected my experience to be composed entirely of rainbows and puppy dog tails.</description>
+    </item>
+    
+    <item>
+      <title>CPAN release of App::Git::Ribbon, App::Git::Spark</title>
+      <link>http://blog.kablamo.org/articles/cpan-release-git-ribbon-git-spark/</link>
+      <pubDate>Tue, 12 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/cpan-release-git-ribbon-git-spark/</guid>
+      <description>I packaged up these scripts and released them on CPAN to make them a little easier to install and manage.
+App::Git::Ribbon on CPAN
+on GitHub
+previous blog post
+App::Git::Spark on CPAN
+on GitHub
+previous blog post</description>
+    </item>
+    
+    <item>
+      <title>git-ribbon</title>
+      <link>http://blog.kablamo.org/articles/git-ribbon/</link>
+      <pubDate>Sat, 02 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/git-ribbon/</guid>
+      <description>I wrote a little Perl script called git-ribbon to help me review the latest changes in a git repository.
+The way I used to review changes was by reading through the git log. I try to do this every morning at work to keep up with whats going on. But I was having a few problems:
+ Its hard to know exactly which changes are new. I want to review commits in the order they happened (instead of most recent first).</description>
+    </item>
+    
+    <item>
+      <title>Whats in your $PERL5LIB?</title>
+      <link>http://blog.kablamo.org/articles/whats-in-your-perl5lib/</link>
+      <pubDate>Tue, 29 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/whats-in-your-perl5lib/</guid>
+      <description>Ever wonder whats in your $PERL5LIB? Here is one way to find out:
+⚡ echo $PERL5LIB .:./lib:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5:/home/eri c/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux:/home/eric/perl 5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux-gnu-thread-multi-64in t:/home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/site_perl:/home/eric/ perl5/perlbrew/perls/perl-5.16.2/lib/5.16.2  My human eyeballs are not equipped to parse that. Unhelpful. So I put this in my .bashrc:
+alias perl5lib=&#39;perl -E &amp;quot;say join \&amp;quot;\n\&amp;quot;, split \&amp;quot;:\&amp;quot;, \$ENV{PERL5LIB}&amp;quot;&#39;  Here it is in action:
+⚡ perl5lib . ./lib /home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5 /home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux /home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/perl5/i686-linux-gnu-thread-multi-64int /home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/site_perl /home/eric/perl5/perlbrew/perls/perl-5.16.2/lib/5.16.2  Better.</description>
+    </item>
+    
+    <item>
+      <title>git-spark revisited</title>
+      <link>http://blog.kablamo.org/articles/git-spark-revisited/</link>
+      <pubDate>Sun, 27 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/git-spark-revisited/</guid>
+      <description>A few days ago I wrote about my git-spark Perl script. It counts how many commits a user has in a git project and makes a little graph and displays it on the command line.
+However I also said it wasn&amp;rsquo;t very useful becuase you can&amp;rsquo;t compare one graph with another because the scale changes when different graphs have different min and max values. For example these two data series produce identical graphs despite have very different data.</description>
+    </item>
+    
+    <item>
+      <title>git-spark plots your commit history</title>
+      <link>http://blog.kablamo.org/articles/git-spark-plots-your-commits/</link>
+      <pubDate>Wed, 23 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/git-spark-plots-your-commits/</guid>
+      <description>I recently rediscovered spark, Zach Holman&amp;rsquo;s cool little sparklines graphing tool for the command line. I used a little Perl to mash it up with &amp;lsquo;git log&amp;rsquo; and came up with git-spark which works like this:
+⚡ git spark --hours 8 Commits by Godzilla over the last 8 hours ▃▃▁▆▅▁▁▃█ ⚡ git spark -d 14 HulkHogan Commits by HulkHogan over the last 14 days ▇▅▄▁▁▄▅▂█▂▁▁▁▅ ⚡ git spark -w 52 Tarzan Commits by Tarzan over the last 52 weeks ▃▁▂▃▃▃▂▁█▆▁▄▄▃▂▂▁▁▂▃▃▄▃▃▂▃▁▁▁▁▁▂▂▃▆▅▂▁▄▃▂▄▄▄▁▂▁▁▂▂▂▃  And heres the usage/help:</description>
+    </item>
+    
+    <item>
+      <title>Use Carp::Always to fix circular dependencies</title>
+      <link>http://blog.kablamo.org/articles/how-to-resolve-circular-dependencies/</link>
+      <pubDate>Sat, 19 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/how-to-resolve-circular-dependencies/</guid>
+      <description>Circular dependencies happen when your library requires a library which requires your library. Here&amp;rsquo;s an example. Lets say you have 2 packages:
+AlienPlanet.pm
+package AlienPlanet; use Moose; use Dinosaurs; # &amp;lt;--- Circular dependency sub has_dinosaurs {1} 1;  Dinosaurs.pm
+package Dinosaurs; use Moose; use AlienPlanet; # &amp;lt;--- Circular dependency sub has_rabies {1} 1;  If you try to compile this, you get the following warning:
+⚡ perl -c lib/AlienPlanet.pm Subroutine has_dinosaurs redefined at lib/AlienPlanet.</description>
+    </item>
+    
+    <item>
+      <title>Devel::Dwarn helps me type less</title>
+      <link>http://blog.kablamo.org/articles/data-dumper-concise/</link>
+      <pubDate>Wed, 05 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/data-dumper-concise/</guid>
+      <description>2 bajillion times a day I want to print a hashref and see whats inside. But every time I want to do that I have to type:
+use Data::Dumper::Concise; print Dumper $hashref;  First of all, thats too much typing. And second of all I keep forgetting to delete my print statements when I check in.
+Happily I recently discovered Devel::Dwarn on CPAN. It is (basically) an alias to Data::Dumper::Concise.</description>
+    </item>
+    
+    <item>
+      <title>Slides from my Selenium talk at YAPCEU 2012</title>
+      <link>http://blog.kablamo.org/articles/slides-from-my-selenium-talk-at-yapc-eu-2012/</link>
+      <pubDate>Sun, 26 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/slides-from-my-selenium-talk-at-yapc-eu-2012/</guid>
+      <description>I gave my first YAPC::EU presentation this year in Frankfurt after doing a trial run at London.pm. I received some good questions and comments and a few new ideas. It was a good experience and I want to do this again.
+My talk introduced Selenium and common problems people have when first trying to write Selenium tests in Perl. I also explained how I solved many of those problems by creating Test::WWW::Selenium::More.</description>
+    </item>
+    
+    <item>
+      <title>Test::WWW::Selenium::More</title>
+      <link>http://blog.kablamo.org/articles/test-www-selenium-more/</link>
+      <pubDate>Thu, 17 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/test-www-selenium-more/</guid>
+      <description>I recently released Test::WWW::Selenium::More to CPAN. It is a small collection of utilities to help you write Selenium tests. Here are some reasons to use it:
+  It has a manual which provides a concise but fairly comprehensive howto guide to Selenium testing in Perl.
+  It uses Moose so you can more easily use roles. For example you might want a role for methods that deal with authentication and a role for methods that deal with payments.</description>
+    </item>
+    
+    <item>
+      <title>New on CPAN - MooseX::CachingProxy</title>
+      <link>http://blog.kablamo.org/articles/new-on-cpan-moosex-cachingproxy/</link>
+      <pubDate>Thu, 10 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/new-on-cpan-moosex-cachingproxy/</guid>
+      <description>Last week I released MooseX::CachingProxy to CPAN.
+Its a small module that intercepts requests from your LWP based application. Those requests are relayed on to the intended server unless they already exist in the cache.
+To toggle on and off the caching proxy, MooseX::CachingProxy provides the attribute &amp;lsquo;caching_proxy&amp;rsquo;. Here is a quick demo:
+package MyApp; use Moose; use WWW::Mechanize; # or any LWP based library with &#39;MooseX::CachingProxy&#39;; sub url { &#39;http://example.</description>
+    </item>
+    
+    <item>
+      <title>New on CPAN - Log::JSON</title>
+      <link>http://blog.kablamo.org/articles/new-on-cpan-log-json/</link>
+      <pubDate>Sun, 29 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/new-on-cpan-log-json/</guid>
+      <description>I released Log::JSON v0.001 to CPAN today. Its a very simple JSON logger.
+The advantage of a JSON logger is that a human can open a mysterious new log file and quickly decipher the content because each piece of information is labeled. Using JSON also means that parsing the log file and reviving the data structures is trivial.
+Here is some example usage for you:
+use Log::JSON; my $logger = Log::JSON-&amp;gt;new( file =&amp;gt; &#39;/path/errorlog.</description>
+    </item>
+    
+  </channel>
+</rss>

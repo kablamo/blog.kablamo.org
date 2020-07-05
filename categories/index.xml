@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Kablamo</title>
+    <link>http://blog.kablamo.org/categories/</link>
+    <description>Recent content in Categories on Kablamo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.kablamo.org/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>books</title>
+      <link>http://blog.kablamo.org/categories/books/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/categories/books/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>perl</title>
+      <link>http://blog.kablamo.org/categories/perl/</link>
+      <pubDate>Tue, 03 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/categories/perl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>uncategorized</title>
+      <link>http://blog.kablamo.org/categories/uncategorized/</link>
+      <pubDate>Sun, 26 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/categories/uncategorized/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>experiments</title>
+      <link>http://blog.kablamo.org/categories/experiments/</link>
+      <pubDate>Mon, 24 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/categories/experiments/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>financial-independence</title>
+      <link>http://blog.kablamo.org/categories/financial-independence/</link>
+      <pubDate>Fri, 04 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/categories/financial-independence/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

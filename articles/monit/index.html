@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="If your website goes down, you want to find out fast. There are a few ways to accomplish this, but I&amp;rsquo;m using monit. Monit is a mature unix monitoring daemon and it gives me the ability not only get alerts but to restart services that go down.
+Monit has lotsa power and options and you can read about all of them on the man page. Or if you don&amp;rsquo;t want to mess around with that you can pay them for a pretty web admin interface and some phone/tablet apps for a one time fee of € 65." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/monit/" />
+
+
+    <title>
+        
+            Monit - How to know when your web site is down :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Monit - How to know when your web site is down">
+<meta itemprop="description" content="If your website goes down, you want to find out fast. There are a few ways to accomplish this, but I&rsquo;m using monit. Monit is a mature unix monitoring daemon and it gives me the ability not only get alerts but to restart services that go down.
+Monit has lotsa power and options and you can read about all of them on the man page. Or if you don&rsquo;t want to mess around with that you can pay them for a pretty web admin interface and some phone/tablet apps for a one time fee of € 65.">
+<meta itemprop="datePublished" content="2013-11-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2013-11-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="399">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Monit - How to know when your web site is down"/>
+<meta name="twitter:description" content="If your website goes down, you want to find out fast. There are a few ways to accomplish this, but I&rsquo;m using monit. Monit is a mature unix monitoring daemon and it gives me the ability not only get alerts but to restart services that go down.
+Monit has lotsa power and options and you can read about all of them on the man page. Or if you don&rsquo;t want to mess around with that you can pay them for a pretty web admin interface and some phone/tablet apps for a one time fee of € 65."/>
+
+
+
+    <meta property="og:title" content="Monit - How to know when your web site is down" />
+<meta property="og:description" content="If your website goes down, you want to find out fast. There are a few ways to accomplish this, but I&rsquo;m using monit. Monit is a mature unix monitoring daemon and it gives me the ability not only get alerts but to restart services that go down.
+Monit has lotsa power and options and you can read about all of them on the man page. Or if you don&rsquo;t want to mess around with that you can pay them for a pretty web admin interface and some phone/tablet apps for a one time fee of € 65." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/monit/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2013-11-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-11-24T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="[perl devops]" />
+
+
+
+    <meta property="article:published_time" content="2013-11-24 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/monit/">Monit - How to know when your web site is down</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>If your website goes down, you want to find out fast.  There are a few ways to
+accomplish this, but I&rsquo;m using <a href="http://mmonit.com/monit">monit</a>.  Monit is a
+mature unix monitoring daemon and it gives me the ability not only get alerts
+but to restart services that go down.</p>
+<p>Monit has lotsa power and options and you can read about all of them on
+the man page.  Or if you don&rsquo;t want to mess around with that you can pay them
+for a <a href="https://mmonit.com/screenshots/">pretty web admin interface</a> and some
+phone/tablet apps for a one time fee of € 65.  Another simpler and I think less
+powerful option is <a href="http://monitis.com/?affiliate=1303230640">monitor.us</a>.</p>
+<p>I don&rsquo;t want to pay.  So I installed monit like this:</p>
+<pre><code>apt-get install monit
+</code></pre>
+<p>The configuration file for monit lives at <code>/etc/monit/monitrc</code>.  You probably
+don&rsquo;t need to bother with that.  When monit runs, it looks in
+<code>/etc/monit/conf.d</code> and executes any scripts it finds in there.  Like many
+people I&rsquo;m running nginx in front of my Starman web apps.  So I want monitor
+both of those processes.</p>
+<p>Here is how to do that.  Created a script named <code>/etc/monit/confd/nginx</code>:</p>
+<pre><code>check process nginx with pidfile /var/run/nginx.pid
+
+    start program = &quot;/etc/init.d/nginx start&quot;
+    stop  program = &quot;/etc/init.d/nginx stop&quot;
+
+    alert kablamo@example.com with mail-format {
+           from: monit@example.com
+        subject: monit alert: $SERVICE $EVENT $DATE
+        message: $DESCRIPTION
+    }
+
+    if failed port 80 protocol HTTP
+        request /
+        with timeout 7 seconds
+        then restart
+</code></pre>
+<p>Then create a second script named <code>/etc/monit/conf.d/mywebapp</code>.  Its very
+similar.  This assumes you are running your web app as the user <code>web</code> on
+localhost port 22222.</p>
+<pre><code>check process mywebapp with pidfile /var/run/mywebapp.pid
+
+    start program = &quot;/etc/init.d/mywebapp start&quot; as uid web and gid web
+    stop  program = &quot;/etc/init.d/mywebapp stop&quot;  as uid web and gid web
+
+    alert kablamo@example.com with mail-format {
+           from: monit@example.com
+        subject: monit alert: $SERVICE $EVENT $DATE
+        message: $DESCRIPTION
+    }
+
+    if failed port 22222 protocol HTTP
+        request /
+        with timeout 7 seconds
+        then restart
+</code></pre>
+<p>With these scripts, anytime your processes disappear or stop working you will
+get email and monit will try to restart them.</p>
+<p>But I&rsquo;m paranoid.  So I created a third monit script to do an end to end test in case
+something ever gets misconfigured somewhere. <code>/etc/monit/conf.d/end2end</code>:</p>
+<pre><code>check host networthify.com with address 71.19.156.131
+        
+    alert kablamo@example.com with mail-format {
+           from: monit@monit@example.com
+        subject: monit alert: $SERVICE $EVENT $DATE
+        message: $DESCRIPTION
+    }
+
+    if failed port 80 protocol HTTP
+        request /
+        with timeout 9 seconds
+        then alert
+</code></pre>
+<p>Suggestions for improvment?</p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

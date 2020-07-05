@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  Plack::Runner and plackup plackup starts a PSGI server which executes a PSGI application. However the script itself is just a very small wrapper around Plack::Runner which does all the heavy lifting. Plack::Runner
+ parses the command line options. instantiates the chosen loader class (which is in the Plack::Loader namespace)." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/read-plack-2/" />
+
+
+    <title>
+        
+            Reading code - plackup Architecture :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Reading code - plackup Architecture">
+<meta itemprop="description" content="Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  Plack::Runner and plackup plackup starts a PSGI server which executes a PSGI application. However the script itself is just a very small wrapper around Plack::Runner which does all the heavy lifting. Plack::Runner
+ parses the command line options. instantiates the chosen loader class (which is in the Plack::Loader namespace).">
+<meta itemprop="datePublished" content="2014-04-09T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2014-04-09T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="412">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Reading code - plackup Architecture"/>
+<meta name="twitter:description" content="Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  Plack::Runner and plackup plackup starts a PSGI server which executes a PSGI application. However the script itself is just a very small wrapper around Plack::Runner which does all the heavy lifting. Plack::Runner
+ parses the command line options. instantiates the chosen loader class (which is in the Plack::Loader namespace)."/>
+
+
+
+    <meta property="og:title" content="Reading code - plackup Architecture" />
+<meta property="og:description" content="Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  Plack::Runner and plackup plackup starts a PSGI server which executes a PSGI application. However the script itself is just a very small wrapper around Plack::Runner which does all the heavy lifting. Plack::Runner
+ parses the command line options. instantiates the chosen loader class (which is in the Plack::Loader namespace)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/read-plack-2/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2014-04-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2014-04-09T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2014-04-09 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/read-plack-2/">Reading code - plackup Architecture</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <ul>
+<li><a href="/2014/04/08/read-plack-1">Part 1 - An Overview</a></li>
+<li><a href="/2014/04/09/read-plack-2"><strong>Part 2 - plackup Architecture</strong></a></li>
+<li><a href="/2014/04/11/read-plack-3">Part 3 - PSGI Application Architecture</a></li>
+<li><a href="/2014/04/12/read-plack-4">Part 4 - Plack::Builder</a></li>
+</ul>
+<h1 id="plackrunner-and-plackup">Plack::Runner and plackup</h1>
+<p><code>plackup</code> starts a PSGI server which executes a PSGI application.  However
+the script itself is just a very small wrapper around Plack::Runner which does
+all the heavy lifting.  Plack::Runner</p>
+<ol>
+<li>parses the command line options.</li>
+<li>instantiates the chosen loader class (which is in the Plack::Loader namespace).</li>
+<li>instatiates the chosen server library (which is in the Plack::Handler namespace).</li>
+<li>starts the PSGI server and passes it a PSGI application</li>
+</ol>
+<h1 id="plackloader">Plack::Loader</h1>
+<p>Loaders are responsible for instantiating and running the PSGI server.  Here are
+the more interesting capabilities a <code>$loader</code> object has:</p>
+<ul>
+<li><code>$loader-&gt;guess()</code> guesses which server library should be loaded by looking at command line opts, $ENV, and %INC.</li>
+<li><code>$loader-&gt;load()</code> instantiates the server library and returns the object.</li>
+<li><code>$loader-&gt;run()</code> starts the server.</li>
+</ul>
+<p>The Plack::Loader namespace contains 3 kinds of loaders:</p>
+<ul>
+<li>Plack::Loader::Delayed - delays compilation of the web app until the first request occurs</li>
+<li>Plack::Loader::Restarter - reloads the server if any files are changed</li>
+<li>Plack::Loader::Shotgun - foreach request, forks a child which compiles the web app and runs it</li>
+</ul>
+<p>I can choose which loader I want using <code>plack --loader</code></p>
+<h1 id="plackhandler">Plack::Handler</h1>
+<p>The <a href="https://metacpan.org/pod/distribution/PSGI/PSGI.pod">PSGI spec</a>
+tells me that PSGI defines the interface between an application and a server.
+Because the PSGI spec is (intentionally) very minimal, there is a good deal of
+wiggle room to interpret how an application and a server might want to play
+together.</p>
+<p>A library in the Plack::Handler namespace is the place where the application
+meets the server.  This layer contains all the wiggling.</p>
+<p>Lets say I wrote a new server called AngryBrontosaurus and I want to be able to
+use it with <code>plackup --server AngryBrontosaurus</code>.  I could implement a small
+class like this:</p>
+<pre><code>package Plack::Handler::AngryBrontosaurus
+use strict;
+use AngryBrontosaurus;
+
+sub new {
+    my $class = shift;
+    bless { @_ }, $class;
+}
+
+sub run {
+    my ($self, $app) = @_; 
+    AngryBrontosaurus-&gt;new-&gt;run($app, $self);
+}
+</code></pre>
+<p>Then, to make sure AngryBrontosaurus and Plack::Handler::AngryBrontosaurus
+correctly implement the PSGI spec, I should also test my code with
+Plack::Test::Suite.</p>
+<pre><code>use Test::More;
+use Plack::Test::Suite;
+Plack::Test::Suite-&gt;run_server_tests('AngryBrontosaurus');
+done_testing;
+</code></pre>
+<p>Notice that while the Plack::Handler namespace contains classes for several
+PSGI servers like Plack::Handler::Starman or Plack::Handler::Twiggy, it also
+includes some classes like Plack::Handler::Apache2 and Plack::Handler::FCGI.
+Clearly Apache2 was not written with PSGI compliance in mind, but there is glue
+in the Plack::Handler::Apache2 layer to enable it to speak with PSGI compliant
+applications.</p>
+<h1 id="sequence-diagram">Sequence diagram</h1>
+<p>This diagram describes how Plack::Runner, Plack::Handler, and Plack::Loader
+interact.</p>
+<p><img src="/images/for-posts/2014-04-01-plack.png" alt="x"></p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

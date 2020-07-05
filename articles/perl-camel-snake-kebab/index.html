@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Camel-Snake-Kebab is a Clojure library for word case conversions. I have wanted to see this on CPAN for a while so last week I finally ported it to Perl. I even ported the test suite. Here is a synopsis of my String::CamelSnakeKebab Perl module:
+use String::CamelSnakeKebab qw/:all/; lower_camel_case(&#39;flux-capacitor&#39;) # Returns &#39;fluxCapacitor&#39; upper_camel_case(&#39;flux-capacitor&#39;) # Returns &#39;FluxCapacitor&#39; lower_snake_case &#39;ASnakeSlithersSlyly&#39; # Returns &#39;a_snake_slithers_slyly&#39; upper_snake_case(&#39;ASnakeSlithersSlyly&#39;) # Returns &#39;A_Snake_Slithers_Slyly&#39; constant_case(&amp;quot;I am constant&amp;quot;) # Returns &amp;quot;I_AM_CONSTANT&amp;quot; kebab_case(&#39;Peppers_Meat_Pineapple&#39;) # Returns &#39;peppers-meat-pineapple&#39; http_header_case(&amp;quot;x-ssl-cipher&amp;quot;) # Returns &amp;quot;X-SSL-Cipher&amp;quot;  Clojure This was my first contact with Clojure and I found the code I was reading to be bite sized, concise, elegant code." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/perl-camel-snake-kebab/" />
+
+
+    <title>
+        
+            Reading code - Camel-Snake-Kebab :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Reading code - Camel-Snake-Kebab">
+<meta itemprop="description" content="Camel-Snake-Kebab is a Clojure library for word case conversions. I have wanted to see this on CPAN for a while so last week I finally ported it to Perl. I even ported the test suite. Here is a synopsis of my String::CamelSnakeKebab Perl module:
+use String::CamelSnakeKebab qw/:all/; lower_camel_case(&#39;flux-capacitor&#39;) # Returns &#39;fluxCapacitor&#39; upper_camel_case(&#39;flux-capacitor&#39;) # Returns &#39;FluxCapacitor&#39; lower_snake_case &#39;ASnakeSlithersSlyly&#39; # Returns &#39;a_snake_slithers_slyly&#39; upper_snake_case(&#39;ASnakeSlithersSlyly&#39;) # Returns &#39;A_Snake_Slithers_Slyly&#39; constant_case(&quot;I am constant&quot;) # Returns &quot;I_AM_CONSTANT&quot; kebab_case(&#39;Peppers_Meat_Pineapple&#39;) # Returns &#39;peppers-meat-pineapple&#39; http_header_case(&quot;x-ssl-cipher&quot;) # Returns &quot;X-SSL-Cipher&quot;  Clojure This was my first contact with Clojure and I found the code I was reading to be bite sized, concise, elegant code.">
+<meta itemprop="datePublished" content="2014-05-26T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2014-05-26T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="775">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Reading code - Camel-Snake-Kebab"/>
+<meta name="twitter:description" content="Camel-Snake-Kebab is a Clojure library for word case conversions. I have wanted to see this on CPAN for a while so last week I finally ported it to Perl. I even ported the test suite. Here is a synopsis of my String::CamelSnakeKebab Perl module:
+use String::CamelSnakeKebab qw/:all/; lower_camel_case(&#39;flux-capacitor&#39;) # Returns &#39;fluxCapacitor&#39; upper_camel_case(&#39;flux-capacitor&#39;) # Returns &#39;FluxCapacitor&#39; lower_snake_case &#39;ASnakeSlithersSlyly&#39; # Returns &#39;a_snake_slithers_slyly&#39; upper_snake_case(&#39;ASnakeSlithersSlyly&#39;) # Returns &#39;A_Snake_Slithers_Slyly&#39; constant_case(&quot;I am constant&quot;) # Returns &quot;I_AM_CONSTANT&quot; kebab_case(&#39;Peppers_Meat_Pineapple&#39;) # Returns &#39;peppers-meat-pineapple&#39; http_header_case(&quot;x-ssl-cipher&quot;) # Returns &quot;X-SSL-Cipher&quot;  Clojure This was my first contact with Clojure and I found the code I was reading to be bite sized, concise, elegant code."/>
+
+
+
+    <meta property="og:title" content="Reading code - Camel-Snake-Kebab" />
+<meta property="og:description" content="Camel-Snake-Kebab is a Clojure library for word case conversions. I have wanted to see this on CPAN for a while so last week I finally ported it to Perl. I even ported the test suite. Here is a synopsis of my String::CamelSnakeKebab Perl module:
+use String::CamelSnakeKebab qw/:all/; lower_camel_case(&#39;flux-capacitor&#39;) # Returns &#39;fluxCapacitor&#39; upper_camel_case(&#39;flux-capacitor&#39;) # Returns &#39;FluxCapacitor&#39; lower_snake_case &#39;ASnakeSlithersSlyly&#39; # Returns &#39;a_snake_slithers_slyly&#39; upper_snake_case(&#39;ASnakeSlithersSlyly&#39;) # Returns &#39;A_Snake_Slithers_Slyly&#39; constant_case(&quot;I am constant&quot;) # Returns &quot;I_AM_CONSTANT&quot; kebab_case(&#39;Peppers_Meat_Pineapple&#39;) # Returns &#39;peppers-meat-pineapple&#39; http_header_case(&quot;x-ssl-cipher&quot;) # Returns &quot;X-SSL-Cipher&quot;  Clojure This was my first contact with Clojure and I found the code I was reading to be bite sized, concise, elegant code." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/perl-camel-snake-kebab/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2014-05-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2014-05-26T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="[perl readingcode writingcode]" />
+
+
+
+    <meta property="article:published_time" content="2014-05-26 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/perl-camel-snake-kebab/">Reading code - Camel-Snake-Kebab</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p><a href="https://github.com/qerub/camel-snake-kebab">Camel-Snake-Kebab</a> is a Clojure
+library for word case conversions.  I have wanted to see this on CPAN for a
+while so last week I finally ported it to Perl.  I even ported the test suite.
+Here is a synopsis of my
+<a href="https://metacpan.org/pod/String::CamelSnakeKebab">String::CamelSnakeKebab</a> Perl module:</p>
+<pre><code>use String::CamelSnakeKebab qw/:all/;
+
+lower_camel_case('flux-capacitor')
+       # Returns 'fluxCapacitor'
+
+upper_camel_case('flux-capacitor')
+       # Returns 'FluxCapacitor'
+
+lower_snake_case 'ASnakeSlithersSlyly'    
+       # Returns 'a_snake_slithers_slyly'
+
+upper_snake_case('ASnakeSlithersSlyly')
+       # Returns 'A_Snake_Slithers_Slyly'
+
+constant_case(&quot;I am constant&quot;)
+    # Returns &quot;I_AM_CONSTANT&quot;
+
+kebab_case('Peppers_Meat_Pineapple')
+ # Returns 'peppers-meat-pineapple'
+
+http_header_case(&quot;x-ssl-cipher&quot;)
+       # Returns &quot;X-SSL-Cipher&quot;
+</code></pre>
+<h1 id="clojure">Clojure</h1>
+<p>This was my first contact with Clojure and I found the code I was reading to be
+bite sized, concise, elegant code.  It reads a bit like math equations to
+me.  Or sort of vaguely BNF-like as you will see.  I suspect I would have had a
+hard time choosing a better library as my introduction to the language.</p>
+<h1 id="functional-programming">Functional programming</h1>
+<p>Clojure is a functional language &ndash; as contrasted with more common imperative
+languages.  I will admit I didn&rsquo;t really know what that means.  But hey I
+looked it up so I can now present to you 3 central concepts of functional
+programming.  (Btw Perl is usually imperative but it can be written
+functionally as well.  Although its a little easier and more natural in
+Clojure).</p>
+<h2 id="1-first-class-and-higher-order-functions">1. First class and higher order functions</h2>
+<p>These are functions which accept other functions as arguments.  So functional
+programmers enjoy passing around code refs.  Thats not radical for Perl
+developers.  Perl has always had excellent support for that.</p>
+<p>This flavor of code is often shorter, more general, and less repetitive.
+But its harder to read and requires me to use my brains causes me some
+discomfort.</p>
+<h3 id="example">Example</h3>
+<p>The most important function in Camel-Snake-Kebab is <code>convert-case</code>.  It is
+called by every case conversion function in the library.  It splits a string
+into words, applies a case rule to the first word and then a second possibly
+different case rule to the remaining words.  Then all the words are joined back
+together using the given separator.  Here it is written in Clojure:</p>
+<pre><code>(defn convert-case [first-fn rest-fn sep s]
+&quot;Converts the case of a string according to the rule for the first
+word, remaining words, and the separator.&quot;
+(let [[first &amp; rest] (split s word-separator-pattern)]
+    (join sep (cons (first-fn first) (map rest-fn rest)))))
+</code></pre>
+<p>Using this I could implement lower snake case like this:</p>
+<pre><code>(defn lower-snake-case [s]
+    (convert-case lower-case lower-case &quot;_&quot; s))
+</code></pre>
+<p>Here is the translation in Perl I came up with:</p>
+<pre><code>sub convert_case {
+    my ($first_coderef, $rest_coderef, $separator, $string) = @_; 
+
+    my ($first, @rest) = split $WORD_SEPARATOR_PATTERN, $string;
+
+    my @words = $first_coderef-&gt;($first);
+    push @words, $rest_coderef-&gt;($_) for @rest;
+
+    return join $separator, @words;
+}
+
+sub my_lc { lc $_ }
+
+sub lower_snake_case {
+    convert_case( \&amp;my_lc, \&amp;my_lc, &quot;_&quot;, shift );
+}
+</code></pre>
+<p>The cool thing about this is the different case methods (lower_camel_case,
+kebab_case, etc) are not actually implemented this way.  They are dynamically
+created when the module loads using a set of conversion rules that looks like
+this:</p>
+<pre><code>our %CONVERSION_RULES = (
+    'lower_camel_case' =&gt; [ \&amp;lc,               \&amp;ucfirst,          &quot;&quot;  ],
+    'upper_camel_case' =&gt; [ \&amp;ucfirst,          \&amp;ucfirst,          &quot;&quot;  ],
+    'lower_snake_case' =&gt; [ \&amp;lc,               \&amp;lc,               &quot;_&quot; ],
+    'upper_snake_case' =&gt; [ \&amp;ucfirst,          \&amp;ucfirst,          &quot;_&quot; ],
+    'constant_case'    =&gt; [ \&amp;uc,               \&amp;uc,               &quot;_&quot; ],
+    'kebab_case'       =&gt; [ \&amp;lc,               \&amp;lc,               &quot;-&quot; ],
+    'http_header_case' =&gt; [ \&amp;http_header_caps, \&amp;http_header_caps, &quot;-&quot; ],
+);
+</code></pre>
+<h2 id="2-purely-functional-functions">2. Purely functional functions</h2>
+<p>These are functions with no state and no side effects.  In functional
+programming I can&rsquo;t do assignments because that alters state (and that is a
+side effect).  Which sounds rediculous.  How can I program without doing
+assignments?  I&rsquo;m not sure, but the advantage of no side effects is
+performance.  I can run functions in parallel without affecting each other.
+Also the function&rsquo;s output will depend entirely on the input which makes purely
+functional functions great for <a href="https://metacpan.org/pod/Memoize">memoization</a>.</p>
+<h3 id="example-1">Example</h3>
+<p>This concept was also evident in the code I ported.  Functions did not modify
+state.  There were very few if any assignments.  And the output of functions
+depended entirely on the input.</p>
+<p>I did try memoizing String::CamelSnakeKebab but it did not make it faster.  I&rsquo;m
+not sure why.  Perhaps case conversion is just not computationally intensive
+enough to make a difference?  So unfortunately I have no example for you.  Any
+help in the comments would be awesome.</p>
+<h2 id="3-no-for-loops">3. No <code>for</code> loops</h2>
+<p><code>for</code> loops require state and assignments.  To implement loops in functional
+programming I&rsquo;m supposed to use recursion.  I didn&rsquo;t see any examples of this
+in this library and my brain is grateful to the author for sparing me the
+exertion.</p>
+<h1 id="the-end">The End</h1>
+<p>Thats the end of my story today.  If you are interested, compare the
+<a href="https://github.com/kablamo/perl-string-camelsnakekebab/blob/master/lib/String/CamelSnakeKebab.pm">Perl source code</a>
+with the
+<a href="https://github.com/qerub/camel-snake-kebab/blob/stable/src/camel_snake_kebab.clj">Clojure source code</a>.
+Each version is about 70 lines of code.</p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

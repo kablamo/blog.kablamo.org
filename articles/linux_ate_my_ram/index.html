@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="I can never remember how to know how much free memory I have.
+The Linux kernel claims most of the operating system&amp;rsquo;s memory. That doesn&amp;rsquo;t mean the operating system is out of memory. It means the kernel has claimed it and is managing it. The problem is that the Linux kernel defines &amp;lsquo;free&amp;rsquo; memory differently than any reasonable user. There are excellent shiny reasons for that, but as a user I don&amp;rsquo;t really care." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/linux_ate_my_ram/" />
+
+
+    <title>
+        
+            My contribution to the Linux ate my RAM problem :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="My contribution to the Linux ate my RAM problem">
+<meta itemprop="description" content="I can never remember how to know how much free memory I have.
+The Linux kernel claims most of the operating system&rsquo;s memory. That doesn&rsquo;t mean the operating system is out of memory. It means the kernel has claimed it and is managing it. The problem is that the Linux kernel defines &lsquo;free&rsquo; memory differently than any reasonable user. There are excellent shiny reasons for that, but as a user I don&rsquo;t really care.">
+<meta itemprop="datePublished" content="2013-11-12T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2013-11-12T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="268">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="My contribution to the Linux ate my RAM problem"/>
+<meta name="twitter:description" content="I can never remember how to know how much free memory I have.
+The Linux kernel claims most of the operating system&rsquo;s memory. That doesn&rsquo;t mean the operating system is out of memory. It means the kernel has claimed it and is managing it. The problem is that the Linux kernel defines &lsquo;free&rsquo; memory differently than any reasonable user. There are excellent shiny reasons for that, but as a user I don&rsquo;t really care."/>
+
+
+
+    <meta property="og:title" content="My contribution to the Linux ate my RAM problem" />
+<meta property="og:description" content="I can never remember how to know how much free memory I have.
+The Linux kernel claims most of the operating system&rsquo;s memory. That doesn&rsquo;t mean the operating system is out of memory. It means the kernel has claimed it and is managing it. The problem is that the Linux kernel defines &lsquo;free&rsquo; memory differently than any reasonable user. There are excellent shiny reasons for that, but as a user I don&rsquo;t really care." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/linux_ate_my_ram/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2013-11-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-11-12T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="uncategorized" />
+
+
+
+    <meta property="article:published_time" content="2013-11-12 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/linux_ate_my_ram/">My contribution to the Linux ate my RAM problem</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <p>I can never remember how to know how much free memory I have.</p>
+<p>The Linux kernel claims most of the operating system&rsquo;s memory.  That doesn&rsquo;t
+mean the operating system is out of memory.  It means the kernel has claimed it
+and is managing it.  The problem is that the Linux kernel defines &lsquo;free&rsquo; memory
+differently than any reasonable user.  There are excellent shiny reasons for
+that, but as a user I don&rsquo;t really care.</p>
+<pre><code>~ ⚡ free -m 
+            total       used       free     shared    buffers     cached
+Mem:          3822       2066       1755          0        147       1125
+-/+ buffers/cache:        793       3029
+Swap:         3394          0       3394
+</code></pre>
+<p>Experienced users and sysadmins will know from this means my system currently
+has 3822 MB of total memory and 3029 MB of free memory.  Errr.  What?  See
+<a href="http://www.linuxatemyram.com">linuxatemyram.com</a> for a more detailed
+explanation.</p>
+<p>I think the world deserves something easier to deal with.  So I wrote &lsquo;mem&rsquo;.
+Use it like this:</p>
+<pre><code>~ ⚡ mem
+   927 MB used (24%)
+  3823 MB total
+</code></pre>
+<p>Its a bash function.  I put the following in my
+<a href="https://github.com/kablamo/dotfiles/blob/master/links/.bash/aliases.sh">.bashrc</a>:</p>
+<pre><code>mem() {
+    memfree=$( grep '^MemFree:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf &quot;%0.0f&quot;, mem }' )
+    buffers=$( grep '^Buffers:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf &quot;%0.0f&quot;, mem }' )
+    cached=$(  grep '^Cached:'  /proc/meminfo | awk '{ mem=($2)/(1024) ; printf &quot;%0.0f&quot;, mem }' )
+    free=$( echo $memfree+$buffers+$cached | bc -l )
+
+    total=$( grep '^MemTotal:' /proc/meminfo | awk '{ mem=($2)/(1024) ; printf &quot;%0.0f&quot;, mem }' )
+    used=$( echo $total-$free | bc -l )
+    pct=$( echo 100*$used/$total | bc -l )
+
+    printf &quot;%5.f MB used (%.0f%%)\n%5.f MB total\n&quot; $used $pct $total
+}
+</code></pre>
+<p>See also &lsquo;htop&rsquo; (sudo apt-get install htop).</p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

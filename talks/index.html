@@ -1,196 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="MooX::Commander How to build command line apps with sub commands and option parsing and OO.
+Slides | GitHub repo
+The Perl test ecosystem How to write tests in Perl. An exploration of CPAN test libraries.
+Slides | GitHub repo
+Publish your first CPAN module in &amp;lt; 5 minutes I originally gave this talk at Chicago.pm as part of a &amp;ldquo;Distribution Management Shootout&amp;rdquo; &amp;ndash; a 3 way duel between
+ jberger&amp;rsquo;s talk about Module::Build and the &amp;ldquo;Classic&amp;rdquo; build systems preaction&amp;rsquo;s talk about Dist::Zilla, and my talk about Minilla and Carton." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/talks/" />
 
-  <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>talks</title>
-  <meta name="description" content="Kablamo is Eric Johnson's blog. I want to do more and be better. Financial independence, entrepreneurship, productivity, and code.  
-">
-
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://blog.kablamo.org/talks/">
-  <link rel="alternate" type="application/rss+xml" title="kablamo" href="http://blog.kablamo.org/feed.xml" />
-</head>
+    <title>
+        
+            Talks :: Kablamo 
+        
+    </title>
 
 
-  <body>
 
-    
-  <div class="wrapper">
-<header class="site-header">
-    <a class="site-title" href="/"><span class="site-title-bold">kablamo</span></a>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
 
-    <nav class="site-nav">
-      <a href="#" class="menu-icon">
-        <svg viewBox="0 0 18 15">
-          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-        </svg>
-      </a>
 
-      <div class="trigger">
-          <a class="page-link" href="/about">About</a>
-          <a class="page-link" href="/categories/financial-independence">Financial independence</a>
-          <a class="page-link" href="/categories/perl">Perl</a>
-          <a class="page-link" href="/categories/experiments">Experiments</a>
-          <a class="page-link" href="/talks">Talks</a>
-          <a class="page-link" href="/reading-list">What I'm reading</a>
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      </div>
-    </nav>
 
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Talks">
+<meta itemprop="description" content="MooX::Commander How to build command line apps with sub commands and option parsing and OO.
+Slides | GitHub repo
+The Perl test ecosystem How to write tests in Perl. An exploration of CPAN test libraries.
+Slides | GitHub repo
+Publish your first CPAN module in &lt; 5 minutes I originally gave this talk at Chicago.pm as part of a &ldquo;Distribution Management Shootout&rdquo; &ndash; a 3 way duel between
+ jberger&rsquo;s talk about Module::Build and the &ldquo;Classic&rdquo; build systems preaction&rsquo;s talk about Dist::Zilla, and my talk about Minilla and Carton.">
+
+<meta itemprop="wordCount" content="129">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Talks"/>
+<meta name="twitter:description" content="MooX::Commander How to build command line apps with sub commands and option parsing and OO.
+Slides | GitHub repo
+The Perl test ecosystem How to write tests in Perl. An exploration of CPAN test libraries.
+Slides | GitHub repo
+Publish your first CPAN module in &lt; 5 minutes I originally gave this talk at Chicago.pm as part of a &ldquo;Distribution Management Shootout&rdquo; &ndash; a 3 way duel between
+ jberger&rsquo;s talk about Module::Build and the &ldquo;Classic&rdquo; build systems preaction&rsquo;s talk about Dist::Zilla, and my talk about Minilla and Carton."/>
+
+
+
+    <meta property="og:title" content="Talks" />
+<meta property="og:description" content="MooX::Commander How to build command line apps with sub commands and option parsing and OO.
+Slides | GitHub repo
+The Perl test ecosystem How to write tests in Perl. An exploration of CPAN test libraries.
+Slides | GitHub repo
+Publish your first CPAN module in &lt; 5 minutes I originally gave this talk at Chicago.pm as part of a &ldquo;Distribution Management Shootout&rdquo; &ndash; a 3 way duel between
+ jberger&rsquo;s talk about Module::Build and the &ldquo;Classic&rdquo; build systems preaction&rsquo;s talk about Dist::Zilla, and my talk about Minilla and Carton." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/talks/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="og:site_name" content="Kablamo" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
 </header>
-  </div>
 
 
-    <div class="page-content">
-      <div class="post">
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/talks/">Talks</a></h2>
 
-  <style>
-    .page-header {
-        background          : url(/images/talks-small.jpg);
-        background-position : center;
-        background-repeat   : no-repeat;
-        background-size     : cover;
-        margin-bottom       : 0;
-    }
-    .page-title {
-        
-    }
-    .post {
-        padding: 0;
-    }
-    .post-content {
-        background: #eee;
-    }
-    .post-content .wrapper {
-        background: #fff;
-        padding: 2rem;
-    }
-  </style>
-  <header class="page-header">
-    <h1 class="page-title">talks</h1>
-  </header>
+        <div class="post-info">
+            
+        </div>
 
-  <article class="post-content">
-    <div class="wrapper">
-     <p>I consider these talks reference material.  I keep them updated and relevant so
-I can refer people to them.  If I’ve missed anything feel free to create an
-issue on the github repo or contribute a pull request.</p>
+        <article>
+            <br>
 
-<h1 id="mooxcommander">MooX::Commander</h1>
+            
+                <img src="/images/talks-small.jpg" class="post-cover" />
+            
 
-<p>How to build command line apps with sub commands and option parsing and OO.<br />
+            <div class="post-content">
+                <h1 id="mooxcommander">MooX::Commander</h1>
+<p>How to build command line apps with sub commands and option parsing and OO.<br>
 <a href="http://kablamo.org/slides-moox-commander/#/">Slides</a> |
 <a href="https://github.com/kablamo/slides-moox-commander">GitHub repo</a></p>
-
 <h1 id="the-perl-test-ecosystem">The Perl test ecosystem</h1>
-<p>How to write tests in Perl.  An exploration of CPAN test libraries.<br />
+<p>How to write tests in Perl.  An exploration of CPAN test libraries.<br>
 <a href="http://kablamo.org/slides-perl-testing">Slides</a> |
 <a href="http://github.com/kablamo/slides-perl-testing">GitHub repo</a></p>
-
 <h1 id="publish-your-first-cpan-module-in-lt-5-minutes">Publish your first CPAN module in &lt; 5 minutes</h1>
-<p>I originally gave this talk at Chicago.pm as part of a “Distribution Management
-Shootout” – a 3 way duel between</p>
-
+<p>I originally gave this talk at Chicago.pm as part of a &ldquo;Distribution Management
+Shootout&rdquo; &ndash; a 3 way duel between</p>
 <ul>
-  <li>jberger’s <a href="http://jberger.github.io/ModuleBuildPresentation">talk</a> about Module::Build and the “Classic” build systems</li>
-  <li>preaction’s <a href="http://preaction.github.io/Introduction-to-Dist-Zilla">talk</a> about Dist::Zilla, and</li>
-  <li>my <a href="http://kablamo.org/slides-first-cpan-module">talk</a> about Minilla and Carton.</li>
+<li>jberger&rsquo;s <a href="http://jberger.github.io/ModuleBuildPresentation">talk</a> about Module::Build and the &ldquo;Classic&rdquo; build systems</li>
+<li>preaction&rsquo;s <a href="http://preaction.github.io/Introduction-to-Dist-Zilla">talk</a> about Dist::Zilla, and</li>
+<li>my <a href="http://kablamo.org/slides-first-cpan-module">talk</a> about Minilla and Carton.</li>
 </ul>
-
 <p>It was a great overview of the most popular tools and I thought all the talks
 were worth checking out.</p>
-
 <p><a href="http://kablamo.org/slides-first-cpan-module">Slides</a> |
 <a href="http://github.com/kablamo/slides-first-cpan-module">GitHub repo</a></p>
-
 <h1 id="introduction-to-moo">Introduction to Moo</h1>
-<p>How to write object oriented code in Perl using Moo. <br />
+<p>How to write object oriented code in Perl using Moo. <br>
 <a href="http://kablamo.org/slides-intro-to-moo">Slides</a> |
 <a href="http://github.com/kablamo/slides-intro-to-moo">GitHub repo</a></p>
 
+            </div>
+        </article>
 
-    </div>
-  </article>
+        <div class="post-info">
+  		</div>
+    </main>
 
-</div>
+            </div>
 
-    </div>
+            
+                
+            
+        </div>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110455056-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-110455056-2');
-</script>
+        
 
 
-  </body>
 
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
 </html>

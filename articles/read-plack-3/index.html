@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  PSGI Applications The PSGI spec defines a PSGI application.
+ A PSGI application is a Perl code reference. It takes exactly one argument, the environment, and returns an array reference containing exactly three values.
+ The three values are a status, headers, and a body. Here is an example:" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/read-plack-3/" />
+
+
+    <title>
+        
+            Reading code - PSGI Application Architecture :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Reading code - PSGI Application Architecture">
+<meta itemprop="description" content="Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  PSGI Applications The PSGI spec defines a PSGI application.
+ A PSGI application is a Perl code reference. It takes exactly one argument, the environment, and returns an array reference containing exactly three values.
+ The three values are a status, headers, and a body. Here is an example:">
+<meta itemprop="datePublished" content="2014-04-11T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2014-04-11T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="616">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="Reading code - PSGI Application Architecture"/>
+<meta name="twitter:description" content="Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  PSGI Applications The PSGI spec defines a PSGI application.
+ A PSGI application is a Perl code reference. It takes exactly one argument, the environment, and returns an array reference containing exactly three values.
+ The three values are a status, headers, and a body. Here is an example:"/>
+
+
+
+    <meta property="og:title" content="Reading code - PSGI Application Architecture" />
+<meta property="og:description" content="Part 1 - An Overview Part 2 - plackup Architecture Part 3 - PSGI Application Architecture Part 4 - Plack::Builder  PSGI Applications The PSGI spec defines a PSGI application.
+ A PSGI application is a Perl code reference. It takes exactly one argument, the environment, and returns an array reference containing exactly three values.
+ The three values are a status, headers, and a body. Here is an example:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/read-plack-3/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2014-04-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2014-04-11T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="perl" />
+
+
+
+    <meta property="article:published_time" content="2014-04-11 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/read-plack-3/">Reading code - PSGI Application Architecture</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <ul>
+<li><a href="/2014/04/08/read-plack-1">Part 1 - An Overview</a></li>
+<li><a href="/2014/04/09/read-plack-2">Part 2 - plackup Architecture</a></li>
+<li><a href="/2014/04/11/read-plack-3"><strong>Part 3 - PSGI Application Architecture</strong></a></li>
+<li><a href="/2014/04/12/read-plack-4">Part 4 - Plack::Builder</a></li>
+</ul>
+<h1 id="psgi-applications">PSGI Applications</h1>
+<p>The <a href="https://metacpan.org/pod/distribution/PSGI/PSGI.pod">PSGI spec</a> defines
+a PSGI application.</p>
+<blockquote>
+<p>A PSGI application is a Perl code reference. It takes exactly one argument,
+the environment, and returns an array reference containing exactly three
+values.</p>
+</blockquote>
+<p>The three values are a status, headers, and a body.  Here is an example:</p>
+<pre><code>my $app = sub {
+    my $env = shift;
+    return [
+        '200',
+        [ 'Content-Type' =&gt; 'text/plain' ],
+        [ &quot;Hello World&quot; ], # or IO::Handle-like object
+    ];
+};
+</code></pre>
+<h1 id="the-psgi-environment-hash">The PSGI environment hash</h1>
+<p>The PSGI environment hash is a hashref with many keys.  But mostly it is the
+data (headers, body, etc) from an HTTP::Request which has been parsed and put into
+a hash for convenient access.</p>
+<h1 id="middleware">Middleware</h1>
+<p>A middleware component takes a PSGI application and runs it, passing in the
+PSGI environment hash.  But before it runs the app, it gets to modify the
+environment if it wants to.  And after running the app, it can modify the
+response if it wants to.</p>
+<h1 id="plackmiddleware">Plack::Middleware</h1>
+<p>Middleware is a wrapper around a PSGI app.  More than one middleware can be
+wrapped around an app, creating a series of layers like an
+<a href="http://blogs.perl.org/users/jakob/2012/09/28/middleware-onion.png/500px-MiddlewareOnion.svg.png">onion</a>.
+What makes the middleware onion a somewhat unusual construct is the event
+driven / callback nature of it.  Lets look at how its implemented.</p>
+<p>All middleware inherits from Plack::Middleware which is an itsy bitsy (teeny
+weeny) module.  The middleware onion is created with just 2 short subroutines
+(notice the <code>call()</code> and <code>prepare_app()</code> subs are written by middleware authors):</p>
+<pre><code>sub wrap {
+    my($self, $app, @args) = @_;
+    if (ref $self) {
+        $self-&gt;{app} = $app;
+    } else {
+        $self = $self-&gt;new({ app =&gt; $app, @args });
+    }
+    return $self-&gt;to_app;
+}
+
+sub to_app {
+    my $self = shift;
+    $self-&gt;prepare_app;
+    return sub { $self-&gt;call(@_) };
+}
+</code></pre>
+<p>How do these subs work together?  The middleware onion is sometimes constructed as follows:</p>
+<pre><code>my $app = MyWebApp-&gt;new-&gt;to_app;
+$app = Plack::Middleware::A-&gt;wrap($app);
+$app = Plack::Middleware::B-&gt;wrap($app);
+$app = Plack::Middleware::C-&gt;wrap($app);
+</code></pre>
+<p>But it might be more clear to write it this way</p>
+<pre><code>my $app0 = MyWebApp-&gt;new-&gt;to_app;           # $app0-&gt;($env) runs the web app
+$app1 = Plack::Middleware::A-&gt;wrap($app0);  # $app1-&gt;($env) calls P::M::A-&gt;call() which calls $app0-&gt;($env)
+$app2 = Plack::Middleware::B-&gt;wrap($app1);  # $app2-&gt;($env) calls P::M::B-&gt;call() which calls $app1-&gt;($env)
+$app3 = Plack::Middleware::C-&gt;wrap($app2);  # $app3-&gt;($env) calls P::M::C-&gt;call() which calls $app2-&gt;($env)
+                                            # When the server receives a request it calls $app3-&gt;($env)
+</code></pre>
+<p>So when an event occurs &ndash; for example the PSGI server sees a new request &ndash; it
+passes the event to the app.  The app is a chain of callbacks which run each
+other.  This is clearly an example of event driven programming.</p>
+<h1 id="plackcomponent-and-plackapp">Plack::Component and Plack::App</h1>
+<p>Plack::Middleware inherits from Plack::Component.  So the most common use of
+Plack::Component is in middleware.</p>
+<p>Plack::Component can also be used as a tool for creating PSGI applications.  It
+has a light dusting of code, but mostly its an interface which is implemented
+by modules in the Plack::App namespace.  For example Plack::App::File is a web
+app which serves static files from a root directory, and Plack::App::URLMap is
+a web app which maps multiple web apps to multiple urls.</p>
+<p>But notice that I am not required to use Plack::Component to create a PSGI
+application. A PSGI application is just a code reference.  The PSGI spec does
+not say that a PSGI application is a reference to code that inherits from
+Plack::Component.</p>
+<p>The nice thing about using Plack::Component to build my app is that it
+provides a common interface for all PSGI apps.  Whenever I see <code>$app</code>, I
+can rely on that behavior.  This is clearly important for middleware.  And it
+feels good from a design point of view.</p>
+<p>But its not required and it adds some complexity.</p>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

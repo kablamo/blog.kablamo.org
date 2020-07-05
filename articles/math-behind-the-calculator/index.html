@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Networthify.com calculates how many years you have to retirement. Lots of people have been curious about how it arrives at the magic number. The answer to this question is: Math!
+More specifically the equation which drives the calculator is derived from two common formulas used for dealing with compound interest. Many people must have done this before me but I couldn&amp;rsquo;t find an example online and I enjoyed doing the math anyway." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="http://blog.kablamo.org/articles/math-behind-the-calculator/" />
+
+
+    <title>
+        
+            The math behind the calculator :: Kablamo 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.97aa9a70e77fda7ebe8e8e42e0c018edc2abade352ef9beb01545eb71b5e014d.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="The math behind the calculator">
+<meta itemprop="description" content="Networthify.com calculates how many years you have to retirement. Lots of people have been curious about how it arrives at the magic number. The answer to this question is: Math!
+More specifically the equation which drives the calculator is derived from two common formulas used for dealing with compound interest. Many people must have done this before me but I couldn&rsquo;t find an example online and I enjoyed doing the math anyway.">
+<meta itemprop="datePublished" content="2012-08-17T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2012-08-17T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="682">
+<meta itemprop="image" content="http://blog.kablamo.org/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://blog.kablamo.org/"/>
+
+<meta name="twitter:title" content="The math behind the calculator"/>
+<meta name="twitter:description" content="Networthify.com calculates how many years you have to retirement. Lots of people have been curious about how it arrives at the magic number. The answer to this question is: Math!
+More specifically the equation which drives the calculator is derived from two common formulas used for dealing with compound interest. Many people must have done this before me but I couldn&rsquo;t find an example online and I enjoyed doing the math anyway."/>
+
+
+
+    <meta property="og:title" content="The math behind the calculator" />
+<meta property="og:description" content="Networthify.com calculates how many years you have to retirement. Lots of people have been curious about how it arrives at the magic number. The answer to this question is: Math!
+More specifically the equation which drives the calculator is derived from two common formulas used for dealing with compound interest. Many people must have done this before me but I couldn&rsquo;t find an example online and I enjoyed doing the math anyway." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.kablamo.org/articles/math-behind-the-calculator/" />
+<meta property="og:image" content="http://blog.kablamo.org/"/>
+<meta property="article:published_time" content="2012-08-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2012-08-17T00:00:00+00:00" /><meta property="og:site_name" content="Kablamo" />
+
+
+
+
+    <meta property="article:section" content="financial-independence" />
+
+
+
+    <meta property="article:published_time" content="2012-08-17 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__text">kablamo</span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://blog.kablamo.org/about">About</a></li><li><a href="http://blog.kablamo.org/books">Book Recommendations</a></li><li><a href="http://blog.kablamo.org/financial-independence">Financial Independence</a></li><li><a href="http://blog.kablamo.org/retrospectives">Retrospectives</a></li><li><a href="http://blog.kablamo.org/talks">Talks</a></li>
+    </ul>
+</nav>
+
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+        <h2 class="single-post-title"><a href="http://blog.kablamo.org/articles/math-behind-the-calculator/">The math behind the calculator</a></h2>
+
+        <div class="post-info">
+            
+        </div>
+
+        <article>
+            <br>
+
+            
+
+            <div class="post-content">
+                <script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<p>Networthify.com calculates how many years you have to retirement. Lots of
+people have been curious about how it arrives at the magic number.  The answer
+to this question is: <em>Math!</em></p>
+<p>More specifically the equation which drives the calculator is derived from
+two common formulas used for dealing with compound interest. Many people must
+have done this before me but I couldn&rsquo;t find an example online and I enjoyed
+doing the math anyway.</p>
+<p><img src="/images/math.jpg" alt="math"></p>
+<p>Before we start with the math, we have to define retirement or else we can&rsquo;t
+calculate how long it takes to get there.  This is a bit of a problem because
+people will define it differently.  But I&rsquo;ll just go ahead do it anyway.</p>
+<p>First, I have no idea what my expenses after retirement are going to be but I
+decided it can&rsquo;t be that different from my current expenses. After all I will
+still need to pay for food, housing, and entertainment.</p>
+<p>Also, I don&rsquo;t want to ever draw down my retirement nest egg. I want my wealth
+to grow, not shrink. I&rsquo;m being overly safe, but I don&rsquo;t want to have some bad
+luck or unexpectedly live to 120 years old and have to lower my standard of
+living.  I want my standard of living to go up because thats way more fun.</p>
+<p>So this is how I defined retirement:</p>
+<p>
+  \[ 
+    \begin{aligned}
+      currentExpenses &amp; = annualIncome - annualSavings \\
+      futureExpenses  &amp; = withdrawalRate \times futureValue \\
+      currentExpenses &amp; = futureExpenses \\
+    \end{aligned}
+  \]
+</p>
+<p>where <em>futureValue</em> is my total savings after retirement and <em>withdrawalRate</em>
+is slightly less than my average annual return on investment.  What we want to
+know is how long will it take to save a pile of money equal in size to
+<em>futureValue</em>.</p>
+<p>Notice there are 2 basic ways to build a pile of money over time:</p>
+<ol>
+<li>Earn interest earned on our existing and growing pile of saved up money.</li>
+<li>Contribute savings from our annual income.</li>
+</ol>
+<p>Happily there are formulas for calculating this stuff.  Lets take a look at them.</p>
+<div class="mathHeader">The capital accumulation formula</div>
+<p>\[ futureValueA = initialValue \times (1 + interestRate)^n \]</p>
+<p>Lets say you have an initial pile of money.  And someone is willing to pay you
+some interest for it.  This formula calculates how big your pile of money will
+be in the future.</p>
+<p>More precisely: it calculates how much money you will have in the future given
+an initial balance which earns interest each time period for n time periods.
+The time period I use is one month.</p>
+<div class="mathHeader">The future value of a series formula</div>
+<p>\[ futureValueB = payment \times \frac{ (1 + interestRate)^n - 1 }{ interestRate } \]</p>
+<p>This formula also calculates how much money you will have in the future. But
+this time you start with no money and contribute a payment each time period for
+n time periods while earning interest on your growing pile of money.</p>
+<p>Again I want to use a time period of one month.  I&rsquo;ll make a small change and
+now this formula calculates what happens when you put some of your salary into
+your savings account each month:</p>
+<p>
+  \[ futureValueB = \frac{annualIncome}{12} \times \frac{ (1 + interestRate)^n - 1 }{ interestRate } \]
+</p>
+<p>But what we really want is a single formula we can solve for n to figure out
+how long it will take to reach retirement.  So lets start doing some
+substitutions:</p>
+<p>
+  \[ 
+    \begin{aligned}
+                   currentExpenses &amp; = annualIncome - annualSavings \\
+                   futureExpenses  &amp; = withdrawalRate \times futureValue \\
+                   currentExpenses &amp; = futureExpenses \\
+                                   \\
+                      futureValue &amp; = futureValueA + futureValueB \\
+                                   \\
+                   currentExpenses &amp; = withdrawalRate \times (futureValueA + futureValueB) \\
+      annualIncome - annualSavings &amp; = withdrawalRate \times (futureValueA + futureValueB) \\
+    \end{aligned}
+  \] 
+</p>
+<p>Awesome.  So now its a &ldquo;simple&rdquo; matter of solving for n. So after doing substitutions for <em>futureValueA</em> and <em>futureValueB</em>,
+doing natural log stuff, <em>handwaving</em>, <em>handwaving</em> &ndash; I arrived at the following:</p>
+<p>
+  \[
+    n = \frac{ln(interestRate \times \frac{\frac{1 - savingsRate}{savingsRate} + withdrawalRate \times initialValue}{withdrawalRate \times initialValue})}{ln(1 + interestRate)}
+  \]
+</p>
+<p>And thats the math behind the calculator.  Here is more reading for the super duper interested:</p>
+<ul>
+<li><a href="http://betterexplained.com/articles/demystifying-the-natural-logarithm-ln/">http://betterexplained.com/articles/demystifying-the-natural-logarithm-ln/</a></li>
+<li><a href="http://www.patrickschneider.com/blog/2008/03/compound-interest-with-an-initial-balance-and-monthly-contributions/">http://www.patrickschneider.com/blog/2008/03/compound-interest-with-an-initial-balance-and-monthly-contributions/</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Compound_interest">http://en.wikipedia.org/wiki/Compound_interest</a></li>
+</ul>
+
+            </div>
+        </article>
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>
