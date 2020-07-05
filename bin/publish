@@ -1,0 +1,10 @@
+#!/bin/bash 
+
+set -e
+
+cd public
+git checkout gh-pages
+git add -A
+git status
+git commit -a -m 'More'
+git push

@@ -1,0 +1,19 @@
+{{ define "main" }}
+
+    <img src="/images/ash-cloud.jpg" class="post-cover">
+    <main class="posts">
+
+        <ul class="posts-list">
+        {{ range $key, $category := .Site.Taxonomies.categories}}
+            <h1 class="category">{{- $key -}}</h1>
+            {{ range first 10 $category.Pages }}
+            <li class="post-item">
+                <span class="post-title"><a href="{{ .Permalink }}">{{- .Title -}}</a></span>
+                <span class="post-day">{{ .Date.Format "2006-01-02" }}</span>
+            </li>
+            {{ end }}
+        {{ end }}
+        </ul>
+
+    </main>
+{{ end }}

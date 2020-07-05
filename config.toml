@@ -1,0 +1,88 @@
+baseURL                = "http://blog.kablamo.org/"
+languageCode           = "en-us"
+title                  = "kablamo"
+theme                  = "hello-friend-ng"
+paginate               = 10
+enableInlineShortCodes = true
+
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04 -0700"
+
+  homeSubtitle = ""
+  disableReadOtherPosts = false
+
+  # Metadata mostly used in document's head
+  description = "My new homepage or blog"
+  keywords = "homepage, blog"
+  images = [""]
+
+  # Default theme "light" or "dark"
+  defaultTheme = "dark"
+
+  [params.favicon.color]
+    mask = "#252627"
+    msapplication = "#252627"
+    theme = "#252627"
+
+  # Social icons
+  [[params.social]]
+    name = "twitter"
+    url  = "https://twitter.com/kablamo_"
+
+  [[params.social]]
+    name = "email"
+    url  = "mailto:sayhey@kablamo.org"
+
+  [[params.social]]
+    name = "github"
+    url  = "https://github.com/kablamo"
+
+[taxonomies]
+    category = "categories"
+    tag      = "tags"
+    series   = "series"
+
+[languages]
+  [languages.en]
+    title = "Kablamo"
+    subtitle = ""
+    keywords = ""
+    copyright = ''
+    readOtherPosts = "Read other articles"
+
+    [languages.en.params.logo]
+      logoText = "kablamo"
+      logoHomeLink = "/"
+      logoCursorDisabled = false
+    # or
+    #
+    # path = "/img/your-example-logo.svg"
+    # alt = "Your example logo alt text"
+
+    [[languages.en.menu.main]]
+      identifier = "talks"
+      name       = "Talks"
+      url        = "/talks"
+    [[languages.en.menu.main]]
+      identifier = "retrospectives"
+      name       = "Retrospectives"
+      url        = "/retrospectives"
+    [[languages.en.menu.main]]
+      identifier = "financial-independence"
+      name       = "Financial Independence"
+      url        = "/financial-independence"
+    [[languages.en.menu.main]]
+      identifier = "books"
+      name       = "Book Recommendations"
+      url        = "/books"
+    [[languages.en.menu.main]]
+      identifier = "about"
+      name       = "About"
+      url        = "/about"
+
+[markup.goldmark.renderer]
+  # Allow HTML in Markdown
+  unsafe = true
