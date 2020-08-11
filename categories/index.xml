@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Kablamo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.kablamo.org/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>books</title>
       <link>http://blog.kablamo.org/categories/books/</link>
-      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 08 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>http://blog.kablamo.org/categories/books/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>parenting</title>
+      <link>http://blog.kablamo.org/categories/parenting/</link>
+      <pubDate>Sat, 08 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/categories/parenting/</guid>
       <description></description>
     </item>
     
