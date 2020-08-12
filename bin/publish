@@ -8,4 +8,4 @@ git add -A
 git status
 git commit -a -m 'More'
 git push
-git checkout master
+cd ..
