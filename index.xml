@@ -22,11 +22,21 @@
     </item>
     
     <item>
+      <title>13 Things Mentally Strong Parents Don&#39;t Do</title>
+      <link>http://blog.kablamo.org/drafts/mentally-strong-parents/</link>
+      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/drafts/mentally-strong-parents/</guid>
+      <description>A terse summary for the hasty and the impatient This book is a list of 13 bad behaviors and then a list of what you can do about each behavior as a parent. I like that its totally practical and you can immediately run out and start applying Amy Morin&amp;rsquo;s advice.
+By the way, I see plenty of my own flaws listed in the 13 bad kid behaviors. Thats a little uncomfortable.</description>
+    </item>
+    
+    <item>
       <title>Book Review: The Secrets of Happy Families</title>
-      <link>http://blog.kablamo.org/articles/the-secrets-of-happy-families/</link>
+      <link>http://blog.kablamo.org/drafts/the-secrets-of-happy-families/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.kablamo.org/articles/the-secrets-of-happy-families/</guid>
+      <guid>http://blog.kablamo.org/drafts/the-secrets-of-happy-families/</guid>
       <description>The Secrets of Happy Families
 Agile families
  Just like agile software development: iterative  </description>
@@ -741,24 +751,24 @@ use Log::JSON; my $logger = Log::JSON-&amp;gt;new( file =&amp;gt; &#39;/path/err
     </item>
     
     <item>
-      <title></title>
-      <link>http://blog.kablamo.org/aphorisms/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.kablamo.org/aphorisms/</guid>
-      <description>Life is poker, not chess To win at chess: be perfect. In chess, there is always a right answer and a wrong answer. I can compute a perfect game if I&amp;rsquo;m smart enough and I do enough calculations.
-In poker, where randomness is built into the game, its not about being perfect. Its about being consistent.
-Poker players don&amp;rsquo;t win in a single hand. They don&amp;rsquo;t win by risking it all on a single big bet.</description>
-    </item>
-    
-    <item>
       <title>About</title>
       <link>http://blog.kablamo.org/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://blog.kablamo.org/about/</guid>
-      <description>About this blog This erudite compendium of written knowledge / blog is about
- Reading and using those new ideas ideas to get better every day. Becoming a better person. Becoming a better parent. Learning how to do personal finance. Anything else I feel like writing about. So there.  Talk to me Please do. I&amp;rsquo;m on Twitter at @kablamo and my email address is write.me@kablamo.org.</description>
+      <description>About this blog Yeah so its about:
+ Reading and using those new ideas ideas to get better every day. Becoming a better person. Becoming a better parent. Learning how to do personal finance. Anything else I feel like writing about. So there.  Talk to me I&amp;rsquo;m on Twitter at @kablamo and my email address is write.me@kablamo.org.</description>
+    </item>
+    
+    <item>
+      <title>Aphorisms</title>
+      <link>http://blog.kablamo.org/aphorisms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/aphorisms/</guid>
+      <description>Successful people don&amp;rsquo;t get everything done. Successful people get the most important things done. Everyone&amp;rsquo;s todo list is infinite. The goal is not to do everything on the todo list. The goal is to do the important things.
+Confront reality. If a solution is not working. Change your approach. If a project is stuck, don&amp;rsquo;t pretend its not. Communicate problems and challenges.
+Productivity is anything that moves you towards your goal Don&amp;rsquo;t do things that aren&amp;rsquo;t moving you towards your goal.</description>
     </item>
     
     <item>

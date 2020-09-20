@@ -34,7 +34,17 @@
   </url>
   
   <url>
-    <loc>http://blog.kablamo.org/articles/the-secrets-of-happy-families/</loc>
+    <loc>http://blog.kablamo.org/drafts/mentally-strong-parents/</loc>
+    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kablamo.org/drafts/</loc>
+    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kablamo.org/drafts/the-secrets-of-happy-families/</loc>
     <lastmod>2018-07-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -394,12 +404,11 @@
   </url>
   
   <url>
-    <loc>http://blog.kablamo.org/aphorisms/</loc>
-    <priority>0</priority>
+    <loc>http://blog.kablamo.org/about/</loc>
   </url>
   
   <url>
-    <loc>http://blog.kablamo.org/about/</loc>
+    <loc>http://blog.kablamo.org/aphorisms/</loc>
   </url>
   
   <url>
