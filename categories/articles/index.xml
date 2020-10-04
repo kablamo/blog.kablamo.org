@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>articles on Kablamo</title>
+    <link>http://blog.kablamo.org/categories/articles/</link>
+    <description>Recent content in articles on Kablamo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Oct 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.kablamo.org/categories/articles/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Prioritizing Prioritization</title>
+      <link>http://blog.kablamo.org/articles/prioritize-prioritization/</link>
+      <pubDate>Sun, 04 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/prioritize-prioritization/</guid>
+      <description>Drowning in work For one reason or another there are times when things get extra busy. My tasks pile up, my projects pile up, my inboxes overflow, and pretty soon I&amp;rsquo;m waking up at 3am staring at the ceiling thinking about work.
+My first instinct when this happens is to leap astride my office chair and start closing tasks. I want to get something done &amp;ndash; anything &amp;ndash; and I want to do it right now.</description>
+    </item>
+    
+    <item>
+      <title>My long term goals v2017.1</title>
+      <link>http://blog.kablamo.org/articles/five-year-goals/</link>
+      <pubDate>Sun, 08 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/five-year-goals/</guid>
+      <description>Maybe writing about my long term goals occasionally will help me think through them and commit to them.
+I currently group my goals into 4 major categories. I try to re-evaluate them frequently. Which means they change. I try to look at them every day so they are top of mind and I don&amp;rsquo;t get off track.
+To achieve these goals I need to break them down into smaller and smaller chunks until I find a chunk thats easy to do.</description>
+    </item>
+    
+    <item>
+      <title>My goals for 2017</title>
+      <link>http://blog.kablamo.org/articles/next-year/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/next-year/</guid>
+      <description>Spend less than $36,500 in 2017. If I can keep my spending at this level I should be on my way to a long term goal of being financially independent at age 42. We spent about $45,000 in 2016.
+  Build a portfolio of airline miles and hotel points by travel hacking credit cards. This could save me $4,000 a year or more in annual plane tickets and hotels for a family of 3 to travel to Singapore.</description>
+    </item>
+    
+    <item>
+      <title>CPAN::Diff - Compare local Perl modules to your darkpan or cpan</title>
+      <link>http://blog.kablamo.org/articles/cpan-diff/</link>
+      <pubDate>Fri, 07 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/cpan-diff/</guid>
+      <description>At work we have a Pinto powered darkpan. But developers install stuff from cpan on their development servers to try things out and occasionally these experiments don&amp;rsquo;t get cleaned up and cause problems. It would be nice nice to know what modules are installed on a machine and how that compares to whats on our darkpan. Specifically I want to know which modules are:
+ Older than those on the darkpan Newer than those on the darkpan Installed on the server but are not in the darkpan  I solved this by stealing a lot of code from cpan-outdated and writing CPAN::Diff:</description>
+    </item>
+    
+    <item>
+      <title>Bash tricks: set -euxo pipefail</title>
+      <link>http://blog.kablamo.org/articles/bash-tricks-eux/</link>
+      <pubDate>Sun, 08 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/bash-tricks-eux/</guid>
+      <description>set -eux is a super useful bash trick I&amp;rsquo;ve been using in Chef and Rex tasks. I&amp;rsquo;m going to break it down and explain it one option at a time:
+set -e This
+cmd1 &amp;amp;&amp;amp; cmd2 &amp;amp;&amp;amp; cmd3  is equivalent to this
+set -e cmd1 cmd2 cmd3  set -u The shell prints a message to stderr when it tries to expand a variable that is not set. Also it immediately exits.</description>
+    </item>
+    
+    <item>
+      <title>The Perl test ecosystem (slides)</title>
+      <link>http://blog.kablamo.org/articles/slides-perl-testing/</link>
+      <pubDate>Sat, 26 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/slides-perl-testing/</guid>
+      <description>I gave this talk last Thursday at Chicago.pm. This talk assumes the listener knows very little about testing in Perl but likely has something for more advanced users as well.
+It begins with prove and Test::More, but then moves on to explore the Test:: namespace on CPAN and talk about 20 other test modules. CPAN has a large number of modules to help with testing &amp;ndash; its a pretty healthy ecosystem.</description>
+    </item>
+    
+    <item>
+      <title>Publish your first CPAN module in &lt; 5 minutes (slides)</title>
+      <link>http://blog.kablamo.org/articles/slides-first-cpan-module/</link>
+      <pubDate>Tue, 15 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/slides-first-cpan-module/</guid>
+      <description>I originally gave this talk at Chicago.pm as part of a “Distribution Management Shootout” – a 3 way duel between:
+ jberger&amp;rsquo;s talk about Module::Build and and the &amp;ldquo;Classic&amp;rdquo; build systems preaction&amp;rsquo;s talk about Dist::Zilla, and my talk about Minilla and Carton.  It was a great overview of the most popular tools and I think all the talks are worth checking out.
+As usual, this talk is both a living document and reference material.</description>
+    </item>
+    
+    <item>
+      <title>HTTP::Request::AsCurl</title>
+      <link>http://blog.kablamo.org/articles/http-request-ascurl/</link>
+      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/http-request-ascurl/</guid>
+      <description>Today, on a whim, I released a module called HTTP::Request::AsCurl to CPAN. It converts an HTTP::Request object to a curl command.
+use HTTP::Request::Common; use HTTP::Request::AsCurl; my $request = POST(&#39;api.earth.defense/weapon1&#39;, { target =&amp;gt; &#39;mothership&#39;, when =&amp;gt; &#39;now&#39; }); say join &amp;quot;\n&amp;quot;, $request-&amp;gt;as_curl; # curl --dump-header - -XPOST &amp;quot;api.earth.defense/weapon1&amp;quot; \ # --data &#39;target=mothership&#39; \ # --data &#39;when=now&#39;  It works by injecting the as_curl() method into the HTTP::Request namespace. This must be a bad idea and probably not a great bit of code to rely on in a production environment.</description>
+    </item>
+    
+    <item>
+      <title>Reading code - Camel-Snake-Kebab</title>
+      <link>http://blog.kablamo.org/articles/perl-camel-snake-kebab/</link>
+      <pubDate>Mon, 26 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/perl-camel-snake-kebab/</guid>
+      <description>Camel-Snake-Kebab is a Clojure library for word case conversions. I have wanted to see this on CPAN for a while so last week I finally ported it to Perl. I even ported the test suite. Here is a synopsis of my String::CamelSnakeKebab Perl module:
+use String::CamelSnakeKebab qw/:all/; lower_camel_case(&#39;flux-capacitor&#39;) # Returns &#39;fluxCapacitor&#39; upper_camel_case(&#39;flux-capacitor&#39;) # Returns &#39;FluxCapacitor&#39; lower_snake_case &#39;ASnakeSlithersSlyly&#39; # Returns &#39;a_snake_slithers_slyly&#39; upper_snake_case(&#39;ASnakeSlithersSlyly&#39;) # Returns &#39;A_Snake_Slithers_Slyly&#39; constant_case(&amp;quot;I am constant&amp;quot;) # Returns &amp;quot;I_AM_CONSTANT&amp;quot; kebab_case(&#39;Peppers_Meat_Pineapple&#39;) # Returns &#39;peppers-meat-pineapple&#39; http_header_case(&amp;quot;x-ssl-cipher&amp;quot;) # Returns &amp;quot;X-SSL-Cipher&amp;quot;  Clojure This was my first contact with Clojure and I found the code I was reading to be bite sized, concise, elegant code.</description>
+    </item>
+    
+    <item>
+      <title>Why reading code is good for me</title>
+      <link>http://blog.kablamo.org/articles/reading-code/</link>
+      <pubDate>Wed, 23 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/reading-code/</guid>
+      <description>So I can start kicking butt faster - When I start a new job or a new contract. Or when I hack on a new feature. Or every day of my life as a programmer that involves legacy code. Yeah pretty much all the time. So I can learn new tricks - Healthy languages evolve. Idioms and slang are tools for more efficiently expressing ideas. I want to be on top of that.</description>
+    </item>
+    
+    <item>
+      <title>An experiment - Write code every day</title>
+      <link>http://blog.kablamo.org/articles/write-code-every-day/</link>
+      <pubDate>Sun, 20 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/write-code-every-day/</guid>
+      <description>If you missed John Resig&amp;rsquo;s recent post about writing code everyday I highly recommend it.
+He is a busy guy with a full time job (at Khan Academy), a few open source side projects (the author of jQuery), a wife, and a few hobbies. How to sustainably get stuff done on his open source side projects without his wife leaving him? He decided to start writing (non work) code for 30 minutes every day.</description>
+    </item>
+    
+    <item>
+      <title>Vim cheat sheet</title>
+      <link>http://blog.kablamo.org/articles/ddg-vim/</link>
+      <pubDate>Fri, 28 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/ddg-vim/</guid>
+      <description>I created a Vim cheat sheet instant answer for DuckDuckDuckGo. If you search for vim cheat sheet or vim help you will get a result like this:
+The data is from rtorruellas&amp;rsquo;s excellent vim cheat sheet (also available on github) which has a responsive mobile friendly layout and is also available in Japanese.</description>
+    </item>
+    
+    <item>
+      <title>Why you should disagree in an interview</title>
+      <link>http://blog.kablamo.org/articles/disagree-interview/</link>
+      <pubDate>Sun, 16 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/disagree-interview/</guid>
+      <description>Today I&amp;rsquo;m writing about something I noticed while doing interviews recently.
+If I disagree with a decision a company made, I need to jump into that with both feet. There is sometimes an instinct to say &amp;ldquo;I suppose I can live with that&amp;rdquo; or &amp;ldquo;I don&amp;rsquo;t know enough about why this choice was made to complain about it&amp;rdquo;. But the goal is not to complain or to highlight their ignorance or to have an argument.</description>
+    </item>
+    
+    <item>
+      <title>Questions I ask in interviews</title>
+      <link>http://blog.kablamo.org/articles/interview-questions/</link>
+      <pubDate>Fri, 14 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/interview-questions/</guid>
+      <description>I recently relocated from London to the Chicago area so I have been doing interviews. When I interview a potential client or employer I carry this list of questions with me. Most of the questions I have taken from other sources online. I have listed them in roughly the order I ask them.
+Understanding the job  What will I be doing every day (precisely)? Why are you hiring? New product?</description>
+    </item>
+    
+    <item>
+      <title>How to build a Duck Duck Go instant answer</title>
+      <link>http://blog.kablamo.org/articles/duckduckgo/</link>
+      <pubDate>Fri, 28 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/duckduckgo/</guid>
+      <description>Instant answers are those little boxes at the top of the DuckDuckGo search results page. I made one for discovering international calling codes &amp;ndash; or dialing codes if you prefer.
+If you want to hack on DuckDuckGo and add your own instant answer its pretty simple to get started. You can use Vagrant and VirtualBox to get a complete working dev environment. But if you are already running Ubuntu or OSX the following recipe is easier:</description>
+    </item>
+    
+    <item>
+      <title>Ray Dalio&#39;s &#34;Principles&#34;</title>
+      <link>http://blog.kablamo.org/articles/dalios-principles/</link>
+      <pubDate>Sun, 15 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/dalios-principles/</guid>
+      <description>I have been reading Ray Dalio&amp;rsquo;s Principles. Ray Dalio is the CEO of Bridgewater which is a big famous successful hedge fund he started in the 70&amp;rsquo;s. Principles, is a 123 page philosophical text he published in 2011 about how to live your life and how to manage people and organizations. Its extremely good. I&amp;rsquo;m not done yet but I have a feeling it is something I&amp;rsquo;m going to be rereading many times over the next few years.</description>
+    </item>
+    
+    <item>
+      <title>Anyenv &#43; Plenv &#43; Carton</title>
+      <link>http://blog.kablamo.org/articles/plenv/</link>
+      <pubDate>Mon, 25 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/plenv/</guid>
+      <description>Recently I started breaking out of my Perl-only isolation bubble and dabbling with other languages. I was surprised how easy and comfortable other languages are. I think its because these days good ideas spread from one language to the next incredibly fast. Even in a new language when I reach for a tool I can usually find some Perl technology analogue.
+For example, I&amp;rsquo;ve been a perlbrew person for a long time and it has served me well.</description>
+    </item>
+    
+    <item>
+      <title>Monit - How to know when your web site is down</title>
+      <link>http://blog.kablamo.org/articles/monit/</link>
+      <pubDate>Sun, 24 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/monit/</guid>
+      <description>If your website goes down, you want to find out fast. There are a few ways to accomplish this, but I&amp;rsquo;m using monit. Monit is a mature unix monitoring daemon and it gives me the ability not only get alerts but to restart services that go down.
+Monit has lotsa power and options and you can read about all of them on the man page. Or if you don&amp;rsquo;t want to mess around with that you can pay them for a pretty web admin interface and some phone/tablet apps for a one time fee of € 65.</description>
+    </item>
+    
+    <item>
+      <title>Devops with Rex</title>
+      <link>http://blog.kablamo.org/articles/rex/</link>
+      <pubDate>Fri, 22 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/rex/</guid>
+      <description>I have recently been playing with Rex and wanted to write down some of my initial thoughts.
+Rex is a devops tool that helps you manage your servers. Its similar to Puppet Lab&amp;rsquo;s mcollective tool or ansible. You can easily run commands on your entire fleet of boxen or just on certain subgroups. And you can run them in parallel which saves you giant baskets of time.
+The big advantage for People Who Prefer Perl (PWPP) is that Rex is written and configured with Perl.</description>
+    </item>
+    
+    <item>
+      <title>Down a rabbit hole - Go-lang and its decentralized CPAN</title>
+      <link>http://blog.kablamo.org/articles/go/</link>
+      <pubDate>Wed, 13 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/go/</guid>
+      <description>I have been in a rabbit hole for the last week. I started by looking at Docker (See my previous post). It turns out Docker is written in Go and so somehow I ended up learning Go. Well &amp;ldquo;learning&amp;rdquo; is an overstatement. I&amp;rsquo;ve read about it for a few days and wrote a tiny bit of code.
+But anyway, the coolest thing about Go so far is its decentralized libraries. Centralized collections of libraries have been all the rage the last few years and it seems like all the languages have gotten hip to that &amp;ndash; CPAN, rubygems, pypi, npm, etc.</description>
+    </item>
+    
+  </channel>
+</rss>

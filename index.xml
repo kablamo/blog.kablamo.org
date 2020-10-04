@@ -6,10 +6,30 @@
     <description>Recent content on Kablamo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 04 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.kablamo.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Prioritizing Prioritization</title>
+      <link>http://blog.kablamo.org/articles/prioritize-prioritization/</link>
+      <pubDate>Sun, 04 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/prioritize-prioritization/</guid>
+      <description>Drowning in work For one reason or another there are times when things get extra busy. My tasks pile up, my projects pile up, my inboxes overflow, and pretty soon I&amp;rsquo;m waking up at 3am staring at the ceiling thinking about work.
+My first instinct when this happens is to leap astride my office chair and start closing tasks. I want to get something done &amp;ndash; anything &amp;ndash; and I want to do it right now.</description>
+    </item>
+    
+    <item>
+      <title>August 2020: I got sick</title>
+      <link>http://blog.kablamo.org/retrospectives/2020-09/</link>
+      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/retrospectives/2020-09/</guid>
+      <description>What went well last month My five year old son
+ Learning German with Duo Lingo and Rosetta Stone each night for about 20 minutes. Reading Chinese each night for about 20 minutes. Reading English each night for about 5 minutes.  What went badly last month  I have been sick for 4 weeks and am still not better 100%. Back at work though.  Goals for next month Health</description>
+    </item>
     
     <item>
       <title>The Formula</title>
@@ -767,8 +787,10 @@ use Log::JSON; my $logger = Log::JSON-&amp;gt;new( file =&amp;gt; &#39;/path/err
       
       <guid>http://blog.kablamo.org/aphorisms/</guid>
       <description>Successful people don&amp;rsquo;t get everything done. Successful people get the most important things done. Everyone&amp;rsquo;s todo list is infinite. The goal is not to do everything on the todo list. The goal is to do the important things.
-Confront reality. If a solution is not working. Change your approach. If a project is stuck, don&amp;rsquo;t pretend its not. Communicate problems and challenges.
-Productivity is anything that moves you towards your goal Don&amp;rsquo;t do things that aren&amp;rsquo;t moving you towards your goal.</description>
+
+Confront reality. If a solution is not working. Change your approach. If a project is stuck, don&amp;rsquo;t pretend its not. Communicate reality.
+
+Productivity is anything that moves you towards your goal.</description>
     </item>
     
     <item>

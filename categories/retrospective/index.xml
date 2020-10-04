@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>retrospective on Kablamo</title>
+    <link>http://blog.kablamo.org/categories/retrospective/</link>
+    <description>Recent content in retrospective on Kablamo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 30 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.kablamo.org/categories/retrospective/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>August 2020: I got sick</title>
+      <link>http://blog.kablamo.org/retrospectives/2020-09/</link>
+      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/retrospectives/2020-09/</guid>
+      <description>What went well last month My five year old son
+ Learning German with Duo Lingo and Rosetta Stone each night for about 20 minutes. Reading Chinese each night for about 20 minutes. Reading English each night for about 5 minutes.  What went badly last month  I have been sick for 4 weeks and am still not better 100%. Back at work though.  Goals for next month Health</description>
+    </item>
+    
+  </channel>
+</rss>
