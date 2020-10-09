@@ -5,8 +5,24 @@
         <description>Recent content in Articles on Kablamo</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 04 Oct 2020 00:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Mon, 05 Oct 2020 00:00:00 +0000</lastBuildDate>
         <atom:link href="http://blog.kablamo.org/articles/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Multipliers</title>
+            <link>http://blog.kablamo.org/articles/multipliers/</link>
+            <pubDate>Mon, 05 Oct 2020 00:00:00 +0000</pubDate>
+            
+            <guid>http://blog.kablamo.org/articles/multipliers/</guid>
+            <description>A terse summary for the hasty and the impatient   </description>
+            <content type="html"><![CDATA[<h2 id="a-terse-summary-for-the-hasty-and-the-impatient">A terse summary for the hasty and the impatient</h2>
+<div style="margin-bottom: 2rem; margin-top: 2rem; width: 800px; position: relative; left: -2rem; background: #333; height: 2rem;"></div>
+<p><img src="/images/books/the-formula-huge.jpg"
+alt="cover art"
+style="padding: 0rem; padding-right: 0; margin-left: auto; margin-right: auto; width: 400px;" /></p>
+<div style="margin-top: 2rem; width: 800px; position: relative; left: -2rem; background: #333; height: 2rem;"></div>
+]]></content>
+        </item>
         
         <item>
             <title>Prioritizing Prioritization</title>

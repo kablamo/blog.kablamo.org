@@ -6,10 +6,19 @@
     <description>Recent content on Kablamo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.kablamo.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Multipliers</title>
+      <link>http://blog.kablamo.org/articles/multipliers/</link>
+      <pubDate>Mon, 05 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kablamo.org/articles/multipliers/</guid>
+      <description>A terse summary for the hasty and the impatient   </description>
+    </item>
     
     <item>
       <title>Prioritizing Prioritization</title>
@@ -799,10 +808,10 @@ Productivity is anything that moves you towards your goal.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://blog.kablamo.org/books/</guid>
-      <description>I get excited and hop up and down when I read books that make me better or show me new ideas. This is a short list of the best, most useful, non fiction books I&amp;rsquo;ve discovered. (Follow me on GoodReads?)
+      <description>A short list of the best, most useful, non fiction books I&amp;rsquo;ve discovered. (Follow me on GoodReads?)
 How to Lead Turn The Ship Around by L. David Marquet
 Key insight: Everyone in an organization should lead. Leader-leader not leader-follower.
-This is the true story of how a naval officer took the most troubled submarine in the fleet and gradually turned it into the best.</description>
+This is the true story of how a naval officer took the most troubled submarine in the fleet and gradually turned it into the best. This book teaches you how to turn everyone under your command into a leader.</description>
     </item>
     
     <item>
