@@ -19,7 +19,17 @@
   </url>
   
   <url>
+    <loc>http://blog.kablamo.org/categories/career/</loc>
+    <lastmod>2020-10-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.kablamo.org/categories/</loc>
+    <lastmod>2020-10-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kablamo.org/categories/leadership/</loc>
     <lastmod>2020-10-05T00:00:00+00:00</lastmod>
   </url>
   
@@ -29,7 +39,7 @@
   </url>
   
   <url>
-    <loc>http://blog.kablamo.org/categories/parenting/</loc>
+    <loc>http://blog.kablamo.org/categories/self-improvement/</loc>
     <lastmod>2020-10-05T00:00:00+00:00</lastmod>
   </url>
   
@@ -59,22 +69,22 @@
   </url>
   
   <url>
+    <loc>http://blog.kablamo.org/categories/parenting/</loc>
+    <lastmod>2020-08-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.kablamo.org/articles/the-formula/</loc>
     <lastmod>2020-08-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.kablamo.org/drafts/mentally-strong-parents/</loc>
+    <loc>http://blog.kablamo.org/articles/mentally-strong-parents/</loc>
     <lastmod>2019-06-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.kablamo.org/drafts/</loc>
-    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.kablamo.org/drafts/the-secrets-of-happy-families/</loc>
+    <loc>http://blog.kablamo.org/articles/the-secrets-of-happy-families/</loc>
     <lastmod>2018-07-29T00:00:00+00:00</lastmod>
   </url>
   
